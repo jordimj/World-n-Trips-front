@@ -1,72 +1,78 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../../store/actions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions";
 // import axios from '../../axios';
 
-import CountryBox from '../../components/CountryBox/CountryBox';
-import FullPost from '../../components/FullPost/FullPost';
-import Map from '../../components/Map/Map';
-import './Main.css';
+import CountryBox from "../../components/CountryBox/CountryBox";
+import FullPost from "../../components/FullPost/FullPost";
+import Map from "../../components/Map/Map";
+import "./Main.css";
 
 class Main extends Component {
-    state = {
-        selectedPostId: null
-    }
+	state = {
+		selectedPostId: null
+	};
 
-    componentDidMount() {
-        this.props.onInitCountries();
-    }
+	componentDidMount() {
+		this.props.onInitCountries(this.props.isBackMocked);
+	}
 
-    postSelectedHandler = (id) => {
-        this.setState({
-            selectedPostId: id
-        });
-    }
+	postSelectedHandler = id => {
+		this.setState({
+			selectedPostId: id
+		});
+	};
 
-    render() {
-        let countriesBeen = <p style={{ textAlign: "center" }}> Something went wrong! </p>;
+	render() {
+		let countriesBeen = (
+			<p style={{ textAlign: "center" }}> Something went wrong! </p>
+		);
 
-        if (!this.props.error) {
-            countriesBeen = this.props.countriesBeen.map(countryBeen => {
-                return <CountryBox
-                    key = { countryBeen.id }
-                    name = { countryBeen.name.toUpperCase() }
-                    code = { countryBeen.alpha2code }
-                    clicked = { () => this.postSelectedHandler(countryBeen.id) }
-                    />;
-            });
-        }
+		if (!this.props.error) {
+			countriesBeen = this.props.countriesBeen.map(countryBeen => {
+				return (
+					<CountryBox
+						key={countryBeen.id}
+						name={countryBeen.name.toUpperCase()}
+						code={countryBeen.alpha2code}
+						clicked={() => this.postSelectedHandler(countryBeen.id)}
+					/>
+				);
+			});
+		}
 
-        let data = [];
+		let data = [];
 
-        if (!this.props.error) {
-            data = this.props.countriesBeen.map( country => [country.name] );
-            data.unshift(["Country"]);
-        }
+		if (!this.props.error) {
+			data = this.props.countriesBeen.map(country => [country.name]);
+			data.unshift(["Country"]);
+		}
 
-        return (<div>
-                    < Map data = { data } />
-                    <section className="Countries" > {countriesBeen} </section>
-                    <section><FullPost id = {this.state.selectedPostId}/></section>
-                </div>
-        );
-    }
+		return (
+			<div>
+				<Map data={data} />
+				<section className="Countries"> {countriesBeen} </section>
+				<section>
+					<FullPost id={this.state.selectedPostId} />
+				</section>
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = state => {
-    return {
-        countriesBeen: state.countriesBeen,
-        error: state.error
-    };
+	return {
+		countriesBeen: state.countriesBeen,
+		error: state.error,
+		isBackMocked: state.isBackMocked
+	};
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onInitCountries: () => dispatch(actions.initCountries())
-    };
+	return {
+		onInitCountries: isBackMocked =>
+			dispatch(actions.initCountries(isBackMocked))
+	};
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
