@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Main from './containers/Main/Main';
+import Main from "./containers/Main/Main";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Main />
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="App">
+				<Main />
+			</div>
+		);
+	}
 }
 
 export default App;
