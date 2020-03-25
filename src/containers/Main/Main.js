@@ -10,7 +10,8 @@ import "./Main.css";
 
 class Main extends Component {
 	state = {
-		selectedPostId: null
+		selectedPostId: null,
+		continent: "all"
 	};
 
 	componentDidMount() {
@@ -20,6 +21,12 @@ class Main extends Component {
 	postSelectedHandler = id => {
 		this.setState({
 			selectedPostId: id
+		});
+	};
+
+	continentSelectedHandler = event => {
+		this.setState({
+			continent: event.target.value
 		});
 	};
 
@@ -50,7 +57,19 @@ class Main extends Component {
 
 		return (
 			<div>
-				<Map data={data} />
+				<label for="continent">Continent to be shown: </label>
+				<select
+					id="continent"
+					onClick={event => this.continentSelectedHandler(event)}
+				>
+					<option value="all">All</option>
+					<option value="europe">Europe</option>
+					<option value="asia">Asia</option>
+					<option value="africa">Africa</option>
+					<option value="americas">America</option>
+					<option value="oceania">Oceania</option>
+				</select>
+				<Map data={data} continent={this.state.continent} />
 				<section className="Countries"> {countriesBeen} </section>
 				<section>
 					<FullPost id={this.state.selectedPostId} />

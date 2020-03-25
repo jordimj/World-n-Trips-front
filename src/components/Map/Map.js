@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { Chart } from "react-google-charts";
 
+const continentCodes = {
+	africa: "002",
+	europe: "150",
+	americas: "019", // [TODO] Check if there is a better map for America
+	asia: "142",
+	oceania: "009"
+};
+
 class Map extends Component {
 	render() {
-		// let data = [
-		//   ["Country"],
-		//   ["Germany"],
-		//   // ["RU", 700]
-		// ];
-
 		let data = this.props.data;
 
 		return (
@@ -30,6 +32,9 @@ class Map extends Component {
 					width="100%"
 					height="600px"
 					data={data}
+					options={{
+						region: continentCodes[this.props.continent]
+					}}
 				/>
 			</div>
 		);
