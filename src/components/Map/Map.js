@@ -33,7 +33,7 @@ class Map extends Component {
 					height="600px"
 					data={data}
 					options={{
-						region: continentCodes[this.props.continent]
+						region: this.props.region !== "000" ? this.props.region : null
 					}}
 				/>
 			</div>
