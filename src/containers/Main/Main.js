@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 // import axios from '../../axios';
 
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import CountryBox from "../../components/CountryBox/CountryBox";
 import FullPost from "../../components/FullPost/FullPost";
 import Map from "../../components/Map/Map";
@@ -57,6 +58,7 @@ class Main extends Component {
 
 		return (
 			<div>
+				<Toolbar />
 				<label for="continent">Continent to be shown: </label>
 				<select
 					id="continent"
