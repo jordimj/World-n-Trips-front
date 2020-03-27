@@ -30,3 +30,17 @@ export const initCountries = isBackMocked => {
 					});
 		  };
 };
+
+export const selectContinent = continent => {
+	return {
+		type: actionTypes.SELECT_CONTINENT,
+		continent
+	};
+};
+
+export const selectRegion = region => {
+	return {
+		type: actionTypes.SELECT_REGION,
+		region
+	};
+};

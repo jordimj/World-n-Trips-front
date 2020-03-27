@@ -1,33 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actions from "../../store/actions";
 
 import CountryBox from "../../components/CountryBox/CountryBox";
 import FullPost from "../../components/FullPost/FullPost";
 import "./CountriesList.css";
 
 class CountriesList extends Component {
-	state = {
-		selectedPostId: null,
-		continent: "all"
-	};
-
-	// componentDidMount() {
-	// 	if (this.props.countriesBeen.length === 0) {
-	// 		this.props.onInitCountries(this.props.isBackMocked);
-	// 	}
-	// }
-
-	postSelectedHandler = id => {
-		this.setState({
-			selectedPostId: id
-		});
-	};
-
-	continentSelectedHandler = event => {
-		this.setState({
-			continent: event.target.value
-		});
-	};
+	componentDidMount() {
+		if (this.props.countriesBeen.length === 0) {
+			this.props.onInitCountries(this.props.isBackMocked);
+		}
+	}
 
 	render() {
 		let countriesBeen = (
@@ -51,9 +35,6 @@ class CountriesList extends Component {
 			<div className="Content">
 				<h1>List of countries I've been to</h1>
 				<section className="Countries"> {countriesBeen} </section>
-				<section>
-					<FullPost id={this.state.selectedPostId} />
-				</section>
 			</div>
 		);
 	}
@@ -62,9 +43,18 @@ class CountriesList extends Component {
 const mapStateToProps = state => {
 	return {
 		countriesBeen: state.countriesBeen,
+		continent: state.continent,
+		region: state.region,
 		error: state.error,
 		isBackMocked: state.isBackMocked
 	};
 };
 
-export default connect(mapStateToProps)(CountriesList);
+const mapDispatchToProps = dispatch => {
+	return {
+		onInitCountries: isBackMocked =>
+			dispatch(actions.initCountries(isBackMocked))
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CountriesList);
