@@ -4,6 +4,7 @@ import * as actions from "../../store/actions";
 
 import Map from "../../components/Map/Map";
 import "./MapPage.css";
+import countryAndRegionsInfo from "../../utils/countryAndRegionsInfo";
 
 class MapPage extends Component {
 	state = {
@@ -25,6 +26,7 @@ class MapPage extends Component {
 	};
 
 	continentSelectedHandler = event => {
+		console.log(this.state);
 		this.setState({
 			continent: event.target.value,
 			region: "all"
@@ -38,130 +40,6 @@ class MapPage extends Component {
 	};
 
 	render() {
-		const regionsPerContinent = {
-			all: {
-				name: "All",
-				code: "000"
-			},
-			europe: {
-				name: "Europe",
-				code: "150",
-				regions: [
-					{
-						name: "Northern Europe",
-						code: "154"
-					},
-					{
-						name: "Western Europe",
-						code: "155"
-					},
-					{
-						name: "Eeastern Europe",
-						code: "151"
-					},
-					{
-						name: "Southern Europe",
-						code: "039"
-					}
-				]
-			},
-			asia: {
-				name: "Asia",
-				code: "142",
-				regions: [
-					{
-						name: "Central Asia",
-						code: "143"
-					},
-					{
-						name: "Eastern Asia",
-						code: "030"
-					},
-					{
-						name: "Southern Asia",
-						code: "034"
-					},
-					{
-						name: "South-Eastern Asia",
-						code: "035"
-					},
-					{
-						name: "Western Asia",
-						code: "145"
-					}
-				]
-			},
-			africa: {
-				name: "Africa",
-				code: "002",
-				regions: [
-					{
-						name: "Northern Africa",
-						code: "015"
-					},
-					{
-						name: "Western Africa",
-						code: "011"
-					},
-					{
-						name: "Middle Africa",
-						code: "017"
-					},
-					{
-						name: "Eeastern Africa",
-						code: "014"
-					},
-					{
-						name: "Southern Africa",
-						code: "018"
-					}
-				]
-			},
-			americas: {
-				name: "America",
-				code: "019",
-				regions: [
-					{
-						name: "Northern America",
-						code: "021"
-					},
-					{
-						name: "Caribbean",
-						code: "029"
-					},
-					{
-						name: "Central America",
-						code: "013"
-					},
-					{
-						name: "Southern America",
-						code: "005"
-					}
-				]
-			},
-			oceania: {
-				name: "Oceania",
-				code: "019",
-				regions: [
-					{
-						name: "Australia and New Zealand",
-						code: "053"
-					},
-					{
-						name: "Melanesia",
-						code: "054"
-					},
-					{
-						name: "Micronesia",
-						code: "057"
-					},
-					{
-						name: "Polynesia",
-						code: "061"
-					}
-				]
-			}
-		};
 		let data = [];
 
 		if (!this.props.error) {
@@ -170,19 +48,23 @@ class MapPage extends Component {
 		}
 
 		let continentSelectOptions = [];
-		for (let continent in regionsPerContinent) {
+		for (let continent in countryAndRegionsInfo) {
 			continentSelectOptions.push(
-				<option value={regionsPerContinent[continent].code}>
-					{regionsPerContinent[continent].name}
+				<option
+					key={countryAndRegionsInfo[continent].name}
+					value={countryAndRegionsInfo[continent].code}
+				>
+					{countryAndRegionsInfo[continent].name}
 				</option>
 			);
 		}
-		// continentSelectOptions = regionsPerContinent.map(continent => (
-		// 	<option value={continent.code}>{continent.name}</option>
-		// ));
 
-		let regionSelectOptions = null;
-		let regions = regionsPerContinent[this.state.continent];
+		let regionSelectOptions = [];
+		regionSelectOptions.push(
+			<option key="all" value="all">
+				All
+			</option>
+		);
 
 		const continentCodes = {
 			africa: "002",
@@ -197,28 +79,41 @@ class MapPage extends Component {
 				return continentCodes[key] === this.state.continent;
 			})[0];
 
-			regionSelectOptions = regionsPerContinent[key].regions.map(region => (
-				<option value={region.code}>{region.name}</option>
-			));
+			regionSelectOptions.push(
+				countryAndRegionsInfo[key].regions.map(region => (
+					<option key={region.name} value={region.code}>
+						{region.name}
+					</option>
+				))
+			);
 		}
 
 		return (
-			<div>
-				<label for="continent">Continent to be shown: </label>
-				<select
-					id="continent"
-					onChange={event => this.continentSelectedHandler(event)}
-				>
-					{continentSelectOptions}
-				</select>
+			<div className="Content">
+				<h1>Countries I've been to</h1>
+				<div className="Input">
+					<label className="Label" for="continent">
+						Continent to be shown:
+					</label>
+					<select
+						id="continent"
+						onChange={event => this.continentSelectedHandler(event)}
+					>
+						{continentSelectOptions}
+					</select>
+				</div>
 
-				<label for="region">Region to be shown: </label>
-				<select
-					id="region"
-					onChange={event => this.regionSelectedHandler(event)}
-				>
-					{regionSelectOptions}
-				</select>
+				<div className="Input">
+					<label className="Label" for="region">
+						Region to be shown:
+					</label>
+					<select
+						id="region"
+						onChange={event => this.regionSelectedHandler(event)}
+					>
+						{regionSelectOptions}
+					</select>
+				</div>
 
 				<Map
 					data={data}

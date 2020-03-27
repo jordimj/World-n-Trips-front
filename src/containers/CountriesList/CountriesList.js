@@ -11,6 +11,12 @@ class CountriesList extends Component {
 		continent: "all"
 	};
 
+	// componentDidMount() {
+	// 	if (this.props.countriesBeen.length === 0) {
+	// 		this.props.onInitCountries(this.props.isBackMocked);
+	// 	}
+	// }
+
 	postSelectedHandler = id => {
 		this.setState({
 			selectedPostId: id
@@ -42,7 +48,8 @@ class CountriesList extends Component {
 		}
 
 		return (
-			<div>
+			<div className="Content">
+				<h1>List of countries I've been to</h1>
 				<section className="Countries"> {countriesBeen} </section>
 				<section>
 					<FullPost id={this.state.selectedPostId} />

@@ -1,9 +1,9 @@
 import React from "react";
-import classes from "./NavigationItems.css";
+import "./NavigationItems.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
 
 const navigationItems = () => (
-	<ul className={classes.NavigationItems}>
+	<ul className="NavigationItems">
 		<NavigationItem link="/" exact>
 			World map
 		</NavigationItem>
