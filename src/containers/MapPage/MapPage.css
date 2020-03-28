@@ -13,16 +13,3 @@
 .Content h1 {
 	text-align: center;
 }
-
-.Input {
-	width: 100%;
-	padding: 10px;
-	box-sizing: border-box;
-	text-align: center;
-}
-
-.Label {
-	font-weight: bold;
-	/* display: block; */
-	margin-bottom: 8px;
-}

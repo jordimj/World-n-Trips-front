@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 
 import CountryBox from "../../components/CountryBox/CountryBox";
-import FullPost from "../../components/FullPost/FullPost";
 import "./CountriesList.css";
 
 class CountriesList extends Component {
@@ -11,6 +10,10 @@ class CountriesList extends Component {
 		if (this.props.countriesBeen.length === 0) {
 			this.props.onInitCountries(this.props.isBackMocked);
 		}
+	}
+
+	countrySelectedHandler = countryName => {
+		this.props.history.push({pathname: `/country/${countryName}` });
 	}
 
 	render() {
@@ -25,7 +28,7 @@ class CountriesList extends Component {
 						key={countryBeen.id}
 						name={countryBeen.name.toUpperCase()}
 						code={countryBeen.alpha2code}
-						clicked={() => this.postSelectedHandler(countryBeen.id)}
+						clicked={() => this.countrySelectedHandler(countryBeen.name)}
 					/>
 				);
 			});

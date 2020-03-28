@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import * as actions from "../../../store/actions";
 import countryAndRegionsInfo from "../../../utils/countryAndRegionsInfo";
+import './SelectItems.css';
 
 class SelectItems extends Component {
 	continentSelectedHandler = event =>
@@ -53,25 +54,27 @@ class SelectItems extends Component {
 		}
 
 		return (
-			<div>
-				<div className="Input">
+			<div className="SelectItems">
+				<div className="SelectItem">
 					<label className="Label" for="continent">
 						Continent to be shown:
 					</label>
 					<select
 						id="continent"
+						className="InputElement"
 						onChange={event => this.continentSelectedHandler(event)}
 					>
 						{continentSelectOptions}
 					</select>
 				</div>
 
-				<div className="Input">
+				<div className="SelectItem">
 					<label className="Label" for="region">
 						Region to be shown:
 					</label>
 					<select
 						id="region"
+						className="InputElement"
 						onChange={event => this.regionSelectedHandler(event)}
 					>
 						{regionSelectOptions}

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Chart } from "react-google-charts";
-import { connect } from "react-redux";
-import * as actions from "../../store/actions";
+import { withRouter } from "react-router-dom";
 
 class Map extends Component {
 	render() {
@@ -19,7 +18,7 @@ class Map extends Component {
 								if (selection.length === 0) return;
 								const region = data[selection[0].row + 1];
 								console.log("Selected : " + region);
-								this.props.onGetCountryInfo(region, false);
+								this.props.history.push({pathname: `/country/${region}` });
 							}
 						}
 					]}
@@ -35,12 +34,4 @@ class Map extends Component {
 		);
 	}
 }
-
-const mapDispatchToProps = dispatch => {
-	return {
-		onGetCountryInfo: (countryCode, isBackMocked) =>
-			dispatch(actions.getCountryInfo(countryCode, isBackMocked))
-	};
-};
-
-export default connect(null, mapDispatchToProps)(Map);
+export default (withRouter(Map));
