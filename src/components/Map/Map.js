@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Chart } from "react-google-charts";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions";
 
 class Map extends Component {
 	render() {
@@ -17,6 +19,7 @@ class Map extends Component {
 								if (selection.length === 0) return;
 								const region = data[selection[0].row + 1];
 								console.log("Selected : " + region);
+								this.props.onGetCountryInfo(region, false);
 							}
 						}
 					]}
@@ -33,4 +36,11 @@ class Map extends Component {
 	}
 }
 
-export default Map;
+const mapDispatchToProps = dispatch => {
+	return {
+		onGetCountryInfo: (countryCode, isBackMocked) =>
+			dispatch(actions.getCountryInfo(countryCode, isBackMocked))
+	};
+};
+
+export default connect(null, mapDispatchToProps)(Map);

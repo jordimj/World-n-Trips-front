@@ -4,8 +4,9 @@ const initialState = {
 	countriesBeen: [],
 	continent: "000",
 	region: "all",
+	country: null,
 	error: false,
-	isBackMocked: true
+	isBackMocked: false
 };
 
 const setCountries = (state, action) => {
@@ -39,6 +40,16 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				region: action.region
+			};
+		case actionTypes.SET_COUNTRY_INFO:
+			const info = action.countryInfo.shift();
+			const cities = action.countryInfo;
+			return {
+				...state,
+				country: {
+					info,
+					cities
+				}
 			};
 		default:
 			return state;

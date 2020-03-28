@@ -21,9 +21,31 @@ export const initCountries = isBackMocked => {
 		? dispatch => dispatch(setCountries(countriesBeenMocked))
 		: dispatch => {
 				axios
-					.get("http://127.0.0.1:8000/countriesBeenTo")
+					.get("/countriesBeenTo")
 					.then(response => {
 						dispatch(setCountries(response.data));
+					})
+					.catch(error => {
+						dispatch(fetchCountriesFailed(error));
+					});
+		  };
+};
+
+export const setCountryInfo = countryInfo => {
+	return {
+		type: actionTypes.SET_COUNTRY_INFO,
+		countryInfo
+	};
+};
+
+export const getCountryInfo = (countryName, isBackMocked) => {
+	return isBackMocked
+		? dispatch => dispatch(setCountryInfo(countriesBeenMocked)) // [TODO] mock
+		: dispatch => {
+				axios
+					.get(`/countryByName/${countryName}/`)
+					.then(response => {
+						dispatch(setCountryInfo(response.data));
 					})
 					.catch(error => {
 						dispatch(fetchCountriesFailed(error));
