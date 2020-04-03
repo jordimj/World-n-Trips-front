@@ -5,7 +5,7 @@ import Switch from "@material-ui/core/Switch";
 
 export default function SwitchWithLabel(props) {
   const [state, setState] = React.useState({
-    checkedB: false
+    checkedValue: false
   });
 
   const handleChange = event => {
@@ -15,19 +15,19 @@ export default function SwitchWithLabel(props) {
   useEffect(() => {
     return () => {
       if (props.onChange) {
-        props.onChange(!state.checkedB);
+        props.onChange(!state.checkedValue);
       }
     };
-  });
+  },[state.checkedValue]);
 
   return (
     <FormGroup row>
       <FormControlLabel
         control={
           <Switch
-            checked={state.checkedB}
+            checked={state.checkedValue}
             onChange={handleChange}
-            name="checkedB"
+            name="checkedValue"
             color="primary"
           />
         }

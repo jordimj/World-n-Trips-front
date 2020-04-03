@@ -9,7 +9,7 @@ import SwitchWithLabel from "../../components/shared/SwitchWithLabel";
 
 class MapPage extends Component {
 	state = {
-		coloredDepeningOnCitiesVisites: false,
+		coloredDepeningOnCitiesVisited: false,
 	};
 
 	componentDidMount() {
@@ -19,43 +19,30 @@ class MapPage extends Component {
 	}
 
 	coloredMapHandler = (coloredMap) => {
-		// console.log(coloredMap);
-		// console.log(typeof(coloredMap));
 
-		if (this.state.coloredDepeningOnCitiesVisites !== coloredMap) 
-		{
-			// this.setState({
-			// 	...this.state,
-			// 	coloredDepeningOnCitiesVisites: coloredMap
-			// });
-			
+		if (this.state.coloredDepeningOnCitiesVisited !== coloredMap) 
+		{			
 			this.setState((prevState, coloredMap) => {
-				if (prevState.coloredDepeningOnCitiesVisites !== coloredMap) {
+				if (prevState.coloredDepeningOnCitiesVisited !== coloredMap) {
 					return {
 						...prevState,
-						coloredDepeningOnCitiesVisites: !prevState.coloredDepeningOnCitiesVisites
+						coloredDepeningOnCitiesVisited: !prevState.coloredDepeningOnCitiesVisited
 					};
 				}
 			 });
 		}
-
-		console.log(this.state.coloredDepeningOnCitiesVisites);
 	}
 
 	render() {
 		let mapData = [];
 
-		// if (!this.props.error) {
-		// 	mapData = this.props.countriesBeen.map(country => [country.name, Number(country.numberOfSpots)]);
-		// 	mapData.unshift(["Country", "Number of spots"]);
-		// }
-
-		if (!this.props.error) {
+		if (this.state.coloredDepeningOnCitiesVisited) {
+			mapData = this.props.countriesBeen.map(country => [country.name, Number(country.numberOfSpots)]);
+			mapData.unshift(["Country", "Number of spots"]);
+		} else {
 			mapData = this.props.countriesBeen.map(country => [country.name]);
-			mapData.unshift(["Country"]);
+		 	mapData.unshift(["Country"]);
 		}
-
-		// console.log(this.state.coloredDepeningOnCitiesVisites);
 
 		return (
 			<div className="Content">
