@@ -1,10 +1,29 @@
 import React, { Component } from "react";
 import { Chart } from "react-google-charts";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 class Map extends Component {
+	
 	render() {
-		let data = this.props.data;
+		const data = this.props.data;
+		let options = {};
+
+		if (this.props.country) {
+			options = {
+				region: this.props.country ? this.props.country.info.alpha2code : "",
+				resolution: 'provinces',
+				// displayMode: 'text',
+				colorAxis: {colors: ['green', 'blue']},
+				sizeAxis: {minSize: 12, maxSize:20},
+				enableRegionInteractivity: true   
+			  };
+		} else {
+			options = {
+				region: this.props.region !== "000" ? this.props.region : null,
+				// colorAxis: { colors: ['green', 'blue'] },
+			  };
+		}
 
 		return (
 			<div>
@@ -26,12 +45,17 @@ class Map extends Component {
 					width="100%"
 					height="600px"
 					data={data}
-					options={{
-						region: this.props.region !== "000" ? this.props.region : null
-					}}
+					options={options}
 				/>
 			</div>
 		);
 	}
 }
-export default (withRouter(Map));
+
+const mapStateToProps = state => {
+	return {
+		country: state.country,
+	};
+};
+
+export default connect(mapStateToProps)(withRouter(Map));

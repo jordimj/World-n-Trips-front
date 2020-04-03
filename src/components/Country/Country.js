@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from '../../store/actions';
+import Map from "../Map/Map";
 
 // import "./FullPost.css";
 
@@ -10,18 +11,23 @@ class Country extends Component {
 	}
 
 	render() {
-
 		const country = null;
 
-		//this.props.match.params.countryName
 		return (
 			<div className="Content">
 				<h1>{this.props.match.params.countryName}'s information</h1>
 				<section className="Countries"> {country} </section>
+				{this.props.country ? <Map data={[["Country"],[this.props.country.info.name]]} /> : null}
 			</div>
 		);
 	}
 }
+
+const mapStateToProps = state => {
+	return {
+		country: state.country,
+	};
+};
 
 const mapDispatchToProps = dispatch => {
 	return {
@@ -30,4 +36,4 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-export default connect(null, mapDispatchToProps)(Country);
+export default connect(mapStateToProps, mapDispatchToProps)(Country);

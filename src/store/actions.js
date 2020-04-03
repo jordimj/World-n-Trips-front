@@ -53,6 +53,12 @@ export const getCountryInfo = (countryName, isBackMocked) => {
 		  };
 };
 
+export const unsetCountryInfo = () => {
+	return {
+		type: actionTypes.UNSET_COUNTRY_INFO
+	};
+};
+
 export const selectContinent = continent => {
 	return {
 		type: actionTypes.SELECT_CONTINENT,

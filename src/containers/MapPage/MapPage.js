@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
+import { Grid } from "@material-ui/core";
 
 import Map from "../../components/Map/Map";
 import "./MapPage.css";
 import SelectItems from "../../components/Navigation/SelectItems/SelectItems";
 import SwitchWithLabel from "../../components/shared/SwitchWithLabel";
+
 
 class MapPage extends Component {
 	state = {
@@ -13,6 +15,9 @@ class MapPage extends Component {
 	};
 
 	componentDidMount() {
+		if (this.props.country) {
+			this.props.onUnsetCountryInfo();
+		}
 		if (this.props.countriesBeen.length === 0) {
 			this.props.onInitCountries(this.props.isBackMocked);
 		}
@@ -20,8 +25,8 @@ class MapPage extends Component {
 
 	coloredMapHandler = (coloredMap) => {
 
-		if (this.state.coloredDepeningOnCitiesVisited !== coloredMap) 
-		{			
+		if (this.state.coloredDepeningOnCitiesVisited !== coloredMap)
+		{
 			this.setState((prevState, coloredMap) => {
 				if (prevState.coloredDepeningOnCitiesVisited !== coloredMap) {
 					return {
@@ -47,16 +52,25 @@ class MapPage extends Component {
 		return (
 			<div className="Content">
 				<h1>Countries I've been to</h1>
-				<SelectItems />
-				<SwitchWithLabel onChange={this.coloredMapHandler} />
-				<Map
-					data={mapData}
-					region={
-						this.props.region !== "all"
-							? this.props.region
-							: this.props.continent
-					}
-				/>
+				<Grid
+				  container
+				  direction="column"
+				  justify="center"
+				  alignItems="center"
+				  >
+					<SelectItems />
+					<SwitchWithLabel onChange={this.coloredMapHandler} />
+					{ this.props.countriesBeen ?
+					<Map
+						data={mapData}
+						region={
+							this.props.region !== "all"
+								? this.props.region
+								: this.props.continent
+						}
+					/>
+					: null }
+				</Grid>
 			</div>
 		);
 	}
@@ -67,6 +81,7 @@ const mapStateToProps = state => {
 		countriesBeen: state.countriesBeen,
 		continent: state.continent,
 		region: state.region,
+		country: state.country,
 		error: state.error,
 		isBackMocked: state.isBackMocked
 	};
@@ -75,7 +90,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		onInitCountries: isBackMocked =>
-			dispatch(actions.initCountries(isBackMocked))
+			dispatch(actions.initCountries(isBackMocked)),
+		onUnsetCountryInfo: () =>
+			dispatch(actions.unsetCountryInfo())
 	};
 };
 

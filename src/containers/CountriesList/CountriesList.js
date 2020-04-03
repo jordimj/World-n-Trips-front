@@ -7,6 +7,9 @@ import "./CountriesList.css";
 
 class CountriesList extends Component {
 	componentDidMount() {
+		if (this.props.country) {
+			this.props.onUnsetCountryInfo();
+		}
 		if (this.props.countriesBeen.length === 0) {
 			this.props.onInitCountries(this.props.isBackMocked);
 		}
@@ -48,6 +51,7 @@ const mapStateToProps = state => {
 		countriesBeen: state.countriesBeen,
 		continent: state.continent,
 		region: state.region,
+		country: state.country,
 		error: state.error,
 		isBackMocked: state.isBackMocked
 	};
@@ -56,7 +60,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		onInitCountries: isBackMocked =>
-			dispatch(actions.initCountries(isBackMocked))
+			dispatch(actions.initCountries(isBackMocked)),
+		onUnsetCountryInfo: () =>
+			dispatch(actions.unsetCountryInfo())
 	};
 };
 

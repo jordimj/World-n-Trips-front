@@ -51,6 +51,11 @@ const reducer = (state = initialState, action) => {
 					cities
 				}
 			};
+		case actionTypes.UNSET_COUNTRY_INFO:
+			return {
+				...state,
+				country: null
+			};
 		default:
 			return state;
 	}

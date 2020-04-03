@@ -1,103 +1,116 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { Grid } from "@material-ui/core";
 
-import * as actions from "../../../store/actions";
 import countryAndRegionsInfo from "../../../utils/countryAndRegionsInfo";
-import './SelectItems.css';
+import * as actions from "../../../store/actions";
 
-class SelectItems extends Component {
-	continentSelectedHandler = event =>
-		this.props.onSelectContinent(event.target.value);
 
-	regionSelectedHandler = event =>
-		this.props.onSelectRegion(event.target.value);
+const useStyles = makeStyles(theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    width: 180
+  },
+  formHelperText: {
+    textAlign: "right"
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2)
+  }
+}));
 
-	render() {
-		let continentSelectOptions = [];
-		for (let continent in countryAndRegionsInfo) {
-			continentSelectOptions.push(
-				<option
-					key={countryAndRegionsInfo[continent].name}
-					value={countryAndRegionsInfo[continent].code}
-				>
-					{countryAndRegionsInfo[continent].name}
-				</option>
-			);
-		}
+export default function SimpleSelect() {
+  const continent = useSelector(state => state.continent);
+  const region = useSelector(state => state.region);
+  const dispatch = useDispatch();
+  const classes = useStyles();
 
-		let regionSelectOptions = [
-			<option key="all" value="all">
-				All
-			</option>
-		];
+  const continentSelectedHandler = event => {
+    dispatch(actions.selectContinent(event.target.value));
+  };
 
-		const continentCodes = {
-			africa: "002",
-			europe: "150",
-			americas: "019", // [TODO] Check if there is a better map for America
-			asia: "142",
-			oceania: "009"
-		};
+  const regionSelectedHandler = event => {
+    dispatch(actions.selectRegion(event.target.value));
+  };
 
-		if (this.props.continent !== "000") {
-			const key = Object.keys(continentCodes).filter(key => {
-				return continentCodes[key] === this.props.continent;
-			})[0];
+  let continentSelectOptions = [];
+  for (let continent in countryAndRegionsInfo) {
+    continentSelectOptions.push(
+      <MenuItem
+        key={countryAndRegionsInfo[continent].name}
+        value={countryAndRegionsInfo[continent].code}
+      >
+        {countryAndRegionsInfo[continent].name}
+      </MenuItem>
+    );
+  }
 
-			regionSelectOptions.push(
-				countryAndRegionsInfo[key].regions.map(region => (
-					<option key={region.name} value={region.code}>
-						{region.name}
-					</option>
-				))
-			);
-		}
+  let regionSelectOptions = [
+    <option key="all" value="all">
+      All
+    </option>
+  ];
 
-		return (
-			<div className="SelectItems">
-				<div className="SelectItem">
-					<label className="Label" for="continent">
-						Continent to be shown:
-					</label>
-					<select
-						id="continent"
-						className="InputElement"
-						onChange={event => this.continentSelectedHandler(event)}
-					>
-						{continentSelectOptions}
-					</select>
-				</div>
+  const continentCodes = {
+    africa: "002",
+    europe: "150",
+    americas: "019", // [TODO] Check if there is a better map for America
+    asia: "142",
+    oceania: "009"
+  };
 
-				<div className="SelectItem">
-					<label className="Label" for="region">
-						Region to be shown:
-					</label>
-					<select
-						id="region"
-						className="InputElement"
-						onChange={event => this.regionSelectedHandler(event)}
-					>
-						{regionSelectOptions}
-					</select>
-				</div>
-			</div>
-		);
-	}
+  if (continent !== "000") {
+    const key = Object.keys(continentCodes).filter(key => {
+      return continentCodes[key] === continent;
+    })[0];
+
+    regionSelectOptions.push(
+      countryAndRegionsInfo[key].regions.map(region => (
+        <MenuItem key={region.name} value={region.code}>
+          {region.name}
+        </MenuItem>
+      ))
+    );
+  }
+
+  return (
+    <Grid container direction="row" justify="center" alignItems="center">
+      <FormControl className={classes.formControl}>
+        <InputLabel id="continent-select-label">Continent</InputLabel>
+        <Select
+          labelId="continent-select-label"
+          id="continent-select"
+          value={continent}
+          onChange={continentSelectedHandler}
+        >
+          {continentSelectOptions}
+        </Select>
+        <FormHelperText className={classes.formHelperText}>
+          Continent to be shown
+        </FormHelperText>
+      </FormControl>
+
+      <FormControl className={classes.formControl}>
+        <InputLabel id="region-helper-label">Region</InputLabel>
+        <Select
+          labelId="region-helper-label"
+          id="region-helper"
+          value={region}
+          onChange={regionSelectedHandler}
+        >
+          {regionSelectOptions}
+        </Select>
+        <FormHelperText className={classes.formHelperText}>
+          Region to be shown
+        </FormHelperText>
+      </FormControl>
+    </Grid>
+  );
 }
-
-const mapStateToProps = state => {
-	return {
-		continent: state.continent,
-		region: state.region
-	};
-};
-
-const mapDispatchToProps = dispatch => {
-	return {
-		onSelectContinent: continent =>
-			dispatch(actions.selectContinent(continent)),
-		onSelectRegion: region => dispatch(actions.selectRegion(region))
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SelectItems);
