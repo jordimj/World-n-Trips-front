@@ -5,6 +5,7 @@ const initialState = {
 	continent: "000",
 	region: "all",
 	country: null,
+	statistics: null,
 	error: false,
 	isBackMocked: false
 };
@@ -55,6 +56,16 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				country: null
+			};
+		case actionTypes.SET_COUNTRY_STATISTICS:
+			return {
+				...state,
+				statistics: action.countryStatistics,
+			};
+		case actionTypes.UNSET_COUNTRY_STATISTICS:
+			return {
+				...state,
+				statistics: null
 			};
 		default:
 			return state;

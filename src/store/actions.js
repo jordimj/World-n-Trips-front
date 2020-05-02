@@ -20,15 +20,15 @@ export const initCountries = isBackMocked => {
 	return isBackMocked
 		? dispatch => dispatch(setCountries(countriesBeenMocked))
 		: dispatch => {
-				axios
-					.get("/countriesBeenTo")
-					.then(response => {
-						dispatch(setCountries(response.data));
-					})
-					.catch(error => {
-						dispatch(fetchCountriesFailed(error));
-					});
-		  };
+			axios
+				.get("/countriesBeenTo")
+				.then(response => {
+					dispatch(setCountries(response.data));
+				})
+				.catch(error => {
+					dispatch(fetchCountriesFailed(error));
+				});
+		};
 };
 
 export const setCountryInfo = countryInfo => {
@@ -42,20 +42,48 @@ export const getCountryInfo = (countryName, isBackMocked) => {
 	return isBackMocked
 		? dispatch => dispatch(setCountryInfo(countriesBeenMocked)) // [TODO] mock
 		: dispatch => {
-				axios
-					.get(`/countryByName/${countryName}/`)
-					.then(response => {
-						dispatch(setCountryInfo(response.data));
-					})
-					.catch(error => {
-						dispatch(fetchCountriesFailed(error));
-					});
-		  };
+			axios
+				.get(`/countryByName/${countryName}/`)
+				.then(response => {
+					dispatch(setCountryInfo(response.data));
+				})
+				.catch(error => {
+					dispatch(fetchCountriesFailed(error));
+				});
+		};
 };
 
 export const unsetCountryInfo = () => {
 	return {
 		type: actionTypes.UNSET_COUNTRY_INFO
+	};
+};
+
+export const setCountryStatistics = countryStatistics => {
+	return {
+		type: actionTypes.SET_COUNTRY_STATISTICS,
+		countryStatistics
+	};
+};
+
+export const getCountryStatistics = (countryName, isBackMocked = false) => {
+	return isBackMocked
+		? dispatch => dispatch(setCountryStatistics(countriesBeenMocked)) // [TODO] replace mock
+		: dispatch => {
+			axios
+				.get(`/statistics/${countryName}/`)
+				.then(response => {
+					dispatch(setCountryStatistics(response.data));
+				})
+				.catch(error => {
+					dispatch(fetchCountriesFailed(error));
+				});
+		};
+};
+
+export const unsetCountryStatistics = () => {
+	return {
+		type: actionTypes.UNSET_COUNTRY_STATISTICS
 	};
 };
 
