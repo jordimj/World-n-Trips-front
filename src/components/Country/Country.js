@@ -1,41 +1,63 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { connect, useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
-import Map from "../Map/Map";
 
+import Spinner from "../shared/Spinner/Spinner";
+import Map from "../Map/Map";
+import ExpensesStatistics from "../Statistics/Expenses/Expenses";
+import InfoLabel from "../shared/InfoLabel";
+import * as countryFlags from "../shared/images";
 // import "./FullPost.css";
 
-class Country extends Component {
-  componentDidMount() {
-    this.props.onGetCountryStatistics(this.props.match.params.countryName, false);
+const CountryInfo = (props) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(actions.getCountryStatistics(props.match.params.countryName, false));
+  }, []);
+
+  const statistics = useSelector(state => state.statistics);
+
+  if (!statistics) {
+    return <Spinner />;
   }
 
-  render() {
-    const country = null;
+  const { info, kilometersWalked, citiesVisited, nights, expenses } = statistics;
+  const country = null;
 
-    return (
-      <div className="Content">
-        <h1>{this.props.match.params.countryName}'s information</h1>
-        <section className="Countries"> {country} </section>
-        {this.props.country ? (
-          <Map data={[["Country"], [this.props.country.info.name]]} />
-        ) : null}
+  return (
+    <div
+      className="Content"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        maxWidth: "80%",
+        textAlign: "-webkit-center"
+      }}>
+      <h1>{props.match.params.countryName.toUpperCase()}</h1>
+      <section className="Countries"> {country} </section>
+
+      <div style={{ display: "flex", flexFlow: "row", placeItems: "center" }}>
+        <div style={{ width: "50%" }}>
+          <img src={countryFlags[info.alpha2code]} alt="Logo" />
+          <InfoLabel label="Local name" value={info.local_name} />
+          <InfoLabel label="Region" value={info.region} />
+          <InfoLabel label="Continent" value={info.continent} />
+          <InfoLabel label="Surface area" value={new Intl.NumberFormat().format(info.surface_area)} appendix="km²" />
+          <InfoLabel label="Population" value={new Intl.NumberFormat().format(info.population)} />
+          <InfoLabel label="Independent from" value={info.independence_year} />
+        </div>
+        <div style={{ width: "50%" }}>
+          <Map data={[["Country"], [props.match.params.countryName]]} />
+        </div>
       </div>
-    );
-  }
+
+      {statistics.expenses.sumInEuros &&
+        <ExpensesStatistics expenses={expenses} />
+      }
+
+    </div>
+  );
+
 }
-
-const mapStateToProps = state => {
-  return {
-    country: state.country
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onGetCountryStatistics: (countryCode, isBackMocked) =>
-      dispatch(actions.getCountryStatistics(countryCode, isBackMocked))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Country);
+export default CountryInfo;
