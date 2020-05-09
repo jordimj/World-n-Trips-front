@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import { connect, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
 
+import Divider from "../shared/Divider";
 import Spinner from "../shared/Spinner/Spinner";
 import Map from "../Map/Map";
 import ExpensesStatistics from "../Statistics/Expenses/Expenses";
+import NightsStatistics from "../Statistics/Nights/Nights";
 import InfoLabel from "../shared/InfoLabel";
 import * as countryFlags from "../shared/images";
 // import "./FullPost.css";
@@ -23,7 +25,6 @@ const CountryInfo = (props) => {
   }
 
   const { info, kilometersWalked, citiesVisited, nights, expenses } = statistics;
-  const country = null;
 
   return (
     <div
@@ -51,10 +52,20 @@ const CountryInfo = (props) => {
             <Map data={[["Country"], [props.match.params.countryName]]} />
           </div>
         </div>
+        <div>Places visited: {citiesVisited.join(", ")}.</div>
       </section>
 
-      {statistics.expenses.sumInEuros &&
-        <ExpensesStatistics expenses={expenses} totalNights={nights.count.total} />
+      {statistics.nights && statistics.nights.count.total !== 0 &&
+        <React.Fragment>
+          <Divider />
+          <NightsStatistics nights={nights} />
+        </React.Fragment>
+      }
+      {statistics.expenses &&
+        <React.Fragment>
+          <Divider />
+          <ExpensesStatistics expenses={expenses} totalNights={nights.count.total} />
+        </React.Fragment>
       }
 
     </div>
