@@ -1,17 +1,27 @@
 import React from "react";
 import ExpensesTable from "./ExpensesTable";
 import InfoLabel from "../../shared/InfoLabel";
+import { expenseEuroFormatter, deductNotDailyExpenses } from "../../../utils/helpers";
+import ExpensesPieChart from "./ExpensesPieChart";
 
 export default function ExpensesStatistics(props) {
-  const totalSpent = new Intl.NumberFormat("de-DE", {
-    style: "currency",
-    currency: "EUR"
-  }).format(props.expenses.sumInEuros);
+  const { sumInEuros, categories } = props.expenses;
+  const sumWithoutDailyExp = deductNotDailyExpenses(sumInEuros, categories);
 
   return (
     <section className="Expenses">
       <h2>Expenses</h2>
-      <InfoLabel label="Total spent" value={totalSpent} />
+      <div style={{ display: "flex", flexFlow: "row", placeItems: "center", marginBottom: "30px" }}>
+        <div style={{ width: "50%" }}>
+          <InfoLabel label="Total amount of expenses" value={expenseEuroFormatter(sumInEuros)} />
+          <InfoLabel label="Total amount of daily expenses" value={expenseEuroFormatter(sumWithoutDailyExp)} />
+          <InfoLabel label="Average expenses per day" value={expenseEuroFormatter(sumInEuros / props.totalNights)} />
+          <InfoLabel label="Average daily expenses per day" value={expenseEuroFormatter(sumWithoutDailyExp / props.totalNights)} />
+        </div>
+        <div style={{ width: "50%" }}>
+          <ExpensesPieChart expensesByCategory={categories} />
+        </div>
+      </div>
       <ExpensesTable {...props} />
     </section>
   );

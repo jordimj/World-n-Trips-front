@@ -35,25 +35,26 @@ const CountryInfo = (props) => {
         textAlign: "-webkit-center"
       }}>
       <h1>{props.match.params.countryName.toUpperCase()}</h1>
-      <section className="Countries"> {country} </section>
-
-      <div style={{ display: "flex", flexFlow: "row", placeItems: "center" }}>
-        <div style={{ width: "50%" }}>
-          <img src={countryFlags[info.alpha2code]} alt="Logo" />
-          <InfoLabel label="Local name" value={info.local_name} />
-          <InfoLabel label="Region" value={info.region} />
-          <InfoLabel label="Continent" value={info.continent} />
-          <InfoLabel label="Surface area" value={new Intl.NumberFormat().format(info.surface_area)} appendix="km²" />
-          <InfoLabel label="Population" value={new Intl.NumberFormat().format(info.population)} />
-          <InfoLabel label="Independent from" value={info.independence_year} />
+      <section className="generalInfo">
+        <h2>General information</h2>
+        <div style={{ display: "flex", flexFlow: "row", placeItems: "center" }}>
+          <div style={{ width: "50%" }}>
+            <img src={countryFlags[info.alpha2code]} alt="Logo" />
+            <InfoLabel label="Local name" value={info.local_name} />
+            <InfoLabel label="Region" value={info.region} />
+            <InfoLabel label="Continent" value={info.continent} />
+            <InfoLabel label="Surface area" value={new Intl.NumberFormat().format(info.surface_area)} appendix="km²" />
+            <InfoLabel label="Population" value={new Intl.NumberFormat().format(info.population)} />
+            <InfoLabel label="Independent from" value={info.independence_year} />
+          </div>
+          <div style={{ width: "50%" }}>
+            <Map data={[["Country"], [props.match.params.countryName]]} />
+          </div>
         </div>
-        <div style={{ width: "50%" }}>
-          <Map data={[["Country"], [props.match.params.countryName]]} />
-        </div>
-      </div>
+      </section>
 
       {statistics.expenses.sumInEuros &&
-        <ExpensesStatistics expenses={expenses} />
+        <ExpensesStatistics expenses={expenses} totalNights={nights.count.total} />
       }
 
     </div>

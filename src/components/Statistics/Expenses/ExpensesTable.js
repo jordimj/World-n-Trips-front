@@ -7,17 +7,19 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { expenseEuroFormatter, percentageFormatter } from "../../../utils/helpers";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 300,
-    maxWidth: 500
+    minWidth: 400,
+    maxWidth: 700
   }
 });
 
 export default function ExpensesTable(props) {
-  const rows = props.expenses.categories;
-  const arrayRows = Object.entries(rows);
+  const { sumInEuros, categories } = props.expenses;
+  const totalNights = props.totalNights;
+  const arrayRows = Object.entries(categories);
 
   const classes = useStyles();
 
@@ -32,6 +34,12 @@ export default function ExpensesTable(props) {
             <TableCell align="center">
               <b>Amount</b>
             </TableCell>
+            <TableCell align="center">
+              <b>Percentage</b>
+            </TableCell>
+            <TableCell align="center">
+              <b>Spent / day</b>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -41,10 +49,13 @@ export default function ExpensesTable(props) {
                 {category}
               </TableCell>
               <TableCell align="center">
-                {new Intl.NumberFormat("de-DE", {
-                  style: "currency",
-                  currency: "EUR"
-                }).format(amount)}
+                {expenseEuroFormatter(amount)}
+              </TableCell>
+              <TableCell align="center">
+                {percentageFormatter(amount/sumInEuros)}
+              </TableCell>
+              <TableCell align="center">
+                {expenseEuroFormatter(amount/totalNights)}
               </TableCell>
             </TableRow>
           ))}
