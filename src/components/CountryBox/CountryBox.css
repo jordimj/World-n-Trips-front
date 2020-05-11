@@ -7,14 +7,10 @@
 	margin: 10px;
 	box-sizing: border-box;
 	cursor: pointer;
+	font-weight: 600;
 }
 
 .CountryBox:hover,
 .CountryBox:active {
 	background-color: #c0ddf5;
-}
-
-.Author {
-	margin: 16px 0;
-	color: #ccc;
 }

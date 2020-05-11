@@ -5,11 +5,8 @@ import "./CountryBox.css";
 
 const countryBox = props => (
 	<article className="CountryBox" onClick={props.clicked}>
-		<h1>{props.name}</h1>
+		<p>{props.name}</p>
 		<img src={countryFlags[props.code]} alt="Logo" />
-		<div className="Info">
-			<div className="Author">{props.author}</div>
-		</div>
 	</article>
 );
 

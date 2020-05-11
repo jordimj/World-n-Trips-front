@@ -37,6 +37,7 @@ export default function ExpensesPieChart(expensesByCategory) {
                 }],
             },
             options: {
+                aspectRatio: 2.5,
                 legend: {
                     position: 'right',
                 }

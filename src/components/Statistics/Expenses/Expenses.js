@@ -11,7 +11,7 @@ export default function ExpensesStatistics(props) {
   return (
     <section className="Expenses">
       <h2>Expenses</h2>
-      <div style={{ display: "flex", flexFlow: "row", placeItems: "center", marginBottom: "30px" }}>
+      <div style={{ display: "flex", flexFlow: "row", placeItems: "center" }}>
         <div style={{ width: "50%" }}>
           <InfoLabel label="Total amount of expenses" value={expenseEuroFormatter(sumInEuros)} />
           <InfoLabel label="Total amount of daily expenses" value={expenseEuroFormatter(sumWithoutDailyExp)} />

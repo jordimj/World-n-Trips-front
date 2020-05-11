@@ -32,14 +32,13 @@ const CountryInfo = (props) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        maxWidth: "80%",
         textAlign: "-webkit-center"
       }}>
-      <h1>{props.match.params.countryName.toUpperCase()}</h1>
+      <h1>{props.match.params.countryName}</h1>
       <section className="generalInfo">
         <h2>General information</h2>
         <div style={{ display: "flex", flexFlow: "row", placeItems: "center" }}>
-          <div style={{ width: "50%" }}>
+          <div style={{ width: "35%" }}>
             <img src={countryFlags[info.alpha2code]} alt="Logo" />
             <InfoLabel label="Local name" value={info.local_name} />
             <InfoLabel label="Region" value={info.region} />
@@ -47,18 +46,21 @@ const CountryInfo = (props) => {
             <InfoLabel label="Surface area" value={new Intl.NumberFormat().format(info.surface_area)} appendix="km²" />
             <InfoLabel label="Population" value={new Intl.NumberFormat().format(info.population)} />
             <InfoLabel label="Independent from" value={info.independence_year} />
+
+            <Divider />
+            <p></p>Places visited: <p>{citiesVisited.join(", ")}.</p>
           </div>
-          <div style={{ width: "50%" }}>
+          <div style={{ width: "65%" }}>
             <Map data={[["Country"], [props.match.params.countryName]]} />
           </div>
         </div>
-        <div>Places visited: {citiesVisited.join(", ")}.</div>
+        
       </section>
 
       {statistics.nights && statistics.nights.count.total !== 0 &&
         <React.Fragment>
           <Divider />
-          <NightsStatistics nights={nights} />
+          <NightsStatistics km={kilometersWalked} nights={nights} />
         </React.Fragment>
       }
       {statistics.expenses &&
