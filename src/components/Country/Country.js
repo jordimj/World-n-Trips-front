@@ -6,6 +6,7 @@ import Divider from "../shared/Divider";
 import Spinner from "../shared/Spinner/Spinner";
 import Map from "../Map/Map";
 import ExpensesStatistics from "../Statistics/Expenses/Expenses";
+import HitchhikesStatistics from "../Statistics/Hitchhikes/Hitchhikes";
 import NightsStatistics from "../Statistics/Nights/Nights";
 import InfoLabel from "../shared/InfoLabel";
 import * as countryFlags from "../shared/images";
@@ -24,7 +25,7 @@ const CountryInfo = (props) => {
     return <Spinner />;
   }
 
-  const { info, kilometersWalked, citiesVisited, nights, expenses } = statistics;
+  const { info, kilometersWalked, citiesVisited, nights, expenses, hitchhikes } = statistics;
 
   return (
     <div
@@ -54,13 +55,19 @@ const CountryInfo = (props) => {
             <Map data={[["Country"], [props.match.params.countryName]]} />
           </div>
         </div>
-        
+
       </section>
 
       {statistics.nights && statistics.nights.count.total !== 0 &&
         <React.Fragment>
           <Divider />
           <NightsStatistics km={kilometersWalked} nights={nights} />
+        </React.Fragment>
+      }
+      {statistics.hitchhikes && statistics.hitchhikes.totalKilometers &&
+        <React.Fragment>
+          <Divider />
+          <HitchhikesStatistics hitchhikes={hitchhikes} totalNights={nights.count.total} />
         </React.Fragment>
       }
       {statistics.expenses &&

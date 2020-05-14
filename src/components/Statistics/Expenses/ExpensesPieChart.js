@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import Chart from "chart.js";
 
-export default function ExpensesPieChart(expensesByCategory) {
+export default function ExpensesPieChart({ expensesByCategory }) {
     const chartRef = useRef();
 
-    const data = Object.values(expensesByCategory["expensesByCategory"]);
-    const labels = Object.keys(expensesByCategory["expensesByCategory"]);
+    const data = Object.values(expensesByCategory);
+    const labels = Object.keys(expensesByCategory);
 
     useEffect(() => {
         const myChartRef = chartRef.current;

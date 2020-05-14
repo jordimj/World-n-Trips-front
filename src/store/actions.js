@@ -1,6 +1,7 @@
 import axios from "../axios";
 import * as actionTypes from "./actionTypes";
 import countriesBeenMocked from "../mock/countriesBeenMock";
+import { countryInfoWithStatistics } from "../mock/countryInfoWithStatisticsMock";
 
 export const setCountries = countries => {
 	return {
@@ -68,7 +69,7 @@ export const setCountryStatistics = countryStatistics => {
 
 export const getCountryStatistics = (countryName, isBackMocked = false) => {
 	return isBackMocked
-		? dispatch => dispatch(setCountryStatistics(countriesBeenMocked)) // [TODO] replace mock
+		? dispatch => dispatch(setCountryStatistics(countryInfoWithStatistics))
 		: dispatch => {
 			axios
 				.get(`/statistics/${countryName}/`)
