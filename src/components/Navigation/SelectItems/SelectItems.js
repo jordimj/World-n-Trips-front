@@ -1,43 +1,39 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import { Grid } from "@material-ui/core";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { Grid } from '@material-ui/core';
 
-import countryAndRegionsInfo from "../../../utils/countryAndRegionsInfo";
-import * as actions from "../../../store/actions";
+import countryAndRegionsInfo from '../../../utils/countryAndRegionsInfo';
 
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
-    width: 180
+    width: 180,
   },
   formHelperText: {
-    textAlign: "right"
+    textAlign: 'right',
   },
   selectEmpty: {
-    marginTop: theme.spacing(2)
-  }
+    marginTop: theme.spacing(2),
+  },
 }));
 
-export default function SimpleSelect() {
-  const continent = useSelector(state => state.continent);
-  const region = useSelector(state => state.region);
-  const dispatch = useDispatch();
+export default function SimpleSelect(props) {
+  const { continent, setContinent, region, setRegion } = props;
   const classes = useStyles();
 
-  const continentSelectedHandler = event => {
-    dispatch(actions.selectContinent(event.target.value));
+  const continentSelectedHandler = (event) => {
+    setContinent(event.target.value);
+    setRegion('all');
   };
 
-  const regionSelectedHandler = event => {
-    dispatch(actions.selectRegion(event.target.value));
+  const regionSelectedHandler = (event) => {
+    setRegion(event.target.value);
   };
 
   let continentSelectOptions = [];
@@ -55,24 +51,24 @@ export default function SimpleSelect() {
   let regionSelectOptions = [
     <option key="all" value="all">
       All
-    </option>
+    </option>,
   ];
 
   const continentCodes = {
-    africa: "002",
-    europe: "150",
-    americas: "019", // [TODO] Check if there is a better map for America
-    asia: "142",
-    oceania: "009"
+    africa: '002',
+    europe: '150',
+    americas: '019', // [TODO] Check if there is a better map for America
+    asia: '142',
+    oceania: '009',
   };
 
-  if (continent !== "000") {
-    const key = Object.keys(continentCodes).filter(key => {
+  if (continent !== '000') {
+    const key = Object.keys(continentCodes).filter((key) => {
       return continentCodes[key] === continent;
     })[0];
 
     regionSelectOptions.push(
-      countryAndRegionsInfo[key].regions.map(region => (
+      countryAndRegionsInfo[key].regions.map((region) => (
         <MenuItem key={region.name} value={region.code}>
           {region.name}
         </MenuItem>
@@ -88,7 +84,7 @@ export default function SimpleSelect() {
           labelId="continent-select-label"
           id="continent-select"
           value={continent}
-          onChange={continentSelectedHandler}
+          onChange={(e) => continentSelectedHandler(e)}
         >
           {continentSelectOptions}
         </Select>
@@ -103,7 +99,7 @@ export default function SimpleSelect() {
           labelId="region-helper-label"
           id="region-helper"
           value={region}
-          onChange={regionSelectedHandler}
+          onChange={(e) => regionSelectedHandler(e)}
         >
           {regionSelectOptions}
         </Select>

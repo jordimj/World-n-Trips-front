@@ -1,16 +1,15 @@
 .CountryBox {
-	width: 250px;
-	padding: 16px;
-	text-align: center;
-	border: 1px solid #eee;
-	box-shadow: 0 2px 3px #ccc;
-	margin: 10px;
-	box-sizing: border-box;
-	cursor: pointer;
-	font-weight: 600;
+  width: 250px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  margin: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-.CountryBox:hover,
-.CountryBox:active {
-	background-color: #c0ddf5;
+.CountryBox:hover {
+  background-color: #c0ddf5;
 }

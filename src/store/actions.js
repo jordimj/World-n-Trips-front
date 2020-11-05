@@ -1,103 +1,77 @@
-import axios from "../axios";
-import * as actionTypes from "./actionTypes";
-import countriesBeenMocked from "../mock/countriesBeenMock";
-import { countryInfoWithStatistics } from "../mock/countryInfoWithStatisticsMock";
+import axios from '../axios';
+import * as actionTypes from './actionTypes';
+import countriesBeenMocked from '../mock/countriesBeenMock';
+import countryInfoWithStatisticsMock from '../mock/countryInfoWithStatisticsMock';
 
-export const setCountries = countries => {
-	return {
-		type: actionTypes.SET_COUNTRIES,
-		countries
-	};
+const fetchCountriesBeenStart = () => {
+  return {
+    type: actionTypes.FETCH_COUNTRIES_BEEN_START,
+  };
 };
 
-export const fetchCountriesFailed = error => {
-	console.log(error);
-	return {
-		type: actionTypes.FETCH_COUNTRIES_FAILED
-	};
+export const fetchCountriesBeenSuccess = (countries) => {
+  return {
+    type: actionTypes.FETCH_COUNTRIES_BEEN_SUCCESS,
+    countries,
+  };
 };
 
-export const initCountries = isBackMocked => {
-	return isBackMocked
-		? dispatch => dispatch(setCountries(countriesBeenMocked))
-		: dispatch => {
-			axios
-				.get("/countriesBeenTo")
-				.then(response => {
-					dispatch(setCountries(response.data));
-				})
-				.catch(error => {
-					dispatch(fetchCountriesFailed(error));
-				});
-		};
+export const fetchCountriesBeenFail = (error) => {
+  return {
+    type: actionTypes.FETCH_COUNTRIES_BEEN_FAIL,
+    error,
+  };
 };
 
-export const setCountryInfo = countryInfo => {
-	return {
-		type: actionTypes.SET_COUNTRY_INFO,
-		countryInfo
-	};
+export const fetchCountriesBeen = (isBackMocked) => {
+  return (dispatch) => {
+    dispatch(fetchCountriesBeenStart());
+
+    isBackMocked
+      ? dispatch(fetchCountriesBeenSuccess(countriesBeenMocked))
+      : axios
+          .get('/countriesBeenTo')
+          .then((response) => {
+            dispatch(fetchCountriesBeenSuccess(response.data));
+          })
+          .catch((error) => {
+            dispatch(fetchCountriesBeenFail(error));
+          });
+  };
 };
 
-export const getCountryInfo = (countryName, isBackMocked) => {
-	return isBackMocked
-		? dispatch => dispatch(setCountryInfo(countriesBeenMocked)) // [TODO] mock
-		: dispatch => {
-			axios
-				.get(`/countryByName/${countryName}/`)
-				.then(response => {
-					dispatch(setCountryInfo(response.data));
-				})
-				.catch(error => {
-					dispatch(fetchCountriesFailed(error));
-				});
-		};
+export const fetchCountryStatisticsStart = () => {
+  return {
+    type: actionTypes.FETCH_COUNTRY_STATS_START,
+  };
 };
 
-export const unsetCountryInfo = () => {
-	return {
-		type: actionTypes.UNSET_COUNTRY_INFO
-	};
+export const fetchCountryStatisticsSuccess = (countryStatistics) => {
+  return {
+    type: actionTypes.FETCH_COUNTRY_STATS_SUCCESS,
+    countryStatistics,
+  };
 };
 
-export const setCountryStatistics = countryStatistics => {
-	return {
-		type: actionTypes.SET_COUNTRY_STATISTICS,
-		countryStatistics
-	};
+export const fetchCountryStatisticsFail = (error) => {
+  return {
+    type: actionTypes.FETCH_COUNTRY_STATS_FAIL,
+    error,
+  };
 };
 
-export const getCountryStatistics = (countryName, isBackMocked = false) => {
-	return isBackMocked
-		? dispatch => dispatch(setCountryStatistics(countryInfoWithStatistics))
-		: dispatch => {
-			axios
-				.get(`/statistics/${countryName}/`)
-				.then(response => {
-					dispatch(setCountryStatistics(response.data));
-				})
-				.catch(error => {
-					dispatch(fetchCountriesFailed(error));
-				});
-		};
-};
-
-export const unsetCountryStatistics = () => {
-	return {
-		type: actionTypes.UNSET_COUNTRY_STATISTICS
-	};
-};
-
-export const selectContinent = continent => {
-	return {
-		type: actionTypes.SELECT_CONTINENT,
-		continent
-	};
-};
-
-export const selectRegion = region => {
-	return {
-		type: actionTypes.SELECT_REGION,
-		region
-	};
+export const fetchCountryStatistics = (countryName, isBackMocked) => {
+  return (dispatch) => {
+    dispatch(fetchCountryStatisticsStart());
+    isBackMocked
+      ? dispatch(fetchCountryStatisticsSuccess(countryInfoWithStatisticsMock))
+      : axios
+          .get(`/statistics/${countryName}/`)
+          .then((response) => {
+            dispatch(fetchCountryStatisticsSuccess(response.data));
+          })
+          .catch((error) => {
+            dispatch(fetchCountryStatisticsFail(error));
+          });
+  };
 };

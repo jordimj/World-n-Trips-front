@@ -1,99 +1,63 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import * as actions from "../../store/actions";
-import { Grid } from "@material-ui/core";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../store/actions';
+import { Grid } from '@material-ui/core';
 
-import Map from "../../components/Map/Map";
-import "./MapPage.css";
-import SelectItems from "../../components/Navigation/SelectItems/SelectItems";
-import SwitchWithLabel from "../../components/shared/SwitchWithLabel";
+import Map from '../../components/Map/Map';
+import './MapPage.css';
+import SelectItems from '../../components/Navigation/SelectItems/SelectItems';
+import SwitchWithLabel from '../../components/shared/SwitchWithLabel';
 
+function MapPage() {
+  const countriesBeen = useSelector((state) => state.countriesBeen);
+  const isBackMocked = useSelector((state) => state.isBackMocked);
 
-class MapPage extends Component {
-	state = {
-		coloredDepeningOnCitiesVisited: false,
-	};
+  const dispatch = useDispatch();
 
-	componentDidMount() {
-		if (this.props.country) {
-			this.props.onUnsetCountryInfo();
-		}
-		if (this.props.countriesBeen.length === 0) {
-			this.props.onInitCountries(this.props.isBackMocked);
-		}
-	}
+  useEffect(() => {
+    if (countriesBeen.length === 0) {
+      dispatch(actions.fetchCountriesBeen(isBackMocked));
+    }
+  }, []);
 
-	coloredMapHandler = (coloredMap) => {
+  const [graduallyColored, setGraduallyColored] = useState(false);
+  const [continent, setContinent] = useState('000');
+  const [region, setRegion] = useState('all');
 
-		if (this.state.coloredDepeningOnCitiesVisited !== coloredMap)
-		{
-			this.setState((prevState, coloredMap) => {
-				if (prevState.coloredDepeningOnCitiesVisited !== coloredMap) {
-					return {
-						...prevState,
-						coloredDepeningOnCitiesVisited: !prevState.coloredDepeningOnCitiesVisited
-					};
-				}
-			 });
-		}
-	}
+  const coloredMapHandler = () => {
+    setGraduallyColored((graduallyColored) => !graduallyColored);
+  };
 
-	render() {
-		let mapData = [];
+  let mapData = [];
 
-		if (this.state.coloredDepeningOnCitiesVisited) {
-			mapData = this.props.countriesBeen.map(country => [country.name, Number(country.numberOfSpots)]);
-			mapData.unshift(["Country", "Number of spots"]);
-		} else {
-			mapData = this.props.countriesBeen.map(country => [country.name]);
-		 	mapData.unshift(["Country"]);
-		}
+  if (graduallyColored) {
+    mapData = countriesBeen.map((country) => [
+      country.name,
+      Number(country.numberOfSpots),
+    ]);
+    mapData.unshift(['Country', 'Number of spots']);
+  } else {
+    mapData = countriesBeen.map((country) => [country.name]);
+    mapData.unshift(['Country']);
+  }
 
-		return (
-			<div className="Content">
-				<h1>Countries I've been to</h1>
-				<Grid
-				  container
-				  direction="column"
-				  justify="center"
-				  alignItems="center"
-				  >
-					<SelectItems />
-					<SwitchWithLabel onChange={this.coloredMapHandler} />
-					{ this.props.countriesBeen ?
-					<Map
-						data={mapData}
-						region={
-							this.props.region !== "all"
-								? this.props.region
-								: this.props.continent
-						}
-					/>
-					: null }
-				</Grid>
-			</div>
-		);
-	}
+  return (
+    <div className="Content">
+      <h1>Countries I've been to</h1>
+      <Grid container direction="column" justify="center" alignItems="center">
+        <SelectItems
+          continent={continent}
+          setContinent={setContinent}
+          region={region}
+          setRegion={setRegion}
+        />
+        <SwitchWithLabel onChange={coloredMapHandler} />
+        {countriesBeen && (
+          <Map data={mapData} region={region !== 'all' ? region : continent} />
+        )}
+      </Grid>
+    </div>
+  );
 }
 
-const mapStateToProps = state => {
-	return {
-		countriesBeen: state.countriesBeen,
-		continent: state.continent,
-		region: state.region,
-		country: state.country,
-		error: state.error,
-		isBackMocked: state.isBackMocked
-	};
-};
-
-const mapDispatchToProps = dispatch => {
-	return {
-		onInitCountries: isBackMocked =>
-			dispatch(actions.initCountries(isBackMocked)),
-		onUnsetCountryInfo: () =>
-			dispatch(actions.unsetCountryInfo())
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MapPage);
+export default MapPage;

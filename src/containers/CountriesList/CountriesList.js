@@ -1,69 +1,51 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import * as actions from "../../store/actions";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import * as actions from '../../store/actions';
 
-import CountryBox from "../../components/CountryBox/CountryBox";
-import "./CountriesList.css";
+import CountryBox from '../../components/CountryBox/CountryBox';
+import './CountriesList.css';
 
-class CountriesList extends Component {
-	componentDidMount() {
-		if (this.props.country) {
-			this.props.onUnsetCountryInfo();
-		}
-		if (this.props.countriesBeen.length === 0) {
-			this.props.onInitCountries(this.props.isBackMocked);
-		}
-	}
+function CountriesList() {
+  const countriesBeen = useSelector((state) => state.countriesBeen);
+  const isBackMocked = useSelector((state) => state.isBackMocked);
 
-	countrySelectedHandler = countryName => {
-		this.props.history.push({pathname: `/country/${countryName}` });
-	}
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-	render() {
-		let countriesBeen = (
-			<p style={{ textAlign: "center" }}> Something went wrong! </p>
-		);
+  useEffect(() => {
+    if (countriesBeen.length === 0) {
+      dispatch(actions.fetchCountriesBeen(isBackMocked));
+    }
+  }, []);
 
-		if (!this.props.error) {
-			countriesBeen = this.props.countriesBeen.map(countryBeen => {
-				return (
-					<CountryBox
-						key={countryBeen.id}
-						name={countryBeen.name.toUpperCase()}
-						code={countryBeen.alpha2code}
-						clicked={() => this.countrySelectedHandler(countryBeen.name)}
-					/>
-				);
-			});
-		}
+  const countrySelectedHandler = (countryName) => {
+    history.push({ pathname: `/country/${countryName}` });
+  };
 
-		return (
-			<div className="Content">
-				<h1>List of countries I've been to</h1>
-				<section className="Countries"> {countriesBeen} </section>
-			</div>
-		);
-	}
+  let countriesList = (
+    <p style={{ textAlign: 'center' }}> Something went wrong! </p>
+  );
+
+  if (countriesBeen) {
+    countriesList = countriesBeen.map((country) => {
+      return (
+        <CountryBox
+          key={country.id}
+          name={country.name.toUpperCase()}
+          code={country.alpha2code}
+          clicked={() => countrySelectedHandler(country.name)}
+        />
+      );
+    });
+  }
+
+  return (
+    <div className="Content">
+      <h1>List of countries I've been to</h1>
+      <section className="Countries"> {countriesList} </section>
+    </div>
+  );
 }
 
-const mapStateToProps = state => {
-	return {
-		countriesBeen: state.countriesBeen,
-		continent: state.continent,
-		region: state.region,
-		country: state.country,
-		error: state.error,
-		isBackMocked: state.isBackMocked
-	};
-};
-
-const mapDispatchToProps = dispatch => {
-	return {
-		onInitCountries: isBackMocked =>
-			dispatch(actions.initCountries(isBackMocked)),
-		onUnsetCountryInfo: () =>
-			dispatch(actions.unsetCountryInfo())
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CountriesList);
+export default CountriesList;

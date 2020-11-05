@@ -1,75 +1,55 @@
-import * as actionTypes from "./actionTypes";
+import * as actionTypes from './actionTypes';
 
 const initialState = {
-	countriesBeen: [],
-	continent: "000",
-	region: "all",
-	country: null,
-	statistics: null,
-	error: false,
-	isBackMocked: false
-};
-
-const setCountries = (state, action) => {
-	return {
-		...state,
-		countriesBeen: action.countries,
-		error: false
-	};
-};
-
-const fetchCountriesFailed = (state, action) => {
-	return {
-		...state,
-		error: true
-	};
+  countriesBeen: [],
+  country: null,
+  loading: false,
+  error: null,
+  isBackMocked: false,
 };
 
 const reducer = (state = initialState, action) => {
-	switch (action.type) {
-		case actionTypes.SET_COUNTRIES:
-			return setCountries(state, action);
-		case actionTypes.FETCH_COUNTRIES_FAILED:
-			return fetchCountriesFailed(state, action);
-		case actionTypes.SELECT_CONTINENT:
-			return {
-				...state,
-				continent: action.continent,
-				region: "all"
-			};
-		case actionTypes.SELECT_REGION:
-			return {
-				...state,
-				region: action.region
-			};
-		case actionTypes.SET_COUNTRY_INFO:
-			const info = action.countryInfo.shift();
-			const cities = action.countryInfo;
-			return {
-				...state,
-				country: {
-					info,
-					cities
-				}
-			};
-		case actionTypes.UNSET_COUNTRY_INFO:
-			return {
-				...state,
-				country: null
-			};
-		case actionTypes.SET_COUNTRY_STATISTICS:
-			return {
-				...state,
-				statistics: action.countryStatistics,
-			};
-		case actionTypes.UNSET_COUNTRY_STATISTICS:
-			return {
-				...state,
-				statistics: null
-			};
-		default:
-			return state;
-	}
+  switch (action.type) {
+    case actionTypes.FETCH_COUNTRIES_BEEN_START:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case actionTypes.FETCH_COUNTRIES_BEEN_SUCCESS:
+      return {
+        ...state,
+        countriesBeen: action.countries,
+        loading: false,
+      };
+    case actionTypes.FETCH_COUNTRIES_BEEN_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case actionTypes.FETCH_COUNTRY_STATS_START:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case actionTypes.FETCH_COUNTRY_STATS_SUCCESS:
+      const { info, citiesVisited, ...statistics } = action.countryStatistics;
+      return {
+        ...state,
+        country: { info, citiesVisited, statistics },
+        loading: false,
+      };
+    case actionTypes.FETCH_COUNTRY_STATS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    default:
+      return state;
+  }
 };
 
 export default reducer;
