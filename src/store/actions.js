@@ -28,7 +28,10 @@ export const fetchCountriesBeen = (isBackMocked) => {
     dispatch(fetchCountriesBeenStart());
 
     isBackMocked
-      ? dispatch(fetchCountriesBeenSuccess(countriesBeenMocked))
+      ? setTimeout(
+          () => dispatch(fetchCountriesBeenSuccess(countriesBeenMocked)),
+          1000
+        )
       : axios
           .get('/countriesBeenTo')
           .then((response) => {
@@ -64,7 +67,13 @@ export const fetchCountryStatistics = (countryName, isBackMocked) => {
   return (dispatch) => {
     dispatch(fetchCountryStatisticsStart());
     isBackMocked
-      ? dispatch(fetchCountryStatisticsSuccess(countryInfoWithStatisticsMock))
+      ? setTimeout(
+          () =>
+            dispatch(
+              fetchCountryStatisticsSuccess(countryInfoWithStatisticsMock)
+            ),
+          1000
+        )
       : axios
           .get(`/statistics/${countryName}/`)
           .then((response) => {

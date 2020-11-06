@@ -1,20 +1,20 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Chart } from 'react-google-charts';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 function Map({ data, region }) {
   const country = useSelector((state) => state.country);
   const history = useHistory();
+  const location = useLocation();
 
   let options = {
     region: region !== '000' ? region : null,
-    // colorAxis: { colors: ['green', 'blue'] },
   };
 
-  if (country) {
+  if (country && location.pathname !== '/') {
     options = {
-      region: country ? country.info.alpha2code : '',
+      region: country.info.alpha2code,
       resolution: 'provinces',
       // displayMode: 'text',
       colorAxis: { colors: ['green', 'blue'] },

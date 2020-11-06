@@ -10,7 +10,6 @@ import NightsStatistics from '../Statistics/Nights/Nights';
 import InfoLabel from '../shared/InfoLabel';
 import * as countryFlags from '../shared/images';
 import { useParams } from 'react-router-dom';
-// import "./FullPost.css";
 
 function CountryInfo() {
   const dispatch = useDispatch();
@@ -28,8 +27,10 @@ function CountryInfo() {
     return null;
   }
 
-  const { info, citiesVisited, statistics } = country;
+  const { info, citiesVisited, statesVisited, statistics } = country;
   const { kilometersWalked, nights, expenses, hitchhikes } = statistics;
+
+  const states = statesVisited.map((state) => [state]);
 
   return (
     <div
@@ -66,7 +67,7 @@ function CountryInfo() {
             <p></p>Places visited: <p>{citiesVisited.join(', ')}.</p>
           </div>
           <div style={{ width: '65%' }}>
-            <Map data={[['Country'], [countryName]]} />
+            <Map data={states.length === 0 ? [['']] : states} />
           </div>
         </div>
       </section>

@@ -35,10 +35,16 @@ const reducer = (state = initialState, action) => {
         error: null,
       };
     case actionTypes.FETCH_COUNTRY_STATS_SUCCESS:
-      const { info, citiesVisited, ...statistics } = action.countryStatistics;
+      const {
+        info,
+        citiesVisited,
+        statesVisited,
+        ...statistics
+      } = action.countryStatistics;
+
       return {
         ...state,
-        country: { info, citiesVisited, statistics },
+        country: { info, citiesVisited, statesVisited, statistics },
         loading: false,
       };
     case actionTypes.FETCH_COUNTRY_STATS_FAIL:
