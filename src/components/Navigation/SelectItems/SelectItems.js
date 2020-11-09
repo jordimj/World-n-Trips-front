@@ -1,13 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import { Grid } from '@material-ui/core';
+import {
+  InputLabel,
+  MenuItem,
+  FormHelperText,
+  FormControl,
+  Select,
+  Grid,
+} from '@material-ui/core';
 
-import countryAndRegionsInfo from '../../../utils/countryAndRegionsInfo';
+import continentAndRegionsInfo from '../../../utils/continentAndRegionsInfo';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -36,45 +38,29 @@ export default function SimpleSelect(props) {
     setRegion(event.target.value);
   };
 
-  let continentSelectOptions = [];
-  for (let continent in countryAndRegionsInfo) {
-    continentSelectOptions.push(
-      <MenuItem
-        key={countryAndRegionsInfo[continent].name}
-        value={countryAndRegionsInfo[continent].code}
-      >
-        {countryAndRegionsInfo[continent].name}
-      </MenuItem>
-    );
-  }
+  const continentSelectOptions = continentAndRegionsInfo.map((continent) => (
+    <MenuItem key={continent.name} value={continent.code}>
+      {continent.name}
+    </MenuItem>
+  ));
 
-  let regionSelectOptions = [
-    <option key="all" value="all">
-      All
-    </option>,
-  ];
-
-  const continentCodes = {
-    africa: '002',
-    europe: '150',
-    americas: '019', // [TODO] Check if there is a better map for America
-    asia: '142',
-    oceania: '009',
-  };
+  let regionSelectOptions = [];
 
   if (continent !== '000') {
-    const key = Object.keys(continentCodes).filter((key) => {
-      return continentCodes[key] === continent;
-    })[0];
-
-    regionSelectOptions.push(
-      countryAndRegionsInfo[key].regions.map((region) => (
+    regionSelectOptions = continentAndRegionsInfo
+      .find((cont) => cont.code === continent)
+      .regions.map((region) => (
         <MenuItem key={region.name} value={region.code}>
           {region.name}
         </MenuItem>
-      ))
-    );
+      ));
   }
+
+  regionSelectOptions.unshift(
+    <MenuItem key="all" value="all">
+      All
+    </MenuItem>
+  );
 
   return (
     <Grid container direction="row" justify="center" alignItems="center">
@@ -84,7 +70,7 @@ export default function SimpleSelect(props) {
           labelId="continent-select-label"
           id="continent-select"
           value={continent}
-          onChange={(e) => continentSelectedHandler(e)}
+          onChange={continentSelectedHandler}
         >
           {continentSelectOptions}
         </Select>
@@ -93,13 +79,16 @@ export default function SimpleSelect(props) {
         </FormHelperText>
       </FormControl>
 
-      <FormControl className={classes.formControl}>
+      <FormControl
+        disabled={continent === '000'}
+        className={classes.formControl}
+      >
         <InputLabel id="region-helper-label">Region</InputLabel>
         <Select
           labelId="region-helper-label"
           id="region-helper"
           value={region}
-          onChange={(e) => regionSelectedHandler(e)}
+          onChange={regionSelectedHandler}
         >
           {regionSelectOptions}
         </Select>
