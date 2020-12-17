@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import Toolbar from './components/Navigation/Toolbar/Toolbar';
+import Toolbar from './components/UI/Navigation/Toolbar/Toolbar';
 import MapPage from './containers/MapPage/MapPage';
 import CountriesList from './containers/CountriesList/CountriesList';
 import Country from './components/Country/Country';

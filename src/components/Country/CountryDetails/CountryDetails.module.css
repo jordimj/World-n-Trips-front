@@ -1,0 +1,11 @@
+.details_panel {
+  background-color: var(--background-color-light);
+  box-shadow: var(--box-shadow);
+  border-radius: 8px;
+}
+
+.details_panel img {
+  width: 95%;
+  border-radius: 8px;
+  margin: 8px;
+}
