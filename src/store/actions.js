@@ -3,6 +3,8 @@ import * as actionTypes from './actionTypes';
 import countriesBeenMocked from '../mock/countriesBeenMock';
 import countryInfoWithStatisticsMock from '../mock/countryInfoWithStatisticsMock';
 
+const isBackMocked = process.env.REACT_APP_IS_BACKEND_MOCKED === 'true';
+
 const fetchCountriesBeenStart = () => {
   return {
     type: actionTypes.FETCH_COUNTRIES_BEEN_START,
@@ -23,7 +25,7 @@ export const fetchCountriesBeenFail = (error) => {
   };
 };
 
-export const fetchCountriesBeen = (isBackMocked) => {
+export const fetchCountriesBeen = () => {
   return (dispatch) => {
     dispatch(fetchCountriesBeenStart());
 
@@ -63,7 +65,7 @@ export const fetchCountryStatisticsFail = (error) => {
   };
 };
 
-export const fetchCountryStatistics = (countryName, isBackMocked) => {
+export const fetchCountryStatistics = (countryName) => {
   return (dispatch) => {
     dispatch(fetchCountryStatisticsStart());
     isBackMocked
@@ -72,7 +74,7 @@ export const fetchCountryStatistics = (countryName, isBackMocked) => {
             dispatch(
               fetchCountryStatisticsSuccess(countryInfoWithStatisticsMock)
             ),
-          1000
+          200
         )
       : axios
           .get(`/statistics/${countryName}/`)

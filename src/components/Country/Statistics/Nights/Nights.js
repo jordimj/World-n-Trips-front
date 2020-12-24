@@ -1,65 +1,44 @@
 import React from 'react';
 import NightsTable from './NightsTable';
-import InfoLabel from '../../../shared/InfoLabel';
 import { percentageFormatter } from '../../../../utils/helpers';
+import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
+import styles from './Nights.module.css';
 
 export default function NightsStatistics(props) {
   const { count, spots, infoExtra } = props.nights;
   const kmWalked = props.km;
 
   return (
-    <section className="Nights">
+    <section>
       <h2>Days & nights</h2>
-      <div
-        style={{
-          display: 'flex',
-          flexFlow: 'row',
-          placeItems: 'center',
-          marginBottom: '30px',
-        }}
-      >
-        <div style={{ width: '50%' }}>
-          <InfoLabel label="Total of nights" value={count.total} />
-          <InfoLabel
+      <div className={styles.container}>
+        <div className={styles.partition}>
+          <DetailRow label="Total of nights" value={count.total} />
+          <DetailRow
             label="Free stays"
-            value={
-              count.free +
-              ' (' +
-              percentageFormatter(count.free / count.total) +
-              ')'
-            }
+            value={`${count.free} (${percentageFormatter(
+              count.free / count.total
+            )})`}
           />
-          <InfoLabel
+          <DetailRow
             label="Paid stays"
-            value={
-              count.paid +
-              ' (' +
-              percentageFormatter(count.paid / count.total) +
-              ')'
-            }
+            value={`${count.paid} (${percentageFormatter(
+              count.paid / count.total
+            )})`}
           />
         </div>
-        <div style={{ width: '50%' }}>
-          <InfoLabel label="Kilometers walked" value={kmWalked} appendix="km" />
-          <InfoLabel
+        <div className={styles.partition}>
+          <DetailRow label="Kilometers walked" value={kmWalked} appendix="km" />
+          <DetailRow
             label="Average kilometers walked"
-            value={(kmWalked / count.total).toFixed(2)}
-            appendix="km / day"
+            value={`${(kmWalked / count.total).toFixed(2)} km / day`}
           />
         </div>
       </div>
 
-      <div
-        style={{
-          display: 'flex',
-          flexFlow: 'row',
-          placeItems: 'center',
-          marginBottom: '30px',
-        }}
-      >
-        <div style={{ width: '65%' }}>
-          <NightsTable spots={spots} />
-        </div>
+      <div className={styles.container}>
+        <NightsTable spots={spots} />
+        {/* [TODO: refactor] 
         {Object.keys(infoExtra).length > 0 && (
           <div style={{ width: '35%' }}>
             <p>Also I slept:</p>
@@ -81,7 +60,7 @@ export default function NightsStatistics(props) {
               ))}
             </ul>
           </div>
-        )}
+        )} */}
       </div>
     </section>
   );

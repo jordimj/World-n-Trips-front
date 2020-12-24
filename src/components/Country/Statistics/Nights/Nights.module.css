@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  place-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.partition {
+  width: 35%;
+}

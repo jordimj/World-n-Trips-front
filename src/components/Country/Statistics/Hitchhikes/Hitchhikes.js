@@ -1,7 +1,8 @@
 import React from 'react';
-import InfoLabel from '../../../shared/InfoLabel';
 import Divider from '../../../shared/Divider';
 import HitchhikesChart from './HitchikesChart';
+import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
+import styles from './Hitchhikes.module.css';
 
 export default function HitchhikesStatistics(props) {
   const {
@@ -17,89 +18,70 @@ export default function HitchhikesStatistics(props) {
   return (
     <section className="Nights">
       <h2>Hitchhikes</h2>
-      <div
-        style={{
-          display: 'flex',
-          flexFlow: 'row',
-          placeItems: 'center',
-          marginBottom: '30px',
-        }}
-      >
-        <div style={{ width: '50%' }}>
-          <InfoLabel
+      <div className={styles.container}>
+        <div className={styles.partition}>
+          <DetailRow
             label="Total of kilometers"
-            value={totalKilometers}
-            appendix="km"
+            value={`${totalKilometers} km`}
           />
-          <InfoLabel
+          <DetailRow
             label="Kilometers in the back of the pickup"
-            value={totalKilometersOpenAir}
-            appendix="km"
+            value={`${totalKilometersOpenAir} km`}
           />
-          <InfoLabel
-            label="Days on the road"
-            value={daysOnTheRoad}
-            appendix="days"
-          />
+          <DetailRow label="Days on the road" value={`${daysOnTheRoad} days`} />
           {minutesWaiting && (
-            <InfoLabel
+            <DetailRow
               label="Waiting on the road"
-              value={minutesWaiting.total}
-              appendix="mins"
+              value={`${minutesWaiting.total} mins`}
             />
           )}
-          <InfoLabel
+          <DetailRow
             label="Number of rides we got"
-            value={Math.trunc(totalCars)}
-            appendix="rides"
+            value={`${Math.trunc(totalCars)} rides`}
           />
         </div>
-        <div style={{ width: '50%' }}>
-          <InfoLabel
+        <div className={styles.partition}>
+          <DetailRow
             label="Average kilometers per day in the country"
-            value={(totalKilometers / totalNights).toFixed(2)}
-            appendix="km"
+            value={`${(totalKilometers / totalNights).toFixed(2)} km`}
           />
-          <InfoLabel
+          <DetailRow
             label="Average kilometers per day on the road"
-            value={(totalKilometers / daysOnTheRoad).toFixed(2)}
-            appendix="km"
+            value={`${(totalKilometers / daysOnTheRoad).toFixed(2)} km`}
           />
-          <InfoLabel
+          <DetailRow
             label="Average rides per day on the road"
-            value={(totalCars / daysOnTheRoad).toFixed(2)}
-            appendix="rides"
+            value={`${(totalCars / daysOnTheRoad).toFixed(2)} rides`}
           />
           <Divider />
-          <InfoLabel
+          <DetailRow
             label="Longest distance per ride"
-            value={distances.longest}
-            appendix="km"
+            value={`${distances.longest} km`}
           />
-          <InfoLabel
+          <DetailRow
             label="Average distance per ride"
-            value={Number(distances.average).toFixed(2)}
-            appendix="km"
+            value={`${Number(distances.average).toFixed(2)} km`}
           />
-          <InfoLabel
+          <DetailRow
             label="Shortest distance per ride"
-            value={distances.shortest}
-            appendix="km"
+            value={`${distances.shortest} km`}
           />
           {minutesWaiting && (
             <React.Fragment>
               <Divider />
-              <InfoLabel
+              <DetailRow
                 label="Longest wait per ride"
-                value={Number(minutesWaiting.waits.longest).toFixed(0)}
-                appendix="mins"
+                value={`${Number(minutesWaiting.waits.longest).toFixed(
+                  0
+                )} mins`}
               />
-              <InfoLabel
+              <DetailRow
                 label="Average wait per ride"
-                value={Number(minutesWaiting.waits.average).toFixed(2)}
-                appendix="mins"
+                value={`${Number(minutesWaiting.waits.average).toFixed(
+                  2
+                )} mins`}
               />
-              <InfoLabel
+              <DetailRow
                 label="Shortest wait per ride"
                 value={Number(minutesWaiting.waits.shortest).toFixed(0)}
                 appendix="mins"
@@ -109,15 +91,7 @@ export default function HitchhikesStatistics(props) {
         </div>
       </div>
       {minutesWaiting && (
-        <div
-          style={{
-            display: 'flex',
-            flexFlow: 'column',
-            placeItems: 'center',
-            marginBottom: '30px',
-            width: '85%',
-          }}
-        >
+        <div className={styles.chartsContainer}>
           <HitchhikesChart data={minutesWaiting.carsPerHour} chartKind="CARS" />
           <HitchhikesChart
             data={minutesWaiting.kilometersPerHour}

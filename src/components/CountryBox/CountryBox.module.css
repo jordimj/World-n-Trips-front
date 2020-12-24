@@ -1,6 +1,6 @@
 .CountryBox {
-  width: 250px;
-  padding: 16px;
+  width: 220px;
+  padding: 0 10px;
   text-align: center;
   border: 1px solid #eee;
   box-shadow: 0 2px 3px #ccc;
@@ -8,8 +8,17 @@
   box-sizing: border-box;
   cursor: pointer;
   font-weight: 600;
+  font-size: 1.3em;
 }
 
 .CountryBox:hover {
   background-color: #c0ddf5;
+}
+
+.CountryBox p {
+  margin-bottom: 0%;
+}
+
+.CountryBox img {
+  width: 50%;
 }

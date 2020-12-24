@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  place-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.partition {
+  width: 35%;
+}
+
+.chartsContainer {
+  margin-bottom: 30px;
+  width: 100%;
+
+  border: var(--primary-color);
+  border-style: solid;
+  border-radius: 8px;
+  padding: 2%;
+}

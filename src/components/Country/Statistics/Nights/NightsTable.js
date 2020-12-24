@@ -1,42 +1,75 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import {
+  KeyboardArrowDownRounded,
+  KeyboardArrowUpRounded,
+} from '@material-ui/icons';
+import { useState } from 'react';
+import styles from './NightsTable.module.css';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 400,
-    maxWidth: 500,
-  },
-});
+const orderBy = (rows, value, direction) => {
+  if (direction === 'asc')
+    return [...rows].sort((a, b) => (a[value] > b[value] ? 1 : -1));
+  if (direction === 'desc')
+    return [...rows].sort((a, b) => (a[value] > b[value] ? -1 : 1));
 
-export default function ExpensesTable(props) {
-  const rows = Object.entries(props.spots);
-  const classes = useStyles();
+  return rows;
+};
+
+const SortArrow = ({ direction }) => {
+  if (!direction) return null;
 
   return (
-    <Table className={classes.table} aria-label="simple table">
-      <TableHead>
-        <TableRow>
-          <TableCell align="center">
-            <b>Kind of spot</b>
-          </TableCell>
-          <TableCell align="center">
-            <b>Number of nights</b>
-          </TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {rows.map(([spotKind, numberOfNights]) => (
-          <TableRow key={spotKind}>
-            <TableCell align="center">{spotKind}</TableCell>
-            <TableCell align="center">{numberOfNights}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <div className={styles.headingArrow}>
+      {direction === 'desc' && <KeyboardArrowDownRounded color="inherit" />}
+      {direction === 'asc' && <KeyboardArrowUpRounded color="inherit" />}
+    </div>
   );
-}
+};
+
+const NightsTable = ({ spots }) => {
+  const [direction, setDirection] = useState('desc');
+  const [value, setValue] = useState('nights');
+
+  const rows = Object.entries(spots);
+  const orderedRows = orderBy(rows, value, direction);
+
+  const switchDirection = () => {
+    if (direction === 'asc') setDirection('desc');
+    else if (direction === 'desc') setDirection('asc');
+  };
+
+  const setValueAndDirection = (value) => {
+    switchDirection();
+    setValue(value);
+  };
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <button
+          className={styles.headerCell}
+          onClick={() => setValueAndDirection('spotKind')}
+        >
+          <div>Kind of spot</div>
+          {value === 'spotKind' && <SortArrow direction={direction} />}
+        </button>
+        <button
+          className={styles.headerCell}
+          onClick={() => setValueAndDirection('nights')}
+        >
+          <div>Number of nights</div>
+          {value === 'nights' && <SortArrow direction={direction} />}
+        </button>
+      </div>
+      <div className={styles.rows}>
+        {orderedRows.map(([spotKind, numberOfNights]) => (
+          <div className={styles.row} key={spotKind}>
+            <div>{spotKind}</div>
+            <div>{numberOfNights}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default NightsTable;

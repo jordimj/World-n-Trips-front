@@ -5,18 +5,17 @@ import { Grid } from '@material-ui/core';
 
 import Map from '../../components/Map/Map';
 import './MapPage.css';
-import SelectItems from '../../components/Navigation/SelectItems/SelectItems';
+import SelectItems from '../../components/UI/SelectItems/SelectItems';
 import ColoredMapSwitch from '../../components/shared/ColoredMapSwitch';
 
 function MapPage() {
   const countriesBeen = useSelector((state) => state.countriesBeen);
-  const isBackMocked = useSelector((state) => state.isBackMocked);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (countriesBeen.length === 0) {
-      dispatch(actions.fetchCountriesBeen(isBackMocked));
+      dispatch(actions.fetchCountriesBeen());
     }
   }, []);
 
@@ -31,14 +30,15 @@ function MapPage() {
   let mapData = [];
 
   if (graduallyColored) {
-    mapData = countriesBeen.map((country) => [
-      country.name,
-      Number(country.numberOfSpots),
-    ]);
-    mapData.unshift(['Country', 'Number of spots']);
+    mapData = [
+      ['Country', 'Number of spots'],
+      ...countriesBeen.map((country) => [
+        country.name,
+        Number(country.numberOfSpots),
+      ]),
+    ];
   } else {
-    mapData = countriesBeen.map((country) => [country.name]);
-    mapData.unshift(['Country']);
+    mapData = [['Country'], ...countriesBeen.map((country) => [country.name])];
   }
 
   return (

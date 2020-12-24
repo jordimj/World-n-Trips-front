@@ -44,23 +44,24 @@ export default function SimpleSelect(props) {
     </MenuItem>
   ));
 
-  let regionSelectOptions = [];
-
-  if (continent !== '000') {
-    regionSelectOptions = continentAndRegionsInfo
-      .find((cont) => cont.code === continent)
-      .regions.map((region) => (
-        <MenuItem key={region.name} value={region.code}>
-          {region.name}
-        </MenuItem>
-      ));
-  }
-
-  regionSelectOptions.unshift(
+  let regionSelectOptions = [
     <MenuItem key="all" value="all">
       All
-    </MenuItem>
-  );
+    </MenuItem>,
+  ];
+
+  if (continent !== '000') {
+    regionSelectOptions = [
+      regionSelectOptions,
+      ...continentAndRegionsInfo
+        .find((cont) => cont.code === continent)
+        .regions.map((region) => (
+          <MenuItem key={region.name} value={region.code}>
+            {region.name}
+          </MenuItem>
+        )),
+    ];
+  }
 
   return (
     <Grid container direction="row" justify="center" alignItems="center">

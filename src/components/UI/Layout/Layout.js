@@ -1,11 +1,9 @@
 import styles from './Layout.module.css';
 
-const Layout = ({ children, title = 'World-n-Trips' }) => {
-  document.title = title;
-
+const Layout = ({ children }) => {
   return (
     <div className={styles.container}>
-      <title>{title}</title>
+      <title>World-n-Trips</title>
       <link rel="icon" href="/favicon.ico" />
 
       <main>{children}</main>
