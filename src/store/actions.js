@@ -1,7 +1,7 @@
-import axios from '../axios';
+import * as API from '../api/api';
 import * as actionTypes from './actionTypes';
-import countriesBeenMocked from '../mock/countriesBeenMock';
-import countryInfoWithStatisticsMock from '../mock/countryInfoWithStatisticsMock';
+import { countriesBeenMock } from '../__mocks__/countriesBeenMock';
+import { countryStatsMock } from '../__mocks__/countryStatsMock';
 
 const isBackMocked = process.env.REACT_APP_IS_BACKEND_MOCKED === 'true';
 
@@ -26,22 +26,18 @@ export const fetchCountriesBeenFail = (error) => {
 };
 
 export const fetchCountriesBeen = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(fetchCountriesBeenStart());
 
-    isBackMocked
-      ? setTimeout(
-          () => dispatch(fetchCountriesBeenSuccess(countriesBeenMocked)),
-          1000
-        )
-      : axios
-          .get('/countriesBeenTo')
-          .then((response) => {
-            dispatch(fetchCountriesBeenSuccess(response.data));
-          })
-          .catch((error) => {
-            dispatch(fetchCountriesBeenFail(error));
-          });
+    try {
+      const countriesBeen = isBackMocked
+        ? countriesBeenMock
+        : await API.getCountriesBeen();
+
+      dispatch(fetchCountriesBeenSuccess(countriesBeen));
+    } catch (e) {
+      dispatch(fetchCountriesBeenFail(e));
+    }
   };
 };
 
@@ -66,23 +62,16 @@ export const fetchCountryStatisticsFail = (error) => {
 };
 
 export const fetchCountryStatistics = (countryName) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(fetchCountryStatisticsStart());
-    isBackMocked
-      ? setTimeout(
-          () =>
-            dispatch(
-              fetchCountryStatisticsSuccess(countryInfoWithStatisticsMock)
-            ),
-          200
-        )
-      : axios
-          .get(`/statistics/${countryName}/`)
-          .then((response) => {
-            dispatch(fetchCountryStatisticsSuccess(response.data));
-          })
-          .catch((error) => {
-            dispatch(fetchCountryStatisticsFail(error));
-          });
+
+    try {
+      const countryStats = isBackMocked
+        ? countryStatsMock
+        : await API.getCountryStats(countryName);
+      dispatch(fetchCountryStatisticsSuccess(countryStats));
+    } catch (e) {
+      dispatch(fetchCountryStatisticsFail(e));
+    }
   };
 };

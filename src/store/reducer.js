@@ -5,7 +5,6 @@ const initialState = {
   country: null,
   loading: false,
   error: null,
-  isBackMocked: false,
 };
 
 const reducer = (state = initialState, action) => {
