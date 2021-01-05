@@ -1,12 +1,13 @@
 import React from 'react';
-import * as countryFlags from '../shared/images';
-
 import styles from './CountryBox.module.css';
 
-const countryBox = (props) => (
-  <article className={styles.CountryBox} onClick={props.clicked}>
-    <p>{props.name}</p>
-    <img src={countryFlags[props.code]} alt="Logo" />
+const countryBox = ({ name, code, onClick }) => (
+  <article className={styles.CountryBox} onClick={onClick}>
+    <p>{name}</p>
+    <img
+      src={process.env.PUBLIC_URL + `/img/flags/${code}.png`}
+      alt={`${name}'s flag`}
+    />
   </article>
 );
 
