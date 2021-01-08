@@ -1,58 +1,73 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import { euroFormatter, percentageFormatter } from '../../../../utils/helpers';
+import { useState } from 'react';
+import {
+  euroFormatter,
+  percentageFormatter,
+  tableOrderBy,
+} from '../../../../utils/helpers';
+import { SortingArrow } from '../../../UI/SortingArrow/SortingArrow';
+import styles from './ExpensesTable.module.css';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 400,
-    maxWidth: 700,
-  },
-});
+const NightsTable = ({ sum, categories, totalNights }) => {
+  const [direction, setDirection] = useState('desc');
+  const [value, setValue] = useState('category');
 
-export default function ExpensesTable({ sum, categories, totalNights }) {
-  const arrayRows = Object.entries(categories);
+  const rows = Object.entries(categories);
+  const orderedRows = tableOrderBy(rows, value, direction);
 
-  const classes = useStyles();
+  const switchDirection = () => {
+    if (direction === 'asc') setDirection('desc');
+    else if (direction === 'desc') setDirection('asc');
+  };
+
+  const setValueAndDirection = (value) => {
+    switchDirection();
+    setValue(value);
+  };
 
   return (
-    <Table className={classes.table} aria-label="simple table">
-      <TableHead>
-        <TableRow>
-          <TableCell align="center">
-            <b>Category</b>
-          </TableCell>
-          <TableCell align="center">
-            <b>Amount</b>
-          </TableCell>
-          <TableCell align="center">
-            <b>Percentage</b>
-          </TableCell>
-          <TableCell align="center">
-            <b>Spent / day</b>
-          </TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {arrayRows.map(([category, amount]) => (
-          <TableRow key={category}>
-            <TableCell align="center" component="th" scope="row">
-              {category}
-            </TableCell>
-            <TableCell align="center">{euroFormatter(amount)}</TableCell>
-            <TableCell align="center">
-              {percentageFormatter(amount / sum)}
-            </TableCell>
-            <TableCell align="center">
-              {euroFormatter(amount / totalNights)}
-            </TableCell>
-          </TableRow>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <button
+          className={styles.headerCell}
+          onClick={() => setValueAndDirection('category')}
+        >
+          <div>Category</div>
+          {value === 'category' && <SortingArrow direction={direction} />}
+        </button>
+        <button
+          className={styles.headerCell}
+          onClick={() => setValueAndDirection('amount')}
+        >
+          <div>Amount</div>
+          {value === 'amount' && <SortingArrow direction={direction} />}
+        </button>
+        <button
+          className={styles.headerCell}
+          onClick={() => setValueAndDirection('percentage')}
+        >
+          <div>Percentage</div>
+          {value === 'percentage' && <SortingArrow direction={direction} />}
+        </button>
+        <button
+          className={styles.headerCell}
+          onClick={() => setValueAndDirection('spent')}
+        >
+          <div>Spent / day</div>
+          {value === 'spent' && <SortingArrow direction={direction} />}
+        </button>
+      </div>
+      <div className={styles.rows}>
+        {orderedRows.map(([category, amount]) => (
+          <div className={styles.row} key={category}>
+            <div>{category}</div>
+            <div>{euroFormatter(amount)}</div>
+            <div>{percentageFormatter(amount / sum)}</div>
+            <div>{euroFormatter(amount / totalNights)}</div>
+          </div>
         ))}
-      </TableBody>
-    </Table>
+      </div>
+    </div>
   );
-}
+};
+
+export default NightsTable;

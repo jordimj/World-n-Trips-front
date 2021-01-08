@@ -1,5 +1,6 @@
 .container {
-  width: 50%;
+  width: 80%;
+  padding: 2% 10%;
 }
 
 .header {
@@ -38,7 +39,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
   gap: 10px;
 
   padding: 10px;

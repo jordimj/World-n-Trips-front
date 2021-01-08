@@ -3,9 +3,9 @@ import styles from './VisitedSpots.module.css';
 
 export default ({ kind, spots }) => {
   return (
-    <div className={styles.visited_spots_container}>
+    <div className={styles.visitedSpotsContainer}>
       <h3>Visited {kind}</h3>
-      <div className={styles.visited_spots}>
+      <div className={styles.visitedSpots}>
         {spots.map((place) => (
           <div id={place}>{place}</div>
         ))}

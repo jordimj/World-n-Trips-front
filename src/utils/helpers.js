@@ -23,3 +23,18 @@ export const deductNotDailyExpenses = (totalExpenses, expensesByCategories) => {
     return acc;
   }, totalExpenses);
 };
+
+export const getAdverbialNumber = (number) => {
+  if (number === '1') return 'Once';
+  if (number === '2') return 'Twice';
+  return `${number} times`;
+};
+
+export const tableOrderBy = (rows, value, direction) => {
+  if (direction === 'asc')
+    return [...rows].sort((a, b) => (a[value] > b[value] ? 1 : -1));
+  if (direction === 'desc')
+    return [...rows].sort((a, b) => (a[value] > b[value] ? -1 : 1));
+
+  return rows;
+};

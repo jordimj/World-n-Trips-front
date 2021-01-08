@@ -6,7 +6,7 @@ import { Grid } from '@material-ui/core';
 import Map from '../../components/Map/Map';
 import './MapPage.css';
 import SelectItems from '../../components/UI/SelectItems/SelectItems';
-import ColoredMapSwitch from '../../components/shared/ColoredMapSwitch';
+import ColoredMapSwitch from '../../components/UI/Switch/ColoredMapSwitch';
 
 function MapPage() {
   const countriesBeen = useSelector((state) => state.countriesBeen);
@@ -23,8 +23,8 @@ function MapPage() {
   const [continent, setContinent] = useState('000');
   const [region, setRegion] = useState('all');
 
-  const coloredMapHandler = (checked) => {
-    setGraduallyColored(checked);
+  const coloredMapHandler = () => {
+    setGraduallyColored((checked) => !checked);
   };
 
   let mapData = [];
@@ -51,7 +51,10 @@ function MapPage() {
           region={region}
           setRegion={setRegion}
         />
-        <ColoredMapSwitch onChange={coloredMapHandler} />
+        <ColoredMapSwitch
+          checked={graduallyColored}
+          onChange={coloredMapHandler}
+        />
         {countriesBeen && (
           <Map data={mapData} region={region !== 'all' ? region : continent} />
         )}

@@ -8,3 +8,7 @@
 .details_panel_label {
   color: var(--text-color-secondary);
 }
+
+div div:last-child {
+  border-bottom: none;
+}

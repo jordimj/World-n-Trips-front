@@ -4,7 +4,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import * as actions from '../../store/actions';
 import styles from './Country.module.css';
 
-import Divider from '../shared/Divider';
+import Divider from '../UI/DividerLine/DividerLine';
 import Map from '../Map/Map';
 import ExpensesStatistics from './Statistics/Expenses/Expenses';
 import HitchhikesStatistics from './Statistics/Hitchhikes/Hitchhikes';
@@ -14,14 +14,14 @@ import VisitedSpots from './VisitedSpots/VisitedSpots';
 
 function CountryInfo() {
   const dispatch = useDispatch();
-  const { countryName } = useParams();
+  const { countryCode } = useParams();
 
   const country = useSelector((state) => state.country);
   const loading = useSelector((state) => state.loading);
 
   useEffect(() => {
-    dispatch(actions.fetchCountryStatistics(countryName));
-  }, []);
+    dispatch(actions.fetchCountryStatistics(countryCode));
+  }, [countryCode]);
 
   if (!country || loading) {
     return null;
@@ -40,19 +40,17 @@ function CountryInfo() {
             <CountryDetails info={info} />
           </div>
           <div className={styles.map}>
-            <h1>{countryName}</h1>
-            <div className={styles.details_panel_borders_label}>
+            <h1>{info.name}</h1>
+            <div className={styles.subtitle}>
               {info.continent.toUpperCase()}
             </div>
             <Map data={states.length === 0 ? [['']] : states} />
-            <div className={styles.details_panel_borders}>
-              <div className={styles.details_panel_borders_label}>
-                Neighbouring countries
-              </div>
-              <div className={styles.details_panel_borders_container}>
+            <div className={styles.bordersContainer}>
+              <div className={styles.subtitle}>Neighbouring countries</div>
+              <div className={styles.bordersGrid}>
                 {JSON.parse(info.borders).map((borderCountry) => (
                   <NavLink to={`/country/${borderCountry}`}>
-                    <div className={styles.details_panel_borders_country}>
+                    <div className={styles.borderDetail}>
                       <img
                         src={`https://restcountries.eu/data/${borderCountry.toLowerCase()}.svg`}
                       />

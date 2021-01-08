@@ -6,7 +6,7 @@ import Toolbar from './components/UI/Navigation/Toolbar/Toolbar';
 import MapPage from './containers/MapPage/MapPage';
 import CountriesList from './containers/CountriesList/CountriesList';
 import Country from './components/Country/Country';
-import { Spinner } from './components/shared/Spinner';
+import { Spinner } from './components/UI/Spinner/Spinner';
 import Layout from './components/UI/Layout/Layout';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <Toolbar />
         <Spinner loading={loading} />
         <Switch>
-          <Route path="/country/:countryName" component={Country} />
+          <Route path="/country/:countryCode" component={Country} />
           <Route path="/list" component={CountriesList} />
           <Route path="/" exact component={MapPage} title="Home" />
         </Switch>

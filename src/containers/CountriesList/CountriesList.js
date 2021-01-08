@@ -24,7 +24,7 @@ function CountriesList() {
   }, []);
 
   const countrySelectedHandler = (countryName) => {
-    history.push({ pathname: `/country/${countryName}` });
+    history.push({ pathname: `/country/${countryName}/` });
   };
 
   const onInputChange = (e) => {
@@ -42,8 +42,8 @@ function CountriesList() {
         <CountryBox
           key={country.id}
           name={country.name.toUpperCase()}
-          code={country.alpha2code}
-          clicked={() => countrySelectedHandler(country.name)}
+          code={country.alpha3code}
+          onClick={() => countrySelectedHandler(country.alpha3code)}
         />
       );
     });
@@ -53,7 +53,7 @@ function CountriesList() {
     <div className="Content">
       <h1>List of countries I've been to</h1>
       <SearchInput placeholder="Filter by name" onChange={onInputChange} />
-      <section className={styles.countries}> {countriesList} </section>
+      <section className={styles.countries}>{countriesList}</section>
     </div>
   );
 }

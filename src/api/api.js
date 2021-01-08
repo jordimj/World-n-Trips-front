@@ -5,7 +5,7 @@ const instance = axios.create({
 });
 
 async function getCountriesBeen() {
-  const response = await instance.get('/countriesBeenTo');
+  const response = await instance.get('/countriesBeenTo/');
   return response.data;
 }
 

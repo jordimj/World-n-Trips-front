@@ -1,5 +1,4 @@
 import React from 'react';
-import Divider from '../../../shared/Divider';
 import HitchhikesChart from './HitchikesChart';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import styles from './Hitchhikes.module.css';
@@ -16,7 +15,7 @@ export default function HitchhikesStatistics(props) {
   const totalNights = props.totalNights;
 
   return (
-    <section className="Nights">
+    <section>
       <h2>Hitchhikes</h2>
       <div className={styles.container}>
         <div className={styles.partition}>
@@ -53,7 +52,6 @@ export default function HitchhikesStatistics(props) {
             label="Average rides per day on the road"
             value={`${(totalCars / daysOnTheRoad).toFixed(2)} rides`}
           />
-          <Divider />
           <DetailRow
             label="Longest distance per ride"
             value={`${distances.longest} km`}
@@ -68,7 +66,6 @@ export default function HitchhikesStatistics(props) {
           />
           {minutesWaiting && (
             <React.Fragment>
-              <Divider />
               <DetailRow
                 label="Longest wait per ride"
                 value={`${Number(minutesWaiting.waits.longest).toFixed(
@@ -91,7 +88,7 @@ export default function HitchhikesStatistics(props) {
         </div>
       </div>
       {minutesWaiting && (
-        <div className={styles.chartsContainer}>
+        <div>
           <HitchhikesChart data={minutesWaiting.carsPerHour} chartKind="CARS" />
           <HitchhikesChart
             data={minutesWaiting.kilometersPerHour}

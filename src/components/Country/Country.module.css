@@ -10,6 +10,11 @@
   margin-bottom: 25px;
 }
 
+.subtitle {
+  color: var(--text-color-secondary);
+  margin-bottom: 20px;
+}
+
 .map {
   background-color: var(--background-color-light);
   box-shadow: var(--box-shadow);
@@ -23,25 +28,23 @@
   padding-right: 2%;
 }
 
-.details_panel_borders {
+.bordersContainer {
   padding: 20px;
 }
-.details_panel_borders_container {
+
+.bordersContainer img {
+  width: 100%;
+  max-height: 100px;
+  border-radius: 4px;
+}
+
+.bordersGrid {
   display: grid;
+  align-items: flex-end;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 24px;
 }
 
-.details_panel_borders img {
-  width: 100%;
-  border-radius: 4px;
-}
-
-.details_panel_borders_country {
+.borderDetail {
   text-align: center;
-}
-
-.details_panel_borders_label {
-  color: var(--text-color-secondary);
-  margin-bottom: 20px;
 }

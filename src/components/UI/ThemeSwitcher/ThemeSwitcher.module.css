@@ -1,0 +1,9 @@
+.themeSwitcher {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.switcherIcon {
+  padding-left: 8px;
+}

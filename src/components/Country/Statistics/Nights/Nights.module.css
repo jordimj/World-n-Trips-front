@@ -1,5 +1,12 @@
 .container {
   display: flex;
+  flex-direction: column;
+  place-items: center;
+  margin-bottom: 30px;
+}
+
+.overview {
+  display: flex;
   place-items: center;
   margin-bottom: 30px;
   width: 100%;
@@ -8,4 +15,8 @@
 
 .partition {
   width: 35%;
+}
+
+.extraInfoList {
+  margin-inline-start: 8em;
 }

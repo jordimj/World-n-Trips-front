@@ -1,4 +1,4 @@
-.visited_spots_container {
+.visitedSpotsContainer {
   background-color: var(--background-color-light);
   box-shadow: var(--box-shadow);
   border-radius: 8px;
@@ -6,7 +6,7 @@
   padding: 1%;
 }
 
-.visited_spots {
+.visitedSpots {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 10px;

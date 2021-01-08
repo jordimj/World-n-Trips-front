@@ -1,13 +1,13 @@
 import React from 'react';
-import styles from './Toolbar.module.css';
 import NavigationItems from '../NavigationItems/NavigationItems';
+import ThemeSwitcher from '../../ThemeSwitcher/ThemeSwitcher';
+import styles from './Toolbar.module.css';
 
 const toolbar = () => (
-  <header className={styles.Toolbar}>
-    <nav className={styles.DesktopOnly}>
-      <NavigationItems />
-    </nav>
-  </header>
+  <nav className={styles.toolbar}>
+    <NavigationItems />
+    <ThemeSwitcher />
+  </nav>
 );
 
 export default toolbar;
