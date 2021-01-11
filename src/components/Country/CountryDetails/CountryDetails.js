@@ -4,7 +4,7 @@ import styles from './CountryDetails.module.css';
 const CountryDetails = ({ info }) => {
   return (
     <div>
-      <div className={styles.details_panel}>
+      <div className={styles.detailsPanel}>
         <img src={info.flagUrl} alt={`${info.name}'s flag`} />
         <DetailRow label="Capital" value={info.capital} />
         <DetailRow label="Region" value={info.region} />

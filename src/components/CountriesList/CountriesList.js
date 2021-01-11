@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as actions from '../../store/actions';
-import CountryBox from '../../components/CountryBox/CountryBox';
+import CountryBox from './CountryBox/CountryBox';
 import SearchInput from '../../components/UI/SearchInput/SearchInput';
 import styles from './CountriesList.module.css';
 
@@ -50,7 +50,7 @@ function CountriesList() {
   }
 
   return (
-    <div className="Content">
+    <div className={styles.container}>
       <h1>List of countries I've been to</h1>
       <SearchInput placeholder="Filter by name" onChange={onInputChange} />
       <section className={styles.countries}>{countriesList}</section>

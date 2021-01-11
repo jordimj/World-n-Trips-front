@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './CountryBox.module.css';
 
-const countryBox = ({ name, code, onClick }) => (
-  <article className={styles.CountryBox} onClick={onClick}>
+const CountryBox = ({ name, code, onClick }) => (
+  <article className={styles.countryBox} onClick={onClick}>
     <p>{name}</p>
     <img
       src={process.env.PUBLIC_URL + `/img/flags/${code}.png`}
@@ -11,4 +11,4 @@ const countryBox = ({ name, code, onClick }) => (
   </article>
 );
 
-export default countryBox;
+export default CountryBox;

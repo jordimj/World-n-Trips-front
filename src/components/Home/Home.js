@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ALL_REGIONS, WORLD_MAP } from '../../constants';
 import * as actions from '../../store/actions';
-import { Grid } from '@material-ui/core';
+import Map from '../Map/Map';
+import SelectItems from '../UI/SelectItems/SelectItems';
+import ColoredMapSwitch from '../UI/Switch/ColoredMapSwitch';
+import styles from './Home.module.css';
 
-import Map from '../../components/Map/Map';
-import './MapPage.css';
-import SelectItems from '../../components/UI/SelectItems/SelectItems';
-import ColoredMapSwitch from '../../components/UI/Switch/ColoredMapSwitch';
-
-function MapPage() {
+function Home() {
   const countriesBeen = useSelector((state) => state.countriesBeen);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,8 +18,8 @@ function MapPage() {
   }, []);
 
   const [graduallyColored, setGraduallyColored] = useState(false);
-  const [continent, setContinent] = useState('000');
-  const [region, setRegion] = useState('all');
+  const [continent, setContinent] = useState(WORLD_MAP);
+  const [region, setRegion] = useState(ALL_REGIONS);
 
   const coloredMapHandler = () => {
     setGraduallyColored((checked) => !checked);
@@ -42,25 +40,26 @@ function MapPage() {
   }
 
   return (
-    <div className="Content">
+    <div className={styles.container}>
       <h1>Countries I've been to</h1>
-      <Grid container direction="column" justify="center" alignItems="center">
-        <SelectItems
-          continent={continent}
-          setContinent={setContinent}
-          region={region}
-          setRegion={setRegion}
+      <SelectItems
+        continent={continent}
+        setContinent={setContinent}
+        region={region}
+        setRegion={setRegion}
+      />
+      <ColoredMapSwitch
+        checked={graduallyColored}
+        onChange={coloredMapHandler}
+      />
+      {countriesBeen && (
+        <Map
+          data={mapData}
+          region={region === ALL_REGIONS ? continent : region}
         />
-        <ColoredMapSwitch
-          checked={graduallyColored}
-          onChange={coloredMapHandler}
-        />
-        {countriesBeen && (
-          <Map data={mapData} region={region !== 'all' ? region : continent} />
-        )}
-      </Grid>
+      )}
     </div>
   );
 }
 
-export default MapPage;
+export default Home;

@@ -1,4 +1,4 @@
-.CountryBox {
+.countryBox {
   width: 220px;
   padding: 0 10px;
   text-align: center;
@@ -11,14 +11,15 @@
   font-size: 1.3em;
 }
 
-.CountryBox:hover {
+.countryBox:hover {
   background-color: #c0ddf5;
 }
 
-.CountryBox p {
-  margin-bottom: 0%;
+.countryBox p {
+  padding: 1%;
 }
 
-.CountryBox img {
-  width: 50%;
+.countryBox img {
+  width: 60%;
+  padding-bottom: 5%;
 }
