@@ -1,15 +1,16 @@
 import React, { useRef, useEffect } from 'react';
 import Chart from 'chart.js';
+import { HOUR_LABELS } from '../../../../constants';
 
 export default function HitchhikesChart(props) {
   const { data, chartKind } = props;
   const chartRef = useRef();
   const finalData = Object.values(data);
 
-  const titles = {
-    CARS: 'Number of cars hitched per hour',
-    KILOMETERS: 'Kilometers hitched per hour',
-    MINUTES: 'Minutes waiting on the road per hour',
+  const TITLES = {
+    cars: 'Number of cars hitched per hour',
+    kilometers: 'Kilometers hitched per hour',
+    minutes: 'Minutes waiting on the road per hour',
   };
 
   useEffect(() => {
@@ -17,32 +18,7 @@ export default function HitchhikesChart(props) {
     const lineChart = new Chart(myChartRef, {
       type: 'line',
       data: {
-        labels: [
-          '12AM',
-          '1AM',
-          '2AM',
-          '3AM',
-          '4AM',
-          '5AM',
-          '6AM',
-          '7AM',
-          '8AM',
-          '9AM',
-          '10AM',
-          '11AM',
-          '12PM',
-          '1PM',
-          '2PM',
-          '3PM',
-          '4PM',
-          '5PM',
-          '6PM',
-          '7PM',
-          '8PM',
-          '9PM',
-          '10PM',
-          '11PM',
-        ],
+        labels: HOUR_LABELS,
         datasets: [
           {
             data: finalData,
@@ -62,7 +38,7 @@ export default function HitchhikesChart(props) {
         },
         title: {
           display: true,
-          text: titles[chartKind],
+          text: TITLES[chartKind],
           padding: 30,
           fontSize: 30,
         },

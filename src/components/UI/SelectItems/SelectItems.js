@@ -9,7 +9,8 @@ import {
   Grid,
 } from '@material-ui/core';
 
-import continentAndRegionsInfo from '../../../utils/continentAndRegionsInfo';
+import CONTINENTS_AND_REGIONS from '../../../constants/continentsAndRegions';
+import { WORLD_MAP } from '../../../constants';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -38,30 +39,31 @@ export default function SimpleSelect(props) {
     setRegion(event.target.value);
   };
 
-  const continentSelectOptions = continentAndRegionsInfo.map((continent) => (
+  const continentSelectOptions = CONTINENTS_AND_REGIONS.map((continent) => (
     <MenuItem key={continent.name} value={continent.code}>
       {continent.name}
     </MenuItem>
   ));
 
-  let regionSelectOptions = [
-    <MenuItem key="all" value="all">
-      All
-    </MenuItem>,
-  ];
-
-  if (continent !== '000') {
-    regionSelectOptions = [
-      regionSelectOptions,
-      ...continentAndRegionsInfo
-        .find((cont) => cont.code === continent)
-        .regions.map((region) => (
-          <MenuItem key={region.name} value={region.code}>
-            {region.name}
-          </MenuItem>
-        )),
-    ];
-  }
+  const regionSelectOptions =
+    continent === WORLD_MAP
+      ? [
+          <MenuItem key="all" value="all">
+            All
+          </MenuItem>,
+        ]
+      : [
+          <MenuItem key="all" value="all">
+            All
+          </MenuItem>,
+          ...CONTINENTS_AND_REGIONS.find(
+            (cont) => cont.code === continent
+          ).regions.map((region) => (
+            <MenuItem key={region.name} value={region.code}>
+              {region.name}
+            </MenuItem>
+          )),
+        ];
 
   return (
     <Grid container direction="row" justify="center" alignItems="center">
@@ -81,7 +83,7 @@ export default function SimpleSelect(props) {
       </FormControl>
 
       <FormControl
-        disabled={continent === '000'}
+        disabled={continent === WORLD_MAP}
         className={classes.formControl}
       >
         <InputLabel id="region-helper-label">Region</InputLabel>

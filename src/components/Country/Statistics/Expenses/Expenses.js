@@ -35,7 +35,7 @@ export default function ExpensesStatistics(props) {
             value={euroFormatter(sumWithoutDailyExp / totalNights)}
           />
         </div>
-        <div style={{ width: '50%' }}>
+        <div className={styles.chart}>
           <ExpensesPieChart expensesByCategory={categories} />
         </div>
       </div>

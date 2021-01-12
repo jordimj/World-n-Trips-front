@@ -25,8 +25,8 @@ export const deductNotDailyExpenses = (totalExpenses, expensesByCategories) => {
 };
 
 export const getAdverbialNumber = (number) => {
-  if (number === '1') return 'Once';
-  if (number === '2') return 'Twice';
+  if (number === 1) return 'Once';
+  if (number === 2) return 'Twice';
   return `${number} times`;
 };
 

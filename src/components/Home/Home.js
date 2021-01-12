@@ -25,19 +25,15 @@ function Home() {
     setGraduallyColored((checked) => !checked);
   };
 
-  let mapData = [];
-
-  if (graduallyColored) {
-    mapData = [
-      ['Country', 'Number of spots'],
-      ...countriesBeen.map((country) => [
-        country.name,
-        Number(country.numberOfSpots),
-      ]),
-    ];
-  } else {
-    mapData = [['Country'], ...countriesBeen.map((country) => [country.name])];
-  }
+  const mapData = graduallyColored
+    ? [
+        ['Country', 'Number of spots'],
+        ...countriesBeen.map((country) => [
+          country.name,
+          country.numberOfSpots,
+        ]),
+      ]
+    : [['Country'], ...countriesBeen.map((country) => [country.name])];
 
   return (
     <div className={styles.container}>

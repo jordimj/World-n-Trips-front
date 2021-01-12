@@ -1,4 +1,4 @@
-const continentAndRegionsInfo = [
+const CONTINENTS_AND_REGIONS = [
   {
     name: 'All',
     code: '000',
@@ -123,4 +123,4 @@ const continentAndRegionsInfo = [
   },
 ];
 
-export default continentAndRegionsInfo;
+export default CONTINENTS_AND_REGIONS;

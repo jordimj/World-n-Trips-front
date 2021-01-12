@@ -89,14 +89,14 @@ export default function HitchhikesStatistics(props) {
       </div>
       {minutesWaiting && (
         <div>
-          <HitchhikesChart data={minutesWaiting.carsPerHour} chartKind="CARS" />
+          <HitchhikesChart data={minutesWaiting.carsPerHour} chartKind="cars" />
           <HitchhikesChart
             data={minutesWaiting.kilometersPerHour}
-            chartKind="KILOMETERS"
+            chartKind="kilometers"
           />
           <HitchhikesChart
             data={minutesWaiting.waitingPerHour}
-            chartKind="MINUTES"
+            chartKind="minutes"
           />
         </div>
       )}

@@ -1,4 +1,4 @@
-export default {
+const COUNTRIES = {
   Afghanistan: 'AFG',
   Albania: 'ALB',
   Algeria: 'DZA',
@@ -242,3 +242,5 @@ export default {
   Zambia: 'ZMB',
   Zimbabwe: 'ZWE',
 };
+
+export default COUNTRIES;

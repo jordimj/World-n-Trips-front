@@ -1,9 +1,10 @@
 import { Brightness6Rounded } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
+import { DARK_MODE, LIGHT_MODE } from '../../../constants';
 import styles from './ThemeSwitcher.module.css';
 
 export default () => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(LIGHT_MODE);
 
   useEffect(() => {
     document.documentElement.setAttribute(
@@ -15,8 +16,8 @@ export default () => {
   }, []);
 
   const switchTheme = () => {
-    if (theme === 'light') saveTheme('dark');
-    else saveTheme('light');
+    if (theme === LIGHT_MODE) saveTheme(DARK_MODE);
+    else saveTheme(LIGHT_MODE);
   };
 
   const saveTheme = (theme) => {
@@ -27,7 +28,7 @@ export default () => {
 
   return (
     <div className={styles.themeSwitcher} onClick={switchTheme}>
-      Go {theme === 'dark' ? 'light' : 'dark'} mode!
+      Go {theme === DARK_MODE ? LIGHT_MODE : DARK_MODE} mode!
       <div className={styles.switcherIcon}>
         <Brightness6Rounded />
       </div>

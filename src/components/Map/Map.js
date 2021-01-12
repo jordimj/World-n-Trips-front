@@ -2,27 +2,26 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Chart } from 'react-google-charts';
 import { useHistory, useLocation } from 'react-router-dom';
-import countryCodes from '../../utils/countryCodes';
+import COUNTRIES from '../../constants/countryCodes';
+import { WORLD_MAP } from '../../constants';
 
 function Map({ data, region }) {
   const country = useSelector((state) => state.country);
   const history = useHistory();
   const location = useLocation();
 
-  let options = {
-    region: region !== '000' ? region : null,
-  };
-
-  if (country && location.pathname !== '/') {
-    options = {
-      region: country.info.alpha2code,
-      resolution: 'provinces',
-      // displayMode: 'text',
-      colorAxis: { colors: ['green', 'blue'] },
-      sizeAxis: { minSize: 12, maxSize: 20 },
-      enableRegionInteractivity: true,
-    };
-  }
+  const options =
+    location.pathname === '/'
+      ? {
+          region: region !== WORLD_MAP ? region : null,
+        }
+      : {
+          region: country.info.alpha2code,
+          resolution: 'provinces',
+          colorAxis: { colors: ['green', 'blue'] },
+          sizeAxis: { minSize: 12, maxSize: 20 },
+          enableRegionInteractivity: true,
+        };
 
   return (
     <Chart
@@ -32,9 +31,9 @@ function Map({ data, region }) {
           callback: ({ chartWrapper }) => {
             const chart = chartWrapper.getChart();
             const selection = chart.getSelection();
-            if (selection.length === 0) return;
-            const region = data[selection[0].row + 1];
-            history.push({ pathname: `/country/${countryCodes[region]}/` });
+            if (selection.length === 0 || location.pathname !== '/') return;
+            const countryName = data[selection[0].row + 1];
+            history.push({ pathname: `/country/${COUNTRIES[countryName]}/` });
           },
         },
       ]}

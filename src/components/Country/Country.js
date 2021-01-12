@@ -45,7 +45,7 @@ function CountryInfo() {
             <div className={styles.subtitle}>Neighbouring countries</div>
             <div className={styles.bordersGrid}>
               {JSON.parse(info.borders).map((borderCountry) => (
-                <NavLink to={`/country/${borderCountry}`}>
+                <NavLink to={`/country/${borderCountry}/`}>
                   <div className={styles.borderDetail}>
                     <img
                       src={`https://restcountries.eu/data/${borderCountry.toLowerCase()}.svg`}
