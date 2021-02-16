@@ -36,7 +36,7 @@ export const countryStatsMock = {
     'Tehran',
     'Yazd',
   ],
-  statesVisited: [],
+  statesVisited: ['IR-07', 'IR-01', 'IR-27', 'IR-13'],
   kilometersWalked: '211.23',
   nights: {
     count: { free: '25', paid: '1', total: 26 },

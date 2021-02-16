@@ -18,9 +18,7 @@ function Map({ data, region }) {
       : {
           region: country.info.alpha2code,
           resolution: 'provinces',
-          colorAxis: { colors: ['green', 'blue'] },
-          sizeAxis: { minSize: 12, maxSize: 20 },
-          enableRegionInteractivity: true,
+          enableRegionInteractivity: false,
         };
 
   return (
@@ -31,7 +29,7 @@ function Map({ data, region }) {
           callback: ({ chartWrapper }) => {
             const chart = chartWrapper.getChart();
             const selection = chart.getSelection();
-            if (selection.length === 0 || location.pathname !== '/') return;
+            if (selection.length === 0) return;
             const countryName = data[selection[0].row + 1];
             history.push({ pathname: `/country/${COUNTRIES[countryName]}/` });
           },
@@ -39,7 +37,6 @@ function Map({ data, region }) {
       ]}
       chartType="GeoChart"
       width="100%"
-      height="100%"
       data={data}
       options={options}
     />

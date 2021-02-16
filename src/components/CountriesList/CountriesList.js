@@ -8,12 +8,8 @@ import styles from './CountriesList.module.css';
 
 function CountriesList() {
   const countriesBeen = useSelector((state) => state.countriesBeen);
+  const loading = useSelector((state) => state.loading);
   const [keyword, setKeyword] = useState('');
-
-  const filteredCountries = countriesBeen.filter((country) =>
-    country.name.toLowerCase().includes(keyword)
-  );
-
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -32,22 +28,25 @@ function CountriesList() {
     setKeyword(e.target.value.toLowerCase());
   };
 
-  let countriesList = (
-    <p style={{ textAlign: 'center' }}> Something went wrong! </p>
+  const filteredCountries = countriesBeen.filter((country) =>
+    country.name.toLowerCase().includes(keyword)
   );
 
-  if (countriesBeen) {
-    countriesList = filteredCountries.map((country) => {
-      return (
-        <CountryBox
-          key={country.id}
-          name={country.name.toUpperCase()}
-          code={country.alpha3code}
-          onClick={() => countrySelectedHandler(country.alpha3code)}
-        />
-      );
-    });
-  }
+  const countriesList =
+    countriesBeen.length === 0 && !loading ? (
+      <p>Something went wrong!</p>
+    ) : (
+      filteredCountries.map((country) => {
+        return (
+          <CountryBox
+            key={country.id}
+            name={country.name.toUpperCase()}
+            code={country.alpha3code}
+            onClick={() => countrySelectedHandler(country.alpha3code)}
+          />
+        );
+      })
+    );
 
   return (
     <div className={styles.container}>
