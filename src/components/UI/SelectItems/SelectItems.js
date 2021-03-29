@@ -19,9 +19,7 @@ export default function SimpleSelect(props) {
     setRegion('all');
   };
 
-  const regionSelectedHandler = (event) => {
-    setRegion(event.target.value);
-  };
+  const regionSelectedHandler = (event) => setRegion(event.target.value);
 
   const continentSelectOptions = CONTINENTS_AND_REGIONS.map((continent) => (
     <MenuItem key={continent.name} value={continent.code}>
@@ -50,17 +48,15 @@ export default function SimpleSelect(props) {
         ];
 
   return (
-    <div className={styles.container}>
-      <FormControl
-        className={styles.root}
-        // classes={{ root: styles.formControl }}
-      >
+    <React.Fragment>
+      <FormControl className={styles.root}>
         <InputLabel id="continent-select-label" className={styles.text}>
           Continent
         </InputLabel>
         <Select
           labelId="continent-select-label"
           id="continent-select"
+          className={styles.select}
           value={continent}
           onChange={continentSelectedHandler}
         >
@@ -72,10 +68,13 @@ export default function SimpleSelect(props) {
       </FormControl>
 
       <FormControl disabled={continent === WORLD_MAP} className={styles.root}>
-        <InputLabel id="region-helper-label">Region</InputLabel>
+        <InputLabel id="region-helper-label" className={styles.text}>
+          Region
+        </InputLabel>
         <Select
           labelId="region-helper-label"
           id="region-helper"
+          className={styles.select}
           value={region}
           onChange={regionSelectedHandler}
         >
@@ -85,6 +84,6 @@ export default function SimpleSelect(props) {
           Region to be shown
         </FormHelperText>
       </FormControl>
-    </div>
+    </React.Fragment>
   );
 }

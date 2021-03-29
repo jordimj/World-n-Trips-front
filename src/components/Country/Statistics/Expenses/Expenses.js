@@ -8,9 +8,8 @@ import {
 import ExpensesPieChart from './ExpensesPieChart';
 import styles from './Expenses.module.css';
 
-export default function ExpensesStatistics(props) {
-  const { sum, categories } = props.expenses;
-  const totalNights = props.totalNights;
+export default function ExpensesStatistics({ expenses, totalNights }) {
+  const { sum, categories } = expenses;
   const sumWithoutDailyExp = deductNotDailyExpenses(sum, categories);
 
   return (

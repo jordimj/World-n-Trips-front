@@ -38,13 +38,13 @@
   border-radius: 4px;
 }
 
-.bordersGrid {
-  display: grid;
-  align-items: flex-end;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 24px;
+.neighbouringCountries {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.borderDetail {
-  text-align: center;
+.neighbouringCountry {
+  width: 20%;
+  margin: 1rem;
 }

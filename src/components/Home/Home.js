@@ -38,16 +38,18 @@ function Home() {
   return (
     <div className={styles.container}>
       <h1>Countries I've been to</h1>
-      <SelectItems
-        continent={continent}
-        setContinent={setContinent}
-        region={region}
-        setRegion={setRegion}
-      />
-      <ColoredMapSwitch
-        checked={graduallyColored}
-        onChange={coloredMapHandler}
-      />
+      <div className={styles.optionsContainer}>
+        <SelectItems
+          continent={continent}
+          setContinent={setContinent}
+          region={region}
+          setRegion={setRegion}
+        />
+        <ColoredMapSwitch
+          checked={graduallyColored}
+          onChange={coloredMapHandler}
+        />
+      </div>
       {countriesBeen && (
         <Map
           data={mapData}

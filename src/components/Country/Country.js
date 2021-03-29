@@ -43,15 +43,16 @@ function CountryInfo() {
           <Map data={states.length === 0 ? [['']] : states} />
           <div className={styles.bordersContainer}>
             <div className={styles.subtitle}>Neighbouring countries</div>
-            <div className={styles.bordersGrid}>
+            <div className={styles.neighbouringCountries}>
               {JSON.parse(info.borders).map((borderCountry) => (
-                <NavLink to={`/country/${borderCountry}/`}>
-                  <div className={styles.borderDetail}>
-                    <img
-                      src={`https://restcountries.eu/data/${borderCountry.toLowerCase()}.svg`}
-                    />
-                    {borderCountry}
-                  </div>
+                <NavLink
+                  to={`/country/${borderCountry}/`}
+                  className={styles.neighbouringCountry}
+                >
+                  <img
+                    src={`https://restcountries.eu/data/${borderCountry.toLowerCase()}.svg`}
+                  />
+                  {borderCountry}
                 </NavLink>
               ))}
             </div>
@@ -66,28 +67,28 @@ function CountryInfo() {
       )}
 
       {statistics.nights && statistics.nights.count.total !== 0 && (
-        <React.Fragment>
+        <>
           <Divider />
           <NightsStatistics km={kilometersWalked} nights={nights} />
-        </React.Fragment>
+        </>
       )}
       {statistics.hitchhikes && statistics.hitchhikes.totalKilometers && (
-        <React.Fragment>
+        <>
           <Divider />
           <HitchhikesStatistics
             hitchhikes={hitchhikes}
             totalNights={nights.count.total}
           />
-        </React.Fragment>
+        </>
       )}
       {statistics.expenses && (
-        <React.Fragment>
+        <>
           <Divider />
           <ExpensesStatistics
             expenses={expenses}
             totalNights={nights.count.total}
           />
-        </React.Fragment>
+        </>
       )}
     </div>
   );

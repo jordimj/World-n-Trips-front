@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
+import styles from './NavigationItems.module.css';
 
 const navigationItems = () => (
   <ul className={styles.navigationItems}>

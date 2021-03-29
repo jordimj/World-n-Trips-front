@@ -36,16 +36,14 @@ function CountriesList() {
     countriesBeen.length === 0 && !loading ? (
       <p>Something went wrong!</p>
     ) : (
-      filteredCountries.map((country) => {
-        return (
-          <CountryBox
-            key={country.id}
-            name={country.name.toUpperCase()}
-            code={country.alpha3code}
-            onClick={() => countrySelectedHandler(country.alpha3code)}
-          />
-        );
-      })
+      filteredCountries.map((country) => (
+        <CountryBox
+          key={country.id}
+          name={country.name.toUpperCase()}
+          code={country.alpha3code}
+          onClick={() => countrySelectedHandler(country.alpha3code)}
+        />
+      ))
     );
 
   return (
