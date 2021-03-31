@@ -1,5 +1,5 @@
 import * as API from '../api/api';
-import * as actionTypes from './actionTypes';
+import * as actionTypes from '../types/actionTypes';
 import { countriesBeenMock } from '../__mocks__/countriesBeenMock';
 import { countryStatsMock } from '../__mocks__/countryStatsMock';
 

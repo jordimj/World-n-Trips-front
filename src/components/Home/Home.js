@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ALL_REGIONS, WORLD_MAP } from '../../constants';
-import * as actions from '../../store/actions';
+import * as actions from '../../actions/actions';
 import Map from '../Map/Map';
 import SelectItems from '../UI/SelectItems/SelectItems';
 import ColoredMapSwitch from '../UI/Switch/ColoredMapSwitch';

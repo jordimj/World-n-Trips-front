@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
-import * as actions from '../../store/actions';
+import * as actions from '../../actions/actions';
 import Divider from '../UI/DividerLine/DividerLine';
 import Map from '../Map/Map';
 import ExpensesStatistics from './Statistics/Expenses/Expenses';
