@@ -1,5 +1,4 @@
 .container {
-  margin-top: 30px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -8,9 +7,9 @@
 }
 
 .optionsContainer {
+  border-radius: 8px;
   padding: 20px 20px 10px;
   margin-bottom: 10px;
   background-color: var(--background-color-dark);
   color: var(--text-color) !important;
-  border-radius: 10px;
 }

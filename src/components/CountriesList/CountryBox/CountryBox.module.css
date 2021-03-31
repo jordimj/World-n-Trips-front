@@ -9,17 +9,18 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 1.3em;
+  transform: scale(1);
+  transition: transform 1s ease-out;
 }
 
 .countryBox:hover {
-  background-color: #c0ddf5;
-}
-
-.countryBox p {
-  padding: 1%;
+  background-color: var(--background-color-dark);
+  transform: scale(1.2);
+  transition: transform 0.4s;
+  z-index: 1;
 }
 
 .countryBox img {
   width: 60%;
-  padding-bottom: 5%;
+  padding-bottom: 1rem;
 }

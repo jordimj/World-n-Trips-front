@@ -7,7 +7,7 @@ export default () => {
   const [theme, setTheme] = useState(LIGHT_MODE);
 
   useEffect(() => {
-    chargeTheme(localStorage.getItem('theme'));
+    chargeTheme(localStorage.getItem('theme') || LIGHT_MODE);
   });
 
   const switchTheme = () => saveTheme(theme === LIGHT_MODE ? DARK_MODE : LIGHT_MODE);

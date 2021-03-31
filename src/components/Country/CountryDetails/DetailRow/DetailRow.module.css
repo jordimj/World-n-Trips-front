@@ -5,10 +5,10 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
-.detailsPanelLabel {
-  color: var(--text-color-secondary);
+.detailsPanelRow:last-child {
+  border-bottom: none;
 }
 
-div div:last-child {
-  border-bottom: none;
+.detailsPanelLabel {
+  color: var(--text-color-secondary);
 }

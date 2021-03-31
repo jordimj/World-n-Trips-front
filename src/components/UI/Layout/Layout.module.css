@@ -1,19 +1,29 @@
 .container {
-  padding: 24px;
-  height: 100vh;
-
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-
+  position: relative;
+  margin: auto;
   max-width: 1300px;
-  margin: 0 auto;
+  overflow: hidden;
+}
+
+.content {
+  min-height: 95vh;
+}
+
+.main {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
 }
 
 .footer {
-  margin-top: 30px;
-  padding-bottom: 10px;
   text-align: center;
-  justify-content: center;
-  vertical-align: auto;
-  font-size: 0.75rem;
+  position: relative;
+  height: 3vh;
+  padding-bottom: 1vh;
+  transform: scale(1);
+  transition: transform 1s ease-out;
+}
+
+.footer:hover {
+  transform: scale(1.1);
+  transition: transform 0.5s;
 }

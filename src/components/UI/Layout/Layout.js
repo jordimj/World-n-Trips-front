@@ -1,13 +1,19 @@
+import { useSelector } from 'react-redux';
+import Toolbar from '../Navigation/Toolbar/Toolbar';
+import Spinner from '../Spinner/Spinner';
 import styles from './Layout.module.css';
 
 const Layout = ({ children }) => {
+  const loading = useSelector((state) => state.loading);
+
   return (
     <div className={styles.container}>
-      <title>World-n-Trips</title>
-      <link rel="icon" href="/favicon.ico" />
-
-      <main>{children}</main>
-
+      <Toolbar />
+      {loading && <Spinner />}
+      <div className={styles.content}>
+        <title>World-n-Trips</title>
+        <main className={styles.main}>{children}</main>
+      </div>
       <footer className={styles.footer}>Jordi MJ @ World-n-Trips</footer>
     </div>
   );
