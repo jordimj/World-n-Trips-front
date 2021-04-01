@@ -14,16 +14,16 @@ function Map({ data, region }) {
   const options =
     location.pathname === '/'
       ? {
-        region: region !== WORLD_MAP ? region : null,
-        colorAxis: { colors: ['#21b6b7'] },
-        defaultColor: '#21b6b7',
-      }
+          region: region !== WORLD_MAP ? region : null,
+          colorAxis: { colors: ['#21b6b7'] },
+          defaultColor: '#21b6b7',
+        }
       : {
-        region: country.info.alpha2code,
-        resolution: 'provinces',
-        enableRegionInteractivity: false,
-        defaultColor: '#21b6b7',
-      };
+          region: country.info.alpha2code,
+          resolution: 'provinces',
+          enableRegionInteractivity: false,
+          defaultColor: '#21b6b7',
+        };
 
   return (
     <div className={styles.container}>

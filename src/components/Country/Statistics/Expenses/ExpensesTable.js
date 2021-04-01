@@ -14,7 +14,8 @@ const NightsTable = ({ sum, categories, totalNights }) => {
   const rows = Object.entries(categories);
   const orderedRows = tableOrderBy(rows, value, direction);
 
-  const switchDirection = () => setDirection(direction === 'desc' ? 'asc' : 'desc');
+  const switchDirection = () =>
+    setDirection(direction === 'desc' ? 'asc' : 'desc');
 
   const setValueAndDirection = (value) => {
     switchDirection();

@@ -6,7 +6,9 @@ export default ({ kind, spots }) => (
     <h3>Visited {kind}</h3>
     <div className={styles.visitedSpots}>
       {spots.map((place) => (
-        <div key={place} className={styles.item}>{place}</div>
+        <div key={place} className={styles.item}>
+          {place}
+        </div>
       ))}
     </div>
   </div>

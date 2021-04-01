@@ -11,7 +11,6 @@ const Layout = ({ children }) => {
       <Toolbar />
       {loading && <Spinner />}
       <div className={styles.content}>
-        <title>World-n-Trips</title>
         <main className={styles.main}>{children}</main>
       </div>
       <footer className={styles.footer}>Jordi MJ @ World-n-Trips</footer>

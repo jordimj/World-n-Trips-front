@@ -9,3 +9,6 @@ build:
 
 serve: build
 	serve -p 3000 build/
+
+pretty:
+	npm run pretty
