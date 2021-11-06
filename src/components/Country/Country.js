@@ -69,7 +69,7 @@ function CountryInfo() {
       {statistics.nights && statistics.nights.count.total !== 0 && (
         <>
           <Divider />
-          <NightsStatistics km={kilometersWalked} nights={nights} />
+          <NightsStatistics kmWalked={kilometersWalked} nights={nights} />
         </>
       )}
       {statistics.hitchhikes && statistics.hitchhikes.totalKilometers && (

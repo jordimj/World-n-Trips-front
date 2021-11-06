@@ -6,6 +6,10 @@ export const DARK_MODE = 'dark';
 export const WORLD_MAP = '000';
 export const ALL_REGIONS = 'all';
 
+// TABLE RELATED
+export const TABLE_DIRECTION_ASC = 'asc';
+export const TABLE_DIRECTION_DESC = 'desc';
+
 // TIMELINE CHART
 export const HOUR_LABELS = [
   '12AM',

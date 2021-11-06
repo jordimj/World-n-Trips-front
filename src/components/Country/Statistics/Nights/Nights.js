@@ -7,15 +7,36 @@ import {
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import styles from './Nights.module.css';
 
-export default function NightsStatistics(props) {
-  const { count, spots, infoExtra } = props.nights;
-  const kmWalked = props.km;
+export default function NightsStatistics({ nights, kmWalked }) {
+  const { count, spots, infoExtra } = nights;
+
+  const detailedSpots = Object.entries(spots).reduce(
+    (acc, current) => [
+      ...acc,
+      {
+        spotKind: current[0],
+        numberOfNights: current[1],
+      },
+    ],
+    []
+  );
 
   return (
     <section>
       <h2>Days & nights</h2>
       <div className={styles.container}>
         <div className={styles.overview}>
+          <div className={styles.partition}>
+            <DetailRow
+              label="Kilometers walked"
+              value={kmWalked}
+              appendix="km"
+            />
+            <DetailRow
+              label="Average kilometers walked"
+              value={`${(kmWalked / count.total).toFixed(2)} km / day`}
+            />
+          </div>
           <div className={styles.partition}>
             <DetailRow label="Total of nights" value={count.total} />
             <DetailRow
@@ -31,20 +52,9 @@ export default function NightsStatistics(props) {
               )})`}
             />
           </div>
-          <div className={styles.partition}>
-            <DetailRow
-              label="Kilometers walked"
-              value={kmWalked}
-              appendix="km"
-            />
-            <DetailRow
-              label="Average kilometers walked"
-              value={`${(kmWalked / count.total).toFixed(2)} km / day`}
-            />
-          </div>
         </div>
 
-        <NightsTable spots={spots} />
+        <NightsTable spots={detailedSpots} />
 
         {Object.keys(infoExtra).length > 0 && (
           <React.Fragment>

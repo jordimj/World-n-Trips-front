@@ -2,6 +2,7 @@ import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
 } from '@material-ui/icons';
+import { TABLE_DIRECTION_ASC, TABLE_DIRECTION_DESC } from '../../../constants';
 import styles from './SortingArrow.module.css';
 
 export const SortingArrow = ({ direction }) => {
@@ -9,8 +10,8 @@ export const SortingArrow = ({ direction }) => {
 
   return (
     <div className={styles.headingArrow}>
-      {direction === 'desc' && <KeyboardArrowDownRounded color="inherit" />}
-      {direction === 'asc' && <KeyboardArrowUpRounded color="inherit" />}
+      {direction === TABLE_DIRECTION_DESC && <KeyboardArrowDownRounded color="inherit" />}
+      {direction === TABLE_DIRECTION_ASC && <KeyboardArrowUpRounded color="inherit" />}
     </div>
   );
 };

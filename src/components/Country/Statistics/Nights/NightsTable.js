@@ -1,23 +1,32 @@
 import { useState } from 'react';
+import {
+  TABLE_DIRECTION_ASC,
+  TABLE_DIRECTION_DESC,
+} from '../../../../constants';
 import { tableOrderBy } from '../../../../utils/helpers';
 import { SortingArrow } from '../../../UI/SortingArrow/SortingArrow';
 import styles from './NightsTable.module.css';
 
-const NightsTable = ({ spots }) => {
-  const [direction, setDirection] = useState('desc');
-  const [value, setValue] = useState('nights');
+const ORDER_BY_SPOT_KIND = 'spotKind';
+const ORDER_BY_TOTAL_NIGHTS = 'nights';
 
-  const rows = Object.entries(spots);
-  const orderedRows = tableOrderBy(rows, value, direction);
+const NightsTable = ({ spots }) => {
+  const [direction, setDirection] = useState(TABLE_DIRECTION_DESC);
+  const [orderBy, setOrderBy] = useState(ORDER_BY_TOTAL_NIGHTS);
+
+  const orderedSpots = tableOrderBy(spots, orderBy, direction);
 
   const switchDirection = () => {
-    if (direction === 'asc') setDirection('desc');
-    else if (direction === 'desc') setDirection('asc');
+    setDirection(
+      direction === TABLE_DIRECTION_DESC
+        ? TABLE_DIRECTION_ASC
+        : TABLE_DIRECTION_DESC
+    );
   };
 
-  const setValueAndDirection = (value) => {
+  const setOrderByAndDirection = (orderBy) => {
     switchDirection();
-    setValue(value);
+    setOrderBy(orderBy);
   };
 
   return (
@@ -25,21 +34,25 @@ const NightsTable = ({ spots }) => {
       <div className={styles.header}>
         <button
           className={styles.headerCell}
-          onClick={() => setValueAndDirection('spotKind')}
+          onClick={() => setOrderByAndDirection(ORDER_BY_SPOT_KIND)}
         >
           <div>Kind of spot</div>
-          {value === 'spotKind' && <SortingArrow direction={direction} />}
+          {orderBy === ORDER_BY_SPOT_KIND && (
+            <SortingArrow direction={direction} />
+          )}
         </button>
         <button
           className={styles.headerCell}
-          onClick={() => setValueAndDirection('nights')}
+          onClick={() => setOrderByAndDirection(ORDER_BY_TOTAL_NIGHTS)}
         >
           <div>Number of nights</div>
-          {value === 'nights' && <SortingArrow direction={direction} />}
+          {orderBy === ORDER_BY_TOTAL_NIGHTS && (
+            <SortingArrow direction={direction} />
+          )}
         </button>
       </div>
       <div className={styles.rows}>
-        {orderedRows.map(([spotKind, numberOfNights]) => (
+        {orderedSpots.map(({ spotKind, numberOfNights }) => (
           <div className={styles.row} key={spotKind}>
             <div>{spotKind}</div>
             <div>{numberOfNights}</div>

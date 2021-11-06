@@ -1,3 +1,5 @@
+import { TABLE_DIRECTION_ASC, TABLE_DIRECTION_DESC } from '../constants';
+
 export const euroFormatter = (expense) => {
   return new Intl.NumberFormat('de-DE', {
     style: 'currency',
@@ -31,9 +33,9 @@ export const getAdverbialNumber = (number) => {
 };
 
 export const tableOrderBy = (rows, value, direction) => {
-  if (direction === 'asc')
+  if (direction === TABLE_DIRECTION_ASC)
     return [...rows].sort((a, b) => (a[value] > b[value] ? 1 : -1));
-  if (direction === 'desc')
+  if (direction === TABLE_DIRECTION_DESC)
     return [...rows].sort((a, b) => (a[value] > b[value] ? -1 : 1));
 
   return rows;

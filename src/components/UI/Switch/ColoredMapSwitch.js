@@ -11,7 +11,7 @@ export default function ColoredMapSwitch({ checked, onChange }) {
         control={
           <Switch checked={checked} onChange={onChange} color="default" />
         }
-        label="Show colored map depending on the number of the places I've been to"
+        label="Colour the map according to the number of places I've been to"
       />
     </FormGroup>
   );

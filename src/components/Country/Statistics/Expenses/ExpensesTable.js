@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import {
+  TABLE_DIRECTION_ASC,
+  TABLE_DIRECTION_DESC,
+} from '../../../../constants';
+import {
   euroFormatter,
   percentageFormatter,
   tableOrderBy,
@@ -7,19 +11,27 @@ import {
 import { SortingArrow } from '../../../UI/SortingArrow/SortingArrow';
 import styles from './ExpensesTable.module.css';
 
-const NightsTable = ({ sum, categories, totalNights }) => {
-  const [direction, setDirection] = useState('desc');
-  const [value, setValue] = useState('category');
+const ORDER_BY_CATEGORY = 'category';
+const ORDER_BY_AMOUNT = 'amount';
+const ORDER_BY_PERCENTAGE = 'percentage';
+const ORDER_BY_DAILY_AVERAGE = 'dailyAverage';
 
-  const rows = Object.entries(categories);
-  const orderedRows = tableOrderBy(rows, value, direction);
+const ExpensesTable = ({ expenses }) => {
+  const [direction, setDirection] = useState(TABLE_DIRECTION_DESC);
+  const [orderBy, setOrderBy] = useState(ORDER_BY_CATEGORY);
+
+  const orderedExpenses = tableOrderBy(expenses, orderBy, direction);
 
   const switchDirection = () =>
-    setDirection(direction === 'desc' ? 'asc' : 'desc');
+    setDirection(
+      direction === TABLE_DIRECTION_DESC
+        ? TABLE_DIRECTION_ASC
+        : TABLE_DIRECTION_DESC
+    );
 
-  const setValueAndDirection = (value) => {
+  const setOrderByAndDirection = (orderBy) => {
     switchDirection();
-    setValue(value);
+    setOrderBy(orderBy);
   };
 
   return (
@@ -27,45 +39,55 @@ const NightsTable = ({ sum, categories, totalNights }) => {
       <div className={styles.header}>
         <button
           className={styles.headerCell}
-          onClick={() => setValueAndDirection('category')}
+          onClick={() => setOrderByAndDirection(ORDER_BY_CATEGORY)}
         >
           <div>Category</div>
-          {value === 'category' && <SortingArrow direction={direction} />}
+          {orderBy === ORDER_BY_CATEGORY && (
+            <SortingArrow direction={direction} />
+          )}
         </button>
         <button
           className={styles.headerCell}
-          onClick={() => setValueAndDirection('amount')}
+          onClick={() => setOrderByAndDirection(ORDER_BY_AMOUNT)}
         >
           <div>Amount</div>
-          {value === 'amount' && <SortingArrow direction={direction} />}
+          {orderBy === ORDER_BY_AMOUNT && (
+            <SortingArrow direction={direction} />
+          )}
         </button>
         <button
           className={styles.headerCell}
-          onClick={() => setValueAndDirection('percentage')}
+          onClick={() => setOrderByAndDirection(ORDER_BY_PERCENTAGE)}
         >
           <div>Percentage</div>
-          {value === 'percentage' && <SortingArrow direction={direction} />}
+          {orderBy === ORDER_BY_PERCENTAGE && (
+            <SortingArrow direction={direction} />
+          )}
         </button>
         <button
           className={styles.headerCell}
-          onClick={() => setValueAndDirection('spent')}
+          onClick={() => setOrderByAndDirection(ORDER_BY_DAILY_AVERAGE)}
         >
-          <div>Spent / day</div>
-          {value === 'spent' && <SortingArrow direction={direction} />}
+          <div>Daily average</div>
+          {orderBy === ORDER_BY_DAILY_AVERAGE && (
+            <SortingArrow direction={direction} />
+          )}
         </button>
       </div>
       <div className={styles.rows}>
-        {orderedRows.map(([category, amount]) => (
-          <div className={styles.row} key={category}>
-            <div>{category}</div>
-            <div>{euroFormatter(amount)}</div>
-            <div>{percentageFormatter(amount / sum)}</div>
-            <div>{euroFormatter(amount / totalNights)}</div>
-          </div>
-        ))}
+        {orderedExpenses.map(
+          ({ category, amount, percentage, dailyAverage }) => (
+            <div className={styles.row} key={category}>
+              <div>{category}</div>
+              <div>{euroFormatter(amount)}</div>
+              <div>{percentageFormatter(percentage)}</div>
+              <div>{`${euroFormatter(dailyAverage)} / day`}</div>
+            </div>
+          )
+        )}
       </div>
     </div>
   );
 };
 
-export default NightsTable;
+export default ExpensesTable;

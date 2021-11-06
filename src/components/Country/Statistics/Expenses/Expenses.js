@@ -12,6 +12,19 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
   const { sum, categories } = expenses;
   const sumWithoutDailyExp = deductNotDailyExpenses(sum, categories);
 
+  const detailedExpenses = Object.entries(categories).reduce(
+    (acc, current) => [
+      ...acc,
+      {
+        category: current[0],
+        amount: current[1],
+        percentage: current[1] / sum,
+        dailyAverage: current[1] / totalNights,
+      },
+    ],
+    []
+  );
+
   return (
     <section>
       <h2>Expenses</h2>
@@ -38,11 +51,7 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
           <ExpensesPieChart expensesByCategory={categories} />
         </div>
       </div>
-      <ExpensesTable
-        sum={sum}
-        categories={categories}
-        totalNights={totalNights}
-      />
+      <ExpensesTable expenses={detailedExpenses} />
     </section>
   );
 }
