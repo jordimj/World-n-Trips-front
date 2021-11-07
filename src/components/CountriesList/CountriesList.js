@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as actions from '../../actions/actions';
 import CountryBox from './CountryBox/CountryBox';
 import SearchInput from '../../components/UI/SearchInput/SearchInput';
@@ -11,7 +11,7 @@ function CountriesList() {
   const loading = useSelector((state) => state.loading);
   const [keyword, setKeyword] = useState('');
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (countriesBeen.length === 0) {
@@ -20,7 +20,7 @@ function CountriesList() {
   }, []);
 
   const countrySelectedHandler = (countryName) => {
-    history.push({ pathname: `/country/${countryName}/` });
+    navigate(`/country/${countryName}/`);
   };
 
   const onInputChange = (e) => {

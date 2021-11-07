@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Chart } from 'react-google-charts';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import COUNTRIES from '../../constants/countryCodes';
 import { WORLD_MAP } from '../../constants';
 import styles from './Map.module.css';
 
 function Map({ data, region }) {
   const country = useSelector((state) => state.country);
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const options =
@@ -36,7 +36,7 @@ function Map({ data, region }) {
               const selection = chart.getSelection();
               if (selection.length === 0) return;
               const countryName = data[selection[0].row + 1];
-              history.push({ pathname: `/country/${COUNTRIES[countryName]}/` });
+              navigate(`/country/${COUNTRIES[countryName]}/`);
             },
           },
         ]}
