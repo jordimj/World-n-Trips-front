@@ -29,7 +29,7 @@ function CountryInfo() {
   const { info, citiesVisited, statesVisited, statistics } = country;
   const { kilometersWalked, nights, expenses, hitchhikes } = statistics;
 
-  const states = statesVisited.map((state) => [state]);
+  const stateCodes = statesVisited.map((state) => [state.code]);
 
   return (
     <div className={styles.country}>
@@ -40,7 +40,7 @@ function CountryInfo() {
         <div className={styles.map}>
           <h1>{info.name}</h1>
           <div className={styles.subtitle}>{info.continent.toUpperCase()}</div>
-          <Map data={states.length === 0 ? [['']] : states} />
+          <Map data={stateCodes.length === 0 ? [['']] : stateCodes} />
           <div className={styles.bordersContainer}>
             <div className={styles.subtitle}>Neighbouring countries</div>
             <div className={styles.neighbouringCountries}>
@@ -60,7 +60,7 @@ function CountryInfo() {
         </div>
       </div>
       {statesVisited.length > 0 && (
-        <VisitedSpots kind="states" spots={statesVisited} />
+        <VisitedSpots kind="states" spots={statesVisited.map(state => state.name)} />
       )}
       {citiesVisited.length > 0 && (
         <VisitedSpots kind="cities" spots={citiesVisited} />
