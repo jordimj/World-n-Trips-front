@@ -48,7 +48,7 @@ export default function SimpleSelect(props) {
         ];
 
   return (
-    <React.Fragment>
+    <>
       <FormControl className={styles.root}>
         <InputLabel id="continent-select-label" className={styles.text}>
           Continent
@@ -84,6 +84,6 @@ export default function SimpleSelect(props) {
           Region to be shown
         </FormHelperText>
       </FormControl>
-    </React.Fragment>
+    </>
   );
 }

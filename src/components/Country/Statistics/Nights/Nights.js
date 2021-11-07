@@ -57,7 +57,7 @@ export default function NightsStatistics({ nights, kmWalked }) {
         <NightsTable spots={detailedSpots} />
 
         {Object.keys(infoExtra).length > 0 && (
-          <React.Fragment>
+          <>
             <h4>Also slept:</h4>
             <ul className={styles.extraInfoList}>
               {Object.entries(infoExtra).map(([spot, nights]) => (
@@ -66,7 +66,7 @@ export default function NightsStatistics({ nights, kmWalked }) {
                 </li>
               ))}
             </ul>
-          </React.Fragment>
+          </>
         )}
       </div>
     </section>

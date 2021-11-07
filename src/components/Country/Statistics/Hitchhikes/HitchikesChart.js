@@ -1,9 +1,8 @@
 import React, { useRef, useEffect } from 'react';
-import Chart from 'chart.js';
+import Chart from 'chart.js/auto';
 import { HOUR_LABELS } from '../../../../constants';
 
-export default function HitchhikesChart(props) {
-  const { data, chartKind } = props;
+export default function HitchhikesChart({ data, chartKind }) {
   const chartRef = useRef();
   const finalData = Object.values(data);
 
@@ -14,8 +13,7 @@ export default function HitchhikesChart(props) {
   };
 
   useEffect(() => {
-    const myChartRef = chartRef.current;
-    const lineChart = new Chart(myChartRef, {
+    const lineChart = new Chart(chartRef.current, {
       type: 'line',
       data: {
         labels: HOUR_LABELS,
@@ -23,24 +21,37 @@ export default function HitchhikesChart(props) {
           {
             data: finalData,
             backgroundColor: ['rgba(255,0,0, 0.5)'],
+            fill: true,
+            tension: 0.5
           },
         ],
       },
       options: {
-        aspectRatio: 4.5,
-        legend: {
-          display: false,
+        aspectRatio: 4,
+        plugins: {
+          legend: {
+            display: false,
+          },
+          title: {
+            display: true,
+            text: TITLES[chartKind],
+            padding: 30,
+            font: {
+              size: 30
+            }
+          },
+        },
+        scales: {
+          y: {
+            ticks: {
+              stepSize: chartKind === 'cars' && 1
+            }
+          }
         },
         layout: {
           padding: {
             bottom: 30,
           },
-        },
-        title: {
-          display: true,
-          text: TITLES[chartKind],
-          padding: 30,
-          fontSize: 30,
         },
       },
     });

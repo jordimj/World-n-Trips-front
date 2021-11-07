@@ -65,7 +65,7 @@ export default function HitchhikesStatistics(props) {
             value={`${distances.shortest} km`}
           />
           {minutesWaiting && (
-            <React.Fragment>
+            <>
               <DetailRow
                 label="Longest wait per ride"
                 value={`${Number(minutesWaiting.waits.longest).toFixed(
@@ -83,7 +83,7 @@ export default function HitchhikesStatistics(props) {
                 value={Number(minutesWaiting.waits.shortest).toFixed(0)}
                 appendix="mins"
               />
-            </React.Fragment>
+            </>
           )}
         </div>
       </div>

@@ -5,7 +5,7 @@ import {
   euroFormatter,
   deductNotDailyExpenses,
 } from '../../../../utils/helpers';
-import ExpensesPieChart from './ExpensesPieChart';
+import ExpensesChart from './ExpensesChart';
 import styles from './Expenses.module.css';
 
 export default function ExpensesStatistics({ expenses, totalNights }) {
@@ -48,7 +48,7 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
           />
         </div>
         <div className={styles.chart}>
-          <ExpensesPieChart expensesByCategory={categories} />
+          <ExpensesChart expensesByCategory={categories} />
         </div>
       </div>
       <ExpensesTable expenses={detailedExpenses} />
