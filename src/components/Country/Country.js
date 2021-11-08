@@ -40,7 +40,7 @@ function CountryInfo() {
         <div className={styles.map}>
           <h1>{info.name}</h1>
           <div className={styles.subtitle}>{info.continent.toUpperCase()}</div>
-          <Map data={stateCodes.length === 0 ? [['']] : stateCodes} />
+          <Map data={[[''], ...stateCodes]} />
           <div className={styles.bordersContainer}>
             <div className={styles.subtitle}>Neighbouring countries</div>
             <div className={styles.neighbouringCountries}>
