@@ -41,26 +41,31 @@ function CountryInfo() {
           <h1>{info.name}</h1>
           <div className={styles.subtitle}>{info.continent.toUpperCase()}</div>
           <Map data={[[''], ...stateCodes]} />
-          <div className={styles.bordersContainer}>
-            <div className={styles.subtitle}>Neighbouring countries</div>
-            <div className={styles.neighbouringCountries}>
-              {JSON.parse(info.borders).map((borderCountry) => (
-                <NavLink
-                  to={`/country/${borderCountry}/`}
-                  className={styles.neighbouringCountry}
-                >
-                  <img
-                    src={`https://restcountries.eu/data/${borderCountry.toLowerCase()}.svg`}
-                  />
-                  {borderCountry}
-                </NavLink>
-              ))}
+          {info.borders && (
+            <div className={styles.bordersContainer}>
+              <div className={styles.subtitle}>Neighbouring countries</div>
+              <div className={styles.neighbouringCountries}>
+                {JSON.parse(info.borders).map((borderCountry) => (
+                  <NavLink
+                    key={borderCountry}
+                    to={`/country/${borderCountry}/`}
+                    className={styles.neighbouringCountry}
+                  >
+                    <img
+                      src={`${process.env.PUBLIC_URL}/img/flags/${borderCountry}.png`}
+                    />
+                  </NavLink>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       {statesVisited.length > 0 && (
-        <VisitedSpots kind="states" spots={statesVisited.map(state => state.name)} />
+        <VisitedSpots
+          kind="states"
+          spots={statesVisited.map((state) => state.name)}
+        />
       )}
       {citiesVisited.length > 0 && (
         <VisitedSpots kind="cities" spots={citiesVisited} />
