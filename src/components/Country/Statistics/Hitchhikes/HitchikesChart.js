@@ -2,15 +2,30 @@ import React, { useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 import { HOUR_LABELS } from '../../../../constants';
 
-export default function HitchhikesChart({ data, chartKind }) {
-  const chartRef = useRef();
-  const finalData = Object.values(data);
+const CHART_KIND_RIDES = 'rides';
+const CHART_KIND_DISTANCES = 'distances';
+const CHART_KIND_MINUTES = 'minutes';
 
-  const TITLES = {
-    cars: 'Number of cars hitched per hour',
-    kilometers: 'Kilometers hitched per hour',
-    minutes: 'Minutes waiting on the road per hour',
-  };
+const TITLES = {
+  [CHART_KIND_RIDES]: 'Number of cars hitched per hour',
+  [CHART_KIND_DISTANCES]: 'Kilometers hitched per hour',
+  [CHART_KIND_MINUTES]: 'Minutes waiting on the road per hour',
+};
+
+const extractDesiredData = (data, chartKind) => {
+  const reducedData = data.reduce((acc, stat) => {
+    return {
+      ...acc,
+      [stat.hour]: stat[chartKind]
+    }
+  }, new Array(24).fill(0));
+
+  return Object.values(reducedData);
+}
+
+export default function HitchhikesChart({ stats, chartKind }) {
+  const chartRef = useRef();
+  const data = extractDesiredData(stats, chartKind);
 
   useEffect(() => {
     const lineChart = new Chart(chartRef.current, {
@@ -19,7 +34,7 @@ export default function HitchhikesChart({ data, chartKind }) {
         labels: HOUR_LABELS,
         datasets: [
           {
-            data: finalData,
+            data,
             backgroundColor: ['rgba(255,0,0, 0.5)'],
             fill: true,
             tension: 0.5
@@ -44,7 +59,7 @@ export default function HitchhikesChart({ data, chartKind }) {
         scales: {
           y: {
             ticks: {
-              stepSize: chartKind === 'cars' && 1
+              stepSize: chartKind === CHART_KIND_RIDES && 1
             }
           }
         },

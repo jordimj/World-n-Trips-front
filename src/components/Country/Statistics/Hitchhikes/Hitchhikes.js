@@ -3,7 +3,7 @@ import HitchhikesChart from './HitchikesChart';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import styles from './Hitchhikes.module.css';
 
-export default function HitchhikesStatistics(props) {
+export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
   const {
     totalKilometers,
     totalKilometersOpenAir,
@@ -11,8 +11,8 @@ export default function HitchhikesStatistics(props) {
     totalCars,
     distances,
     minutesWaiting,
-  } = props.hitchhikes;
-  const totalNights = props.totalNights;
+    statsPerHour
+  } = hitchhikes;
 
   return (
     <section>
@@ -88,17 +88,11 @@ export default function HitchhikesStatistics(props) {
         </div>
       </div>
       {minutesWaiting && (
-        <div>
-          <HitchhikesChart data={minutesWaiting.carsPerHour} chartKind="cars" />
-          <HitchhikesChart
-            data={minutesWaiting.kilometersPerHour}
-            chartKind="kilometers"
-          />
-          <HitchhikesChart
-            data={minutesWaiting.waitingPerHour}
-            chartKind="minutes"
-          />
-        </div>
+        <>
+          <HitchhikesChart stats={statsPerHour} chartKind="rides" />
+          <HitchhikesChart stats={statsPerHour} chartKind="distance" />
+          <HitchhikesChart stats={statsPerHour} chartKind="minutes" />
+        </>
       )}
     </section>
   );
