@@ -1,11 +1,9 @@
 import React from 'react';
-import {
-  InputLabel,
-  MenuItem,
-  FormHelperText,
-  FormControl,
-  Select,
-} from '@material-ui/core';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 import CONTINENTS_AND_REGIONS from '../../../constants/continentsAndRegions';
 import { WORLD_MAP } from '../../../constants';
