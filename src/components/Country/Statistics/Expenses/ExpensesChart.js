@@ -52,8 +52,8 @@ export default function ExpensesChart({ expensesByCategory }) {
             padding: 10,
             bodyFont: {
               size: 15,
-              weight: 900
-            }
+              weight: 900,
+            },
           },
         },
       },

@@ -1,6 +1,6 @@
 import React from 'react';
 import HitchhikesChart from './HitchikesChart';
-import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
+import DetailRow, { APPENDIX_TYPES } from '../../CountryDetails/DetailRow/DetailRow';
 import styles from './Hitchhikes.module.css';
 
 export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
@@ -11,7 +11,7 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
     totalCars,
     distances,
     minutesWaiting,
-    statsPerHour
+    statsPerHour,
   } = hitchhikes;
 
   return (
@@ -21,67 +21,77 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
         <div className={styles.partition}>
           <DetailRow
             label="Total of kilometers"
-            value={`${totalKilometers} km`}
+            value={totalKilometers}
+            appendix={APPENDIX_TYPES.KM}
           />
           <DetailRow
             label="Kilometers in the back of the pickup"
-            value={`${totalKilometersOpenAir} km`}
+            value={totalKilometersOpenAir}
+            appendix={APPENDIX_TYPES.KM}
           />
-          <DetailRow label="Days on the road" value={`${daysOnTheRoad} days`} />
+          <DetailRow label="Days on the road" value={daysOnTheRoad}
+            appendix={APPENDIX_TYPES.DAYS}
+          />
           {minutesWaiting && (
             <DetailRow
               label="Waiting on the road"
-              value={`${minutesWaiting.total} mins`}
+              value={minutesWaiting.total}
+              appendix={APPENDIX_TYPES.MINS}
             />
           )}
           <DetailRow
             label="Number of rides we got"
-            value={`${Math.trunc(totalCars)} rides`}
+            value={Math.trunc(totalCars)}
+            appendix={APPENDIX_TYPES.RIDES}
           />
         </div>
         <div className={styles.partition}>
           <DetailRow
             label="Average kilometers per day in the country"
-            value={`${(totalKilometers / totalNights).toFixed(2)} km`}
+            value={(totalKilometers / totalNights).toFixed(2)}
+            appendix={APPENDIX_TYPES.KM_PER_DAY}
           />
           <DetailRow
             label="Average kilometers per day on the road"
-            value={`${(totalKilometers / daysOnTheRoad).toFixed(2)} km`}
+            value={(totalKilometers / daysOnTheRoad).toFixed(2)}
+            appendix={APPENDIX_TYPES.KM}
           />
           <DetailRow
             label="Average rides per day on the road"
-            value={`${(totalCars / daysOnTheRoad).toFixed(2)} rides`}
+            value={(totalCars / daysOnTheRoad).toFixed(2)}
+            appendix={APPENDIX_TYPES.RIDES}
           />
           <DetailRow
             label="Longest distance per ride"
-            value={`${distances.longest} km`}
+            value={distances.longest}
+            appendix={APPENDIX_TYPES.KM}
           />
           <DetailRow
             label="Average distance per ride"
-            value={`${Number(distances.average).toFixed(2)} km`}
+            value={Number(distances.average).toFixed(2)}
+            appendix={APPENDIX_TYPES.KM}
           />
           <DetailRow
             label="Shortest distance per ride"
-            value={`${distances.shortest} km`}
+            value={distances.shortest}
+            appendix={APPENDIX_TYPES.KM}
           />
           {minutesWaiting && (
             <>
               <DetailRow
                 label="Longest wait per ride"
-                value={`${Number(minutesWaiting.waits.longest).toFixed(
-                  0
-                )} mins`}
+                value={Number(minutesWaiting.waits.longest).toFixed(0)}
+                appendix={APPENDIX_TYPES.MINS}
               />
               <DetailRow
                 label="Average wait per ride"
-                value={`${Number(minutesWaiting.waits.average).toFixed(
-                  2
-                )} mins`}
+                value={Number(minutesWaiting.waits.average).toFixed(2)}
+                appendix={APPENDIX_TYPES.MINS}
               />
               <DetailRow
                 label="Shortest wait per ride"
                 value={Number(minutesWaiting.waits.shortest).toFixed(0)}
-                appendix="mins"
+                appendix={APPENDIX_TYPES.MINS}
               />
             </>
           )}

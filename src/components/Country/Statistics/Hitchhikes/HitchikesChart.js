@@ -16,12 +16,12 @@ const extractDesiredData = (data, chartKind) => {
   const reducedData = data.reduce((acc, stat) => {
     return {
       ...acc,
-      [stat.hour]: stat[chartKind]
-    }
+      [stat.hour]: stat[chartKind],
+    };
   }, new Array(24).fill(0));
 
   return Object.values(reducedData);
-}
+};
 
 export default function HitchhikesChart({ stats, chartKind }) {
   const chartRef = useRef();
@@ -37,7 +37,7 @@ export default function HitchhikesChart({ stats, chartKind }) {
             data,
             backgroundColor: ['rgba(255,0,0, 0.5)'],
             fill: true,
-            tension: 0.5
+            tension: 0.5,
           },
         ],
       },
@@ -52,16 +52,16 @@ export default function HitchhikesChart({ stats, chartKind }) {
             text: TITLES[chartKind],
             padding: 30,
             font: {
-              size: 30
-            }
+              size: 30,
+            },
           },
         },
         scales: {
           y: {
             ticks: {
-              stepSize: chartKind === CHART_KIND_RIDES && 1
-            }
-          }
+              stepSize: chartKind === CHART_KIND_RIDES && 1,
+            },
+          },
         },
         layout: {
           padding: {

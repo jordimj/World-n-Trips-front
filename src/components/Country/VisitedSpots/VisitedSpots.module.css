@@ -18,3 +18,8 @@
   min-height: 2rem;
   margin: 0 20px;
 }
+
+.tab {
+  width: 25%;
+  font-size: 1rem;
+}
