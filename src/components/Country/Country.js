@@ -61,7 +61,7 @@ function CountryInfo() {
           )}
         </div>
       </div>
-      <VisitedSpots cities={citiesVisited} states={statesVisited} />
+      {citiesVisited.length !== 0 && <VisitedSpots cities={citiesVisited} states={statesVisited} />}
       {statistics.nights && statistics.nights.count.total !== 0 && (
         <>
           <Divider />

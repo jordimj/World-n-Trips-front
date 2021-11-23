@@ -9,7 +9,7 @@ function TabPanel({children, active, index}) {
     return (
         <div role="tabpanel" hidden={active !== index}>
             {active === index && (
-                <Box sx={{p: 2}}>
+                <Box sx={{pt: 3}}>
                     <Typography>{children}</Typography>
                 </Box>
             )}
