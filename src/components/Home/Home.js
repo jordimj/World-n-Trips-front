@@ -5,6 +5,7 @@ import * as actions from '../../actions/actions';
 import Map from '../Map/Map';
 import SelectItems from '../UI/SelectItems/SelectItems';
 import ColoredMapSwitch from '../UI/Switch/ColoredMapSwitch';
+import Sidebar from '../UI/Sidebar/Sidebar';
 import styles from './Home.module.css';
 
 function Home() {
@@ -56,6 +57,7 @@ function Home() {
           region={region === ALL_REGIONS ? continent : region}
         />
       )}
+      <Sidebar />
     </div>
   );
 }
