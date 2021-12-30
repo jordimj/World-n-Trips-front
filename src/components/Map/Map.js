@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { Chart } from 'react-google-charts';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -8,6 +7,10 @@ import styles from './Map.module.css';
 
 function Map({ data, region }) {
   const country = useSelector((state) => state.country);
+  const graduallyColored = useSelector(
+    (state) => state.worldMapConf.graduallyColored
+  );
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -35,7 +38,9 @@ function Map({ data, region }) {
               const chart = chartWrapper.getChart();
               const selection = chart.getSelection();
               if (selection.length === 0) return;
-              const countryName = data[selection[0].row + 1];
+              const countryName = graduallyColored
+                ? data[selection[0].row + 1][0]
+                : data[selection[0].row + 1];
               navigate(`/country/${COUNTRIES[countryName]}/`);
             },
           },
