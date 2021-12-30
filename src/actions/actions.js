@@ -75,3 +75,23 @@ export const fetchCountryStatistics = (countryName) => {
     }
   };
 };
+
+export const toggleGradualColoring = () => {
+  return {
+    type: actionTypes.TOGGLE_GRADUAL_COLORING,
+  };
+};
+
+export const setSelectedContinent = (continent) => {
+  return {
+    type: actionTypes.SET_SELECTED_CONTINENT,
+    continent,
+  };
+};
+
+export const setSelectedRegion = (region) => {
+  return {
+    type: actionTypes.SET_SELECTED_REGION,
+    region,
+  };
+};

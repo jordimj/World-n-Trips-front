@@ -3,28 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ALL_REGIONS, WORLD_MAP } from '../../constants';
 import * as actions from '../../actions/actions';
 import Map from '../Map/Map';
-import SelectItems from '../UI/SelectItems/SelectItems';
-import ColoredMapSwitch from '../UI/Switch/ColoredMapSwitch';
 import Sidebar from '../UI/Sidebar/Sidebar';
 import styles from './Home.module.css';
 
 function Home() {
   const countriesBeen = useSelector((state) => state.countriesBeen);
+  const { graduallyColored, selectedContinent, selectedRegion } = useSelector(
+    (state) => state.worldMapConf
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (countriesBeen.length === 0) {
-      dispatch(actions.fetchCountriesBeen());
-    }
+    if (countriesBeen.length === 0) dispatch(actions.fetchCountriesBeen());
   }, []);
-
-  const [graduallyColored, setGraduallyColored] = useState(false);
-  const [continent, setContinent] = useState(WORLD_MAP);
-  const [region, setRegion] = useState(ALL_REGIONS);
-
-  const coloredMapHandler = () => {
-    setGraduallyColored((checked) => !checked);
-  };
 
   const mapData = graduallyColored
     ? [
@@ -39,22 +30,12 @@ function Home() {
   return (
     <div className={styles.container}>
       <h1>Countries I've been to</h1>
-      <div className={styles.optionsContainer}>
-        <SelectItems
-          continent={continent}
-          setContinent={setContinent}
-          region={region}
-          setRegion={setRegion}
-        />
-        <ColoredMapSwitch
-          checked={graduallyColored}
-          onChange={coloredMapHandler}
-        />
-      </div>
       {countriesBeen && (
         <Map
           data={mapData}
-          region={region === ALL_REGIONS ? continent : region}
+          region={
+            selectedRegion === ALL_REGIONS ? selectedContinent : selectedRegion
+          }
         />
       )}
       <Sidebar />

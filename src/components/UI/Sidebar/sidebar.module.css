@@ -1,6 +1,6 @@
 .sidebar {
   background-color: var(--background-color-dark);
-  width: 300px;
+  width: 350px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -8,9 +8,9 @@
   position: fixed;
   top: 0;
   left: -100%;
-  transition: 500ms ease-in-out;
-  padding: 0 30px;
-  gap: 30px;
+  transition: 1s ease-in-out;
+  padding: 0 40px;
+  gap: 40px;
 }
 
 .active {
@@ -22,4 +22,18 @@
 .select {
   font-family: var(--font-family);
   color: var(--text-color) !important;
+}
+
+.toggleButton {
+  position: absolute;
+  align-items: center;
+  left: 0;
+  bottom: 1vh;
+  display: flex;
+  gap: 10px;
+}
+
+.toggleButton:hover > svg {
+  transform: rotate(360deg) scale(1.2);
+  transition: transform 0.5s;
 }

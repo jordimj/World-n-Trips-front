@@ -5,11 +5,3 @@
   justify-items: center;
   align-items: center;
 }
-
-.optionsContainer {
-  border-radius: 8px;
-  padding: 20px 20px 10px;
-  margin-bottom: 10px;
-  background-color: var(--background-color-dark);
-  color: var(--text-color) !important;
-}

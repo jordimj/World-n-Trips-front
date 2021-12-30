@@ -15,9 +15,10 @@
 }
 
 .footer {
+  width: 25%;
   text-align: center;
+  margin: auto;
   position: relative;
-  height: 3vh;
   padding-bottom: 1vh;
   transform: scale(1);
   transition: transform 1s ease-out;
