@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './CountryBox.module.css';
 
 const CountryBox = ({ name, code, onClick }) => (

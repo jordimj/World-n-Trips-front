@@ -1,4 +1,3 @@
-import React from 'react';
 import ExpensesTable from './ExpensesTable';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import {

@@ -1,4 +1,3 @@
-import React from 'react';
 import NightsTable from './NightsTable';
 import {
   getAdverbialNumber,

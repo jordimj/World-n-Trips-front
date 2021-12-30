@@ -1,6 +1,7 @@
-import React from 'react';
 import HitchhikesChart from './HitchikesChart';
-import DetailRow, { APPENDIX_TYPES } from '../../CountryDetails/DetailRow/DetailRow';
+import DetailRow, {
+  APPENDIX_TYPES,
+} from '../../CountryDetails/DetailRow/DetailRow';
 import styles from './Hitchhikes.module.css';
 
 export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
@@ -29,7 +30,9 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
             value={totalKilometersOpenAir}
             appendix={APPENDIX_TYPES.KM}
           />
-          <DetailRow label="Days on the road" value={daysOnTheRoad}
+          <DetailRow
+            label="Days on the road"
+            value={daysOnTheRoad}
             appendix={APPENDIX_TYPES.DAYS}
           />
           {minutesWaiting && (

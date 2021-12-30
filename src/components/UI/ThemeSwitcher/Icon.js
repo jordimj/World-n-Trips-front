@@ -1,4 +1,3 @@
-import React from 'react';
 import { DARK_MODE, LIGHT_MODE } from '../../../constants';
 
 const Icon = ({ name, size = '26' }) => {
