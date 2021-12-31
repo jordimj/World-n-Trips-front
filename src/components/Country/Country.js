@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
+import { Tooltip, Zoom } from '@mui/material';
 import * as actions from '../../actions/actions';
 import Divider from '../UI/DividerLine/DividerLine';
 import Map from '../Map/Map';
@@ -22,9 +23,7 @@ function CountryInfo() {
     dispatch(actions.fetchCountryStatistics(countryCode));
   }, [countryCode]);
 
-  if (!country || loading) {
-    return null;
-  }
+  if (!country || loading) return null;
 
   const { info, citiesVisited, statesVisited, statistics } = country;
   const { kilometersWalked, nights, expenses, hitchhikes } = statistics;
@@ -45,23 +44,27 @@ function CountryInfo() {
             <div className={styles.bordersContainer}>
               <div className={styles.subtitle}>Neighbouring countries</div>
               <div className={styles.neighbouringCountries}>
-                {JSON.parse(info.borders).map((borderCountry) => (
-                  <NavLink
-                    key={borderCountry}
-                    to={`/country/${borderCountry}/`}
-                    className={styles.neighbouringCountry}
-                  >
-                    <img
-                      src={`${process.env.PUBLIC_URL}/img/flags/${borderCountry}.png`}
-                    />
-                  </NavLink>
+                {info.borders.map(([countryCode, countryName]) => (
+                  <Tooltip title={countryName} arrow TransitionComponent={Zoom}>
+                    <NavLink
+                      key={countryCode}
+                      to={`/country/${countryCode}/`}
+                      className={styles.neighbouringCountry}
+                    >
+                      <img
+                        src={`${process.env.PUBLIC_URL}/img/flags/${countryCode}.png`}
+                      />
+                    </NavLink>
+                  </Tooltip>
                 ))}
               </div>
             </div>
           )}
         </div>
       </div>
-      {citiesVisited.length !== 0 && <VisitedSpots cities={citiesVisited} states={statesVisited} />}
+      {citiesVisited.length !== 0 && (
+        <VisitedSpots cities={citiesVisited} states={statesVisited} />
+      )}
       {statistics.nights && statistics.nights.count.total !== 0 && (
         <>
           <Divider />
