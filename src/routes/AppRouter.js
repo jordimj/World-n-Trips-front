@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../components/Home/Home';
 import CountriesList from '../components/CountriesList/CountriesList';
 import Country from '../components/Country/Country';
+import Statistics from '../components/Statistics/Statistics';
 import Layout from '../components/UI/Layout/Layout';
 
 export const AppRouter = () => (
@@ -10,6 +11,7 @@ export const AppRouter = () => (
       <Routes>
         <Route path="/country/:countryCode" element={<Country />} />
         <Route path="/countriesList" element={<CountriesList />} />
+        <Route path="/statistics" element={<Statistics />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </Layout>

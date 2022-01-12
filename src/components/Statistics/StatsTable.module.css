@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  padding: 20px;
+  background-color: var(--navbar-color);
+
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+}
+
+.header button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.headerCell {
+  color: var(--text-color-secondary);
+  font-weight: 500;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.rows {
+  box-shadow: var(--box-shadow);
+  border-radius: 8px;
+  margin-bottom: 25px;
+  padding: 1%;
+  background-color: var(--background-color-light);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 10px;
+
+  padding: 10px;
+  background-color: transparent;
+  font-weight: 500;
+}

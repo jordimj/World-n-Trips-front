@@ -81,7 +81,7 @@ export default function MapSidebar() {
           </FormHelperText>
         </FormControl>
 
-        <FormControl>
+        <FormControl disabled={selectedContinent === WORLD_MAP}>
           <InputLabel id="region-helper-label" className={styles.text}>
             Region
           </InputLabel>
