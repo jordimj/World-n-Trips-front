@@ -3,6 +3,7 @@ import { ALL_REGIONS, WORLD_MAP } from '../constants';
 
 const initialState = {
   countriesBeen: [],
+  statistics: null,
   country: null,
   worldMapConf: {
     graduallyColored: false,
@@ -49,6 +50,24 @@ const reducer = (state = initialState, action) => {
         loading: false,
       };
     case actionTypes.FETCH_COUNTRY_STATS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case actionTypes.FETCH_STATS_START:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case actionTypes.FETCH_STATS_SUCCESS:
+      return {
+        ...state,
+        statistics: action.statistics,
+        loading: false,
+      };
+    case actionTypes.FETCH_STATS_FAIL:
       return {
         ...state,
         loading: false,

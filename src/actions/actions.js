@@ -11,14 +11,14 @@ const fetchCountriesBeenStart = () => {
   };
 };
 
-export const fetchCountriesBeenSuccess = (countries) => {
+const fetchCountriesBeenSuccess = (countries) => {
   return {
     type: actionTypes.FETCH_COUNTRIES_BEEN_SUCCESS,
     countries,
   };
 };
 
-export const fetchCountriesBeenFail = (error) => {
+const fetchCountriesBeenFail = (error) => {
   return {
     type: actionTypes.FETCH_COUNTRIES_BEEN_FAIL,
     error,
@@ -41,20 +41,53 @@ export const fetchCountriesBeen = () => {
   };
 };
 
-export const fetchCountryStatisticsStart = () => {
+const fetchStatisticsStart = () => {
+  return {
+    type: actionTypes.FETCH_STATS_START,
+  };
+};
+
+const fetchStatisticsSuccess = (statistics) => {
+  return {
+    type: actionTypes.FETCH_STATS_SUCCESS,
+    statistics,
+  };
+};
+
+const fetchStatisticsFail = (error) => {
+  return {
+    type: actionTypes.FETCH_STATS_FAIL,
+    error,
+  };
+};
+
+export const fetchStatistics = () => {
+  return async (dispatch) => {
+    dispatch(fetchStatisticsStart());
+
+    try {
+      const stats = await API.getStats();
+      dispatch(fetchStatisticsSuccess(stats));
+    } catch (e) {
+      dispatch(fetchStatisticsFail(e));
+    }
+  };
+};
+
+const fetchCountryStatisticsStart = () => {
   return {
     type: actionTypes.FETCH_COUNTRY_STATS_START,
   };
 };
 
-export const fetchCountryStatisticsSuccess = (countryStatistics) => {
+const fetchCountryStatisticsSuccess = (countryStatistics) => {
   return {
     type: actionTypes.FETCH_COUNTRY_STATS_SUCCESS,
     countryStatistics,
   };
 };
 
-export const fetchCountryStatisticsFail = (error) => {
+const fetchCountryStatisticsFail = (error) => {
   return {
     type: actionTypes.FETCH_COUNTRY_STATS_FAIL,
     error,

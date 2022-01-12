@@ -5,13 +5,15 @@ const instance = axios.create({
 });
 
 async function getCountriesBeen() {
-  const response = await instance.get('/countriesBeenTo/');
-  return response.data;
+  return (await instance.get('/countriesBeenTo')).data;
+}
+
+async function getStats() {
+  return (await instance.get('/statistics')).data;
 }
 
 async function getCountryStats(countryName) {
-  const response = await instance.get(`/statistics/${countryName}/`);
-  return response.data;
+  return (await instance.get(`/statistics/${countryName}/`)).data;
 }
 
-export { getCountriesBeen, getCountryStats };
+export { getCountriesBeen, getStats, getCountryStats };
