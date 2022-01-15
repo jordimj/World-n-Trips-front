@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 
 const PER_YEAR_CHART = 'year';
@@ -12,18 +12,36 @@ const TITLES = {
 export default function BarChart({ data, kind }) {
   const chartRef = useRef();
 
-  useEffect(() => {
-    const lineChart = new Chart(chartRef.current, {
-      type: 'bar',
-      data: {
-        datasets: [
+  const datasets =
+    kind === PER_MONTH_CHART
+      ? [
+          {
+            data: data.allTime,
+            backgroundColor: ['rgba(255,0,0, 0.5)'],
+            fill: true,
+            tension: 0.5,
+          },
+          {
+            data: data.afterLongTrip,
+            backgroundColor: ['rgba(0,0,255, 0.5)'],
+            fill: true,
+            tension: 0.5,
+          },
+        ]
+      : [
           {
             data,
             backgroundColor: ['rgba(255,0,0, 0.5)'],
             fill: true,
             tension: 0.5,
           },
-        ],
+        ];
+
+  useEffect(() => {
+    const lineChart = new Chart(chartRef.current, {
+      type: 'bar',
+      data: {
+        datasets,
       },
       options: {
         aspectRatio: 4,

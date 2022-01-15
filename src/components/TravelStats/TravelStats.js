@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box, Stack, Typography } from '@mui/material';
 import { percentageFormatter } from '../../utils/helpers';
 import * as actions from '../../actions/actions';
-import StatsTable from './StatsTable';
+import TravelStatsTable from './TravelStatsTable/TravelStatsTable';
 import BarChart from './Timeline/BarChart';
 
 export default function () {
@@ -37,9 +37,9 @@ export default function () {
               <Typography fontSize={40} sx={{ mb: '40px' }}>
                 of the world's countries!
               </Typography>
-              <StatsTable stats={statistics.countries.byContinent} />
+              <TravelStatsTable stats={statistics.countries.byContinent} />
             </Stack>
-            <StatsTable stats={statistics.countries.byRegion} />
+            <TravelStatsTable stats={statistics.countries.byRegion} />
           </Stack>
           <BarChart data={statistics.travels.perYear} kind="year" />
           <BarChart data={statistics.travels.perMonth} kind="month" />

@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { TABLE_DIRECTION_ASC, TABLE_DIRECTION_DESC } from '../../constants';
-import { percentageFormatter, tableOrderBy } from '../../utils/helpers';
-import { SortingArrow } from '../UI/SortingArrow/SortingArrow';
-import styles from './StatsTable.module.css';
+import { TABLE_DIRECTION_ASC, TABLE_DIRECTION_DESC } from '../../../constants';
+import { percentageFormatter, tableOrderBy } from '../../../utils/helpers';
+import { SortingArrow } from '../../UI/SortingArrow/SortingArrow';
+import styles from './TravelStatsTable.module.css';
 
 const ORDER_BY_AREA = 'area';
 const ORDER_BY_VISITED = 'visited';
 const ORDER_BY_TOTAL = 'total';
 const ORDER_BY_PERCENTAGE = 'percentage';
 
-const StatsTable = ({ stats }) => {
+const TravelStatsTable = ({ stats }) => {
   const [direction, setDirection] = useState(TABLE_DIRECTION_DESC);
   const [orderBy, setOrderBy] = useState(ORDER_BY_AREA);
 
@@ -77,4 +77,4 @@ const StatsTable = ({ stats }) => {
   );
 };
 
-export default StatsTable;
+export default TravelStatsTable;
