@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { DARK_MODE, LIGHT_MODE } from '../../../constants';
 import Icon from './Icon';
 import styles from './ThemeSwitcher.module.css';

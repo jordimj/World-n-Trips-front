@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 import { HOUR_LABELS } from '../../../../constants';
 

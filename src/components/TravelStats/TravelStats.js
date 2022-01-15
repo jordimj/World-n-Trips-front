@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Stack, Typography } from '@mui/material';
 import { percentageFormatter } from '../../utils/helpers';
@@ -13,6 +13,8 @@ export default function () {
   useEffect(() => {
     if (!statistics) dispatch(actions.fetchStatistics());
   }, []);
+
+  if (!statistics) return <Fragment />;
 
   const { countries, travels } = statistics;
 
