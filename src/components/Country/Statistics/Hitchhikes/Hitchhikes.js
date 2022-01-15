@@ -1,7 +1,5 @@
 import HitchhikesChart from './HitchikesChart';
-import DetailRow, {
-  APPENDIX_TYPES,
-} from '../../CountryDetails/DetailRow/DetailRow';
+import DetailRow, { APPENDIX_TYPES } from '../../CountryDetails/DetailRow/DetailRow';
 import styles from './Hitchhikes.module.css';
 
 export default function HitchhikesStatistics({ hitchhikes, totalNights }) {

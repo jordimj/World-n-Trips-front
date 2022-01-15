@@ -17,9 +17,7 @@ const TravelStatsTable = ({ stats }) => {
 
   const switchDirection = () =>
     setDirection(
-      direction === TABLE_DIRECTION_DESC
-        ? TABLE_DIRECTION_ASC
-        : TABLE_DIRECTION_DESC
+      direction === TABLE_DIRECTION_DESC ? TABLE_DIRECTION_ASC : TABLE_DIRECTION_DESC
     );
 
   const setOrderByAndDirection = (orderBy) => {
@@ -42,9 +40,7 @@ const TravelStatsTable = ({ stats }) => {
           onClick={() => setOrderByAndDirection(ORDER_BY_VISITED)}
         >
           <div>Visited</div>
-          {orderBy === ORDER_BY_VISITED && (
-            <SortingArrow direction={direction} />
-          )}
+          {orderBy === ORDER_BY_VISITED && <SortingArrow direction={direction} />}
         </button>
         <button
           className={styles.headerCell}
@@ -58,9 +54,7 @@ const TravelStatsTable = ({ stats }) => {
           onClick={() => setOrderByAndDirection(ORDER_BY_PERCENTAGE)}
         >
           <div>Percentage</div>
-          {orderBy === ORDER_BY_PERCENTAGE && (
-            <SortingArrow direction={direction} />
-          )}
+          {orderBy === ORDER_BY_PERCENTAGE && <SortingArrow direction={direction} />}
         </button>
       </div>
       <div className={styles.rows}>

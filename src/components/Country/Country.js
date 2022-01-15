@@ -83,10 +83,7 @@ function CountryInfo() {
       {statistics.expenses && (
         <>
           <Divider />
-          <ExpensesStatistics
-            expenses={expenses}
-            totalNights={nights.count.total}
-          />
+          <ExpensesStatistics expenses={expenses} totalNights={nights.count.total} />
         </>
       )}
     </div>

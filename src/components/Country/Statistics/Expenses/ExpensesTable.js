@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import {
-  TABLE_DIRECTION_ASC,
-  TABLE_DIRECTION_DESC,
-} from '../../../../constants';
+import { TABLE_DIRECTION_ASC, TABLE_DIRECTION_DESC } from '../../../../constants';
 import {
   euroFormatter,
   percentageFormatter,
@@ -24,9 +21,7 @@ const ExpensesTable = ({ expenses }) => {
 
   const switchDirection = () =>
     setDirection(
-      direction === TABLE_DIRECTION_DESC
-        ? TABLE_DIRECTION_ASC
-        : TABLE_DIRECTION_DESC
+      direction === TABLE_DIRECTION_DESC ? TABLE_DIRECTION_ASC : TABLE_DIRECTION_DESC
     );
 
   const setOrderByAndDirection = (orderBy) => {
@@ -42,49 +37,39 @@ const ExpensesTable = ({ expenses }) => {
           onClick={() => setOrderByAndDirection(ORDER_BY_CATEGORY)}
         >
           <div>Category</div>
-          {orderBy === ORDER_BY_CATEGORY && (
-            <SortingArrow direction={direction} />
-          )}
+          {orderBy === ORDER_BY_CATEGORY && <SortingArrow direction={direction} />}
         </button>
         <button
           className={styles.headerCell}
           onClick={() => setOrderByAndDirection(ORDER_BY_AMOUNT)}
         >
           <div>Amount</div>
-          {orderBy === ORDER_BY_AMOUNT && (
-            <SortingArrow direction={direction} />
-          )}
+          {orderBy === ORDER_BY_AMOUNT && <SortingArrow direction={direction} />}
         </button>
         <button
           className={styles.headerCell}
           onClick={() => setOrderByAndDirection(ORDER_BY_PERCENTAGE)}
         >
           <div>Percentage</div>
-          {orderBy === ORDER_BY_PERCENTAGE && (
-            <SortingArrow direction={direction} />
-          )}
+          {orderBy === ORDER_BY_PERCENTAGE && <SortingArrow direction={direction} />}
         </button>
         <button
           className={styles.headerCell}
           onClick={() => setOrderByAndDirection(ORDER_BY_DAILY_AVERAGE)}
         >
           <div>Daily average</div>
-          {orderBy === ORDER_BY_DAILY_AVERAGE && (
-            <SortingArrow direction={direction} />
-          )}
+          {orderBy === ORDER_BY_DAILY_AVERAGE && <SortingArrow direction={direction} />}
         </button>
       </div>
       <div className={styles.rows}>
-        {orderedExpenses.map(
-          ({ category, amount, percentage, dailyAverage }) => (
-            <div className={styles.row} key={category}>
-              <div>{category}</div>
-              <div>{euroFormatter(amount)}</div>
-              <div>{percentageFormatter(percentage)}</div>
-              <div>{`${euroFormatter(dailyAverage)} / day`}</div>
-            </div>
-          )
-        )}
+        {orderedExpenses.map(({ category, amount, percentage, dailyAverage }) => (
+          <div className={styles.row} key={category}>
+            <div>{category}</div>
+            <div>{euroFormatter(amount)}</div>
+            <div>{percentageFormatter(percentage)}</div>
+            <div>{`${euroFormatter(dailyAverage)} / day`}</div>
+          </div>
+        ))}
       </div>
     </div>
   );

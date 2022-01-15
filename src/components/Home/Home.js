@@ -20,10 +20,7 @@ function Home() {
   const mapData = graduallyColored
     ? [
         ['Country', 'Number of spots'],
-        ...countriesBeen.map((country) => [
-          country.name,
-          country.numberOfSpots,
-        ]),
+        ...countriesBeen.map((country) => [country.name, country.numberOfSpots]),
       ]
     : [['Country'], ...countriesBeen.map((country) => [country.name])];
 
@@ -33,9 +30,7 @@ function Home() {
       {countriesBeen && (
         <Map
           data={mapData}
-          region={
-            selectedRegion === ALL_REGIONS ? selectedContinent : selectedRegion
-          }
+          region={selectedRegion === ALL_REGIONS ? selectedContinent : selectedRegion}
         />
       )}
       <Sidebar />

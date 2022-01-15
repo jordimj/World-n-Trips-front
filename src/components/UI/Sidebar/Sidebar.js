@@ -16,9 +16,9 @@ import { WORLD_MAP } from '../../../constants';
 import styles from './sidebar.module.css';
 
 export default function MapSidebar() {
-  const { graduallyColored, selectedContinent, selectedRegion } = useSelector(
-    (state) => state.worldMapConf
-  );
+  const worldMapConf = useSelector((state) => state.worldMapConf);
+  const { graduallyColored, selectedContinent, selectedRegion } = worldMapConf;
+
   const [active, setActive] = useState(false);
   const dispatch = useDispatch();
 
@@ -58,7 +58,7 @@ export default function MapSidebar() {
   return (
     <>
       <div className={styles.toggleButton} onClick={toggleSidebar}>
-        <ViewSidebarIcon fontSize={"large"} />
+        <ViewSidebarIcon fontSize="large" />
         <Typography>Open filter sidebar</Typography>
       </div>
       <nav className={`${styles.sidebar} ${active && styles.active}`}>

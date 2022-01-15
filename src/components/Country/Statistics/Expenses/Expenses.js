@@ -1,9 +1,6 @@
 import ExpensesTable from './ExpensesTable';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
-import {
-  euroFormatter,
-  deductNotDailyExpenses,
-} from '../../../../utils/helpers';
+import { euroFormatter, deductNotDailyExpenses } from '../../../../utils/helpers';
 import ExpensesChart from './ExpensesChart';
 import styles from './Expenses.module.css';
 
@@ -29,10 +26,7 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
       <h2>Expenses</h2>
       <div className={styles.container}>
         <div className={styles.partition}>
-          <DetailRow
-            label="Total amount of expenses"
-            value={euroFormatter(sum)}
-          />
+          <DetailRow label="Total amount of expenses" value={euroFormatter(sum)} />
           <DetailRow
             label="Total amount of daily expenses"
             value={euroFormatter(sumWithoutDailyExp)}

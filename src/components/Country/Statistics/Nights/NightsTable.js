@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import {
-  TABLE_DIRECTION_ASC,
-  TABLE_DIRECTION_DESC,
-} from '../../../../constants';
+import { TABLE_DIRECTION_ASC, TABLE_DIRECTION_DESC } from '../../../../constants';
 import { tableOrderBy } from '../../../../utils/helpers';
 import { SortingArrow } from '../../../UI/SortingArrow/SortingArrow';
 import styles from './NightsTable.module.css';
@@ -18,9 +15,7 @@ const NightsTable = ({ spots }) => {
 
   const switchDirection = () => {
     setDirection(
-      direction === TABLE_DIRECTION_DESC
-        ? TABLE_DIRECTION_ASC
-        : TABLE_DIRECTION_DESC
+      direction === TABLE_DIRECTION_DESC ? TABLE_DIRECTION_ASC : TABLE_DIRECTION_DESC
     );
   };
 
@@ -37,18 +32,14 @@ const NightsTable = ({ spots }) => {
           onClick={() => setOrderByAndDirection(ORDER_BY_SPOT_KIND)}
         >
           <div>Kind of spot</div>
-          {orderBy === ORDER_BY_SPOT_KIND && (
-            <SortingArrow direction={direction} />
-          )}
+          {orderBy === ORDER_BY_SPOT_KIND && <SortingArrow direction={direction} />}
         </button>
         <button
           className={styles.headerCell}
           onClick={() => setOrderByAndDirection(ORDER_BY_TOTAL_NIGHTS)}
         >
           <div>Number of nights</div>
-          {orderBy === ORDER_BY_TOTAL_NIGHTS && (
-            <SortingArrow direction={direction} />
-          )}
+          {orderBy === ORDER_BY_TOTAL_NIGHTS && <SortingArrow direction={direction} />}
         </button>
       </div>
       <div className={styles.rows}>

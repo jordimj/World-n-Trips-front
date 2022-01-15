@@ -1,8 +1,5 @@
 import NightsTable from './NightsTable';
-import {
-  getAdverbialNumber,
-  percentageFormatter,
-} from '../../../../utils/helpers';
+import { getAdverbialNumber, percentageFormatter } from '../../../../utils/helpers';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import styles from './Nights.module.css';
 
@@ -26,11 +23,7 @@ export default function NightsStatistics({ nights, kmWalked }) {
       <div className={styles.container}>
         <div className={styles.overview}>
           <div className={styles.partition}>
-            <DetailRow
-              label="Kilometers walked"
-              value={kmWalked}
-              appendix="km"
-            />
+            <DetailRow label="Kilometers walked" value={kmWalked} appendix="km" />
             <DetailRow
               label="Average kilometers walked"
               value={`${(kmWalked / count.total).toFixed(2)} km / day`}
@@ -40,15 +33,11 @@ export default function NightsStatistics({ nights, kmWalked }) {
             <DetailRow label="Total of nights" value={count.total} />
             <DetailRow
               label="Free stays"
-              value={`${count.free} (${percentageFormatter(
-                count.free / count.total
-              )})`}
+              value={`${count.free} (${percentageFormatter(count.free / count.total)})`}
             />
             <DetailRow
               label="Paid stays"
-              value={`${count.paid} (${percentageFormatter(
-                count.paid / count.total
-              )})`}
+              value={`${count.paid} (${percentageFormatter(count.paid / count.total)})`}
             />
           </div>
         </div>

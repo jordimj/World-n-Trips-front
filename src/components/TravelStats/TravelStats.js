@@ -14,35 +14,32 @@ export default function () {
     if (!statistics) dispatch(actions.fetchStatistics());
   }, []);
 
+  const { countries, travels } = statistics;
+
   return (
     <Box textAlign="center">
       <h1>Travel statistics</h1>
-      {statistics && (
-        <>
-          <Stack
-            direction="row"
-            spacing={3}
-            justifyContent="center"
-            sx={{ pt: 3 }}
-          >
-            <Stack spacing={3} justifyContent="center" sx={{ pt: 3 }}>
-              <Typography fontSize={90}>
-                {statistics.countries.all.visited} /{' '}
-                {statistics.countries.all.total}
-              </Typography>
-              <Typography fontSize={40}>
-                I've been to the{' '}
-                {percentageFormatter(statistics.countries.all.percentage)}
-              </Typography>
-              <Typography fontSize={40} sx={{ mb: '40px' }}>
-                of the world's countries!
-              </Typography>
-              <TravelStatsTable stats={statistics.countries.byContinent} />
-            </Stack>
-            <TravelStatsTable stats={statistics.countries.byRegion} />
+      {countries && (
+        <Stack direction="row" spacing={3} justifyContent="center" sx={{ pt: 3 }}>
+          <Stack spacing={3} justifyContent="center" sx={{ pt: 3 }}>
+            <Typography fontSize={90}>
+              {countries.all.visited} / {countries.all.total}
+            </Typography>
+            <Typography fontSize={40}>
+              I've been to the {percentageFormatter(countries.all.percentage)}
+            </Typography>
+            <Typography fontSize={40} sx={{ mb: '40px' }}>
+              of the world's countries!
+            </Typography>
+            <TravelStatsTable stats={countries.byContinent} />
           </Stack>
-          <BarChart data={statistics.travels.perYear} kind="year" />
-          <BarChart data={statistics.travels.perMonth} kind="month" />
+          <TravelStatsTable stats={countries.byRegion} />
+        </Stack>
+      )}
+      {travels && (
+        <>
+          <BarChart data={travels.perYear} kind="year" />
+          <BarChart data={travels.perMonth} kind="month" />
         </>
       )}
     </Box>

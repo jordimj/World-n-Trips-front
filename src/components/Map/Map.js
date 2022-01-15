@@ -7,9 +7,7 @@ import styles from './Map.module.css';
 
 function Map({ data, region }) {
   const country = useSelector((state) => state.country);
-  const graduallyColored = useSelector(
-    (state) => state.worldMapConf.graduallyColored
-  );
+  const graduallyColored = useSelector((state) => state.worldMapConf.graduallyColored);
 
   const navigate = useNavigate();
   const location = useLocation();
