@@ -16,7 +16,7 @@ export default function () {
 
   if (!statistics) return <Fragment />;
 
-  const { countries, travels } = statistics;
+  const { countries, travels, top5 } = statistics;
 
   return (
     <Box textAlign="center">
@@ -35,13 +35,23 @@ export default function () {
             </Typography>
             <TravelStatsTable stats={countries.byContinent} />
           </Stack>
-          <TravelStatsTable stats={countries.byRegion} />
+          <TravelStatsTable stats={countries.byRegion} kind="region" />
         </Stack>
       )}
       {travels && (
         <>
           <BarChart data={travels.perYear} kind="year" />
           <BarChart data={travels.perMonth} kind="month" />
+        </>
+      )}
+      {top5 && (
+        <>
+          <h2>Top5 countries</h2>
+          <Stack direction="row" justifyContent="space-around">
+            <TravelStatsTable stats={top5.longestStay} kind="country" shortTable />
+            <TravelStatsTable stats={top5.hitchhiked} kind="country" shortTable />
+            <TravelStatsTable stats={top5.mostSpent} kind="country" shortTable />
+          </Stack>
         </>
       )}
     </Box>
