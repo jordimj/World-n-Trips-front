@@ -3,6 +3,7 @@ import { ALL_REGIONS, WORLD_MAP } from '../constants';
 
 const initialState = {
   countriesBeen: [],
+  trips: [],
   statistics: null,
   country: null,
   worldMapConf: {
@@ -50,6 +51,24 @@ const reducer = (state = initialState, action) => {
         loading: false,
       };
     case actionTypes.FETCH_COUNTRY_STATS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case actionTypes.FETCH_TRIPS_START:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case actionTypes.FETCH_TRIPS_SUCCESS:
+      return {
+        ...state,
+        trips: action.trips,
+        loading: false,
+      };
+    case actionTypes.FETCH_TRIPS_FAIL:
       return {
         ...state,
         loading: false,

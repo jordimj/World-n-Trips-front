@@ -16,4 +16,8 @@ async function getCountryStats(countryName) {
   return (await instance.get(`/statistics/${countryName}/`)).data;
 }
 
-export { getCountriesBeen, getStats, getCountryStats };
+async function getTrips() {
+  return (await instance.get(`/trips/full`)).data;
+}
+
+export { getCountriesBeen, getStats, getTrips, getCountryStats };

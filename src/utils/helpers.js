@@ -40,3 +40,33 @@ export const tableOrderBy = (rows, value, direction) => {
 
   return rows;
 };
+
+export const addDatesToTripCard = (arrivalDate, departureDate) => {
+  const arrival = new Date(arrivalDate.date);
+  const departure = new Date(departureDate.date);
+
+  const defaultOptions = {
+    month: 'long',
+    year: 'numeric',
+  };
+
+  if (arrival.getFullYear() !== departure.getFullYear()) {
+    return (
+      Intl.DateTimeFormat('en-US', defaultOptions).format(arrival) +
+      ' - ' +
+      Intl.DateTimeFormat('en-US', defaultOptions).format(departure)
+    );
+  }
+
+  if (arrival.getMonth() !== departure.getMonth()) {
+    return (
+      Intl.DateTimeFormat('en-US', {
+        month: 'long',
+      }).format(new Date(arrival)) +
+      ' - ' +
+      Intl.DateTimeFormat('en-US', defaultOptions).format(new Date(departure))
+    );
+  }
+
+  return Intl.DateTimeFormat('en-US', defaultOptions).format(new Date(arrival));
+};

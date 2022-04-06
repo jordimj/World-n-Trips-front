@@ -109,6 +109,39 @@ export const fetchCountryStatistics = (countryName) => {
   };
 };
 
+const fetchTripsStart = () => {
+  return {
+    type: actionTypes.FETCH_TRIPS_START,
+  };
+};
+
+const fetchTripsSuccess = (trips) => {
+  return {
+    type: actionTypes.FETCH_TRIPS_SUCCESS,
+    trips,
+  };
+};
+
+const fetchTripsFail = (error) => {
+  return {
+    type: actionTypes.FETCH_TRIPS_FAIL,
+    error,
+  };
+};
+
+export const fetchTrips = () => {
+  return async (dispatch) => {
+    dispatch(fetchTripsStart());
+
+    try {
+      const trips = await API.getTrips();
+      dispatch(fetchTripsSuccess(trips.reverse()));
+    } catch (e) {
+      dispatch(fetchTripsFail(e));
+    }
+  };
+};
+
 export const toggleGradualColoring = () => {
   return {
     type: actionTypes.TOGGLE_GRADUAL_COLORING,
