@@ -13,10 +13,10 @@
   margin-bottom: 6px;
 }
 
-.navigationItem a.active {
-  border-bottom: 3px solid var(--primary-color);
-}
-
 .navigationItem a:hover {
   border-bottom: 3px solid white;
+}
+
+.active {
+  border-bottom: 3px solid var(--primary-color);
 }
