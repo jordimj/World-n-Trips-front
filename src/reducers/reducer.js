@@ -4,6 +4,7 @@ import { ALL_REGIONS, WORLD_MAP } from '../constants';
 const initialState = {
   countriesBeen: [],
   trips: [],
+  journals: [],
   statistics: null,
   country: null,
   worldMapConf: {
@@ -69,6 +70,24 @@ const reducer = (state = initialState, action) => {
         loading: false,
       };
     case actionTypes.FETCH_TRIPS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case actionTypes.FETCH_JOURNALS_START:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case actionTypes.FETCH_JOURNALS_SUCCESS:
+      return {
+        ...state,
+        journals: action.journals,
+        loading: false,
+      };
+    case actionTypes.FETCH_JOURNALS_FAIL:
       return {
         ...state,
         loading: false,

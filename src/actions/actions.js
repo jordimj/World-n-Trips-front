@@ -135,9 +135,42 @@ export const fetchTrips = () => {
 
     try {
       const trips = await API.getTrips();
-      dispatch(fetchTripsSuccess(trips.reverse()));
+      dispatch(fetchTripsSuccess(trips));
     } catch (e) {
       dispatch(fetchTripsFail(e));
+    }
+  };
+};
+
+const fetchJournalsStart = () => {
+  return {
+    type: actionTypes.FETCH_JOURNALS_START,
+  };
+};
+
+const fetchJournalsSuccess = (journals) => {
+  return {
+    type: actionTypes.FETCH_JOURNALS_SUCCESS,
+    journals,
+  };
+};
+
+const fetchJournalsFail = (error) => {
+  return {
+    type: actionTypes.FETCH_JOURNALS_FAIL,
+    error,
+  };
+};
+
+export const fetchJournals = (tripId) => {
+  return async (dispatch) => {
+    dispatch(fetchJournalsStart());
+
+    try {
+      const journals = await API.getJournals(tripId);
+      dispatch(fetchJournalsSuccess(journals));
+    } catch (e) {
+      dispatch(fetchJournalsFail(e));
     }
   };
 };
