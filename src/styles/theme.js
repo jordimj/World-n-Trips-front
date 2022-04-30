@@ -70,6 +70,10 @@ const theme = createTheme({
     button: {
       fontStyle: 'italic',
     },
+    journal: {
+      fontSize: 60,
+      fontFamily: "'Just Another Hand', cursive",
+    },
   },
 });
 
