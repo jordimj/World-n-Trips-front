@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import ExpensesTable from './ExpensesTable';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import { euroFormatter, deductNotDailyExpenses } from '../../../../utils/helpers';
@@ -23,7 +24,7 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
 
   return (
     <section>
-      <h2>Expenses</h2>
+      <Typography variant="h2">Expenses</Typography>
       <div className={styles.container}>
         <div className={styles.partition}>
           <DetailRow label="Total amount of expenses" value={euroFormatter(sum)} />

@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
-import { Tooltip, Zoom } from '@mui/material';
+import { Box, Stack, Tooltip, Typography, Zoom } from '@mui/material';
 import * as actions from '../../actions/actions';
 import Divider from '../UI/DividerLine/DividerLine';
 import Map from '../Map/Map';
@@ -31,37 +31,45 @@ function CountryInfo() {
   const stateCodes = statesVisited.map((state) => [state.code]);
 
   return (
-    <div className={styles.country}>
-      <div className={styles.header}>
+    <Fragment>
+      <Stack
+        direction="row"
+        gap={4}
+        sx={{ mt: '50px', mb: '25px', placeItems: 'center' }}
+      >
         <div className={styles.details}>
           <CountryDetails info={info} />
         </div>
-        <div className={styles.map}>
-          <h1>{info.name}</h1>
-          <div className={styles.subtitle}>{info.continent.toUpperCase()}</div>
+        <Box className={styles.map}>
+          <Typography variant="h1">{info.name}</Typography>
+          <Typography variant="subtitle1">{info.continent.toUpperCase()}</Typography>
           <Map data={[[''], ...stateCodes]} />
           {info.borders && (
             <div className={styles.bordersContainer}>
-              <div className={styles.subtitle}>Neighbouring countries</div>
+              <Typography variant="subtitle1">Neighbouring countries</Typography>
               <div className={styles.neighbouringCountries}>
-                {info.borders.map(([countryCode, countryName]) => (
-                  <Tooltip title={countryName} arrow TransitionComponent={Zoom}>
-                    <NavLink
-                      key={countryCode}
-                      to={`/country/${countryCode}/`}
-                      className={styles.neighbouringCountry}
-                    >
-                      <img
-                        src={`${process.env.PUBLIC_URL}/img/flags/${countryCode}.png`}
-                      />
-                    </NavLink>
-                  </Tooltip>
-                ))}
+                {info.borders.length === 0 ? (
+                  <Typography>{`${info.name} has none`}</Typography>
+                ) : (
+                  info.borders.map(([countryCode, countryName]) => (
+                    <Tooltip title={countryName} arrow TransitionComponent={Zoom}>
+                      <NavLink
+                        key={countryCode}
+                        to={`/country/${countryCode}/`}
+                        className={styles.neighbouringCountry}
+                      >
+                        <img
+                          src={`${process.env.PUBLIC_URL}/img/flags/${countryCode}.png`}
+                        />
+                      </NavLink>
+                    </Tooltip>
+                  ))
+                )}
               </div>
             </div>
           )}
-        </div>
-      </div>
+        </Box>
+      </Stack>
       {citiesVisited.length !== 0 && (
         <VisitedSpots cities={citiesVisited} states={statesVisited} />
       )}
@@ -86,7 +94,7 @@ function CountryInfo() {
           <ExpensesStatistics expenses={expenses} totalNights={nights.count.total} />
         </>
       )}
-    </div>
+    </Fragment>
   );
 }
 export default CountryInfo;

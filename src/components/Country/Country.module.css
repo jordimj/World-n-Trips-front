@@ -1,20 +1,3 @@
-.country {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.header {
-  display: flex;
-  flex-flow: row;
-  place-items: center;
-  margin-bottom: 25px;
-}
-
-.subtitle {
-  color: var(--text-color-secondary);
-  margin-bottom: 20px;
-}
-
 .map {
   background-color: var(--background-color-light);
   box-shadow: var(--box-shadow);
@@ -25,7 +8,6 @@
 
 .details {
   width: 35%;
-  padding-right: 2%;
 }
 
 .bordersContainer {

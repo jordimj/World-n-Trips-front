@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Typography } from '@mui/material';
 import * as actions from '../../actions/actions';
 import CountryBox from './CountryBox/CountryBox';
 import SearchInput from '../../components/UI/SearchInput/SearchInput';
@@ -14,14 +15,10 @@ function CountriesList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (countriesBeen.length === 0) {
-      dispatch(actions.fetchCountriesBeen());
-    }
+    if (countriesBeen.length === 0) dispatch(actions.fetchCountriesBeen());
   }, []);
 
-  const countrySelectedHandler = (countryName) => {
-    navigate(`/country/${countryName}/`);
-  };
+  const countrySelectedHandler = (countryName) => navigate(`/country/${countryName}/`);
 
   const onInputChange = (e) => {
     e.preventDefault();
@@ -34,7 +31,7 @@ function CountriesList() {
 
   const countriesList =
     countriesBeen.length === 0 && !loading ? (
-      <p>Something went wrong!</p>
+      <Typography>Something went wrong!</Typography>
     ) : (
       filteredCountries.map((country) => (
         <CountryBox
@@ -47,11 +44,11 @@ function CountriesList() {
     );
 
   return (
-    <div className={styles.container}>
-      <h1>List of countries I've been to</h1>
+    <Fragment>
+      <Typography variant="h1">List of countries I've been to</Typography>
       <SearchInput placeholder="Filter by name" onChange={onInputChange} />
       <section className={styles.countries}>{countriesList}</section>
-    </div>
+    </Fragment>
   );
 }
 

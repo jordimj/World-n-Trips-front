@@ -8,11 +8,7 @@ import styles from '../VisitedSpots/VisitedSpots.module.css';
 function TabPanel({ children, active, index }) {
   return (
     <div role="tabpanel" hidden={active !== index}>
-      {active === index && (
-        <Box sx={{ pt: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {active === index && <Typography sx={{ pt: 3 }}>{children}</Typography>}
     </div>
   );
 }
@@ -33,12 +29,15 @@ export default function VisitedSpots({ cities, states }) {
 
   return (
     <Box className={styles.visitedSpotsContainer}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={active} onChange={handleChange} centered>
-          <Tab label="Visited cities" className={styles.tab} />
-          <Tab label="Visited states" className={styles.tab} />
-        </Tabs>
-      </Box>
+      <Tabs
+        value={active}
+        onChange={handleChange}
+        centered
+        sx={{ borderBottom: 1, borderColor: 'divider' }}
+      >
+        <Tab label="Visited cities" className={styles.tab} />
+        <Tab label="Visited states" className={styles.tab} />
+      </Tabs>
       <TabPanel active={active} index={0}>
         {getSpots(cities)}
       </TabPanel>

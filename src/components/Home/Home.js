@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
 import { ALL_REGIONS, WORLD_MAP } from '../../constants';
 import * as actions from '../../actions/actions';
 import Map from '../Map/Map';
@@ -25,8 +27,8 @@ function Home() {
     : [['Country'], ...countriesBeen.map((country) => [country.name])];
 
   return (
-    <div className={styles.container}>
-      <h1>Countries I've been to</h1>
+    <Stack className={styles.container}>
+      <Typography variant="h1">Countries I've been to</Typography>
       {countriesBeen && (
         <Map
           data={mapData}
@@ -34,7 +36,7 @@ function Home() {
         />
       )}
       <Sidebar />
-    </div>
+    </Stack>
   );
 }
 
