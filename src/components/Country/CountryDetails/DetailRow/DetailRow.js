@@ -6,15 +6,12 @@ export const APPENDIX_TYPES = {
   KM_PER_DAY: 'km/day',
   RIDES: 'rides',
   DAYS: 'days',
+  SQUARE_METERS: 'km²',
 };
 
 export default ({ label, value, appendix }) => (
   <div className={styles.detailsPanelRow}>
     <div className={styles.detailsPanelLabel}>{label}</div>
-    {value instanceof Array
-      ? value.map(({ name, symbol }) => `${name} (${symbol})`).join(', ')
-      : appendix
-      ? `${value} ${appendix}`
-      : value}
+    {appendix ? `${value} ${appendix}` : value}
   </div>
 );
