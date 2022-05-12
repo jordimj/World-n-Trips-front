@@ -29,6 +29,29 @@ const theme = createTheme({
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textDecoration: 'none',
+          textTransform: 'capitalize',
+          fontSize: 'inherit',
+          fontStyle: 'normal',
+          boxSizing: 'border-box',
+          color: 'white!important',
+          height: '100%',
+        },
+      },
+    },
+    MuiSwitch: {
+      styleOverrides: {
+        colorPrimary: {
+          color: '#252329',
+          '&.Mui-checked': {
+            color: '#120f13',
+          },
+        },
+      },
+    },
   },
   typography: {
     fontFamily: ['Poppins', 'sans-serif'].join(','),

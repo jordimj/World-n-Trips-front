@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { DARK_MODE, LIGHT_MODE } from '../../../constants';
+// todo: delete old icon system?
 import Icon from './Icon';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import styles from './ThemeSwitcher.module.css';
 
 export default () => {
@@ -24,7 +27,11 @@ export default () => {
 
   return (
     <div className={styles.themeSwitcher} onClick={switchTheme}>
-      <Icon name={theme} />
+      {theme === LIGHT_MODE ? (
+        <DarkModeIcon fontSize="large" />
+      ) : (
+        <LightModeIcon fontSize="large" />
+      )}
     </div>
   );
 };

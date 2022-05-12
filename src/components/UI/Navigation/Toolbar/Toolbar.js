@@ -1,11 +1,11 @@
 import NavigationItems from '../NavigationItems/NavigationItems';
-import ThemeSwitcher from '../../ThemeSwitcher/ThemeSwitcher';
 import styles from './Toolbar.module.css';
+import SettingsMenu from '../../SettingsMenu/SettingsMenu';
 
 const toolbar = () => (
   <nav className={styles.toolbar}>
     <NavigationItems />
-    <ThemeSwitcher />
+    <SettingsMenu />
   </nav>
 );
 
