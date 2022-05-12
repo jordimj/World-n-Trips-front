@@ -34,6 +34,7 @@
   margin-bottom: 25px;
   padding: 1%;
   background-color: var(--background-color-light);
+  text-align: center;
 }
 
 .row {

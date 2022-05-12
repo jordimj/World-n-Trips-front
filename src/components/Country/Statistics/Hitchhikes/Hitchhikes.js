@@ -1,6 +1,6 @@
+import { Box, Stack, Typography } from '@mui/material';
 import HitchhikesChart from './HitchikesChart';
 import DetailRow, { APPENDIX_TYPES } from '../../CountryDetails/DetailRow/DetailRow';
-import styles from './Hitchhikes.module.css';
 
 export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
   const {
@@ -14,20 +14,22 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
   } = hitchhikes;
 
   return (
-    <section>
-      <h2>Hitchhikes</h2>
-      <div className={styles.container}>
-        <div className={styles.partition}>
+    <Box component="section">
+      <Typography variant="h2">Hitchhikes</Typography>
+      <Stack direction="row" justifyContent="space-evenly" alignItems="center">
+        <Stack sx={{ width: '40%' }}>
           <DetailRow
             label="Total of kilometers"
             value={totalKilometers}
             appendix={APPENDIX_TYPES.KM}
           />
-          <DetailRow
-            label="Kilometers in the back of the pickup"
-            value={totalKilometersOpenAir}
-            appendix={APPENDIX_TYPES.KM}
-          />
+          {totalKilometersOpenAir && (
+            <DetailRow
+              label="Kilometers in the back of the pickup"
+              value={totalKilometersOpenAir}
+              appendix={APPENDIX_TYPES.KM}
+            />
+          )}
           <DetailRow
             label="Days on the road"
             value={daysOnTheRoad}
@@ -45,8 +47,8 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
             value={Math.trunc(totalCars)}
             appendix={APPENDIX_TYPES.RIDES}
           />
-        </div>
-        <div className={styles.partition}>
+        </Stack>
+        <Stack sx={{ width: '40%' }}>
           <DetailRow
             label="Average kilometers per day in the country"
             value={(totalKilometers / totalNights).toFixed(2)}
@@ -96,15 +98,15 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
               />
             </>
           )}
-        </div>
-      </div>
+        </Stack>
+      </Stack>
       {minutesWaiting && (
-        <>
+        <Box sx={{ mt: 4 }}>
           <HitchhikesChart stats={statsPerHour} chartKind="rides" />
           <HitchhikesChart stats={statsPerHour} chartKind="distance" />
           <HitchhikesChart stats={statsPerHour} chartKind="minutes" />
-        </>
+        </Box>
       )}
-    </section>
+    </Box>
   );
 }

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -24,6 +26,7 @@ export default function MapSidebar() {
 
   const toggleSidebar = () => setActive(!active);
   const toggleColoring = () => dispatch(actions.toggleGradualColoring());
+
   const continentSelectedHandler = (e) =>
     dispatch(actions.setSelectedContinent(e.target.value));
   const regionSelectedHandler = (e) =>
@@ -57,10 +60,10 @@ export default function MapSidebar() {
 
   return (
     <>
-      <div className={styles.toggleButton} onClick={toggleSidebar}>
+      <Box className={styles.toggleButton} onClick={toggleSidebar}>
         <ViewSidebarIcon fontSize="large" />
         <Typography>Open filter sidebar</Typography>
-      </div>
+      </Box>
       <nav className={`${styles.sidebar} ${active && styles.active}`}>
         <Typography variant="h3">Some filters</Typography>
         <FormControl>
@@ -110,9 +113,13 @@ export default function MapSidebar() {
           label="Colour the map according to the number of places I've been to"
         />
 
-        <div>
-          <CloseIcon onClick={toggleSidebar} sx={{ fontSize: '60px' }} />
-        </div>
+        <IconButton
+          aria-label="close"
+          onClick={toggleSidebar}
+          sx={{ fontSize: '80px', width: 'fit-content', alignSelf: 'center' }}
+        >
+          <CloseIcon fontSize="inherit" />
+        </IconButton>
       </nav>
     </>
   );
