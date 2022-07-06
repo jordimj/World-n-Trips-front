@@ -41,6 +41,13 @@ export default function () {
     setQuery('');
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSearch();
+    }
+  };
+
   return (
     <Box textAlign="center">
       <Typography variant="h1">{trip.name} TRIP</Typography>
@@ -52,6 +59,7 @@ export default function () {
           inputProps={{ 'aria-label': 'search by keyword' }}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <IconButton onClick={handleSearch} sx={{ p: '10px' }} aria-label="search">
           <SearchIcon />
