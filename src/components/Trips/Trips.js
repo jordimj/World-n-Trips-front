@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Card, CardContent, CardMedia, Stack, Typography } from '@mui/material';
 import * as actions from '../../actions/actions';
 import { addDatesToTripCard } from '../../utils/helpers';
+import Chip from '../UI/Chip/Chip';
 
 export default function () {
   const trips = useSelector((state) => state.trips);
@@ -45,6 +46,8 @@ export default function () {
                 <Typography variant="body2" color="text.secondary">
                   {addDatesToTripCard(trip.arrivalDate, trip.departureDate)}
                 </Typography>
+                {trip.telework && <Chip variant="telework" />}
+                {trip.worktrip && <Chip variant="worktrip" />}
               </CardContent>
             </Card>
           ))}
