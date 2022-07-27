@@ -70,3 +70,12 @@ export const addDatesToTripCard = (arrivalDate, departureDate) => {
 
   return Intl.DateTimeFormat('en-US', defaultOptions).format(new Date(arrival));
 };
+
+export const groupBy = (items, keyGetter) =>
+  items.reduce((acc, cur) => {
+    const key = keyGetter(cur);
+    return {
+      ...acc,
+      [key]: [...(acc[key] || []), cur],
+    };
+  }, []);

@@ -52,6 +52,18 @@ const theme = createTheme({
         },
       },
     },
+    MuiDivider: {
+      styleOverrides: {
+        textAlignLeft: {
+          borderWidth: 20,
+          marginTop: 50,
+          fontSize: 40,
+          '&:first-child': {
+            marginTop: 10,
+          },
+        },
+      },
+    },
   },
   typography: {
     fontFamily: ['Poppins', 'sans-serif'].join(','),
