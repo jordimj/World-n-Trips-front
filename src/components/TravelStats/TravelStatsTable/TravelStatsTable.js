@@ -63,7 +63,12 @@ const TravelStatsTable = ({ stats, kind = 'continent', shortTable = false }) => 
       </thead>
       <tbody className={styles.rows}>
         {orderedStats.map(({ name, visited, total, percentage }) => (
-          <tr className={`${styles.row} ${shortTable && styles.shortRow}`} key={name}>
+          <tr
+            className={[styles.row, shortTable && styles.shortRow]
+              .filter(Boolean)
+              .join(' ')}
+            key={name}
+          >
             <td>{name}</td>
             {!shortTable && <td>{visited}</td>}
             <td>{total}</td>

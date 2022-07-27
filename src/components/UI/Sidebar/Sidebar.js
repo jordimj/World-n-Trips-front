@@ -64,7 +64,9 @@ export default function MapSidebar() {
         <ViewSidebarIcon fontSize="large" />
         <Typography>Open filter sidebar</Typography>
       </Box>
-      <nav className={`${styles.sidebar} ${active && styles.active}`}>
+      <nav
+        className={[styles.sidebar, active && styles.active].filter(Boolean).join(' ')}
+      >
         <Typography variant="h3">Some filters</Typography>
         <FormControl>
           <InputLabel id="continent-select-label" className={styles.text}>

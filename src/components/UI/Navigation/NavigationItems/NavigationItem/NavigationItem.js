@@ -6,7 +6,7 @@ const navigationItem = ({ exact, link, children }) => (
     <NavLink
       exact={exact}
       to={link}
-      className={({ isActive }) => isActive && styles.active}
+      className={({ isActive }) => (isActive ? styles.active : undefined)}
     >
       {children}
     </NavLink>
