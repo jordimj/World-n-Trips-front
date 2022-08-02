@@ -1,3 +1,4 @@
+import { Box, Divider } from '@mui/material';
 import NightsTable from './NightsTable';
 import { getAdverbialNumber, percentageFormatter } from '../../../../utils/helpers';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
@@ -18,8 +19,8 @@ export default function NightsStatistics({ nights, kmWalked }) {
   );
 
   return (
-    <section>
-      <h2>Days & nights</h2>
+    <Box sx={{ textAlign: '-webkit-center' }}>
+      <Divider>Days & nights</Divider>
       <div className={styles.container}>
         <div className={styles.overview}>
           <div className={styles.partition}>
@@ -57,6 +58,6 @@ export default function NightsStatistics({ nights, kmWalked }) {
           </>
         )}
       </div>
-    </section>
+    </Box>
   );
 }

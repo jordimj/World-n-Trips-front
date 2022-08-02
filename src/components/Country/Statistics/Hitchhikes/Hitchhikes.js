@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Divider, Stack } from '@mui/material';
 import HitchhikesChart from './HitchikesChart';
 import DetailRow, { APPENDIX_TYPES } from '../../CountryDetails/DetailRow/DetailRow';
 
@@ -14,8 +14,8 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
   } = hitchhikes;
 
   return (
-    <Box component="section">
-      <Typography variant="h2">Hitchhikes</Typography>
+    <Box component="section" sx={{ textAlign: '-webkit-center' }}>
+      <Divider>Hitchhikes</Divider>
       <Stack direction="row" justifyContent="space-evenly" alignItems="center">
         <Stack sx={{ width: '40%' }}>
           <DetailRow

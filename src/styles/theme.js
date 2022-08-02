@@ -54,10 +54,16 @@ const theme = createTheme({
     },
     MuiDivider: {
       styleOverrides: {
-        textAlignLeft: {
+        withChildren: {
           borderWidth: 20,
-          marginTop: 50,
           fontSize: 40,
+          width: '80%',
+          marginTop: 20,
+          textAlign: '-webkit-center',
+        },
+        textAlignLeft: {
+          width: '100%',
+          marginTop: 50,
           '&:first-child': {
             marginTop: 10,
           },

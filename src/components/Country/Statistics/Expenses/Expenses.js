@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import ExpensesTable from './ExpensesTable';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import { euroFormatter, deductNotDailyExpenses } from '../../../../utils/helpers';
@@ -23,8 +23,8 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
   );
 
   return (
-    <section>
-      <Typography variant="h2">Expenses</Typography>
+    <Box component="section" sx={{ textAlign: '-webkit-center' }}>
+      <Divider>Expenses</Divider>
       <div className={styles.container}>
         <div className={styles.partition}>
           <DetailRow label="Total amount of expenses" value={euroFormatter(sum)} />
@@ -46,6 +46,6 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
         </div>
       </div>
       <ExpensesTable expenses={detailedExpenses} />
-    </section>
+    </Box>
   );
 }

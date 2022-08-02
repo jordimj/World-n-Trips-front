@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import { Box, Stack, Tooltip, Typography, Zoom } from '@mui/material';
 import * as actions from '../../actions/actions';
-import Divider from '../UI/DividerLine/DividerLine';
 import Map from '../Map/Map';
 import ExpensesStatistics from './Statistics/Expenses/Expenses';
 import HitchhikesStatistics from './Statistics/Hitchhikes/Hitchhikes';
@@ -73,26 +72,12 @@ function CountryInfo() {
       {citiesVisited.length !== 0 && (
         <VisitedSpots cities={citiesVisited} states={statesVisited} />
       )}
-      {statistics.nights && statistics.nights.count.total !== 0 && (
-        <>
-          <Divider />
-          <NightsStatistics kmWalked={kilometersWalked} nights={nights} />
-        </>
+      {nights && <NightsStatistics kmWalked={kilometersWalked} nights={nights} />}
+      {hitchhikes && (
+        <HitchhikesStatistics hitchhikes={hitchhikes} totalNights={nights.count.total} />
       )}
-      {statistics.hitchhikes && statistics.hitchhikes.totalKilometers && (
-        <>
-          <Divider />
-          <HitchhikesStatistics
-            hitchhikes={hitchhikes}
-            totalNights={nights.count.total}
-          />
-        </>
-      )}
-      {statistics.expenses && (
-        <>
-          <Divider />
-          <ExpensesStatistics expenses={expenses} totalNights={nights.count.total} />
-        </>
+      {expenses && (
+        <ExpensesStatistics expenses={expenses} totalNights={nights.count.total} />
       )}
     </Fragment>
   );
