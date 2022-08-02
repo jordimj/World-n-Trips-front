@@ -30,15 +30,23 @@ export default function () {
 
   const [query, setQuery] = useState('');
   const [searching, setSearching] = useState(false);
+  const [totalMatches, setTotalMatches] = useState(0);
 
   const handleSearch = () => {
     if (query === '') return;
     setSearching(true);
+    setTotalMatches(
+      journals.reduce(
+        (acc, curr) => acc + (curr.text.match(new RegExp(query, 'gi')) ?? []).length,
+        0
+      )
+    );
   };
 
   const handleStopSearch = () => {
     setSearching(false);
     setQuery('');
+    setTotalMatches(0);
   };
 
   const handleKeyDown = (event) => {
@@ -52,25 +60,33 @@ export default function () {
     <Box textAlign="center">
       <Typography variant="h1">{trip.name} TRIP</Typography>
       <Typography variant="h2">Journal entries</Typography>
-      <Stack direction="row" sx={{ width: '350px', ml: 'auto' }}>
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Search by keyword"
-          inputProps={{ 'aria-label': 'search by keyword' }}
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-        <IconButton onClick={handleSearch} sx={{ p: '10px' }} aria-label="search">
-          <SearchIcon />
-        </IconButton>
-        <IconButton
-          onClick={handleStopSearch}
-          sx={{ p: '10px' }}
-          aria-label="close search"
-        >
-          <CloseIcon />
-        </IconButton>
+      <Stack sx={{ width: '350px', ml: 'auto' }}>
+        <Stack direction="row">
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="Search by keyword"
+            inputProps={{ 'aria-label': 'search by keyword' }}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <IconButton onClick={handleSearch} sx={{ p: '10px' }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+          <IconButton
+            onClick={handleStopSearch}
+            sx={{ p: '10px' }}
+            aria-label="close search"
+          >
+            <CloseIcon />
+          </IconButton>
+        </Stack>
+        {searching &&
+          (totalMatches > 0 ? (
+            <Typography>{totalMatches} occurrences found!</Typography>
+          ) : (
+            <Typography>No occurrences found.</Typography>
+          ))}
       </Stack>
       {journals && (
         <Stack
