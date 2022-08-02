@@ -40,14 +40,19 @@ export default function () {
                   direction="row"
                   gap={3}
                   justifyContent="flex-start"
-                  flexWrap={'wrap'}
+                  flexWrap="wrap"
                   sx={{ pt: 3 }}
                 >
                   {items.map((trip) => (
                     <Card
                       key={trip.id}
-                      sx={{ width: 380 }}
-                      onClick={() => navigate(`/journals/${trip.id}`)}
+                      sx={{
+                        width: 380,
+                        cursor: trip.hasJournals ? 'pointer' : 'auto',
+                      }}
+                      onClick={() =>
+                        trip.hasJournals ? navigate(`/journals/${trip.id}`) : {}
+                      }
                     >
                       <CardMedia
                         component="img"
