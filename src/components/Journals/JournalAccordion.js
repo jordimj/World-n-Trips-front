@@ -1,0 +1,42 @@
+import { useEffect, useState } from 'react';
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import parse from 'html-react-parser';
+
+export default function (props) {
+  const { journal, day, isSearching, query } = props;
+
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleExpanded = () => setExpanded(!expanded);
+
+  useEffect(() => {
+    if (isSearching && journal.text.search(query) !== -1) setExpanded(true);
+    if (!isSearching) setExpanded(false);
+  }, [isSearching]);
+
+  return (
+    <Accordion disableGutters expanded={expanded} onClick={toggleExpanded}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content" // check it
+        id="panel1a-header"
+      >
+        <Typography>#{day}</Typography>
+        <Typography sx={{ ml: 3, mr: 'auto' }}>{journal.title}</Typography>
+        <Typography>
+          {new Intl.DateTimeFormat('en-US', {
+            dateStyle: 'full',
+          }).format(new Date(journal.date))}
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails sx={{ px: 20, py: 5 }}>
+        <Typography variant={'journal'}>
+          {isSearching
+            ? parse(journal.text.replaceAll(query, `<mark>${query}</mark>`))
+            : parse(journal.text)}
+        </Typography>
+      </AccordionDetails>
+    </Accordion>
+  );
+}

@@ -1,21 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  IconButton,
-  InputBase,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, IconButton, InputBase, Stack, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import parse from 'html-react-parser';
 import * as actions from '../../actions/actions';
+import JournalAccordion from './JournalAccordion';
 
 export default function () {
   const { tripId } = useParams();
@@ -29,12 +19,12 @@ export default function () {
   }, [tripId]);
 
   const [query, setQuery] = useState('');
-  const [searching, setSearching] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const [totalMatches, setTotalMatches] = useState(0);
 
   const handleSearch = () => {
     if (query === '') return;
-    setSearching(true);
+    setIsSearching(true);
     setTotalMatches(
       journals.reduce(
         (acc, curr) => acc + (curr.text.match(new RegExp(query, 'gi')) ?? []).length,
@@ -44,7 +34,7 @@ export default function () {
   };
 
   const handleStopSearch = () => {
-    setSearching(false);
+    setIsSearching(false);
     setQuery('');
     setTotalMatches(0);
   };
@@ -81,7 +71,7 @@ export default function () {
             <CloseIcon />
           </IconButton>
         </Stack>
-        {searching &&
+        {isSearching &&
           (totalMatches > 0 ? (
             <Typography>{totalMatches} occurrences found!</Typography>
           ) : (
@@ -97,31 +87,13 @@ export default function () {
           sx={{ pt: 3 }}
         >
           {journals.map((journal, idx) => {
-            const shouldExpand = searching && journal.text.search(query) !== -1;
-
             return (
-              <Accordion disableGutters defaultExpanded={shouldExpand}>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography>#{idx + 1}</Typography>
-                  <Typography sx={{ ml: 3, mr: 'auto' }}>{journal.title}</Typography>
-                  <Typography>
-                    {new Intl.DateTimeFormat('en-US', {
-                      dateStyle: 'full',
-                    }).format(new Date(journal.date))}
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails sx={{ px: 20, py: 5 }}>
-                  <Typography variant={'journal'}>
-                    {searching
-                      ? parse(journal.text.replaceAll(query, `<mark>${query}</mark>`))
-                      : parse(journal.text)}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
+              <JournalAccordion
+                day={idx + 1}
+                journal={journal}
+                isSearching={isSearching}
+                query={query}
+              />
             );
           })}
         </Stack>
