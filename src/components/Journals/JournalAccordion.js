@@ -4,14 +4,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import parse from 'html-react-parser';
 
 export default function (props) {
-  const { journal, day, isSearching, query } = props;
+  const { journal, day, keyword, isSearching } = props;
 
   const [expanded, setExpanded] = useState(false);
-
   const toggleExpanded = () => setExpanded(!expanded);
 
   useEffect(() => {
-    if (isSearching && journal.text.search(query) !== -1) setExpanded(true);
+    if (isSearching && journal.text.search(keyword) !== -1) setExpanded(true);
     if (!isSearching) setExpanded(false);
   }, [isSearching]);
 
@@ -33,7 +32,7 @@ export default function (props) {
       <AccordionDetails sx={{ px: 20, py: 5 }}>
         <Typography variant={'journal'}>
           {isSearching
-            ? parse(journal.text.replaceAll(query, `<mark>${query}</mark>`))
+            ? parse(journal.text.replaceAll(keyword, `<mark>${keyword}</mark>`))
             : parse(journal.text)}
         </Typography>
       </AccordionDetails>

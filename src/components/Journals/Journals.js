@@ -6,45 +6,28 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import * as actions from '../../actions/actions';
 import JournalAccordion from './JournalAccordion';
+import useJournalSearch from '../../hooks/useJournalSearch';
 
 export default function () {
   const { tripId } = useParams();
   const dispatch = useDispatch();
 
-  const journals = useSelector((state) => state.journals);
+  const {
+    journals,
+    isSearching,
+    keyword,
+    setKeyword,
+    totalMatches,
+    handleSearch,
+    handleStopSearch,
+    handleKeyDown,
+  } = useJournalSearch();
+
   const trip = useSelector((state) => state.trips).find((trip) => trip.id == tripId);
 
   useEffect(() => {
     if (journals !== []) dispatch(actions.fetchJournals(tripId));
   }, [tripId]);
-
-  const [query, setQuery] = useState('');
-  const [isSearching, setIsSearching] = useState(false);
-  const [totalMatches, setTotalMatches] = useState(0);
-
-  const handleSearch = () => {
-    if (query === '') return;
-    setIsSearching(true);
-    setTotalMatches(
-      journals.reduce(
-        (acc, curr) => acc + (curr.text.match(new RegExp(query, 'gi')) ?? []).length,
-        0
-      )
-    );
-  };
-
-  const handleStopSearch = () => {
-    setIsSearching(false);
-    setQuery('');
-    setTotalMatches(0);
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      handleSearch();
-    }
-  };
 
   return (
     <Box textAlign="center">
@@ -56,8 +39,8 @@ export default function () {
             sx={{ ml: 1, flex: 1 }}
             placeholder="Search by keyword"
             inputProps={{ 'aria-label': 'search by keyword' }}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
             onKeyDown={handleKeyDown}
           />
           <IconButton onClick={handleSearch} sx={{ p: '10px' }} aria-label="search">
@@ -86,16 +69,14 @@ export default function () {
           flexWrap={'wrap'}
           sx={{ pt: 3 }}
         >
-          {journals.map((journal, idx) => {
-            return (
-              <JournalAccordion
-                day={idx + 1}
-                journal={journal}
-                isSearching={isSearching}
-                query={query}
-              />
-            );
-          })}
+          {journals.map((journal, idx) => (
+            <JournalAccordion
+              day={idx + 1}
+              journal={journal}
+              isSearching={isSearching}
+              keyword={keyword}
+            />
+          ))}
         </Stack>
       )}
     </Box>
