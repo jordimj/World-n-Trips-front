@@ -1,17 +1,29 @@
+import { Stack, Typography } from '@mui/material';
 import { useState } from 'react';
-import { TABLE_DIRECTION_ASC, TABLE_DIRECTION_DESC } from '../../../constants';
-import { percentageFormatter, tableOrderBy } from '../../../utils/helpers';
+import {
+  DATA_APPENDICES,
+  ORDER_BY,
+  TABLE_DIRECTION_ASC,
+  TABLE_DIRECTION_DESC,
+} from '../../../constants';
+import {
+  euroFormatter,
+  numberFormatter,
+  percentageFormatter,
+  tableOrderBy,
+} from '../../../utils/helpers';
 import { SortingArrow } from '../../UI/SortingArrow/SortingArrow';
 import styles from './TravelStatsTable.module.css';
 
-const ORDER_BY_AREA = 'area';
-const ORDER_BY_VISITED = 'visited';
-const ORDER_BY_TOTAL = 'total';
-const ORDER_BY_PERCENTAGE = 'percentage';
-
-const TravelStatsTable = ({ stats, kind = 'continent', shortTable = false }) => {
+const TravelStatsTable = ({
+  stats,
+  kind = 'continent',
+  shortTable = false,
+  title = '',
+  format = '',
+}) => {
   const [direction, setDirection] = useState(TABLE_DIRECTION_DESC);
-  const [orderBy, setOrderBy] = useState(ORDER_BY_AREA);
+  const [orderBy, setOrderBy] = useState(ORDER_BY.AREA);
 
   const orderedStats = tableOrderBy(stats, orderBy, direction);
 
@@ -25,58 +37,76 @@ const TravelStatsTable = ({ stats, kind = 'continent', shortTable = false }) => 
     setOrderBy(orderBy);
   };
 
+  const dataFormat = (number) => {
+    if (format === 'currency') return euroFormatter(number);
+    if (format === 'kilometers') return numberFormatter(number, DATA_APPENDICES.KM);
+
+    return number;
+  };
+
   return (
-    <table className={styles.container}>
-      <thead className={styles.header}>
-        <button
-          className={styles.headerCell}
-          onClick={() => setOrderByAndDirection(ORDER_BY_AREA)}
+    <Stack gap={1}>
+      {title !== '' && (
+        <Typography
+          variant="h6"
+          textTransform="uppercase"
+          sx={{ px: '32px', fontWeight: 400 }}
         >
-          {kind}
-          {orderBy === ORDER_BY_AREA && <SortingArrow direction={direction} />}
-        </button>
-        {!shortTable && (
+          {title}
+        </Typography>
+      )}
+      <table className={styles.container}>
+        <thead className={styles.header}>
           <button
             className={styles.headerCell}
-            onClick={() => setOrderByAndDirection(ORDER_BY_VISITED)}
+            onClick={() => setOrderByAndDirection(ORDER_BY.AREA)}
           >
-            Visited
-            {orderBy === ORDER_BY_VISITED && <SortingArrow direction={direction} />}
+            {kind}
+            {orderBy === ORDER_BY.AREA && <SortingArrow direction={direction} />}
           </button>
-        )}
-        <button
-          className={styles.headerCell}
-          onClick={() => setOrderByAndDirection(ORDER_BY_TOTAL)}
-        >
-          Total
-          {orderBy === ORDER_BY_TOTAL && <SortingArrow direction={direction} />}
-        </button>
-        {!shortTable && (
+          {!shortTable && (
+            <button
+              className={styles.headerCell}
+              onClick={() => setOrderByAndDirection(ORDER_BY.VISITED)}
+            >
+              Visited
+              {orderBy === ORDER_BY.VISITED && <SortingArrow direction={direction} />}
+            </button>
+          )}
           <button
             className={styles.headerCell}
-            onClick={() => setOrderByAndDirection(ORDER_BY_PERCENTAGE)}
+            onClick={() => setOrderByAndDirection(ORDER_BY.TOTAL)}
           >
-            Percentage
-            {orderBy === ORDER_BY_PERCENTAGE && <SortingArrow direction={direction} />}
+            Total
+            {orderBy === ORDER_BY.TOTAL && <SortingArrow direction={direction} />}
           </button>
-        )}
-      </thead>
-      <tbody className={styles.rows}>
-        {orderedStats.map(({ name, visited, total, percentage }) => (
-          <tr
-            className={[styles.row, shortTable && styles.shortRow]
-              .filter(Boolean)
-              .join(' ')}
-            key={name}
-          >
-            <td>{name}</td>
-            {!shortTable && <td>{visited}</td>}
-            <td>{total}</td>
-            {!shortTable && <td>{percentageFormatter(percentage)}</td>}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          {!shortTable && (
+            <button
+              className={styles.headerCell}
+              onClick={() => setOrderByAndDirection(ORDER_BY.PERCENTAGE)}
+            >
+              Percentage
+              {orderBy === ORDER_BY.PERCENTAGE && <SortingArrow direction={direction} />}
+            </button>
+          )}
+        </thead>
+        <tbody className={styles.rows}>
+          {orderedStats.map(({ name, visited, total, percentage }) => (
+            <tr
+              className={[styles.row, shortTable && styles.shortRow]
+                .filter(Boolean)
+                .join(' ')}
+              key={name}
+            >
+              <td>{name}</td>
+              {!shortTable && <td>{visited}</td>}
+              <td>{dataFormat(total)}</td>
+              {!shortTable && <td>{percentageFormatter(percentage)}</td>}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </Stack>
   );
 };
 

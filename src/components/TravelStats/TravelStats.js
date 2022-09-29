@@ -16,14 +16,14 @@ export default function () {
 
   if (!statistics) return <Fragment />;
 
-  const { countries, travels, top5 } = statistics;
+  const { countries, travels, top5, trips } = statistics;
 
   return (
     <Box textAlign="center">
       <Typography variant="h1">Travel statistics</Typography>
       {countries && (
         <Stack direction="row" spacing={3} justifyContent="center" sx={{ pt: 3 }}>
-          <Stack spacing={3} justifyContent="center" sx={{ pt: 3 }}>
+          <Stack spacing={2} justifyContent="center" sx={{ pt: 3 }}>
             <Typography fontSize={90}>
               {countries.all.visited} / {countries.all.total}
             </Typography>
@@ -46,13 +46,41 @@ export default function () {
       )}
       {top5 && (
         <>
-          <Typography variant="h2">Top5 countries</Typography>
+          <Typography variant="h2">TOP 5</Typography>
           <Stack direction="row" justifyContent="space-around">
-            <TravelStatsTable stats={top5.longestInCountry} kind="country" shortTable />
-            <TravelStatsTable stats={top5.longestInCities} kind="city" shortTable />
-            <TravelStatsTable stats={top5.hitchhiked} kind="country" shortTable />
-            <TravelStatsTable stats={top5.mostSpent} kind="country" shortTable />
-            <TravelStatsTable stats={top5.mostExpensiveVisas} kind="country" shortTable />
+            <TravelStatsTable
+              stats={top5.longestInCountry}
+              kind="country"
+              title="Countries where I stayed the longest"
+              shortTable
+            />
+            <TravelStatsTable
+              stats={top5.longestInCities}
+              kind="city"
+              title="Cities where I stayed the longest"
+              shortTable
+            />
+            <TravelStatsTable
+              stats={top5.hitchhiked}
+              kind="country"
+              title="Countries where I hitchhiked the most"
+              format="kilometers"
+              shortTable
+            />
+            <TravelStatsTable
+              stats={top5.mostSpent}
+              kind="country"
+              title="Countries where I spent the most"
+              format="currency"
+              shortTable
+            />
+            <TravelStatsTable
+              stats={top5.mostExpensiveVisas}
+              kind="country"
+              title="Most expensive country visas"
+              format="currency"
+              shortTable
+            />
           </Stack>
         </>
       )}

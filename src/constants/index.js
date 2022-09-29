@@ -9,6 +9,12 @@ export const ALL_REGIONS = 'all';
 // TABLE RELATED
 export const TABLE_DIRECTION_ASC = 'asc';
 export const TABLE_DIRECTION_DESC = 'desc';
+export const ORDER_BY = {
+  AREA: 'area',
+  VISITED: 'visited',
+  TOTAL: 'total',
+  PERCENTAGE: 'percentage',
+};
 
 // TIMELINE CHART
 export const HOUR_LABELS = [
