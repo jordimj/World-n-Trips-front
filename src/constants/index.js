@@ -37,3 +37,12 @@ export const HOUR_LABELS = [
   '10PM',
   '11PM',
 ];
+
+export const DATA_APPENDICES = {
+  MINS: 'mins',
+  KM: 'km',
+  KM_PER_DAY: 'km/day',
+  RIDES: 'rides',
+  DAYS: 'days',
+  SQUARE_METERS: 'km²',
+};

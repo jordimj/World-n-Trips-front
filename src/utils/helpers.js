@@ -15,6 +15,18 @@ export const percentageFormatter = (number) => {
   }).format(number);
 };
 
+export const numberFormatter = (number, appendix = '') => {
+  const noDecimals = number % 1 === 0;
+  return (
+    new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: noDecimals ? 0 : 2,
+      maximumFractionDigits: noDecimals ? 0 : 2,
+    }).format(number) +
+    ' ' +
+    appendix
+  );
+};
+
 export const deductNotDailyExpenses = (totalExpenses, expensesByCategories) => {
   const notDailyExpenses = ['VISA', 'INTERNATIONAL TRANSPORT', 'INSURANCE'];
 

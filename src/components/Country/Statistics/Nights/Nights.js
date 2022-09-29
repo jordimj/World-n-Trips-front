@@ -1,7 +1,12 @@
 import { Box, Divider } from '@mui/material';
 import NightsTable from './NightsTable';
-import { getAdverbialNumber, percentageFormatter } from '../../../../utils/helpers';
+import {
+  getAdverbialNumber,
+  numberFormatter,
+  percentageFormatter,
+} from '../../../../utils/helpers';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
+import { DATA_APPENDICES } from '../../../../constants';
 import styles from './Nights.module.css';
 
 export default function NightsStatistics({ nights, kmWalked }) {
@@ -24,10 +29,13 @@ export default function NightsStatistics({ nights, kmWalked }) {
       <div className={styles.container}>
         <div className={styles.overview}>
           <div className={styles.partition}>
-            <DetailRow label="Kilometers walked" value={kmWalked} appendix="km" />
+            <DetailRow
+              label="Kilometers walked"
+              value={numberFormatter(kmWalked, DATA_APPENDICES.KM)}
+            />
             <DetailRow
               label="Average kilometers walked"
-              value={`${(kmWalked / count.total).toFixed(2)} km / day`}
+              value={numberFormatter(kmWalked / count.total, DATA_APPENDICES.KM_PER_DAY)}
             />
           </div>
           <div className={styles.partition}>

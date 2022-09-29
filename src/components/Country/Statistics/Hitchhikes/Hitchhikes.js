@@ -1,6 +1,8 @@
 import { Box, Divider, Stack } from '@mui/material';
 import HitchhikesChart from './HitchikesChart';
-import DetailRow, { APPENDIX_TYPES } from '../../CountryDetails/DetailRow/DetailRow';
+import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
+import { DATA_APPENDICES } from '../../../../constants';
+import { numberFormatter } from '../../../../utils/helpers';
 
 export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
   const {
@@ -20,81 +22,79 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
         <Stack sx={{ width: '40%' }}>
           <DetailRow
             label="Total of kilometers"
-            value={totalKilometers}
-            appendix={APPENDIX_TYPES.KM}
+            value={numberFormatter(totalKilometers, DATA_APPENDICES.KM)}
           />
           {totalKilometersOpenAir && (
             <DetailRow
               label="Kilometers in the back of the pickup"
-              value={totalKilometersOpenAir}
-              appendix={APPENDIX_TYPES.KM}
+              value={numberFormatter(totalKilometersOpenAir, DATA_APPENDICES.KM)}
             />
           )}
           <DetailRow
             label="Days on the road"
-            value={daysOnTheRoad}
-            appendix={APPENDIX_TYPES.DAYS}
+            value={numberFormatter(daysOnTheRoad, DATA_APPENDICES.DAYS)}
           />
           {minutesWaiting && (
             <DetailRow
               label="Waiting on the road"
-              value={minutesWaiting.total}
-              appendix={APPENDIX_TYPES.MINS}
+              value={numberFormatter(minutesWaiting.total, DATA_APPENDICES.MINS)}
             />
           )}
           <DetailRow
             label="Number of rides we got"
-            value={Math.trunc(totalCars)}
-            appendix={APPENDIX_TYPES.RIDES}
+            value={numberFormatter(Math.trunc(totalCars), DATA_APPENDICES.RIDES)}
           />
         </Stack>
         <Stack sx={{ width: '40%' }}>
           <DetailRow
             label="Average kilometers per day in the country"
-            value={(totalKilometers / totalNights).toFixed(2)}
-            appendix={APPENDIX_TYPES.KM_PER_DAY}
+            value={numberFormatter(
+              totalKilometers / totalNights,
+              DATA_APPENDICES.KM_PER_DAY
+            )}
           />
           <DetailRow
             label="Average kilometers per day on the road"
-            value={(totalKilometers / daysOnTheRoad).toFixed(2)}
-            appendix={APPENDIX_TYPES.KM}
+            value={numberFormatter(totalKilometers / daysOnTheRoad, DATA_APPENDICES.KM)}
           />
           <DetailRow
             label="Average rides per day on the road"
-            value={(totalCars / daysOnTheRoad).toFixed(2)}
-            appendix={APPENDIX_TYPES.RIDES}
+            value={numberFormatter(totalCars / daysOnTheRoad, DATA_APPENDICES.RIDES)}
           />
           <DetailRow
             label="Longest distance per ride"
-            value={distances.longest}
-            appendix={APPENDIX_TYPES.KM}
+            value={numberFormatter(distances.longest, DATA_APPENDICES.KM)}
           />
           <DetailRow
             label="Average distance per ride"
-            value={Number(distances.average).toFixed(2)}
-            appendix={APPENDIX_TYPES.KM}
+            value={numberFormatter(distances.average, DATA_APPENDICES.KM)}
           />
           <DetailRow
             label="Shortest distance per ride"
-            value={distances.shortest}
-            appendix={APPENDIX_TYPES.KM}
+            value={numberFormatter(distances.shortest, DATA_APPENDICES.KM)}
           />
           {minutesWaiting && (
             <>
               <DetailRow
                 label="Longest wait per ride"
-                value={Number(minutesWaiting.waits.longest).toFixed(0)}
-                appendix={APPENDIX_TYPES.MINS}
+                value={numberFormatter(
+                  minutesWaiting.waits.longest,
+                  DATA_APPENDICES.MINS
+                )}
               />
               <DetailRow
                 label="Average wait per ride"
-                value={Number(minutesWaiting.waits.average).toFixed(2)}
-                appendix={APPENDIX_TYPES.MINS}
+                value={numberFormatter(
+                  minutesWaiting.waits.average,
+                  DATA_APPENDICES.MINS
+                )}
               />
               <DetailRow
                 label="Shortest wait per ride"
-                value={Number(minutesWaiting.waits.shortest).toFixed(0)}
-                appendix={APPENDIX_TYPES.MINS}
+                value={numberFormatter(
+                  minutesWaiting.waits.shortest,
+                  DATA_APPENDICES.MINS
+                )}
               />
             </>
           )}
