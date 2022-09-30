@@ -91,3 +91,5 @@ export const groupBy = (items, keyGetter) =>
       [key]: [...(acc[key] || []), cur],
     };
   }, []);
+
+export const buildTripName = (trip) => (trip.endsWith('TRIP') ? trip : `${trip} TRIP`);
