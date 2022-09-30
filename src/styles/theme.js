@@ -8,6 +8,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontStyle: 'normal',
+          color: 'var(--text-color)',
+          '&.Mui-selected': {
+            color: 'var(--text-color)',
+          },
         },
       },
     },
@@ -67,6 +71,14 @@ const theme = createTheme({
           '&:first-child': {
             marginTop: 10,
           },
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        outlined: {
+          fontSize: 16,
+          color: 'var(--text-color)',
         },
       },
     },

@@ -34,6 +34,11 @@ export default function VisitedSpots({ cities, states }) {
         onChange={handleChange}
         centered
         sx={{ borderBottom: 1, borderColor: 'divider' }}
+        TabIndicatorProps={{
+          style: {
+            backgroundColor: 'var(--navbar-color)',
+          },
+        }}
       >
         <Tab label="Visited cities" className={styles.tab} />
         <Tab label="Visited states" className={styles.tab} />
