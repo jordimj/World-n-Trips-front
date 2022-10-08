@@ -7,7 +7,6 @@ import styles from './Map.module.css';
 
 function Map({ data, region }) {
   const country = useSelector((state) => state.country);
-  const graduallyColored = useSelector((state) => state.worldMapConf.graduallyColored);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -26,24 +25,36 @@ function Map({ data, region }) {
           defaultColor: '#21b6b7',
         };
 
+  const onChartClick = ({ chartWrapper }) => {
+    const selection = chartWrapper.getChart().getSelection();
+
+    if (selection.length === 0) return;
+
+    const selectedCountryPosition = selection[0].row + 1;
+    const countryName = data[selectedCountryPosition][0];
+
+    navigate(`/country/${COUNTRIES[countryName]}/`);
+  };
+
+  const waitToRedrawChart = ({ chartWrapper }) => {
+    // When storage Event is caught, should wait a second and redraw the chart
+    window.addEventListener('storage', () => setTimeout(() => chartWrapper.draw(), 1000));
+  };
+
   return (
     <div className={styles.container}>
       <Chart
+        chartType="GeoChart"
         chartEvents={[
           {
             eventName: 'select',
-            callback: ({ chartWrapper }) => {
-              const chart = chartWrapper.getChart();
-              const selection = chart.getSelection();
-              if (selection.length === 0) return;
-              const countryName = graduallyColored
-                ? data[selection[0].row + 1][0]
-                : data[selection[0].row + 1];
-              navigate(`/country/${COUNTRIES[countryName]}/`);
-            },
+            callback: onChartClick,
+          },
+          {
+            eventName: 'ready',
+            callback: waitToRedrawChart,
           },
         ]}
-        chartType="GeoChart"
         data={data}
         options={options}
       />
