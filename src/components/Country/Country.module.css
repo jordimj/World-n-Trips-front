@@ -20,13 +20,13 @@
   border-radius: 4px;
 }
 
-.neighbouringCountries {
+.neighboringCountries {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.neighbouringCountry {
+.neighboringCountry {
   width: 9%;
   margin: 1rem;
 }

@@ -58,8 +58,8 @@ function Country() {
           <Map data={[[''], ...stateCodes]} />
           {info.borders && (
             <div className={styles.bordersContainer}>
-              <Typography variant="subtitle1">Neighbouring countries</Typography>
-              <div className={styles.neighbouringCountries}>
+              <Typography variant="subtitle1">Neighboring countries</Typography>
+              <div className={styles.neighboringCountries}>
                 {info.borders.length === 0 ? (
                   <Typography>{`${info.name} has none`}</Typography>
                 ) : (
@@ -73,7 +73,7 @@ function Country() {
                       <NavLink
                         key={countryCode}
                         to={`/country/${countryCode}/`}
-                        className={styles.neighbouringCountry}
+                        className={styles.neighboringCountry}
                       >
                         <img
                           src={`${process.env.PUBLIC_URL}/img/flags/${countryCode}.png`}

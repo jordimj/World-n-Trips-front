@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
-import { DARK_MODE, LIGHT_MODE } from '../../../constants';
-// todo: delete old icon system?
-import Icon from './Icon';
+import { useState, useEffect, Fragment } from 'react';
+import { Stack, Typography } from '@mui/material';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import styles from './ThemeSwitcher.module.css';
+import { DARK_MODE, LIGHT_MODE } from '../../../constants';
 
 export default () => {
   const [theme, setTheme] = useState(LIGHT_MODE);
@@ -26,12 +24,18 @@ export default () => {
   };
 
   return (
-    <div className={styles.themeSwitcher} onClick={switchTheme}>
+    <Stack direction="row" alignItems="center" onClick={switchTheme}>
       {theme === LIGHT_MODE ? (
-        <DarkModeIcon fontSize="large" />
+        <Fragment>
+          <DarkModeIcon fontSize="large" sx={{ width: '58px' }} />
+          <Typography>Dark mode</Typography>
+        </Fragment>
       ) : (
-        <LightModeIcon fontSize="large" />
+        <Fragment>
+          <LightModeIcon fontSize="large" sx={{ width: '58px' }} />
+          <Typography>Light mode</Typography>
+        </Fragment>
       )}
-    </div>
+    </Stack>
   );
 };

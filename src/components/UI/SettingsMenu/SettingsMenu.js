@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { ListItemIcon, ListItemText, Switch } from '@mui/material';
+import Switch from '@mui/material/Switch';
 import useFullWidth from '../../../hooks/useFullWidth';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 
@@ -18,8 +18,8 @@ export default function SettingsMenu() {
   return (
     <Fragment>
       <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
+        id="settings-button"
+        aria-controls={open ? 'settings-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleOpen}
@@ -27,18 +27,16 @@ export default function SettingsMenu() {
         Settings
       </Button>
       <Menu
-        id="basic-menu"
+        id="settings-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          'aria-labelledby': 'settings-button',
         }}
       >
         <MenuItem>
-          <ListItemText>
-            <ThemeSwitcher />
-          </ListItemText>
+          <ThemeSwitcher />
         </MenuItem>
         <MenuItem>
           <Switch
