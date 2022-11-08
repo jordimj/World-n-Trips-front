@@ -68,7 +68,7 @@ const theme = createTheme({
         textAlignLeft: {
           width: '100%',
           marginTop: 50,
-          '&:first-child': {
+          '&:first-of-type': {
             marginTop: 10,
           },
         },
@@ -77,8 +77,12 @@ const theme = createTheme({
     MuiChip: {
       styleOverrides: {
         outlined: {
+          textTransform: 'capitalize',
+        },
+        sizeMedium: {
           fontSize: 16,
           color: 'var(--text-color)',
+          padding: 5,
         },
       },
     },
@@ -125,7 +129,7 @@ const theme = createTheme({
     },
     journal: {
       fontSize: 60,
-      fontFamily: "'Just Another Hand', cursive",
+      fontFamily: 'Just Another Hand, cursive',
     },
   },
 });

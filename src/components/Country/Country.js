@@ -1,7 +1,7 @@
 import { Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
-import { Box, Chip, Stack, Tooltip, Typography, Zoom } from '@mui/material';
+import { Box, Stack, Tooltip, Typography, Zoom } from '@mui/material';
 import * as actions from '../../actions/actions';
 import Map from '../Map/Map';
 import ExpensesStatistics from './Statistics/Expenses/Expenses';
@@ -10,9 +10,10 @@ import NightsStatistics from './Statistics/Nights/Nights';
 import CountryDetails from './CountryDetails/CountryDetails';
 import VisitedSpots from './VisitedSpots/VisitedSpots';
 import { buildTripName } from '../../utils/helpers';
+import Chip from '../UI/Chip/Chip';
 import styles from './Country.module.css';
 
-function CountryInfo() {
+function Country() {
   const dispatch = useDispatch();
   const { countryCode } = useParams();
 
@@ -39,9 +40,15 @@ function CountryInfo() {
       >
         <div className={styles.details}>
           <CountryDetails info={info} />
-          <Stack direction="row" gap={2} justifyContent="center" marginTop={5}>
-            {trips?.map((trip) => (
-              <Chip label={buildTripName(trip)} variant="outlined" />
+          <Stack
+            direction="row"
+            justifyContent="center"
+            columnGap={2}
+            marginTop={1}
+            flexWrap="wrap"
+          >
+            {trips?.sort().map((trip) => (
+              <Chip key={trip} label={buildTripName(trip)} />
             ))}
           </Stack>
         </div>
@@ -57,7 +64,12 @@ function CountryInfo() {
                   <Typography>{`${info.name} has none`}</Typography>
                 ) : (
                   info.borders.map(([countryCode, countryName]) => (
-                    <Tooltip title={countryName} arrow TransitionComponent={Zoom}>
+                    <Tooltip
+                      key={countryName}
+                      title={countryName}
+                      arrow
+                      TransitionComponent={Zoom}
+                    >
                       <NavLink
                         key={countryCode}
                         to={`/country/${countryCode}/`}
@@ -88,4 +100,4 @@ function CountryInfo() {
     </Fragment>
   );
 }
-export default CountryInfo;
+export default Country;

@@ -34,7 +34,7 @@ export default function () {
           {Object.entries(groupedTrips)
             .reverse()
             .map(([year, items]) => (
-              <Fragment>
+              <Fragment key={year}>
                 <Divider textAlign="left">{year}</Divider>
                 <Stack
                   direction="row"

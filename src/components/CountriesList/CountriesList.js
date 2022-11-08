@@ -35,7 +35,7 @@ function CountriesList() {
     ) : (
       filteredCountries.map((country) => (
         <CountryBox
-          key={country.id}
+          key={country.alpha3code}
           name={country.name.toUpperCase()}
           code={country.alpha3code}
           onClick={() => countrySelectedHandler(country.alpha3code)}

@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import styles from '../VisitedSpots/VisitedSpots.module.css';
 
 function TabPanel({ children, active, index }) {
   return (
     <div role="tabpanel" hidden={active !== index}>
-      {active === index && <Typography sx={{ pt: 3 }}>{children}</Typography>}
+      {active === index && children}
     </div>
   );
 }
