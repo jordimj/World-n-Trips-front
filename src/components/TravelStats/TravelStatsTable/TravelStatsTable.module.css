@@ -5,6 +5,8 @@
 
   border-radius: 8px;
   box-shadow: var(--box-shadow);
+  position: sticky;
+  top: var(--sticky-header-top);
 }
 
 .header button {

@@ -20,6 +20,7 @@ export default function (props) {
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content" // check it
         id="panel1a-header"
+        sx={{ position: 'sticky', top: 'var(--sticky-header-top)', borderRadius: '10px' }}
       >
         <Typography>#{day}</Typography>
         <Typography sx={{ ml: 3, mr: 'auto' }}>{journal.title}</Typography>
