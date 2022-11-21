@@ -33,7 +33,18 @@ export default function () {
     <Box textAlign="center">
       <Typography variant="h1">{trip.name} TRIP</Typography>
       <Typography variant="h2">Journal entries</Typography>
-      <Stack sx={{ width: '350px', ml: 'auto' }}>
+      <Stack
+        sx={{
+          position: 'sticky',
+          top: '120px',
+          zIndex: 2,
+          width: '350px',
+          backgroundColor: 'white',
+          border: '1px solid grey',
+          borderRadius: '10px',
+          ml: 'auto',
+        }}
+      >
         <Stack direction="row">
           <InputBase
             sx={{ ml: 1, flex: 1 }}
