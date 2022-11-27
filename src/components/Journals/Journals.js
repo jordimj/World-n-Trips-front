@@ -1,12 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Box, IconButton, InputBase, Stack, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import InputBase from '@mui/material/InputBase';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import * as actions from '../../actions/actions';
 import JournalAccordion from './JournalAccordion';
 import useJournalSearch from '../../hooks/useJournalSearch';
+import Spinner from '../UI/Spinner/Spinner';
 
 export default function () {
   const { tripId } = useParams();
@@ -23,11 +28,16 @@ export default function () {
     handleKeyDown,
   } = useJournalSearch();
 
-  const trip = useSelector((state) => state.trips).find((trip) => trip.id == tripId);
+  const trips = useSelector((state) => state.trips);
 
   useEffect(() => {
+    if (trips !== []) dispatch(actions.fetchTrips());
     if (journals !== []) dispatch(actions.fetchJournals(tripId));
   }, [tripId]);
+
+  const trip = trips.find((trip) => trip.id == tripId);
+
+  if (!trip || journals.length === 0) return <Spinner />;
 
   return (
     <Box textAlign="center">
@@ -82,6 +92,7 @@ export default function () {
         >
           {journals.map((journal, idx) => (
             <JournalAccordion
+              key={idx}
               day={idx + 1}
               journal={journal}
               isSearching={isSearching}
