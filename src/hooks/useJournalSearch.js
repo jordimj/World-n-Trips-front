@@ -1,20 +1,22 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const useJournalSearch = () => {
-  const [keyword, setKeyword] = useState('');
+  const keywordRef = useRef(null);
   const [isSearching, setIsSearching] = useState(false);
   const [totalMatches, setTotalMatches] = useState(0);
 
   const journals = useSelector((state) => state.journals);
 
   const handleSearch = () => {
-    if (keyword === '') return;
+    if (keywordRef.current.value === '') return;
 
     setIsSearching(true);
     setTotalMatches(
       journals.reduce(
-        (acc, curr) => acc + (curr.text.match(new RegExp(keyword, 'gi')) ?? []).length,
+        (acc, curr) =>
+          acc +
+          (curr.text.match(new RegExp(keywordRef.current.value, 'gi')) ?? []).length,
         0
       )
     );
@@ -22,8 +24,8 @@ const useJournalSearch = () => {
 
   const handleStopSearch = () => {
     setIsSearching(false);
-    setKeyword('');
     setTotalMatches(0);
+    keywordRef.current.value = '';
   };
 
   const handleKeyDown = (event) => {
@@ -34,8 +36,7 @@ const useJournalSearch = () => {
   };
 
   return {
-    keyword,
-    setKeyword,
+    keywordRef,
     isSearching,
     totalMatches,
     handleSearch,

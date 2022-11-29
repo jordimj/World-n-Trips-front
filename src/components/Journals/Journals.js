@@ -20,8 +20,7 @@ export default function () {
   const {
     journals,
     isSearching,
-    keyword,
-    setKeyword,
+    keywordRef,
     totalMatches,
     handleSearch,
     handleStopSearch,
@@ -60,8 +59,7 @@ export default function () {
             sx={{ ml: 1, flex: 1 }}
             placeholder="Search by keyword"
             inputProps={{ 'aria-label': 'search by keyword' }}
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
+            inputRef={keywordRef}
             onKeyDown={handleKeyDown}
           />
           <IconButton onClick={handleSearch} sx={{ p: '10px' }} aria-label="search">
@@ -96,7 +94,7 @@ export default function () {
               day={idx + 1}
               journal={journal}
               isSearching={isSearching}
-              keyword={keyword}
+              keyword={keywordRef.current?.value ?? ''}
             />
           ))}
         </Stack>
