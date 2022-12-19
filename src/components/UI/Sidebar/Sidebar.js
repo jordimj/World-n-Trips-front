@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
@@ -12,25 +9,20 @@ import CloseIcon from '@mui/icons-material/Close';
 import ViewSidebarIcon from '@mui/icons-material/ViewSidebar';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import * as actions from '../../../actions/actions';
 import CONTINENTS_AND_REGIONS from '../../../constants/continentsAndRegions';
 import { WORLD_MAP } from '../../../constants';
+import useMapSidebar from '../../../hooks/useMapSidebar';
 import styles from './sidebar.module.css';
 
 export default function MapSidebar() {
-  const worldMapConf = useSelector((state) => state.worldMapConf);
-  const { graduallyColored, selectedContinent, selectedRegion } = worldMapConf;
-
-  const [active, setActive] = useState(false);
-  const dispatch = useDispatch();
-
-  const toggleSidebar = () => setActive(!active);
-  const toggleColoring = () => dispatch(actions.toggleGradualColoring());
-
-  const continentSelectedHandler = (e) =>
-    dispatch(actions.setSelectedContinent(e.target.value));
-  const regionSelectedHandler = (e) =>
-    dispatch(actions.setSelectedRegion(e.target.value));
+  const {
+    isVisible,
+    worldMapConf: { graduallyColored, selectedContinent, selectedRegion },
+    toggleSidebar,
+    toggleColoring,
+    continentSelectedHandler,
+    regionSelectedHandler,
+  } = useMapSidebar();
 
   const continentSelectOptions = CONTINENTS_AND_REGIONS.map((continent) => (
     <MenuItem key={continent.name} value={continent.code}>
@@ -60,14 +52,20 @@ export default function MapSidebar() {
 
   return (
     <>
-      <Box className={styles.toggleButton} onClick={toggleSidebar}>
-        <ViewSidebarIcon fontSize="large" />
-        <Typography>Open filter sidebar</Typography>
-      </Box>
-      <nav
-        className={[styles.sidebar, active && styles.active].filter(Boolean).join(' ')}
+      <IconButton
+        size="large"
+        title={`${isVisible ? 'Close' : 'Open'} sidebar`}
+        className={styles.toggleButton}
+        onClick={toggleSidebar}
       >
-        <Typography variant="h3">Some filters</Typography>
+        <ViewSidebarIcon fontSize="large" />
+      </IconButton>
+      <nav
+        className={[styles.sidebar, isVisible && styles.visible]
+          .filter(Boolean)
+          .join(' ')}
+      >
+        <Typography variant="h3">Map filters</Typography>
         <FormControl>
           <InputLabel id="continent-select-label" className={styles.text}>
             Continent
@@ -82,7 +80,7 @@ export default function MapSidebar() {
             {continentSelectOptions}
           </Select>
           <FormHelperText className={styles.formHelperText}>
-            Continent to be shown
+            Continent to display
           </FormHelperText>
         </FormControl>
 
@@ -100,7 +98,7 @@ export default function MapSidebar() {
             {regionSelectOptions}
           </Select>
           <FormHelperText className={styles.formHelperText}>
-            Region to be shown
+            Region to display
           </FormHelperText>
         </FormControl>
 
@@ -117,6 +115,7 @@ export default function MapSidebar() {
 
         <IconButton
           aria-label="close"
+          title="Close sidebar"
           onClick={toggleSidebar}
           sx={{ fontSize: '80px', width: 'fit-content', alignSelf: 'center' }}
         >

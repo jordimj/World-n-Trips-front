@@ -9,11 +9,12 @@
   top: 0;
   left: -100%;
   transition: 1s ease-in-out;
-  padding: 0 40px;
-  gap: 40px;
+  padding: 0 var(--spacing-4);
+  gap: var(--spacing-4);
+  border: var(--border);
 }
 
-.active {
+.visible {
   left: 0;
 }
 
@@ -24,16 +25,24 @@
   color: var(--text-color) !important;
 }
 
+.formHelperText {
+  text-align: end;
+}
+
 .toggleButton {
   position: absolute;
   align-items: center;
   left: 0;
   bottom: 1vh;
-  display: flex;
-  gap: 10px;
+  transition: transform 1s;
 }
 
-.toggleButton:hover > svg {
+.toggleButton svg,
+.sidebar svg {
+  fill: var(--icon-color);
+}
+
+.toggleButton:hover {
   transform: rotate(360deg) scale(1.2);
   transition: transform 0.5s;
 }
