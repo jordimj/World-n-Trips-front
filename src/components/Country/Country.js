@@ -33,12 +33,8 @@ function Country() {
 
   return (
     <Fragment>
-      <Stack
-        direction="row"
-        gap={4}
-        sx={{ mt: '50px', mb: '25px', placeItems: 'center' }}
-      >
-        <div className={styles.details}>
+      <Stack direction="row" gap={4} sx={{ mt: 5, mb: 4, alignItems: 'center' }}>
+        <Box className={styles.details}>
           <CountryDetails info={info} />
           <Stack
             direction="row"
@@ -51,15 +47,15 @@ function Country() {
               <Chip key={trip} label={buildTripName(trip)} />
             ))}
           </Stack>
-        </div>
+        </Box>
         <Box className={styles.map}>
           <Typography variant="h1">{info.name}</Typography>
           <Typography variant="subtitle1">{info.continent.toUpperCase()}</Typography>
           <Map data={[[''], ...stateCodes]} />
           {info.borders && (
-            <div className={styles.bordersContainer}>
+            <Box className={styles.bordersContainer}>
               <Typography variant="subtitle1">Neighboring countries</Typography>
-              <div className={styles.neighboringCountries}>
+              <Box className={styles.neighboringCountries}>
                 {info.borders.length === 0 ? (
                   <Typography>{`${info.name} has none`}</Typography>
                 ) : (
@@ -82,8 +78,8 @@ function Country() {
                     </Tooltip>
                   ))
                 )}
-              </div>
-            </div>
+              </Box>
+            </Box>
           )}
         </Box>
       </Stack>

@@ -1,8 +1,6 @@
 .map {
   background-color: var(--background-color-light);
-  box-shadow: var(--box-shadow);
-  border-radius: 8px;
-  padding: 1%;
+  padding: var(--spacing-2);
   width: 65%;
 }
 
@@ -11,22 +9,20 @@
 }
 
 .bordersContainer {
-  padding: 20px;
+  padding: var(--spacing-3);
 }
 
 .bordersContainer img {
   width: 100%;
-  max-height: 100px;
-  border-radius: 4px;
 }
 
 .neighboringCountries {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: var(--spacing-3);
 }
 
 .neighboringCountry {
-  width: 9%;
-  margin: 1rem;
+  width: 90px;
 }

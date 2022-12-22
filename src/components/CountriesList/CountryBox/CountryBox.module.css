@@ -1,16 +1,12 @@
 .countryBox {
   width: 240px;
   min-height: 240px;
-  padding: 0 10px;
   text-align: center;
-  border: 1px solid #eee;
-  box-shadow: 0 2px 3px #ccc;
-  margin: 10px;
-  padding: 10px;
+  box-shadow: 0 2px 3px var(--border-color);
+  margin: var(--spacing-2);
+  padding: var(--spacing-2);
   box-sizing: border-box;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 1.3em;
   transform: scale(1);
   transition: transform 1s ease-out;
 }

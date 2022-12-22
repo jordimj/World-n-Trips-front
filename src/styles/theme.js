@@ -78,6 +78,7 @@ const theme = createTheme({
       styleOverrides: {
         outlined: {
           textTransform: 'capitalize',
+          border: 'var(--border)',
         },
         sizeMedium: {
           fontSize: 16,
@@ -112,7 +113,7 @@ const theme = createTheme({
     },
     cardTitle: {
       fontWeight: 600,
-      fontSize: '1.3em',
+      fontSize: 25,
     },
     subtitle1: {
       color: textColorSecondary,

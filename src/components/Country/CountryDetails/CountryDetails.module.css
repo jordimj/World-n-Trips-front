@@ -1,11 +1,11 @@
 .detailsPanel {
   background-color: var(--background-color-light);
   box-shadow: var(--box-shadow);
-  border-radius: 8px;
+  border-radius: var(--spacing-2);
 }
 
 .detailsPanel img {
-  width: 96%;
-  border-radius: 8px;
-  margin: 2%;
+  width: 97%;
+  border-radius: var(--spacing-2);
+  margin: var(--spacing-2);
 }
