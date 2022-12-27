@@ -61,12 +61,12 @@ const fetchStatisticsFail = (error) => {
   };
 };
 
-export const fetchStatistics = () => {
+export const fetchStatistics = (year = null) => {
   return async (dispatch) => {
     dispatch(fetchStatisticsStart());
 
     try {
-      const stats = await API.getStats();
+      const stats = await (year ? API.getYearStats(year) : API.getStats());
       dispatch(fetchStatisticsSuccess(stats));
     } catch (e) {
       dispatch(fetchStatisticsFail(e));

@@ -12,8 +12,12 @@ async function getStats() {
   return (await instance.get('/statistics')).data;
 }
 
+async function getYearStats(year) {
+  return (await instance.get(`/statistics/${year}`)).data;
+}
+
 async function getCountryStats(countryName) {
-  return (await instance.get(`/statistics/${countryName}/`)).data;
+  return (await instance.get(`/country/statistics/${countryName}/`)).data;
 }
 
 async function getTrips() {
@@ -24,4 +28,11 @@ async function getJournals(tripId) {
   return (await instance.get(`/journals/${tripId}`)).data;
 }
 
-export { getCountriesBeen, getStats, getTrips, getJournals, getCountryStats };
+export {
+  getCountriesBeen,
+  getStats,
+  getYearStats,
+  getTrips,
+  getJournals,
+  getCountryStats,
+};
