@@ -73,6 +73,7 @@ export default function MapSidebar() {
           <Select
             labelId="continent-select-label"
             id="continent-select"
+            label="Continent"
             className={styles.select}
             value={selectedContinent}
             onChange={continentSelectedHandler}
@@ -91,6 +92,7 @@ export default function MapSidebar() {
           <Select
             labelId="region-helper-label"
             id="region-helper"
+            label="Region"
             className={styles.select}
             value={selectedRegion}
             onChange={regionSelectedHandler}
