@@ -5,7 +5,7 @@ const instance = axios.create({
 });
 
 async function getCountriesBeen() {
-  return (await instance.get('/countriesBeenTo')).data;
+  return (await instance.get('/countries/visited')).data;
 }
 
 async function getStats() {
@@ -17,7 +17,7 @@ async function getYearStats(year) {
 }
 
 async function getCountryStats(countryName) {
-  return (await instance.get(`/country/statistics/${countryName}/`)).data;
+  return (await instance.get(`/countries/statistics/${countryName}/`)).data;
 }
 
 async function getTrips() {
@@ -25,7 +25,7 @@ async function getTrips() {
 }
 
 async function getJournals(tripId) {
-  return (await instance.get(`/journals/${tripId}`)).data;
+  return (await instance.get(`/journals/trip/${tripId}`)).data;
 }
 
 export {
