@@ -1,7 +1,5 @@
 import { createTheme } from '@mui/material';
 
-const textColorSecondary = '#b3c5cd';
-
 const theme = createTheme({
   components: {
     MuiTab: {
@@ -25,7 +23,7 @@ const theme = createTheme({
     MuiAccordionSummary: {
       styleOverrides: {
         root: {
-          backgroundColor: '#252329',
+          backgroundColor: 'var(--navbar-color)',
           color: 'white',
           '& svg': {
             color: 'white',
@@ -49,9 +47,9 @@ const theme = createTheme({
     MuiSwitch: {
       styleOverrides: {
         colorPrimary: {
-          color: '#252329',
+          color: 'var(--navbar-color)',
           '&.Mui-checked': {
-            color: '#120f13',
+            color: 'var(--background-color-light)',
           },
         },
       },
@@ -116,7 +114,7 @@ const theme = createTheme({
       fontSize: 25,
     },
     subtitle1: {
-      color: textColorSecondary,
+      color: 'var(--text-color-secondary)',
       textAlign: 'center',
       marginBottom: 20,
     },

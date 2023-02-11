@@ -1,0 +1,9 @@
+.formHelperText,
+.text,
+.select {
+  color: var(--text-color) !important;
+}
+
+.formHelperText {
+  text-align: end;
+}

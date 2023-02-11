@@ -18,17 +18,6 @@
   left: 0;
 }
 
-.formHelperText,
-.text,
-.select {
-  font-family: var(--font-family);
-  color: var(--text-color) !important;
-}
-
-.formHelperText {
-  text-align: end;
-}
-
 .toggleButton {
   position: absolute;
   align-items: center;
