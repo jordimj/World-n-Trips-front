@@ -1,16 +1,22 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Typography } from '@mui/material';
+import { Checkbox, ListItemText, MenuItem, Stack, Typography } from '@mui/material';
 import * as actions from '../../actions/actions';
 import CountryBox from './CountryBox/CountryBox';
 import SearchInput from '../../components/UI/SearchInput/SearchInput';
+import Select from '../../components/UI/Select/Select';
+import { DATABASE_REGIONS } from '../../constants/continentsAndRegions';
 import styles from './CountriesList.module.css';
 
 function CountriesList() {
   const countriesBeen = useSelector((state) => state.countriesBeen);
   const loading = useSelector((state) => state.loading);
+
+  const [selectedContinents, setSelectedContinents] = useState([]);
+  const [selectedRegions, setSelectedRegions] = useState([]);
   const [keyword, setKeyword] = useState('');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,29 +31,81 @@ function CountriesList() {
     setKeyword(e.target.value.toLowerCase());
   };
 
-  const filteredCountries = countriesBeen.filter((country) =>
-    country.name.toLowerCase().includes(keyword)
-  );
-
-  const countriesList =
-    countriesBeen.length === 0 && !loading ? (
-      <Typography>Something went wrong!</Typography>
-    ) : (
-      filteredCountries.map((country) => (
-        <CountryBox
-          key={country.alpha3code}
-          name={country.name.toUpperCase()}
-          code={country.alpha3code}
-          onClick={() => countrySelectedHandler(country.alpha3code)}
-        />
-      ))
+  const onContinentChange = (e) =>
+    setSelectedContinents(
+      typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value
     );
+
+  const onRegionChange = (e) =>
+    setSelectedRegions(
+      typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value
+    );
+
+  const filteredCountries = countriesBeen.filter((country) => {
+    if (selectedContinents.length === 0 && selectedRegions.length === 0)
+      return country.name.toLowerCase().includes(keyword);
+
+    if (selectedContinents.length > 0 && selectedRegions.length === 0)
+      return (
+        country.name.toLowerCase().includes(keyword) &&
+        selectedContinents.includes(country.continent)
+      );
+
+    return (
+      country.name.toLowerCase().includes(keyword) &&
+      selectedRegions.includes(country.region)
+    );
+  });
 
   return (
     <Fragment>
-      <Typography variant="h1">List of countries I've been to</Typography>
-      <SearchInput placeholder="Filter by name" onChange={onInputChange} />
-      <section className={styles.countries}>{countriesList}</section>
+      <Typography variant="h1">Countries I've been to</Typography>
+      <Stack direction="row" gap={3} sx={{ my: 3 }}>
+        <Select.Multiple
+          label="Continent"
+          value={selectedContinents}
+          onChange={onContinentChange}
+        >
+          {Object.keys(DATABASE_REGIONS).map((region) => (
+            <MenuItem key={region} value={region}>
+              <Checkbox checked={selectedContinents.indexOf(region) > -1} />
+              <ListItemText primary={region} />
+            </MenuItem>
+          ))}
+        </Select.Multiple>
+        <Select.Multiple
+          label="Region"
+          value={selectedRegions}
+          onChange={onRegionChange}
+          disabled={selectedContinents.length === 0}
+        >
+          {selectedContinents
+            .map((continent) =>
+              DATABASE_REGIONS[continent].map((region) => (
+                <MenuItem key={region} value={region}>
+                  <Checkbox checked={selectedRegions.indexOf(region) > -1} />
+                  <ListItemText primary={region} />
+                </MenuItem>
+              ))
+            )
+            .flat()}
+        </Select.Multiple>
+        <SearchInput placeholder="Filter by name" onChange={onInputChange} />
+      </Stack>
+      <section className={styles.countries}>
+        {countriesBeen.length === 0 && !loading ? (
+          <Typography>Something went wrong!</Typography>
+        ) : (
+          filteredCountries.map((country) => (
+            <CountryBox
+              key={country.alpha3code}
+              name={country.name.toUpperCase()}
+              code={country.alpha3code}
+              onClick={() => countrySelectedHandler(country.alpha3code)}
+            />
+          ))
+        )}
+      </section>
     </Fragment>
   );
 }

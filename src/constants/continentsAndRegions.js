@@ -1,3 +1,4 @@
+// Continents and regions with their code for Google Charts Geo
 const CONTINENTS_AND_REGIONS = [
   {
     name: 'All',
@@ -124,3 +125,33 @@ const CONTINENTS_AND_REGIONS = [
 ];
 
 export default CONTINENTS_AND_REGIONS;
+
+// Continents and regions as categorized in the DB
+export const DATABASE_REGIONS = {
+  Africa: ['Central Africa', 'Northern Africa', 'Western Africa', 'Southern Africa'],
+  Antarctica: ['Antarctica'],
+  Asia: [
+    'Eastern Asia',
+    'Middle East',
+    'Southeast Asia',
+    'Southern and Central Asia',
+    'Transcaucasia',
+  ],
+  Europe: [
+    'Baltic Countries',
+    'British Islands',
+    'Eastern Europe',
+    'Nordic Countries',
+    'Southern Europe',
+    'Western Europe',
+  ],
+  'North America': ['Caribbean', 'Central America', 'North America'],
+  Oceania: [
+    'Australia and New Zealand',
+    'Melanesia',
+    'Micronesia',
+    'Micronesia / Caribbean',
+    'Polynesia',
+  ],
+  'South America': ['South America'],
+};

@@ -85,6 +85,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiCheckbox: {
+      styleOverrides: {
+        colorPrimary: {
+          color: 'var(--navbar-color)!important',
+        },
+      },
+    },
   },
   typography: {
     fontFamily: ['Poppins', 'sans-serif'].join(','),
