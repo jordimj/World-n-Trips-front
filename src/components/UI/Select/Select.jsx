@@ -24,7 +24,9 @@ function Select(props) {
       >
         {children}
       </MuiSelect>
-      <FormHelperText className={styles.formHelperText}>{helper}</FormHelperText>
+      {helper && (
+        <FormHelperText className={styles.formHelperText}>{helper}</FormHelperText>
+      )}
     </FormControl>
   );
 }

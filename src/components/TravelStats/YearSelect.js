@@ -23,7 +23,9 @@ function YearSelect({ year, onYearChange }) {
           </MenuItem>
         ))}
       </Select>
-      <FormHelperText>All time VS Yearly Stats</FormHelperText>
+      <FormHelperText sx={{ textAlign: 'right' }}>
+        All time VS Yearly Stats
+      </FormHelperText>
     </FormControl>
   );
 }

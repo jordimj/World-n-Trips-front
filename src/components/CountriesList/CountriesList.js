@@ -1,7 +1,14 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Checkbox, ListItemText, MenuItem, Stack, Typography } from '@mui/material';
+import {
+  Checkbox,
+  ListItemText,
+  ListSubheader,
+  MenuItem,
+  Stack,
+  Typography,
+} from '@mui/material';
 import * as actions from '../../actions/actions';
 import CountryBox from './CountryBox/CountryBox';
 import SearchInput from '../../components/UI/SearchInput/SearchInput';
@@ -60,7 +67,7 @@ function CountriesList() {
   return (
     <Fragment>
       <Typography variant="h1">Countries I've been to</Typography>
-      <Stack direction="row" gap={3} sx={{ my: 3 }}>
+      <Stack direction="row" gap={3} sx={{ m: 5 }}>
         <Select.Multiple
           label="Continent"
           value={selectedContinents}
@@ -80,14 +87,15 @@ function CountriesList() {
           disabled={selectedContinents.length === 0}
         >
           {selectedContinents
-            .map((continent) =>
+            .map((continent) => [
+              <ListSubheader key={continent}>{continent}</ListSubheader>,
               DATABASE_REGIONS[continent].map((region) => (
                 <MenuItem key={region} value={region}>
                   <Checkbox checked={selectedRegions.indexOf(region) > -1} />
                   <ListItemText primary={region} />
                 </MenuItem>
-              ))
-            )
+              )),
+            ])
             .flat()}
         </Select.Multiple>
         <SearchInput placeholder="Filter by name" onChange={onInputChange} />
