@@ -83,6 +83,19 @@ export const addDatesToTripCard = (arrivalDate, departureDate) => {
   return Intl.DateTimeFormat('en-US', defaultOptions).format(new Date(arrival));
 };
 
+export function formatFullDate(date) {
+  return new Intl.DateTimeFormat('en-US', {
+    dateStyle: 'full',
+  }).format(new Date(date));
+}
+
+export function getYearsAgo(date) {
+  const yearDifference = new Date().getFullYear() - new Date(date).getFullYear();
+
+  if (yearDifference === 1) return 'A year ago';
+  return yearDifference + ' years ago';
+}
+
 export const groupBy = (items, keyGetter) =>
   items.reduce((acc, cur) => {
     const key = keyGetter(cur);

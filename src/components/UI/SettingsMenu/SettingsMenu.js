@@ -5,6 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Switch from '@mui/material/Switch';
 import useFullWidth from '../../../hooks/useFullWidth';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
+import Ephemeris from '../../Ephemeris/Ephemeris';
+import useLocalStorage from '../../../hooks/useLocalStorage';
 
 export default function SettingsMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -14,9 +16,14 @@ export default function SettingsMenu() {
   const handleClose = () => setAnchorEl(null);
 
   const { fullWidth, saveFullWidth } = useFullWidth();
+  const [enabledEphemeris, setEnabledEphemeris] = useLocalStorage(
+    'enabled_ephemeris',
+    true
+  );
 
   return (
     <Fragment>
+      {enabledEphemeris && <Ephemeris />}
       <Button
         id="settings-button"
         aria-controls={open ? 'settings-menu' : undefined}
@@ -45,6 +52,14 @@ export default function SettingsMenu() {
             onChange={(e) => saveFullWidth(e.target.checked)}
           />
           Full width
+        </MenuItem>
+        <MenuItem>
+          <Switch
+            color="primary"
+            checked={enabledEphemeris}
+            onChange={(e) => setEnabledEphemeris(e.target.checked)}
+          />
+          Travel ephemeris
         </MenuItem>
       </Menu>
     </Fragment>

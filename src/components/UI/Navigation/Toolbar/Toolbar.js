@@ -1,12 +1,13 @@
 import NavigationItems from '../NavigationItems/NavigationItems';
-import styles from './Toolbar.module.css';
 import SettingsMenu from '../../SettingsMenu/SettingsMenu';
+import styles from './Toolbar.module.css';
 
-const toolbar = () => (
-  <nav className={styles.toolbar}>
-    <NavigationItems />
-    <SettingsMenu />
-  </nav>
-);
-
-export default toolbar;
+function Toolbar() {
+  return (
+    <nav className={styles.toolbar}>
+      <NavigationItems />
+      <SettingsMenu />
+    </nav>
+  );
+}
+export default Toolbar;

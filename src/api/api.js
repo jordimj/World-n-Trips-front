@@ -28,6 +28,10 @@ async function getJournals(tripId) {
   return (await instance.get(`/journals/trip/${tripId}`)).data;
 }
 
+async function getEphemeris() {
+  return (await instance.get('/ephemeris/')).data;
+}
+
 export {
   getCountriesBeen,
   getStats,
@@ -35,4 +39,5 @@ export {
   getTrips,
   getJournals,
   getCountryStats,
+  getEphemeris,
 };
