@@ -59,7 +59,7 @@ function Country() {
                 {info.borders.length === 0 ? (
                   <Typography>{`${info.name} has none`}</Typography>
                 ) : (
-                  info.borders.map(([countryCode, countryName]) => (
+                  info.borders.map(([countryCode, countryName, visited]) => (
                     <Tooltip
                       key={countryName}
                       title={countryName}
@@ -69,11 +69,12 @@ function Country() {
                       <NavLink
                         key={countryCode}
                         to={`/country/${countryCode}/`}
-                        className={styles.neighboringCountry}
+                        className={[
+                          styles.neighboringCountry,
+                          visited && styles.visited,
+                        ].filter(Boolean)}
                       >
-                        <img
-                          src={`${process.env.PUBLIC_URL}/img/flags/${countryCode}.png`}
-                        />
+                        <img src={`/img/flags/${countryCode}.png`} />
                       </NavLink>
                     </Tooltip>
                   ))

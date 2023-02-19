@@ -25,4 +25,13 @@
 
 .neighboringCountry {
   width: 90px;
+  opacity: 0.5;
+  filter: grayscale(100%);
+}
+
+.neighboringCountry:hover,
+.visited {
+  opacity: 1;
+  filter: none;
+  transition: 0.5s opacity, filter;
 }

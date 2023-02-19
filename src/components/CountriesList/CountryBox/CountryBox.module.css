@@ -1,4 +1,6 @@
 .countryBox {
+  align-items: center;
+  gap: var(--spacing-4);
   width: 240px;
   min-height: 240px;
   text-align: center;
