@@ -1,0 +1,9 @@
+.paper {
+  max-width: 1200px;
+  margin: 10px;
+  max-height: 50vh;
+}
+
+.head {
+  height: 60px;
+}

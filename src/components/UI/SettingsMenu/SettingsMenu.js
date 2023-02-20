@@ -2,11 +2,13 @@ import { Fragment, useState } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
 import useFullWidth from '../../../hooks/useFullWidth';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import Ephemeris from '../../Ephemeris/Ephemeris';
 import useLocalStorage from '../../../hooks/useLocalStorage';
+import Inserter from '../../../features/inserter/pages/Inserter';
 
 export default function SettingsMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -22,8 +24,9 @@ export default function SettingsMenu() {
   );
 
   return (
-    <Fragment>
+    <Stack direction="row" gap={3} alignItems="center">
       {enabledEphemeris && <Ephemeris />}
+      <Inserter />
       <Button
         id="settings-button"
         aria-controls={open ? 'settings-menu' : undefined}
@@ -62,6 +65,6 @@ export default function SettingsMenu() {
           Travel ephemeris
         </MenuItem>
       </Menu>
-    </Fragment>
+    </Stack>
   );
 }
