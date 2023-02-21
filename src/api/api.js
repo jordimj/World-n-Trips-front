@@ -4,7 +4,7 @@ const instance = axios.create({
   baseURL: process.env.REACT_APP_ROOT_URL,
 });
 
-async function getCountriesBeen() {
+async function getVisitedCountries() {
   return (await instance.get('/countries/visited')).data;
 }
 
@@ -33,7 +33,7 @@ async function getEphemeris() {
 }
 
 export {
-  getCountriesBeen,
+  getVisitedCountries,
   getStats,
   getYearStats,
   getTrips,

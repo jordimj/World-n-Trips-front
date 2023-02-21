@@ -1,8 +1,8 @@
-import * as React from 'react';
+import { useState } from 'react';
+import { Dialog, DialogTitle, IconButton } from '@mui/material';
 import PublishIcon from '@mui/icons-material/Publish';
-import { blue } from '@mui/material/colors';
+import CloseIcon from '@mui/icons-material/Close';
 import AppStepper from '../components/AppStepper/AppStepper';
-import { Dialog, DialogTitle } from '@mui/material';
 
 export interface InserterDialogProps {
   open: boolean;
@@ -15,14 +15,23 @@ function InserterDialog(props: InserterDialogProps) {
 
   return (
     <Dialog onClose={handleClose} open={open} fullWidth maxWidth="xl">
-      <DialogTitle>New data parser & inserter</DialogTitle>
+      <DialogTitle sx={{ display: 'flex' }}>
+        New data parser & inserter
+        <IconButton
+          aria-label="close-inserter-dialog"
+          onClick={onClose}
+          sx={{ ml: 'auto' }}
+        >
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
       <AppStepper />
     </Dialog>
   );
 }
 
 export default function Inserter() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

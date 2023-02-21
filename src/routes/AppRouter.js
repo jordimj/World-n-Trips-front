@@ -1,14 +1,18 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Layout from '../components/UI/Layout/Layout';
-import Spinner from '../components/UI/Spinner/Spinner';
+import Layout from '../template/components/Layout/Layout';
+import Spinner from '../template/components/Spinner/Spinner';
 
-const Home = lazy(() => import('../components/Home/Home'));
-const CountriesList = lazy(() => import('../components/CountriesList/CountriesList'));
-const Country = lazy(() => import('../components/Country/Country'));
-const TravelStats = lazy(() => import('../components/TravelStats/TravelStats'));
-const Trips = lazy(() => import('../components/Trips/Trips'));
-const Journals = lazy(() => import('../components/Journals/Journals'));
+const Home = lazy(() => import('../features/countries/components/Home/Home'));
+const CountriesList = lazy(() =>
+  import('../features/countries/components/CountriesList/CountriesList')
+);
+const Country = lazy(() => import('../features/countries/components/Country/Country'));
+const TravelStats = lazy(() =>
+  import('../features/statistics/components/TravelStats/TravelStats')
+);
+const Trips = lazy(() => import('../features/journals/components/Trips/Trips'));
+const Journals = lazy(() => import('../features/journals/components/Journals/Journals'));
 
 export const AppRouter = () => (
   <Suspense fallback={<Spinner />}>
