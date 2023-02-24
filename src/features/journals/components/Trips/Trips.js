@@ -11,7 +11,8 @@ import {
   Typography,
 } from '@mui/material';
 import * as actions from '../../actions/actions';
-import { addDatesToTripCard, groupBy } from '../../../../utils/helpers';
+import { groupBy } from '../../../../utils';
+import { addDatesToTripCard } from '../../../../utils/date';
 import Chip from '../../../../template/components/Chip/Chip';
 
 export default function () {
@@ -65,7 +66,10 @@ export default function () {
                           {trip.name}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                          {addDatesToTripCard(trip.arrivalDate, trip.departureDate)}
+                          {addDatesToTripCard(
+                            trip.arrivalDate.date,
+                            trip.departureDate.date
+                          )}
                         </Typography>
                         {trip.telework && <Chip variant="telework" />}
                         {trip.worktrip && <Chip variant="worktrip" />}

@@ -4,7 +4,7 @@ import {
   getAdverbialNumber,
   numberFormatter,
   percentageFormatter,
-} from '../../../../../../utils/helpers';
+} from '../../../../../../utils/number';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import { DATA_APPENDICES } from '../../../../../../constants';
 import styles from './Nights.module.css';

@@ -2,7 +2,7 @@ import { Box, Divider, Stack } from '@mui/material';
 import HitchhikesChart from './HitchikesChart';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import { DATA_APPENDICES } from '../../../../../../constants';
-import { numberFormatter } from '../../../../../../utils/helpers';
+import { numberFormatter } from '../../../../../../utils/number';
 
 export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
   const {

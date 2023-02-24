@@ -1,6 +1,6 @@
 import DetailRow from './DetailRow/DetailRow';
 import { DATA_APPENDICES } from '../../../../../constants';
-import { numberFormatter } from '../../../../../utils/helpers';
+import { numberFormatter } from '../../../../../utils/number';
 import styles from './CountryDetails.module.css';
 
 const CountryDetails = ({ info }) => {

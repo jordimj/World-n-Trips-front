@@ -1,7 +1,8 @@
 import { Box, Divider } from '@mui/material';
 import ExpensesTable from './ExpensesTable';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
-import { euroFormatter, deductNotDailyExpenses } from '../../../../../../utils/helpers';
+import { deductNotDailyExpenses } from '../../../../../../utils';
+import { euroFormatter } from '../../../../../../utils/number';
 import ExpensesChart from './ExpensesChart';
 import styles from './Expenses.module.css';
 

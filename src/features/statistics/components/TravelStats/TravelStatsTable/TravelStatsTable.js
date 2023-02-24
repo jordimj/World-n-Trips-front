@@ -6,12 +6,12 @@ import {
   TABLE_DIRECTION_ASC,
   TABLE_DIRECTION_DESC,
 } from '../../../../../constants';
+import { tableOrderBy } from '../../../../../utils';
 import {
   euroFormatter,
   numberFormatter,
   percentageFormatter,
-  tableOrderBy,
-} from '../../../../../utils/helpers';
+} from '../../../../../utils/number';
 import { SortingArrow } from '../../../../../template/components/SortingArrow/SortingArrow';
 import styles from './TravelStatsTable.module.css';
 

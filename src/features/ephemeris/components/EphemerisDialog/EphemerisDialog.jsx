@@ -7,7 +7,7 @@ import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
 import { IconButton, Stack } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { formatFullDate, getYearsAgo } from '../../../../utils/helpers';
+import { formatFullDate, getYearsAgo } from '../../../../utils/date';
 
 function EphemerisDialog(props) {
   const { onClose, open, ephemeris } = props;

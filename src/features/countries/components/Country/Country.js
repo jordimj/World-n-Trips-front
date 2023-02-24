@@ -9,7 +9,7 @@ import HitchhikesStatistics from './Statistics/Hitchhikes/Hitchhikes';
 import NightsStatistics from './Statistics/Nights/Nights';
 import CountryDetails from './CountryDetails/CountryDetails';
 import VisitedSpots from './VisitedSpots/VisitedSpots';
-import { buildTripName } from '../../../../utils/helpers';
+import { buildTripName } from '../../../../utils';
 import Chip from '../../../../template/components/Chip/Chip';
 import styles from './Country.module.css';
 

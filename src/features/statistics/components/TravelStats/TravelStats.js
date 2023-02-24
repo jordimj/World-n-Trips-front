@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Stack, Typography } from '@mui/material';
-import { percentageFormatter } from '../../../../utils/helpers';
+import { percentageFormatter } from '../../../../utils/number';
 import * as actions from '../../actions/actions';
 import TravelStatsTable from './TravelStatsTable/TravelStatsTable';
 import BarChart from './Timeline/BarChart';
