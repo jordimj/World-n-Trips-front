@@ -24,8 +24,8 @@ export default function Journal(props: JournalProps) {
   const pasteTitle = async () => setTitle((await pasteFromClipboard()) ?? '');
 
   return (
-    <Stack gap={2} justifyContent="center" alignItems="center">
-      <FormControl sx={{ width: '80%', maxWidth: '1600px', mt: 6 }}>
+    <Stack gap={2} justifyContent="center" alignItems="center" sx={{ width: '90%' }}>
+      <FormControl sx={{ maxWidth: '1600px', mt: 6 }}>
         <Stack direction="row" gap={2}>
           <TextField
             label="Title of the day"

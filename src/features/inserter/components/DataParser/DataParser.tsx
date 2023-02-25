@@ -58,7 +58,7 @@ export default function DataParser(props: DataParserProps) {
   return (
     <>
       <h2>Insert the CSV data</h2>
-      <Stack alignItems="center">
+      <Stack alignItems="center" sx={{ minWidth: '1200px' }}>
         <TextField
           id="outlined-multiline-static"
           label="Paste your CSV string in here"
@@ -66,9 +66,9 @@ export default function DataParser(props: DataParserProps) {
           rows={15}
           onChange={handleStringUpload}
           sx={{
-            width: '50%',
+            width: '100%',
             backgroundColor: 'white',
-            borderRadius: '10px',
+            borderRadius: 'var(--border-radius)',
           }}
           disabled={source === 'file'}
         />

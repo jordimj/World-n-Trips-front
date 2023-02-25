@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
+import React, { Fragment, useEffect, useState } from 'react';
+import Stack from '@mui/material/Stack';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
@@ -14,7 +14,6 @@ import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
 import styles from './AppStepper.module.css';
-import { Stack } from '@mui/material';
 
 export const STEPS = [
   'Kind of data',
@@ -156,7 +155,7 @@ export default function AppStepper() {
   };
 
   return (
-    <Stack className={styles.root}>
+    <Fragment>
       <Stepper activeStep={activeStep} alternativeLabel className={styles.stepper}>
         {STEPS.map((label: string) => (
           <Step key={label}>
@@ -164,14 +163,16 @@ export default function AppStepper() {
           </Step>
         ))}
       </Stepper>
-      {getStepContent(activeStep)}
-      <StepperButtons
-        activeStep={activeStep}
-        setActiveStep={setActiveStep}
-        handleDataInsertion={handleDataInsertion}
-        isForwardDisabled={isForwardDisabled}
-      />
+      <Stack className={styles.stepContent}>
+        {getStepContent(activeStep)}
+        <StepperButtons
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
+          handleDataInsertion={handleDataInsertion}
+          isForwardDisabled={isForwardDisabled}
+        />
+      </Stack>
       {snackbar}
-    </Stack>
+    </Fragment>
   );
 }

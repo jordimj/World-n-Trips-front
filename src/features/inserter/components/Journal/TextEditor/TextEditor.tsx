@@ -100,7 +100,7 @@ export default function TextEditor(props: TextEditorProps) {
         </ButtonGroup>
       </Stack>
       <Box className={styles.textEditor}>
-        {/* <Editor editorState={editorState} onChange={setEditorState} spellCheck /> */}
+        <Editor editorState={editorState} onChange={setEditorState} spellCheck />
       </Box>
       {snackbar}
     </Box>

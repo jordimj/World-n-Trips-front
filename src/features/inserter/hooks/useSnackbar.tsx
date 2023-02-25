@@ -29,8 +29,8 @@ function useSnackbar() {
 
   const snackbar = (
     <Stack spacing={2} sx={{ width: '100%' }}>
-      {messages.map((message) => (
-        <Snackbar open={open} autoHideDuration={5000} onClose={closeSnackbar}>
+      {messages.map((message, idx) => (
+        <Snackbar key={idx} open={open} autoHideDuration={5000} onClose={closeSnackbar}>
           <Alert severity={message.severity ?? 'success'} sx={{ width: '100%' }}>
             <AlertTitle sx={{ fontWeight: 600 }}>{message.label}</AlertTitle>
             {message.sublabel ?? null}

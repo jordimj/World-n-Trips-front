@@ -8,6 +8,7 @@
   --navbar-color: #252329;
   --border-color: lightgray;
   --border: 0.5px solid var(--border-color);
+  --border-radius: 8px;
 
   --background-color: #f9f9f9;
   --background-color-dark: #eef3f6;

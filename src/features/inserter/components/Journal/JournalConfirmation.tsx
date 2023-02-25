@@ -20,8 +20,8 @@ export default function JournalConfirmation(props: JournalConfirmationProps) {
       <Box
         sx={{
           my: 2,
-          maxWidth: '75vw',
-          maxHeight: '40vh',
+          maxWidth: '90%',
+          maxHeight: '30vh',
           overflow: 'auto',
           '::-webkit-scrollbar-thumb': {
             background: 'white',

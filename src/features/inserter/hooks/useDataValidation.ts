@@ -1,5 +1,5 @@
 import { z, ZodIssue } from 'zod';
-import { Day, Expense, Night, Spot } from '../types';
+import { Day, Expense, Night, Spot, TableKind } from '../types';
 
 type MapFunc<T = any> = (val: T, index?: number, arr?: T[]) => T;
 const isString = <T = any>(str: string | T): str is string => typeof str === 'string';
@@ -59,7 +59,7 @@ const ExpenseSchema = z.object({
 });
 
 const ALLOWED_CATEGORIES = [
-  'ALLOTJAMENT',
+  'ALLOTJAMENT(',
   'ACTIVITATS',
   'BEGUDA',
   'MENJAR',
@@ -76,7 +76,7 @@ const ALLOWED_CATEGORIES = [
   'TREBALL',
 ];
 
-const getSchema = (variant: 'day' | 'night' | 'spot' | 'expense') => {
+const getSchema = (variant: TableKind) => {
   return {
     day: DaySchema,
     night: NightSchema,
@@ -85,27 +85,32 @@ const getSchema = (variant: 'day' | 'night' | 'spot' | 'expense') => {
   }[variant];
 };
 
-interface DayRow {
-  dataKind: 'day';
-  row: Day;
-}
+// interface DayRow {
+//   dataKind: 'day';
+//   row: Day;
+// }
 
-interface NightRow {
-  dataKind: 'night';
-  row: Night;
-}
+// interface NightRow {
+//   dataKind: 'night';
+//   row: Night;
+// }
 
-interface SpotRow {
-  dataKind: 'spot';
-  row: Spot;
-}
+// interface SpotRow {
+//   dataKind: 'spot';
+//   row: Spot;
+// }
 
-interface ExpenseRow {
-  dataKind: 'expense';
-  row: Expense;
-}
+// interface ExpenseRow {
+//   dataKind: 'expense';
+//   row: Expense;
+// }
 
-type Props = DayRow | NightRow | SpotRow | ExpenseRow;
+// type Props = DayRow | NightRow | SpotRow | ExpenseRow;
+
+interface Props {
+  dataKind: TableKind;
+  row: Day | Night | Spot | Expense;
+}
 
 function useDataValidation(props: Props) {
   const { dataKind, row } = props;

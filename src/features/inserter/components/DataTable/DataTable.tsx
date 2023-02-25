@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -39,30 +39,28 @@ export default function DataTable(props: DataTableProps) {
   const { dataKind, rows, updateParsedData } = props;
 
   return (
-    <Fragment>
-      <TableContainer className={styles.paper} component={Paper}>
-        <Table size="small" aria-label="table" stickyHeader>
-          <TableHead className={styles.head}>
-            <TableRow>
-              {TABLE_HEADERS[dataKind].map((header: string, idx: number) => (
-                <TableCell key={idx} align="center">
-                  <strong>{header}</strong>
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody sx={{ scrollSnapType: 'y mandatory' }}>
-            {(rows as TableData).map((row) => (
-              <DataTableRow
-                key={row.id}
-                row={row}
-                dataKind={dataKind}
-                updateParsedData={updateParsedData}
-              />
+    <TableContainer className={styles.paper} component={Paper}>
+      <Table size="small" aria-label="table" stickyHeader>
+        <TableHead className={styles.head}>
+          <TableRow>
+            {TABLE_HEADERS[dataKind].map((header: string, idx: number) => (
+              <TableCell key={idx} align="center">
+                <strong>{header}</strong>
+              </TableCell>
             ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Fragment>
+          </TableRow>
+        </TableHead>
+        <TableBody sx={{ scrollSnapType: 'y mandatory' }}>
+          {(rows as TableData).map((row) => (
+            <DataTableRow
+              key={row.id}
+              row={row}
+              dataKind={dataKind}
+              updateParsedData={updateParsedData}
+            />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }

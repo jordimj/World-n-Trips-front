@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import { IconButton, Stack } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { formatFullDate, getYearsAgo } from '../../../../utils/date';
+import { buildTripName } from '../../../../utils';
 
 function EphemerisDialog(props) {
   const { onClose, open, ephemeris } = props;
@@ -32,24 +33,37 @@ function EphemerisDialog(props) {
       <List sx={{ pt: 0 }}>
         {ephemeris.map((eph, idx) => (
           <ListItem key={idx}>
-            <img
-              src={`/img/flags/${eph.country.alpha3code}.png`}
-              alt={`${eph.country.name}'s flag`}
-              width="75"
-              onClick={() => onCountryFlagClick(eph.country.alpha3code)}
-              style={{
-                cursor: 'pointer',
-              }}
-            />
-            <Stack sx={{ ml: 2 }}>
-              <Typography sx={{ mb: 1 }} onClick={toggleShowTimeAgo}>
-                {showTimeAgo ? getYearsAgo(eph.date) : formatFullDate(eph.date)}
-              </Typography>
-              <Typography>
-                I slept at {eph.city}, {eph.country.name}
-              </Typography>
-              <Typography>In the {eph.trip}</Typography>
-            </Stack>
+            {eph.country ? (
+              <Fragment>
+                <img
+                  src={`/img/flags/${eph.country.alpha3code}.png`}
+                  alt={`${eph.country.name}'s flag`}
+                  width="75"
+                  onClick={() => onCountryFlagClick(eph.country.alpha3code)}
+                  style={{
+                    cursor: 'pointer',
+                  }}
+                />
+                <Stack sx={{ ml: 2 }}>
+                  <Typography sx={{ mb: 1 }} onClick={toggleShowTimeAgo}>
+                    {showTimeAgo ? getYearsAgo(eph.date) : formatFullDate(eph.date)}
+                  </Typography>
+                  <Typography>
+                    I slept at {eph.city}, {eph.country.name}
+                  </Typography>
+                  <Typography>In the {buildTripName(eph.trip)}</Typography>
+                </Stack>
+              </Fragment>
+            ) : (
+              <Stack sx={{ ml: 2 }}>
+                <Typography sx={{ mb: 1 }} onClick={toggleShowTimeAgo}>
+                  {showTimeAgo ? getYearsAgo(eph.date) : formatFullDate(eph.date)}
+                </Typography>
+                <Typography>
+                  I was coming back from my {buildTripName(eph.trip)}
+                </Typography>
+              </Stack>
+            )}
           </ListItem>
         ))}
       </List>

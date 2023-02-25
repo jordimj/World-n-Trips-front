@@ -8,8 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
-
-import ConditionalWrapper from '../ConditionalWrapper';
+import ConditionalWrapper from '../../../../template/components/ConditionalWrapper/ConditionalWrapper';
 import useHover from '../../hooks/useHover';
 
 interface Props {
