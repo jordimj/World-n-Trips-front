@@ -8,11 +8,11 @@ import useRequest from '../../hooks/useRequest';
 
 interface DatePickerProps {
   date: Date | null;
-  setDate: Dispatch<SetStateAction<Date | null>>;
+  handleChange: (date: Date | null) => void;
 }
 
 export default function DatePicker(props: DatePickerProps) {
-  const { date, setDate } = props;
+  const { date, handleChange } = props;
 
   const { doRequest } = useRequest();
   const [availableDates, setAvailableDates] = useState<Array<string>>([]);
@@ -25,10 +25,8 @@ export default function DatePicker(props: DatePickerProps) {
     // // // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleChange = (newDate: Date | null) => setDate(newDate);
-
   const handleDisableDate = (date: Date) =>
-    !availableDates.includes(date.toLocaleDateString('en-CA'));
+    !availableDates.includes(new Date(date).toLocaleDateString('en-CA'));
 
   return (
     <Box sx={{ backgroundColor: 'white', borderRadius: '5px' }}>

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { useContext } from 'react';
 import Button from '@mui/material/Button';
 import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
 import FormatBoldIcon from '@mui/icons-material/FormatBold';
@@ -12,16 +12,19 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import useClipboard from '../../../hooks/useClipboard';
 import styles from './TextEditor.module.css';
+import { InserterContext } from '../../../context/InserterContext';
+import { InserterDispatchContext } from '../../../context/InserterDispatchContext';
 
-interface TextEditorProps {
-  editorState: EditorState;
-  setEditorState: Dispatch<SetStateAction<EditorState>>;
-}
-
-export default function TextEditor(props: TextEditorProps) {
-  const { editorState, setEditorState } = props;
+export default function TextEditor() {
+  const {
+    journal: { editorState },
+  } = useContext(InserterContext);
+  const dispatch = useContext(InserterDispatchContext);
 
   const { copyToClipboard, pasteFromClipboard, snackbar } = useClipboard();
+
+  const setEditorState = (state: EditorState) =>
+    dispatch({ type: 'SET_JOURNAL_EDITOR_STATE', payload: state });
 
   // const _onBoldClick = () => {
   //   setEditorState(RichUtils.toggleInlineStyle(editorState, "BOLD"));
@@ -51,7 +54,7 @@ export default function TextEditor(props: TextEditorProps) {
     setEditorState(RichUtils.toggleBlockType(editorState, 'unordered-list-item'));
   };
 
-  const clearEditor = () => setEditorState(() => EditorState.createEmpty());
+  const clearEditor = () => setEditorState(EditorState.createEmpty());
 
   const copyText = () => copyToClipboard(editorState.getCurrentContent().getPlainText());
 

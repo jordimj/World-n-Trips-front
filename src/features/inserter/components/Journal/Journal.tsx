@@ -8,13 +8,20 @@ import TextEditor from './TextEditor/TextEditor';
 import { Button, ButtonGroup } from '@mui/material';
 import useClipboard from '../../hooks/useClipboard';
 import { InserterContext } from '../../context/InserterContext';
+import { InserterDispatchContext } from '../../context/InserterDispatchContext';
 
 export default function Journal() {
-  const { title, setTitle, editorState, setEditorState } = useContext(InserterContext);
+  const {
+    journal: { title },
+  } = useContext(InserterContext);
+  const dispatch = useContext(InserterDispatchContext);
 
   const { copyToClipboard, pasteFromClipboard, snackbar } = useClipboard();
 
-  const pasteTitle = async () => setTitle((await pasteFromClipboard()) ?? '');
+  const onChangeTitle = (title: string) =>
+    dispatch({ type: 'SET_JOURNAL_TITLE', payload: title });
+
+  // const pasteTitle = async () => setTitle((await pasteFromClipboard()) ?? '');
 
   return (
     <Stack gap={2} justifyContent="center" alignItems="center" sx={{ width: '90%' }}>
@@ -24,20 +31,20 @@ export default function Journal() {
             label="Title of the day"
             variant="outlined"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => onChangeTitle(e.target.value)}
             sx={{ backgroundColor: 'white', borderRadius: '5px', width: '100%' }}
           />
           <ButtonGroup disableElevation variant="contained">
             <Button onClick={() => copyToClipboard(title)}>
               <ContentCopyIcon />
             </Button>
-            <Button onClick={pasteTitle}>
+            {/* <Button onClick={pasteTitle}>
               <ContentPasteIcon />
-            </Button>
+            </Button> */}
           </ButtonGroup>
         </Stack>
       </FormControl>
-      <TextEditor editorState={editorState} setEditorState={setEditorState} />
+      <TextEditor />
       {snackbar}
     </Stack>
   );

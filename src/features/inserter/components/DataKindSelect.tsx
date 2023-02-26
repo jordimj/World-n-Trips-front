@@ -7,14 +7,11 @@ import { KindOfData } from '../types';
 
 export default function DataKindSelect({
   dataKind,
-  setDataKind,
+  onChange,
 }: {
   dataKind: KindOfData | undefined;
-  setDataKind: Dispatch<SetStateAction<KindOfData | undefined>>;
+  onChange: (e: SelectChangeEvent) => void;
 }) {
-  const handleChange = (event: SelectChangeEvent) =>
-    setDataKind(event.target.value as KindOfData);
-
   return (
     <FormControl
       variant="outlined"
@@ -30,7 +27,7 @@ export default function DataKindSelect({
         labelId="data-kind-select-label"
         id="data-kind-select"
         value={dataKind ?? ''}
-        onChange={handleChange}
+        onChange={onChange}
         label="Data to be parsed"
       >
         <MenuItem value="day">Day</MenuItem>

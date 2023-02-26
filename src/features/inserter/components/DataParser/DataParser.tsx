@@ -6,9 +6,11 @@ import TextField from '@mui/material/TextField';
 import { Day, Expense, Night, Spot, TableData } from '../../types';
 import useSnackbar from '../../hooks/useSnackbar';
 import { InserterContext } from '../../context/InserterContext';
+import { InserterDispatchContext } from '../../context/InserterDispatchContext';
 
 export default function DataParser() {
-  const { setFilename, setParsedData, filename } = useContext(InserterContext);
+  const { filename } = useContext(InserterContext);
+  const dispatch = useContext(InserterDispatchContext);
   const [source, setSource] = useState<'string' | 'file' | undefined>(undefined);
 
   const { openSnackbar, snackbar } = useSnackbar();
@@ -34,7 +36,7 @@ export default function DataParser() {
           (item: Day | Night | Expense | Spot, i: number) => (item.id = i + 1)
         );
 
-        setParsedData(data);
+        dispatch({ type: 'SET_PARSED_DATA', payload: data });
       },
     });
 
@@ -47,7 +49,7 @@ export default function DataParser() {
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) throw new Error('No file to be read');
 
-    setFilename(e.target.files[0]?.name);
+    dispatch({ type: 'SET_FILENAME', payload: e.target.files[0]?.name });
     parseCsvData(e.target.files[0]);
   };
 

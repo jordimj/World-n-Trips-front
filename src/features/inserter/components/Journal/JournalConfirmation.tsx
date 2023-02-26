@@ -3,9 +3,18 @@ import { Box, Divider, Typography } from '@mui/material';
 import parse from 'html-react-parser';
 import DatePicker from '../DatePicker/DatePicker';
 import { InserterContext } from '../../context/InserterContext';
+import { InserterDispatchContext } from '../../context/InserterDispatchContext';
 
 export default function JournalConfirmation() {
-  const { title, date, setDate, parsedData: content } = useContext(InserterContext);
+  const {
+    parsedData: content,
+    journal: { title, date },
+  } = useContext(InserterContext);
+
+  const dispatch = useContext(InserterDispatchContext);
+
+  const handleChange = (newDate: Date | null) =>
+    dispatch({ type: 'SET_JOURNAL_DATE', payload: newDate });
 
   return (
     <>
@@ -24,7 +33,7 @@ export default function JournalConfirmation() {
       >
         {parse(content as string)}
       </Box>
-      <DatePicker date={date} setDate={setDate} />
+      <DatePicker date={date} handleChange={handleChange} />
     </>
   );
 }
