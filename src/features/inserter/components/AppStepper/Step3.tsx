@@ -1,38 +1,14 @@
+import React, { useContext } from 'react';
 import { Stack } from '@mui/material';
-import React, { Dispatch, SetStateAction } from 'react';
-import { ImportData, KindOfData, TableKind } from '../../types';
+import { InserterContext } from '../../context/InserterContext';
+import { TableKind } from '../../types';
 import DataTable from '../DataTable/DataTable';
 import JournalConfirmation from '../Journal/JournalConfirmation';
 import Select from '../Select';
 
-interface Step3Props {
-  dataKind: Required<KindOfData>;
-  title: string;
-  date: Date | null;
-  setDate: Dispatch<SetStateAction<Date | null>>;
-  filename: string;
-  parsedData: ImportData;
-  updateParsedData: (
-    id: number,
-    key: 'category' | 'subcategory' | 'extraInfo',
-    value: any
-  ) => void;
-  optionId: number;
-  setOptionId: Dispatch<SetStateAction<number>>;
-}
-
-function Step3(props: Step3Props) {
-  const {
-    dataKind,
-    title,
-    parsedData,
-    date,
-    setDate,
-    filename,
-    updateParsedData,
-    optionId,
-    setOptionId,
-  } = props;
+function Step3() {
+  const { dataKind, parsedData, filename, updateParsedData, optionId, setOptionId } =
+    useContext(InserterContext);
 
   const isJournal = dataKind === 'journal';
 
@@ -40,12 +16,7 @@ function Step3(props: Step3Props) {
     <Stack alignItems="center">
       <h2>Verify the data before importing it</h2>
       {isJournal ? (
-        <JournalConfirmation
-          title={title}
-          content={parsedData as string}
-          date={date}
-          setDate={setDate}
-        />
+        <JournalConfirmation />
       ) : (
         <>
           {filename && <h5>Data read from: {filename}</h5>}

@@ -13,6 +13,7 @@ import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
+import { InserterContext } from '../../context/InserterContext';
 import styles from './AppStepper.module.css';
 
 export const STEPS = [
@@ -100,41 +101,13 @@ export default function AppStepper() {
   };
 
   function getStepContent(stepIndex: number) {
+    // prettier-ignore
     switch (stepIndex) {
-      case 0:
-        return <Step1 dataKind={dataKind} setDataKind={setDataKind} />;
-      case 1:
-        return (
-          <Step2
-            isJournal={isJournal}
-            title={title}
-            setTitle={setTitle}
-            editorState={editorState}
-            setEditorState={setEditorState}
-            filename={filename}
-            setFilename={setFilename}
-            setParsedData={setParsedData}
-          />
-        );
-      case 2:
-        if (dataKind === undefined || parsedData === undefined) return;
-        return (
-          <Step3
-            dataKind={dataKind}
-            title={title}
-            parsedData={parsedData}
-            date={date}
-            setDate={setDate}
-            filename={filename}
-            updateParsedData={updateParsedData}
-            optionId={optionId}
-            setOptionId={setOptionId}
-          />
-        );
-      case 3:
-        return <Step4 loading={loading} errorSnackbar={errorSnackbar} />;
-      default:
-        return null;
+      case 0: return <Step1 />;
+      case 1: return <Step2 />;
+      case 2: return <Step3 />;
+      case 3: return <Step4 loading={loading} errorSnackbar={errorSnackbar} />;
+      default: return null;
     }
   }
 
@@ -164,7 +137,27 @@ export default function AppStepper() {
         ))}
       </Stepper>
       <Stack className={styles.stepContent}>
-        {getStepContent(activeStep)}
+        <InserterContext.Provider
+          value={{
+            dataKind,
+            title,
+            filename,
+            date,
+            parsedData,
+            optionId,
+            editorState,
+            setDataKind,
+            setFilename,
+            setParsedData,
+            setDate,
+            setTitle,
+            setOptionId,
+            setEditorState,
+            updateParsedData,
+          }}
+        >
+          {getStepContent(activeStep)}
+        </InserterContext.Provider>
         <StepperButtons
           activeStep={activeStep}
           setActiveStep={setActiveStep}

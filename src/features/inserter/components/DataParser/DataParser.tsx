@@ -1,18 +1,14 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { parse } from 'papaparse';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import { Day, Expense, ImportData, Night, Spot, TableData } from '../../types';
+import { Day, Expense, Night, Spot, TableData } from '../../types';
 import useSnackbar from '../../hooks/useSnackbar';
+import { InserterContext } from '../../context/InserterContext';
 
-interface DataParserProps {
-  setFilename: Dispatch<SetStateAction<string>>;
-  setParsedData: Dispatch<SetStateAction<ImportData | undefined>>;
-}
-
-export default function DataParser(props: DataParserProps) {
-  const { setFilename, setParsedData } = props;
+export default function DataParser() {
+  const { setFilename, setParsedData, filename } = useContext(InserterContext);
   const [source, setSource] = useState<'string' | 'file' | undefined>(undefined);
 
   const { openSnackbar, snackbar } = useSnackbar();
@@ -89,6 +85,7 @@ export default function DataParser(props: DataParserProps) {
           </Button>
         </label>
       </Stack>
+      {filename && <h5>Selected file: {filename}</h5>}
       {snackbar}
     </>
   );

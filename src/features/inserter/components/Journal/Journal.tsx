@@ -1,23 +1,16 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { useContext } from 'react';
 import FormControl from '@mui/material/FormControl';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
-import { EditorState } from 'draft-js';
 import TextEditor from './TextEditor/TextEditor';
 import { Button, ButtonGroup } from '@mui/material';
 import useClipboard from '../../hooks/useClipboard';
+import { InserterContext } from '../../context/InserterContext';
 
-interface JournalProps {
-  title: string;
-  setTitle: Dispatch<SetStateAction<string>>;
-  editorState: EditorState;
-  setEditorState: Dispatch<SetStateAction<EditorState>>;
-}
-
-export default function Journal(props: JournalProps) {
-  const { title, setTitle, editorState, setEditorState } = props;
+export default function Journal() {
+  const { title, setTitle, editorState, setEditorState } = useContext(InserterContext);
 
   const { copyToClipboard, pasteFromClipboard, snackbar } = useClipboard();
 
