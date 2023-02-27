@@ -16,7 +16,7 @@ function Step1() {
   return (
     <>
       <h2>Select the kind of data to be imported</h2>
-      <DataKindSelect dataKind={dataKind} setDataKind={onDataKindClick} />
+      <DataKindSelect dataKind={dataKind} onChange={onDataKindClick} />
     </>
   );
 }

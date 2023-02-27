@@ -5,10 +5,16 @@ import { TableKind } from '../../types';
 import DataTable from '../DataTable/DataTable';
 import JournalConfirmation from '../Journal/JournalConfirmation';
 import Select from '../Select';
+import { InserterDispatchContext } from '../../context/InserterDispatchContext';
+import { SelectChangeEvent } from '@mui/material';
 
 function Step3() {
-  const { dataKind, parsedData, filename, updateParsedData, optionId, setOptionId } =
-    useContext(InserterContext);
+  const { dataKind, parsedData, filename, optionId } = useContext(InserterContext);
+
+  const dispatch = useContext(InserterDispatchContext);
+
+  const onChangeOption = (e: SelectChangeEvent) =>
+    dispatch({ type: 'SET_OPTION', payload: Number(e.target.value) });
 
   const isJournal = dataKind === 'journal';
 
@@ -20,12 +26,12 @@ function Step3() {
       ) : (
         <>
           {filename && <h5>Data read from: {filename}</h5>}
-          <DataTable
+          <DataTable />
+          <Select
             dataKind={dataKind as TableKind}
-            rows={parsedData!}
-            updateParsedData={updateParsedData}
+            id={optionId}
+            onChangeOption={onChangeOption}
           />
-          <Select dataKind={dataKind as TableKind} id={optionId} setId={setOptionId} />
         </>
       )}
     </Stack>

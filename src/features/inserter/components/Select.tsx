@@ -20,11 +20,11 @@ enum Urls {
 export default function GeneralSelect({
   dataKind,
   id,
-  setId,
+  onChangeOption,
 }: {
   dataKind: TableKind;
   id: number;
-  setId: Dispatch<SetStateAction<number>>;
+  onChangeOption: (e: SelectChangeEvent) => void;
 }) {
   const [options, setOptions] = useState<SelectOption[]>([]);
 
@@ -37,8 +37,6 @@ export default function GeneralSelect({
     });
     // // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const handleChange = (e: SelectChangeEvent) => setId(parseInt(e.target.value));
 
   if (loading) return <CircularProgress />;
 
@@ -59,7 +57,7 @@ export default function GeneralSelect({
         labelId="data-kind-select-label"
         id="data-kind-select"
         value={id.toString()}
-        onChange={handleChange}
+        onChange={onChangeOption}
         label="Data to be parsed"
       >
         {options.map((option: SelectOption) => (

@@ -1,11 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import { Expense, ImportData, KindOfData } from '../../types';
 import useRequest from '../../hooks/useRequest';
 import useSnackbar from '../../hooks/useSnackbar';
 import StepperButtons from './StepperButtons';
@@ -13,7 +12,8 @@ import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
-import { InserterProvider } from '../../context/InserterProvider';
+import { InserterContext } from '../../context/InserterContext';
+import { InserterDispatchContext } from '../../context/InserterDispatchContext';
 import styles from './AppStepper.module.css';
 
 export const STEPS = [
@@ -24,55 +24,22 @@ export const STEPS = [
 ];
 
 export default function AppStepper() {
-  const [dataKind, setDataKind] = useState<KindOfData | undefined>(undefined);
-  const [filename, setFilename] = useState<string>('');
-  const [optionId, setOptionId] = useState<number>(-1);
-  const [parsedData, setParsedData] = useState<ImportData>();
-
-  const [date, setDate] = useState<Date | null>(null);
-  const [title, setTitle] = useState<string>('');
-  const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
-
   const [activeStep, setActiveStep] = useState<number>(0);
 
-  useEffect(() => {
-    const rawContentState = convertToRaw(editorState.getCurrentContent());
-    setParsedData(draftToHtml(rawContentState));
-  }, [editorState]);
+  // useEffect(() => {
+  //   const rawContentState = convertToRaw(editorState.getCurrentContent());
+  //   setParsedData(draftToHtml(rawContentState));
+  // }, [editorState]);
 
   const { snackbar, openSnackbar } = useSnackbar();
 
-  const handleFinished = () => {
-    openSnackbar([{ label: 'Database insertion done!' }]);
-    setActiveStep(0);
-    setDataKind(undefined);
-    setFilename('');
-    setOptionId(-1);
-    setParsedData([]);
-    setTitle('');
-    setEditorState(() => EditorState.createEmpty());
-    setDate(null);
-  };
-
-  const updateParsedData = (
-    id: number,
-    key: 'category' | 'subcategory' | 'extraInfo',
-    value: any
-  ) => {
-    if (!Array.isArray(parsedData)) return;
-    setParsedData(
-      (parsedData as Expense[])?.map((data) => {
-        if (data.id === id) {
-          return {
-            ...data,
-            [key]: value,
-          } as Expense;
-        }
-
-        return data as Expense;
-      }) as Expense[]
-    );
-  };
+  const {
+    dataKind,
+    parsedData,
+    optionId,
+    journal: { date, title, editorState },
+  } = useContext(InserterContext);
+  const dispatch = useContext(InserterDispatchContext);
 
   const { doRequest, loading, errorSnackbar } = useRequest();
   const isJournal = dataKind === 'journal';
@@ -97,7 +64,10 @@ export default function AppStepper() {
       body,
     });
 
-    if (response?.status === 201) handleFinished();
+    if (response?.status === 201) {
+      dispatch({ type: 'RESET_STATE' });
+      openSnackbar([{ label: 'Database insertion done!' }]);
+    }
   };
 
   function getStepContent(stepIndex: number) {
@@ -137,7 +107,7 @@ export default function AppStepper() {
         ))}
       </Stepper>
       <Stack className={styles.stepContent}>
-        <InserterProvider>{getStepContent(activeStep)}</InserterProvider>
+        {getStepContent(activeStep)}
         <StepperButtons
           activeStep={activeStep}
           setActiveStep={setActiveStep}

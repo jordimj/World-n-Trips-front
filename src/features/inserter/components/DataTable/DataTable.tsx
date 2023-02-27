@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useContext } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,19 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { ImportData, TableData, TableKind } from '../../types';
+import { TableData } from '../../types';
 import DataTableRow from './DataTableRow';
+import { InserterContext } from '../../context/InserterContext';
 import styles from './DataTable.module.css';
-
-interface DataTableProps {
-  dataKind: TableKind;
-  rows: ImportData;
-  updateParsedData: (
-    id: number,
-    key: 'category' | 'subcategory' | 'extraInfo',
-    value: any
-  ) => void;
-}
 
 const TABLE_HEADERS = {
   day: ['Date', 'Kilometers'],
@@ -35,8 +26,10 @@ const TABLE_HEADERS = {
   ],
 };
 
-export default function DataTable(props: DataTableProps) {
-  const { dataKind, rows, updateParsedData } = props;
+export default function DataTable() {
+  const { dataKind, parsedData: rows } = useContext(InserterContext);
+
+  if (dataKind === undefined || dataKind === 'journal') return <Fragment />;
 
   return (
     <TableContainer className={styles.paper} component={Paper}>
@@ -52,12 +45,7 @@ export default function DataTable(props: DataTableProps) {
         </TableHead>
         <TableBody sx={{ scrollSnapType: 'y mandatory' }}>
           {(rows as TableData).map((row) => (
-            <DataTableRow
-              key={row.id}
-              row={row}
-              dataKind={dataKind}
-              updateParsedData={updateParsedData}
-            />
+            <DataTableRow key={row.id} row={row} dataKind={dataKind} />
           ))}
         </TableBody>
       </Table>

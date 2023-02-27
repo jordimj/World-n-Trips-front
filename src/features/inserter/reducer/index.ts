@@ -28,9 +28,14 @@ type SetParsedDataAction = {
   payload: TableData;
 };
 
+type SetOptionAction = {
+  type: 'SET_OPTION';
+  payload: number;
+};
+
 type SetJournalDateAction = {
   type: 'SET_JOURNAL_DATE';
-  payload: Date;
+  payload: Date | null;
 };
 
 type SetJournalTitleAction = {
@@ -43,13 +48,19 @@ type SetJournalEditorStateAction = {
   payload: EditorState;
 };
 
+type ResetStateAction = {
+  type: 'RESET_STATE';
+};
+
 export type Action =
   | SetDataKindAction
   | SetFilenameAction
   | SetParsedDataAction
+  | SetOptionAction
   | SetJournalDateAction
   | SetJournalTitleAction
-  | SetJournalEditorStateAction;
+  | SetJournalEditorStateAction
+  | ResetStateAction;
 
 export const initialState: State = {
   dataKind: undefined,
@@ -83,6 +94,12 @@ function reducer(state: State, action: Action) {
         parsedData: action.payload,
       };
     }
+    case 'SET_OPTION': {
+      return {
+        ...state,
+        optionId: action.payload,
+      };
+    }
     case 'SET_JOURNAL_DATE': {
       return {
         ...state,
@@ -109,6 +126,9 @@ function reducer(state: State, action: Action) {
           editorState: action.payload,
         },
       };
+    }
+    case 'RESET_STATE': {
+      return initialState;
     }
     // default: {
     //   throw Error('Unknown action: ' + action.type);

@@ -3,6 +3,7 @@ import { Dialog, DialogTitle, IconButton } from '@mui/material';
 import PublishIcon from '@mui/icons-material/Publish';
 import CloseIcon from '@mui/icons-material/Close';
 import AppStepper from '../components/AppStepper/AppStepper';
+import { InserterProvider } from '../context/InserterProvider';
 
 export interface InserterDialogProps {
   open: boolean;
@@ -25,7 +26,9 @@ function InserterDialog(props: InserterDialogProps) {
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <AppStepper />
+      <InserterProvider>
+        <AppStepper />
+      </InserterProvider>
     </Dialog>
   );
 }
