@@ -1,5 +1,5 @@
 import { EditorState } from 'draft-js';
-import { createContext, Dispatch, SetStateAction } from 'react';
+import { createContext } from 'react';
 import { ImportData, KindOfData } from '../types';
 
 interface InserterContext {
@@ -12,11 +12,6 @@ interface InserterContext {
     title: string;
     editorState: EditorState;
   };
-  //   updateParsedData: (
-  //     id: number,
-  //     key: 'category' | 'subcategory' | 'extraInfo',
-  //     value: any
-  //   ) => void;
 }
 
 export const InserterContext = createContext<InserterContext>({

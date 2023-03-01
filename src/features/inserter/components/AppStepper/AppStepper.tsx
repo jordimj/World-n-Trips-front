@@ -82,17 +82,17 @@ export default function AppStepper() {
   }
 
   const isForwardDisabled = (activeStep: number): boolean => {
-    const shouldDisableStep1 = isJournal
+    const shouldDisableStep2 = isJournal
       ? title === '' || editorState.getCurrentContent().getPlainText() === ''
       : !parsedData;
 
-    const shouldDisableStep2 = isJournal ? date === null : optionId === -1;
+    const shouldDisableStep3 = isJournal ? date === null : optionId === -1;
 
     // prettier-ignore
     switch (activeStep) {
       case 0: return dataKind === undefined;
-      case 1: return shouldDisableStep1;
-      case 2: return shouldDisableStep2;
+      case 1: return shouldDisableStep2;
+      case 2: return shouldDisableStep3;
       default: return false;
     }
   };

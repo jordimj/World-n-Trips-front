@@ -1,9 +1,14 @@
-import { createContext, ReactNode, useContext, useReducer } from 'react';
+import { ReactNode, useContext, useReducer } from 'react';
 import reducer, { initialState } from '../reducer';
 import { InserterContext } from './InserterContext';
 import { InserterDispatchContext } from './InserterDispatchContext';
 
-export function InserterProvider({ children }: { children: ReactNode }) {
+interface InserterProviderProps {
+  children: ReactNode;
+}
+
+export function InserterProvider(props: InserterProviderProps) {
+  const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
