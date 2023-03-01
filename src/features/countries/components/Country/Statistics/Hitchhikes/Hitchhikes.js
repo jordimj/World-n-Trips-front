@@ -1,8 +1,14 @@
+import { Fragment } from 'react';
 import { Box, Divider, Stack } from '@mui/material';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import HitchhikesChart from './HitchikesChart';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import { DATA_APPENDICES } from '../../../../../../constants';
 import { numberFormatter } from '../../../../../../utils/number';
+import KPI from '../KPI/KPI';
 
 export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
   const {
@@ -16,65 +22,72 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
   } = hitchhikes;
 
   return (
-    <Box component="section" sx={{ textAlign: '-webkit-center' }}>
-      <Divider>Hitchhikes</Divider>
-      <Stack direction="row" justifyContent="space-evenly" alignItems="center">
-        <Stack sx={{ width: '40%' }}>
-          <DetailRow
-            label="Total of kilometers"
-            value={numberFormatter(totalKilometers, DATA_APPENDICES.KM)}
+    <Fragment>
+      <Stack component="section" gap={5} alignItems="center">
+        <Divider>Hitchhikes</Divider>
+        <Stack direction="row" gap={3}>
+          <KPI
+            icon={<ThumbUpIcon fontSize="inherit" />}
+            label="Kilometers hitchhiked"
+            KPI={numberFormatter(totalKilometers)}
           />
-          {totalKilometersOpenAir && (
-            <DetailRow
-              label="Kilometers in the back of the pickup"
-              value={numberFormatter(totalKilometersOpenAir, DATA_APPENDICES.KM)}
-            />
-          )}
-          <DetailRow
+          <KPI
+            icon={<CalendarMonthIcon fontSize="inherit" />}
             label="Days on the road"
-            value={numberFormatter(daysOnTheRoad, DATA_APPENDICES.DAYS)}
+            KPI={numberFormatter(daysOnTheRoad)}
           />
           {minutesWaiting && (
-            <DetailRow
-              label="Waiting on the road"
-              value={numberFormatter(minutesWaiting.total, DATA_APPENDICES.MINS)}
+            <KPI
+              icon={<AccessTimeIcon fontSize="inherit" />}
+              label="Minutes waiting"
+              KPI={minutesWaiting.total}
             />
           )}
-          <DetailRow
-            label="Number of rides we got"
-            value={numberFormatter(Math.trunc(totalCars), DATA_APPENDICES.RIDES)}
+          <KPI
+            icon={<DirectionsCarIcon fontSize="inherit" />}
+            label="Cars hitchhiked"
+            KPI={numberFormatter(Math.trunc(totalCars))}
           />
         </Stack>
-        <Stack sx={{ width: '40%' }}>
-          <DetailRow
-            label="Average kilometers per day in the country"
-            value={numberFormatter(
-              totalKilometers / totalNights,
-              DATA_APPENDICES.KM_PER_DAY
-            )}
-          />
-          <DetailRow
-            label="Average kilometers per day on the road"
-            value={numberFormatter(totalKilometers / daysOnTheRoad, DATA_APPENDICES.KM)}
-          />
-          <DetailRow
-            label="Average rides per day on the road"
-            value={numberFormatter(totalCars / daysOnTheRoad, DATA_APPENDICES.RIDES)}
-          />
-          <DetailRow
-            label="Longest distance per ride"
-            value={numberFormatter(distances.longest, DATA_APPENDICES.KM)}
-          />
-          <DetailRow
-            label="Average distance per ride"
-            value={numberFormatter(distances.average, DATA_APPENDICES.KM)}
-          />
-          <DetailRow
-            label="Shortest distance per ride"
-            value={numberFormatter(distances.shortest, DATA_APPENDICES.KM)}
-          />
+        <Stack
+          direction="row"
+          justifyContent="space-evenly"
+          alignItems="center"
+          sx={{ width: '100%' }}
+        >
+          <Stack sx={{ width: '32%' }}>
+            <DetailRow
+              label="Average kilometers per day in the country"
+              value={numberFormatter(
+                totalKilometers / totalNights,
+                DATA_APPENDICES.KM_PER_DAY
+              )}
+            />
+            <DetailRow
+              label="Average kilometers per day on the road"
+              value={numberFormatter(totalKilometers / daysOnTheRoad, DATA_APPENDICES.KM)}
+            />
+            <DetailRow
+              label="Average rides per day on the road"
+              value={numberFormatter(totalCars / daysOnTheRoad, DATA_APPENDICES.RIDES)}
+            />
+          </Stack>
+          <Stack sx={{ width: '32%' }}>
+            <DetailRow
+              label="Longest distance per ride"
+              value={numberFormatter(distances.longest, DATA_APPENDICES.KM)}
+            />
+            <DetailRow
+              label="Average distance per ride"
+              value={numberFormatter(distances.average, DATA_APPENDICES.KM)}
+            />
+            <DetailRow
+              label="Shortest distance per ride"
+              value={numberFormatter(distances.shortest, DATA_APPENDICES.KM)}
+            />
+          </Stack>
           {minutesWaiting && (
-            <>
+            <Stack sx={{ width: '32%' }}>
               <DetailRow
                 label="Longest wait per ride"
                 value={numberFormatter(
@@ -96,7 +109,7 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
                   DATA_APPENDICES.MINS
                 )}
               />
-            </>
+            </Stack>
           )}
         </Stack>
       </Stack>
@@ -107,6 +120,6 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
           <HitchhikesChart stats={statsPerHour} chartKind="minutes" />
         </Box>
       )}
-    </Box>
+    </Fragment>
   );
 }

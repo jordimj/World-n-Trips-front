@@ -1,9 +1,11 @@
-import { Box, Divider } from '@mui/material';
+import { Box, Divider, Stack } from '@mui/material';
+import MoneyIcon from '@mui/icons-material/Money';
+import EuroIcon from '@mui/icons-material/Euro';
 import ExpensesTable from './ExpensesTable';
-import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import { deductNotDailyExpenses } from '../../../../../../utils';
 import { euroFormatter } from '../../../../../../utils/number';
 import ExpensesChart from './ExpensesChart';
+import KPI from '../KPI/KPI';
 import styles from './Expenses.module.css';
 
 export default function ExpensesStatistics({ expenses, totalNights }) {
@@ -24,29 +26,45 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
   );
 
   return (
-    <Box component="section" sx={{ textAlign: '-webkit-center' }}>
+    <Stack component="section" alignItems="center" gap={4}>
       <Divider>Expenses</Divider>
-      <div className={styles.container}>
-        <div className={styles.partition}>
-          <DetailRow label="Total amount of expenses" value={euroFormatter(sum)} />
-          <DetailRow
-            label="Total amount of daily expenses"
-            value={euroFormatter(sumWithoutDailyExp)}
-          />
-          <DetailRow
-            label="Average expenses per day"
-            value={euroFormatter(sum / totalNights)}
-          />
-          <DetailRow
-            label="Average daily expenses per day"
-            value={euroFormatter(sumWithoutDailyExp / totalNights)}
-          />
-        </div>
-        <div className={styles.chart}>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ width: '100%' }}
+      >
+        <Stack gap={3}>
+          <Stack direction="row" gap={3}>
+            <KPI
+              icon={<EuroIcon fontSize="inherit" />}
+              label="Total expenses"
+              KPI={euroFormatter(sum)}
+            />
+            <KPI
+              icon={<EuroIcon fontSize="inherit" />}
+              label="Expenses / day"
+              KPI={euroFormatter(sum / totalNights)}
+            />
+          </Stack>
+          <Stack direction="row" gap={3}>
+            <KPI
+              icon={<MoneyIcon fontSize="inherit" />}
+              label="Total daily expenses"
+              KPI={euroFormatter(sumWithoutDailyExp)}
+            />
+            <KPI
+              icon={<MoneyIcon fontSize="inherit" />}
+              label="Daily expenses / day"
+              KPI={euroFormatter(sumWithoutDailyExp / totalNights)}
+            />
+          </Stack>
+        </Stack>
+        <Box className={styles.chart}>
           <ExpensesChart expensesByCategory={categories} />
-        </div>
-      </div>
+        </Box>
+      </Stack>
       <ExpensesTable expenses={detailedExpenses} />
-    </Box>
+    </Stack>
   );
 }

@@ -1,12 +1,12 @@
-import { Box, Divider } from '@mui/material';
+import { Fragment } from 'react';
+import { Divider, Stack, Typography } from '@mui/material';
+import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
+import NightShelterIcon from '@mui/icons-material/NightShelter';
+import EuroIcon from '@mui/icons-material/Euro';
 import NightsTable from './NightsTable';
-import {
-  getAdverbialNumber,
-  numberFormatter,
-  percentageFormatter,
-} from '../../../../../../utils/number';
-import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
-import { DATA_APPENDICES } from '../../../../../../constants';
+import { getAdverbialNumber, numberFormatter } from '../../../../../../utils/number';
+import KPI from '../KPI/KPI';
+import NightsChart from './NightsChart';
 import styles from './Nights.module.css';
 
 export default function NightsStatistics({ nights, kmWalked }) {
@@ -24,48 +24,47 @@ export default function NightsStatistics({ nights, kmWalked }) {
   );
 
   return (
-    <Box sx={{ textAlign: '-webkit-center' }}>
+    <Stack alignItems="center" gap={5}>
       <Divider>Days & nights</Divider>
-      <div className={styles.container}>
-        <div className={styles.overview}>
-          <div className={styles.partition}>
-            <DetailRow
-              label="Kilometers walked"
-              value={numberFormatter(kmWalked, DATA_APPENDICES.KM)}
-            />
-            <DetailRow
-              label="Average kilometers walked"
-              value={numberFormatter(kmWalked / count.total, DATA_APPENDICES.KM_PER_DAY)}
-            />
-          </div>
-          <div className={styles.partition}>
-            <DetailRow label="Total of nights" value={count.total} />
-            <DetailRow
-              label="Free stays"
-              value={`${count.free} (${percentageFormatter(count.free / count.total)})`}
-            />
-            <DetailRow
-              label="Paid stays"
-              value={`${count.paid} (${percentageFormatter(count.paid / count.total)})`}
-            />
-          </div>
-        </div>
-
+      <Stack direction="row" gap={3}>
+        <KPI
+          icon={<DirectionsWalkIcon fontSize="inherit" />}
+          label="Kilometers walked"
+          KPI={numberFormatter(kmWalked)}
+        />
+        <KPI
+          icon={<DirectionsWalkIcon fontSize="inherit" />}
+          label="Kilometers / day"
+          KPI={numberFormatter(kmWalked / count.total)}
+        />
+        <KPI
+          icon={<NightShelterIcon fontSize="inherit" />}
+          label="Nights spent"
+          KPI={count.total}
+        />
+      </Stack>
+      <Stack direction="row" alignItems="center" gap={3} sx={{ width: '70%' }}>
         <NightsTable spots={detailedSpots} />
-
-        {Object.keys(infoExtra).length > 0 && (
-          <>
-            <h4>Also slept:</h4>
-            <ul className={styles.extraInfoList}>
-              {Object.entries(infoExtra).map(([spot, nights]) => (
-                <li key={spot}>
-                  {getAdverbialNumber(nights)} in a {spot.toLowerCase()}
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
-      </div>
-    </Box>
+        <Stack>
+          <KPI icon={<EuroIcon fontSize="inherit" />}>
+            <NightsChart data={{ 'Free stays': count.free, 'Paid stays': count.paid }} />
+          </KPI>
+          {Object.keys(infoExtra).length > 0 && (
+            <Fragment>
+              <Typography variant="h5" sx={{ color: 'var(--primary-color)', mt: 3 }}>
+                Also slept:
+              </Typography>
+              <ul className={styles.extraInfoList}>
+                {Object.entries(infoExtra).map(([spot, nights]) => (
+                  <li key={spot}>
+                    {getAdverbialNumber(nights)} in a {spot.toLowerCase()}
+                  </li>
+                ))}
+              </ul>
+            </Fragment>
+          )}
+        </Stack>
+      </Stack>
+    </Stack>
   );
 }
