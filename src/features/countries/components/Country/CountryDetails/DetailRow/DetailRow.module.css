@@ -1,14 +1,14 @@
-.detailsPanelRow {
+.row {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-  border-bottom: 1px solid #e0e0e0;
+  padding: var(--spacing-4);
+  border-bottom: var(--border);
 }
 
-.detailsPanelRow:last-child {
+.row:last-child {
   border-bottom: none;
 }
 
-.detailsPanelLabel {
+.label {
   color: var(--text-color-secondary);
 }

@@ -31,7 +31,7 @@ export default function (props) {
         </Typography>
       </AccordionSummary>
       <AccordionDetails sx={{ px: 20, py: 5 }}>
-        <Typography variant={'journal'}>
+        <Typography variant="journal">
           {isSearching
             ? parse(journal.text.replaceAll(keyword, `<mark>${keyword}</mark>`))
             : parse(journal.text)}

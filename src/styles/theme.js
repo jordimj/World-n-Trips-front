@@ -118,12 +118,18 @@ const theme = createTheme({
     },
     cardTitle: {
       fontWeight: 600,
-      fontSize: 25,
+      fontSize: 22,
+      letterSpacing: 'var(--uppercase-letter-spacing)',
     },
     subtitle1: {
+      fontSize: 16,
       color: 'var(--text-color-secondary)',
-      textAlign: 'center',
-      marginBottom: 20,
+      textTransform: 'uppercase',
+      letterSpacing: 'var(--uppercase-letter-spacing)',
+    },
+    subtitle2: {
+      color: 'var(--text-color-secondary)',
+      fontSize: 16,
     },
     body1: {
       fontWeight: 400,

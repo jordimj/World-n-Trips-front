@@ -9,8 +9,8 @@
   top: 0;
   left: -100%;
   transition: 1s ease-in-out;
-  padding: 0 var(--spacing-4);
-  gap: var(--spacing-4);
+  padding: 0 var(--spacing-6);
+  gap: var(--spacing-6);
   border: var(--border);
 }
 

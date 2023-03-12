@@ -1,9 +1,9 @@
 .visitedSpotsContainer {
   background-color: var(--background-color-light);
   box-shadow: var(--box-shadow);
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
 }
 
 .visitedSpots {
@@ -11,16 +11,15 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding-top: 1rem;
+  padding-top: var(--spacing-4);
+  gap: var(--spacing-4);
 }
 
 .item {
-  width: 20%;
-  min-height: 2rem;
-  margin: 0 20px;
+  min-width: 220px;
 }
 
 .tab {
   width: 25%;
-  font-size: 1rem;
+  font-size: 16px;
 }

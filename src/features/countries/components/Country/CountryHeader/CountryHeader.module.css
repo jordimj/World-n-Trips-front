@@ -1,0 +1,10 @@
+.map {
+  align-items: center;
+  background-color: var(--background-color-light);
+  padding: var(--spacing-2);
+  width: 65%;
+}
+
+.details {
+  width: 35%;
+}

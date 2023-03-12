@@ -1,18 +1,10 @@
-.map {
-  background-color: var(--background-color-light);
-  padding: var(--spacing-2);
-  width: 65%;
+.container {
+  align-items: center;
+  padding: var(--spacing-4);
+  gap: var(--spacing-4);
 }
 
-.details {
-  width: 35%;
-}
-
-.bordersContainer {
-  padding: var(--spacing-3);
-}
-
-.bordersContainer img {
+.container img {
   width: 100%;
 }
 
@@ -20,7 +12,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--spacing-3);
+  gap: var(--spacing-4);
 }
 
 .neighboringCountry {
