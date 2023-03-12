@@ -52,7 +52,15 @@ export default function () {
 
   return (
     <Box textAlign="center">
-      <Typography variant="h1">{trip.name} TRIP</Typography>
+      <Typography
+        variant="h1"
+        sx={{
+          letterSpacing: 'var(--uppercase-letter-spacing)',
+          textTransform: 'capitalize',
+        }}
+      >
+        {trip.name}
+      </Typography>
       <Typography variant="h2">Journal entries</Typography>
       <Stack
         sx={{

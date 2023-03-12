@@ -142,6 +142,10 @@ const theme = createTheme({
     journal: {
       fontSize: 60,
       fontFamily: 'Just Another Hand, cursive',
+      hyphens: 'auto',
+      textAlign: 'justify',
+      textIndent: 'var(--spacing-7)',
+      lineHeight: '1.3em',
     },
   },
 });
