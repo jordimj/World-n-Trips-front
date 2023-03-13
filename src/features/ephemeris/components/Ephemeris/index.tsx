@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 import Badge from '@mui/material/Badge';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import EphemerisDialog from '../EphemerisDialog/EphemerisDialog';
+import EphemerisDialog from '../EphemerisDialog';
 import useFetchEphemeris from '../../hooks/useFetchEphemeris';
 import Spinner from '../../../../template/components/Spinner/Spinner';
 
@@ -15,7 +15,7 @@ function Ephemeris() {
 
   if (!data) return null;
 
-  const { ephemeris, ephemerisCount } = data;
+  const { allEphemeris, ephemerisCount } = data;
 
   return (
     <Fragment>
@@ -30,7 +30,7 @@ function Ephemeris() {
           <CalendarMonthIcon onClick={handleOpen} />
         </Badge>
       )}
-      <EphemerisDialog open={open} ephemeris={ephemeris} onClose={handleClose} />
+      <EphemerisDialog open={open} allEphemeris={allEphemeris} onClose={handleClose} />
     </Fragment>
   );
 }

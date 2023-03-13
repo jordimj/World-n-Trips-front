@@ -9,17 +9,24 @@ import { IconButton, Stack } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { formatFullDate, getYearsAgo } from '../../../../utils/date';
 import { buildTripName } from '../../../../utils';
+import { EphemerisList } from '../../interfaces';
 
-function EphemerisDialog(props) {
-  const { onClose, open, ephemeris } = props;
+interface EphemerisDialogProps {
+  open: boolean;
+  onClose: () => void;
+  allEphemeris: EphemerisList;
+}
+
+function EphemerisDialog(props: EphemerisDialogProps) {
+  const { open, onClose, allEphemeris } = props;
 
   const [showTimeAgo, setShowTimeAgo] = useState(true);
   const toggleShowTimeAgo = () => setShowTimeAgo((prev) => !prev);
 
   const navigate = useNavigate();
-  const onCountryFlagClick = (countryName) => {
+  const onCountryFlagClick = (countryCode: string) => {
     onClose();
-    navigate(`/country/${countryName}/`);
+    navigate(`/country/${countryCode}/`);
   };
 
   return (
@@ -31,36 +38,40 @@ function EphemerisDialog(props) {
         </IconButton>
       </DialogTitle>
       <List sx={{ pt: 0 }}>
-        {ephemeris.map((eph, idx) => (
+        {allEphemeris.map((ephemeris, idx) => (
           <ListItem key={idx}>
-            {eph.country ? (
+            {ephemeris.country ? (
               <Fragment>
                 <img
-                  src={`/img/flags/${eph.country.alpha3code}.png`}
-                  alt={`${eph.country.name}'s flag`}
+                  src={`/img/flags/${ephemeris.country.alpha3code}.png`}
+                  alt={`${ephemeris.country.name}'s flag`}
+                  onClick={() => onCountryFlagClick(ephemeris.country.alpha3code)}
                   width="75"
-                  onClick={() => onCountryFlagClick(eph.country.alpha3code)}
                   style={{
                     cursor: 'pointer',
                   }}
                 />
                 <Stack sx={{ ml: 2 }}>
                   <Typography sx={{ mb: 1 }} onClick={toggleShowTimeAgo}>
-                    {showTimeAgo ? getYearsAgo(eph.date) : formatFullDate(eph.date)}
+                    {showTimeAgo
+                      ? getYearsAgo(ephemeris.date)
+                      : formatFullDate(ephemeris.date)}
                   </Typography>
                   <Typography>
-                    I slept at {eph.city}, {eph.country.name}
+                    I slept at {ephemeris.city}, {ephemeris.country.name}
                   </Typography>
-                  <Typography>In the {buildTripName(eph.trip)}</Typography>
+                  <Typography>In the {buildTripName(ephemeris.trip)}</Typography>
                 </Stack>
               </Fragment>
             ) : (
               <Stack sx={{ ml: 2 }}>
                 <Typography sx={{ mb: 1 }} onClick={toggleShowTimeAgo}>
-                  {showTimeAgo ? getYearsAgo(eph.date) : formatFullDate(eph.date)}
+                  {showTimeAgo
+                    ? getYearsAgo(ephemeris.date)
+                    : formatFullDate(ephemeris.date)}
                 </Typography>
                 <Typography>
-                  I was coming back from my {buildTripName(eph.trip)}
+                  I was coming back from my {buildTripName(ephemeris.trip)}
                 </Typography>
               </Stack>
             )}

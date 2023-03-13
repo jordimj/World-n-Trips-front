@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import * as API from '../../../api/api';
+import { EphemerisList } from '../interfaces';
 
 function useFetchEphemeris() {
   return useQuery({
@@ -8,8 +9,8 @@ function useFetchEphemeris() {
       const data = await API.getEphemeris();
 
       return {
-        ephemeris: data,
-        ephemerisCount: data?.length,
+        allEphemeris: data as EphemerisList,
+        ephemerisCount: Number(data?.length),
       };
     },
   });

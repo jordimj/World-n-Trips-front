@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
 import useFullWidth from '../../../hooks/useFullWidth';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
-import Ephemeris from '../../../features/ephemeris/components/Ephemeris/Ephemeris';
+import Ephemeris from '../../../features/ephemeris/components/Ephemeris';
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import Inserter from '../../../features/inserter/pages/Inserter';
 
