@@ -6,7 +6,7 @@ interface InserterContext {
   dataKind: KindOfData | undefined;
   filename: string;
   parsedData?: ImportData;
-  optionId: number;
+  optionId: number | null;
   journal: {
     date: Date | null;
     title: string;
@@ -18,7 +18,7 @@ export const InserterContext = createContext<InserterContext>({
   dataKind: undefined,
   filename: '',
   parsedData: [],
-  optionId: -1,
+  optionId: null,
   journal: {
     date: null,
     title: '',

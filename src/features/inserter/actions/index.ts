@@ -18,7 +18,7 @@ type SetParsedDataAction = {
 
 type SetOptionAction = {
   type: 'SET_OPTION';
-  payload: number;
+  payload: number | null;
 };
 
 type SetJournalDateAction = {

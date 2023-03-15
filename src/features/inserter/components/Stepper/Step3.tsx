@@ -4,17 +4,15 @@ import { InserterContext } from '../../context/InserterContext';
 import { TableKind } from '../../types';
 import DataTable from '../DataTable/DataTable';
 import JournalConfirmation from '../Journal/JournalConfirmation';
-import Select from '../Select';
+import Autocomplete from '../Autocomplete';
 import { InserterDispatchContext } from '../../context/InserterDispatchContext';
-import { SelectChangeEvent } from '@mui/material';
 
 function Step3() {
-  const { dataKind, parsedData, filename, optionId } = useContext(InserterContext);
-
+  const { dataKind, filename, optionId } = useContext(InserterContext);
   const dispatch = useContext(InserterDispatchContext);
 
-  const onChangeOption = (e: SelectChangeEvent) =>
-    dispatch({ type: 'SET_OPTION', payload: Number(e.target.value) });
+  const onChangeOption = (optionId: number | null) =>
+    dispatch({ type: 'SET_OPTION', payload: optionId });
 
   const isJournal = dataKind === 'journal';
 
@@ -27,9 +25,8 @@ function Step3() {
         <>
           {filename && <h5>Data read from: {filename}</h5>}
           <DataTable />
-          <Select
+          <Autocomplete
             dataKind={dataKind as TableKind}
-            id={optionId}
             onChangeOption={onChangeOption}
           />
         </>

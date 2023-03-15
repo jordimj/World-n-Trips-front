@@ -1,0 +1,14 @@
+.stepper {
+  background-color: white;
+  padding: var(--spacing-6) 0;
+  width: 100%;
+}
+
+.stepContent {
+  border-top: var(--border);
+  padding: var(--spacing-6);
+  align-items: center;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  height: 100vh;
+}

@@ -6,7 +6,7 @@ interface State {
   dataKind: KindOfData | undefined;
   filename: string;
   parsedData?: ImportData;
-  optionId: number;
+  optionId: number | null;
   journal: {
     date: Date | null;
     title: string;
@@ -18,7 +18,7 @@ export const initialState: State = {
   dataKind: undefined,
   filename: '',
   parsedData: [],
-  optionId: -1,
+  optionId: null,
   journal: {
     title: '',
     date: null,

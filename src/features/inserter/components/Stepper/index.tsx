@@ -1,8 +1,8 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Stepper from '@mui/material/Stepper';
+import MuiStepper from '@mui/material/Stepper';
 import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import useRequest from '../../hooks/useRequest';
@@ -14,7 +14,7 @@ import Step3 from './Step3';
 import Step4 from './Step4';
 import { InserterContext } from '../../context/InserterContext';
 import { InserterDispatchContext } from '../../context/InserterDispatchContext';
-import styles from './AppStepper.module.css';
+import styles from './Stepper.module.css';
 
 export const STEPS = [
   'Kind of data',
@@ -23,14 +23,8 @@ export const STEPS = [
   'Data importation',
 ];
 
-export default function AppStepper() {
+export default function Stepper() {
   const [activeStep, setActiveStep] = useState<number>(0);
-
-  // useEffect(() => {
-  //   const rawContentState = convertToRaw(editorState.getCurrentContent());
-  //   setParsedData(draftToHtml(rawContentState));
-  // }, [editorState]);
-
   const { snackbar, openSnackbar } = useSnackbar();
 
   const {
@@ -47,11 +41,12 @@ export default function AppStepper() {
   const handleDataInsertion = async () => {
     if (dataKind === undefined) return;
 
+    const rawContentState = convertToRaw(editorState.getCurrentContent());
     const body = isJournal
       ? {
           date: new Intl.DateTimeFormat('en-CA').format(date!),
           title,
-          parsedData,
+          parsedData: draftToHtml(rawContentState),
         }
       : {
           parsedData,
@@ -99,13 +94,13 @@ export default function AppStepper() {
 
   return (
     <Fragment>
-      <Stepper activeStep={activeStep} alternativeLabel className={styles.stepper}>
+      <MuiStepper activeStep={activeStep} alternativeLabel className={styles.stepper}>
         {STEPS.map((label: string) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
-      </Stepper>
+      </MuiStepper>
       <Stack className={styles.stepContent}>
         {getStepContent(activeStep)}
         <StepperButtons

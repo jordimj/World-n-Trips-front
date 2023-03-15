@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Dialog, DialogTitle, IconButton } from '@mui/material';
 import PublishIcon from '@mui/icons-material/Publish';
 import CloseIcon from '@mui/icons-material/Close';
-import AppStepper from '../components/AppStepper/AppStepper';
+import Stepper from '../components/Stepper';
 import { InserterProvider } from '../context/InserterProvider';
 
 export interface InserterDialogProps {
@@ -27,7 +27,7 @@ function InserterDialog(props: InserterDialogProps) {
         </IconButton>
       </DialogTitle>
       <InserterProvider>
-        <AppStepper />
+        <Stepper />
       </InserterProvider>
     </Dialog>
   );

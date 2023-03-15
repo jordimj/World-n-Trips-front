@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { STEPS } from './AppStepper';
+import { STEPS } from '.';
 
 interface StepperButtonsProps {
   activeStep: number;
@@ -17,18 +17,12 @@ export default function StepperButtons(props: StepperButtonsProps) {
   const handleBack = () => setActiveStep((prevStep) => --prevStep);
 
   return (
-    <Box
-      sx={{
-        paddingTop: '10px',
-        paddingBottom: '30px',
-      }}
-    >
+    <Stack direction="row" gap={1} sx={{ py: 1 }}>
       <Button
         disabled={activeStep === 0}
         onClick={handleBack}
-        sx={{
-          marginRight: 'var(--spacing-1)',
-        }}
+        variant="outlined"
+        color="secondary"
       >
         Back
       </Button>
@@ -40,6 +34,6 @@ export default function StepperButtons(props: StepperButtonsProps) {
       >
         {activeStep === STEPS.length - 1 ? 'Import!' : 'Next'}
       </Button>
-    </Box>
+    </Stack>
   );
 }
