@@ -42,6 +42,10 @@ const theme = createTheme({
           color: 'white!important',
           height: '100%',
         },
+        outlinedSecondary: {
+          backgroundColor: 'white',
+          color: '#1976D2!important',
+        },
       },
     },
     MuiSwitch: {

@@ -79,9 +79,9 @@ export default function Stepper() {
   const isForwardDisabled = (activeStep: number): boolean => {
     const shouldDisableStep2 = isJournal
       ? title === '' || editorState.getCurrentContent().getPlainText() === ''
-      : !parsedData;
+      : parsedData?.length === 0;
 
-    const shouldDisableStep3 = isJournal ? date === null : optionId === -1;
+    const shouldDisableStep3 = isJournal ? date === null : optionId === null;
 
     // prettier-ignore
     switch (activeStep) {

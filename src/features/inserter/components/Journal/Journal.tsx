@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import TextEditor from './TextEditor/TextEditor';
-import { Button, ButtonGroup } from '@mui/material';
+import { Box, Button, ButtonGroup } from '@mui/material';
 import useClipboard from '../../hooks/useClipboard';
 import { InserterContext } from '../../context/InserterContext';
 import { InserterDispatchContext } from '../../context/InserterDispatchContext';
@@ -21,27 +21,37 @@ export default function Journal() {
   const onChangeTitle = (title: string) =>
     dispatch({ type: 'SET_JOURNAL_TITLE', payload: title });
 
-  // const pasteTitle = async () => setTitle((await pasteFromClipboard()) ?? '');
+  const pasteTitle = async () => onChangeTitle((await pasteFromClipboard()) ?? '');
 
   return (
     <Stack gap={2} justifyContent="center" alignItems="center" sx={{ width: '90%' }}>
-      <FormControl sx={{ maxWidth: '1600px', mt: 6 }}>
+      <FormControl sx={{ maxWidth: '1600px', mt: 6, width: '50%', minWidth: '400px' }}>
         <Stack direction="row" gap={2}>
           <TextField
             label="Title of the day"
             variant="outlined"
             value={title}
             onChange={(e) => onChangeTitle(e.target.value)}
-            sx={{ backgroundColor: 'white', borderRadius: '5px', width: '100%' }}
+            sx={{
+              backgroundColor: 'var(--background-color-light)',
+              borderRadius: 'var(--border-radius)',
+              width: '100%',
+              position: 'relative',
+              '& input': {
+                width: 'calc(100% - 150x)',
+              },
+            }}
           />
-          <ButtonGroup disableElevation variant="contained">
-            <Button onClick={() => copyToClipboard(title)}>
-              <ContentCopyIcon />
-            </Button>
-            {/* <Button onClick={pasteTitle}>
-              <ContentPasteIcon />
-            </Button> */}
-          </ButtonGroup>
+          <Box sx={{ position: 'absolute', top: '10px', right: '10px' }}>
+            <ButtonGroup disableElevation variant="contained">
+              <Button onClick={() => copyToClipboard(title)}>
+                <ContentCopyIcon />
+              </Button>
+              <Button onClick={pasteTitle}>
+                <ContentPasteIcon />
+              </Button>
+            </ButtonGroup>
+          </Box>
         </Stack>
       </FormControl>
       <TextEditor />
