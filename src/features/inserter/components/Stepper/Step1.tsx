@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { capitalize, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import { MenuItem } from '@mui/material';
 import Select from '../../../../template/components/Select/Select';
-import { InserterContext } from '../../context/InserterContext';
 import { useInserterDispatch, useInserterState } from '../../context/InserterProvider';
 import { KindOfData } from '../../types';
 
@@ -26,7 +25,9 @@ function Step1() {
         maxWidth={300}
       >
         {DATA_KINDS.map((kind) => (
-          <MenuItem value={kind}>{capitalize(kind)}</MenuItem>
+          <MenuItem key={kind} value={kind}>
+            {capitalize(kind)}
+          </MenuItem>
         ))}
       </Select>
     </Stack>

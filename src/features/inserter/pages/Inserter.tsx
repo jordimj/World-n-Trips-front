@@ -40,9 +40,9 @@ export default function Inserter() {
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
+    <>
       <PublishIcon onClick={handleClickOpen} sx={{ color: 'white' }} />
       <InserterDialog open={open} onClose={handleClose} />
-    </div>
+    </>
   );
 }

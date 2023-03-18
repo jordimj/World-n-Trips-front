@@ -1,20 +1,7 @@
-import React from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+import { Typography } from '@mui/material';
 
-interface Step4Props {
-  loading: boolean;
-  errorSnackbar: JSX.Element;
-}
-
-function Step4(props: Step4Props) {
-  const { loading, errorSnackbar } = props;
-  return (
-    <>
-      <h2>Time to import</h2>
-      {loading && <CircularProgress />}
-      {errorSnackbar}
-    </>
-  );
+function Step4() {
+  return <Typography variant="h2">Time to import</Typography>;
 }
 
 export default Step4;

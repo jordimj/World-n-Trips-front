@@ -3,17 +3,12 @@ import Stack from '@mui/material/Stack';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import MuiStepper from '@mui/material/Stepper';
-import { EditorState, convertToRaw } from 'draft-js';
-import draftToHtml from 'draftjs-to-html';
-import useRequest from '../../hooks/useRequest';
-import useSnackbar from '../../hooks/useSnackbar';
 import StepperButtons from './StepperButtons';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
 import { InserterContext } from '../../context/InserterContext';
-import { InserterDispatchContext } from '../../context/InserterDispatchContext';
 import styles from './Stepper.module.css';
 
 export const STEPS = [
@@ -25,7 +20,6 @@ export const STEPS = [
 
 export default function Stepper() {
   const [activeStep, setActiveStep] = useState<number>(0);
-  const { snackbar, openSnackbar } = useSnackbar();
 
   const {
     dataKind,
@@ -33,37 +27,6 @@ export default function Stepper() {
     optionId,
     journal: { date, title, editorState },
   } = useContext(InserterContext);
-  const dispatch = useContext(InserterDispatchContext);
-
-  const { doRequest, loading, errorSnackbar } = useRequest();
-  const isJournal = dataKind === 'journal';
-
-  const handleDataInsertion = async () => {
-    if (dataKind === undefined) return;
-
-    const rawContentState = convertToRaw(editorState.getCurrentContent());
-    const body = isJournal
-      ? {
-          date: new Intl.DateTimeFormat('en-CA').format(date!),
-          title,
-          parsedData: draftToHtml(rawContentState),
-        }
-      : {
-          parsedData,
-          optionId,
-        };
-
-    const response = await doRequest({
-      url: `/${dataKind}s/create`,
-      method: 'post',
-      body,
-    });
-
-    if (response?.status === 201) {
-      dispatch({ type: 'RESET_STATE' });
-      openSnackbar([{ label: 'Database insertion done!' }]);
-    }
-  };
 
   function getStepContent(stepIndex: number) {
     // prettier-ignore
@@ -71,10 +34,12 @@ export default function Stepper() {
       case 0: return <Step1 />;
       case 1: return <Step2 />;
       case 2: return <Step3 />;
-      case 3: return <Step4 loading={loading} errorSnackbar={errorSnackbar} />;
+      case 3: return <Step4 />;
       default: return null;
     }
   }
+
+  const isJournal = dataKind === 'journal';
 
   const isForwardDisabled = (activeStep: number): boolean => {
     const shouldDisableStep2 = isJournal
@@ -106,11 +71,9 @@ export default function Stepper() {
         <StepperButtons
           activeStep={activeStep}
           setActiveStep={setActiveStep}
-          handleDataInsertion={handleDataInsertion}
           isForwardDisabled={isForwardDisabled}
         />
       </Stack>
-      {snackbar}
     </Fragment>
   );
 }
