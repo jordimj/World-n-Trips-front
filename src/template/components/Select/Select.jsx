@@ -6,10 +6,22 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import styles from './Select.module.css';
 
 function Select(props) {
-  const { label, value, onChange, children, helper, disabled = false, ...rest } = props;
+  const {
+    label,
+    value,
+    onChange,
+    children,
+    helper,
+    disabled = false,
+    maxWidth,
+    ...rest
+  } = props;
 
   return (
-    <FormControl disabled={disabled} sx={{ width: '100%' }}>
+    <FormControl
+      disabled={disabled}
+      sx={{ width: '100%', backgroundColor: 'white', ...(maxWidth && { maxWidth }) }}
+    >
       <InputLabel id={`${label}-select-label`} className={styles.text}>
         {label}
       </InputLabel>
