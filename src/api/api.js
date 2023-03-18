@@ -4,40 +4,36 @@ const instance = axios.create({
   baseURL: process.env.REACT_APP_ROOT_URL,
 });
 
-async function getVisitedCountries() {
+export async function getVisitedCountries() {
   return (await instance.get('/countries/visited')).data;
 }
 
-async function getStats() {
+export async function getStats() {
   return (await instance.get('/statistics')).data;
 }
 
-async function getYearStats(year) {
+export async function getYearStats(year) {
   return (await instance.get(`/statistics/${year}`)).data;
 }
 
-async function getCountryStats(countryName) {
+export async function getCountryStats(countryName) {
   return (await instance.get(`/countries/statistics/${countryName}/`)).data;
 }
 
-async function getTrips() {
+export async function getTrips() {
   return (await instance.get('/trips/full')).data;
 }
 
-async function getJournals(tripId) {
+export async function getJournals(tripId) {
   return (await instance.get(`/journals/trip/${tripId}`)).data;
 }
 
-async function getEphemeris() {
-  return (await instance.get('/ephemeris/')).data;
+export async function getAvailableDates() {
+  return await (
+    await instance.get('/journals/dates')
+  ).data;
 }
 
-export {
-  getVisitedCountries,
-  getStats,
-  getYearStats,
-  getTrips,
-  getJournals,
-  getCountryStats,
-  getEphemeris,
-};
+export async function getEphemeris() {
+  return (await instance.get('/ephemeris/')).data;
+}
