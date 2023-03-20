@@ -1,4 +1,3 @@
-import React, { useContext } from 'react';
 import FormControl from '@mui/material/FormControl';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
@@ -7,21 +6,18 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import TextEditor from './TextEditor/TextEditor';
 import { Box, Button, ButtonGroup } from '@mui/material';
 import useClipboard from '../../hooks/useClipboard';
-import { InserterContext } from '../../context/InserterContext';
-import { InserterDispatchContext } from '../../context/InserterDispatchContext';
+import { useInserterContext } from '../../hooks/useInserterContext';
 
 export default function Journal() {
   const {
-    journal: { title },
-  } = useContext(InserterContext);
-  const dispatch = useContext(InserterDispatchContext);
+    state: {
+      journal: { title },
+    },
+    actions: { setTitle },
+  } = useInserterContext();
 
   const { copyToClipboard, pasteFromClipboard, snackbar } = useClipboard();
-
-  const onChangeTitle = (title: string) =>
-    dispatch({ type: 'SET_JOURNAL_TITLE', payload: title });
-
-  const pasteTitle = async () => onChangeTitle((await pasteFromClipboard()) ?? '');
+  const pasteTitle = async () => setTitle((await pasteFromClipboard()) ?? '');
 
   return (
     <Stack gap={2} justifyContent="center" alignItems="center" sx={{ width: '90%' }}>
@@ -31,7 +27,7 @@ export default function Journal() {
             label="Title of the day"
             variant="outlined"
             value={title}
-            onChange={(e) => onChangeTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
             sx={{
               backgroundColor: 'var(--background-color-light)',
               borderRadius: 'var(--border-radius)',

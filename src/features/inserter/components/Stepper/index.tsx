@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
@@ -8,7 +8,7 @@ import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
-import { InserterContext } from '../../context/InserterContext';
+import { useInserterContext } from '../../hooks/useInserterContext';
 import styles from './Stepper.module.css';
 
 export const STEPS = [
@@ -22,11 +22,13 @@ export default function Stepper() {
   const [activeStep, setActiveStep] = useState<number>(0);
 
   const {
-    dataKind,
-    parsedData,
-    optionId,
-    journal: { date, title, editorState },
-  } = useContext(InserterContext);
+    state: {
+      dataKind,
+      parsedData,
+      optionId,
+      journal: { date, title, editorState },
+    },
+  } = useInserterContext();
 
   function getStepContent(stepIndex: number) {
     // prettier-ignore

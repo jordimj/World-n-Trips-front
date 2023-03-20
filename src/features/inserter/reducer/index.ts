@@ -2,7 +2,7 @@ import { EditorState } from 'draft-js';
 import { Action } from '../actions';
 import { ImportData, KindOfData } from '../types';
 
-interface State {
+export interface InserterState {
   dataKind: KindOfData | undefined;
   filename: string;
   parsedData?: ImportData;
@@ -14,7 +14,7 @@ interface State {
   };
 }
 
-export const initialState: State = {
+export const initialState: InserterState = {
   dataKind: undefined,
   filename: '',
   parsedData: [],
@@ -26,7 +26,7 @@ export const initialState: State = {
   },
 };
 
-function reducer(state: State, action: Action) {
+function reducer(state: InserterState, action: Action) {
   switch (action.type) {
     case 'SET_DATA_KIND': {
       return {

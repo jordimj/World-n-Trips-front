@@ -1,16 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { parse } from 'papaparse';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import { Day, Expense, Night, Spot, TableData } from '../../types';
 import useSnackbar from '../../hooks/useSnackbar';
-import { InserterContext } from '../../context/InserterContext';
-import { InserterDispatchContext } from '../../context/InserterDispatchContext';
+import { useInserterContext } from '../../hooks/useInserterContext';
 
 export default function DataParser() {
-  const { filename } = useContext(InserterContext);
-  const dispatch = useContext(InserterDispatchContext);
+  const {
+    state: { filename },
+    actions: { setParsedData, setFilename },
+  } = useInserterContext();
+
   const [source, setSource] = useState<'string' | 'file' | undefined>(undefined);
 
   const { openSnackbar, snackbar } = useSnackbar();
@@ -36,7 +38,7 @@ export default function DataParser() {
           (item: Day | Night | Expense | Spot, i: number) => (item.id = i + 1)
         );
 
-        dispatch({ type: 'SET_PARSED_DATA', payload: data });
+        setParsedData(data);
       },
     });
 
@@ -49,7 +51,7 @@ export default function DataParser() {
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) throw new Error('No file to be read');
 
-    dispatch({ type: 'SET_FILENAME', payload: e.target.files[0]?.name });
+    setFilename(e.target.files[0]?.name);
     parseCsvData(e.target.files[0]);
   };
 

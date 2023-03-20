@@ -1,21 +1,20 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import { useContext } from 'react';
-import { InserterContext } from '../context/InserterContext';
-import { InserterDispatchContext } from '../context/InserterDispatchContext';
 import * as API from '../../../api/api';
 import axios from 'axios';
+import { useInserterContext } from './useInserterContext';
 
 function useDataInsertion() {
   const {
-    dataKind,
-    parsedData,
-    optionId,
-    journal: { date, title, editorState },
-  } = useContext(InserterContext);
-
-  const dispatch = useContext(InserterDispatchContext);
+    state: {
+      dataKind,
+      parsedData,
+      optionId,
+      journal: { date, title, editorState },
+    },
+    actions: { resetState },
+  } = useInserterContext();
 
   const isJournal = dataKind === 'journal';
 
@@ -34,7 +33,7 @@ function useDataInsertion() {
   return useMutation({
     mutationFn: () => axios.post(`http://localhost:8000/${dataKind}s/create`, body),
     onSuccess: () => {
-      dispatch({ type: 'RESET_STATE' });
+      resetState();
     },
   });
 }

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { TableData } from '../../types';
 import DataTableRow from './DataTableRow';
-import { InserterContext } from '../../context/InserterContext';
+import { useInserterContext } from '../../hooks/useInserterContext';
 import styles from './DataTable.module.css';
 
 const TABLE_HEADERS = {
@@ -27,7 +27,9 @@ const TABLE_HEADERS = {
 };
 
 export default function DataTable() {
-  const { dataKind, parsedData: rows } = useContext(InserterContext);
+  const {
+    state: { dataKind, parsedData: rows },
+  } = useInserterContext();
 
   if (dataKind === undefined || dataKind === 'journal') return <Fragment />;
 

@@ -1,19 +1,19 @@
-import React, { useContext } from 'react';
 import { capitalize, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import { MenuItem } from '@mui/material';
 import Select from '../../../../template/components/Select/Select';
-import { useInserterDispatch, useInserterState } from '../../context/InserterProvider';
 import { KindOfData } from '../../types';
+import { useInserterContext } from '../../hooks/useInserterContext';
 
 const DATA_KINDS = ['day', 'night', 'spot', 'expense', 'journal'];
 
 function Step1() {
-  const { dataKind } = useInserterState();
-  const dispatch = useInserterDispatch();
+  const {
+    state: { dataKind },
+    actions: { setDatakind },
+  } = useInserterContext();
 
-  const onDataKindClick = (event: SelectChangeEvent) => {
-    dispatch({ type: 'SET_DATA_KIND', payload: event.target.value as KindOfData });
-  };
+  const onDataKindClick = (event: SelectChangeEvent) =>
+    setDatakind(event.target.value as KindOfData);
 
   return (
     <Stack alignItems="center" gap={2}>

@@ -1,11 +1,10 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment } from 'react';
 import TableRow from '@mui/material/TableRow';
 import DataTableCell from './DataTableCell';
-import { Day, Expense, ImportData, Night, Spot, TableKind } from '../../types';
+import { Day, Expense, Night, Spot, TableKind } from '../../types';
 import useDataValidation from '../../hooks/useDataValidation';
 import useCategories from '../../hooks/useCategories';
-import { InserterContext } from '../../context/InserterContext';
-import { InserterDispatchContext } from '../../context/InserterDispatchContext';
+import { useInserterContext } from '../../hooks/useInserterContext';
 
 // interface DayRow {
 //   dataKind: 'day';
@@ -47,12 +46,13 @@ const EDITABLE_CELL_KEYS = {
 export default function DataTableRow(props: DataTableRowProps) {
   const { dataKind, row } = props;
 
-  const { data: categories, error } = useCategories();
+  const {
+    state: { parsedData },
+    actions: { setParsedData },
+  } = useInserterContext();
 
+  const { data: categories } = useCategories();
   const { validationErrors } = useDataValidation({ dataKind, row });
-
-  const { parsedData } = useContext(InserterContext);
-  const dispatch = useContext(InserterDispatchContext);
 
   const updateParsedData = (
     id: number,
@@ -72,7 +72,7 @@ export default function DataTableRow(props: DataTableRowProps) {
       return data as Expense;
     }) as Expense[];
 
-    dispatch({ type: 'SET_PARSED_DATA', payload: newParsedData });
+    setParsedData(newParsedData);
   };
 
   return (

@@ -1,18 +1,15 @@
-import React, { useContext } from 'react';
 import { Stack } from '@mui/material';
-import { InserterContext } from '../../context/InserterContext';
 import { TableKind } from '../../types';
 import DataTable from '../DataTable/DataTable';
 import JournalConfirmation from '../Journal/JournalConfirmation';
 import Autocomplete from '../Autocomplete';
-import { InserterDispatchContext } from '../../context/InserterDispatchContext';
+import { useInserterContext } from '../../hooks/useInserterContext';
 
 function Step3() {
-  const { dataKind, filename, optionId } = useContext(InserterContext);
-  const dispatch = useContext(InserterDispatchContext);
-
-  const onChangeOption = (optionId: number | null) =>
-    dispatch({ type: 'SET_OPTION', payload: optionId });
+  const {
+    state: { dataKind, filename },
+    actions: { setOption },
+  } = useInserterContext();
 
   const isJournal = dataKind === 'journal';
 
@@ -25,10 +22,7 @@ function Step3() {
         <>
           {filename && <h5>Data read from: {filename}</h5>}
           <DataTable />
-          <Autocomplete
-            dataKind={dataKind as TableKind}
-            onChangeOption={onChangeOption}
-          />
+          <Autocomplete dataKind={dataKind as TableKind} onChangeOption={setOption} />
         </>
       )}
     </Stack>

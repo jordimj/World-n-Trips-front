@@ -1,27 +1,7 @@
-import { EditorState } from 'draft-js';
-import { createContext } from 'react';
-import { ImportData, KindOfData } from '../types';
+import { createContext, Dispatch } from 'react';
+import { Action } from '../actions';
+import { InserterState } from '../reducer';
 
-interface InserterContext {
-  dataKind: KindOfData | undefined;
-  filename: string;
-  parsedData?: ImportData;
-  optionId: number | null;
-  journal: {
-    date: Date | null;
-    title: string;
-    editorState: EditorState;
-  };
-}
-
-export const InserterContext = createContext<InserterContext>({
-  dataKind: undefined,
-  filename: '',
-  parsedData: [],
-  optionId: null,
-  journal: {
-    date: null,
-    title: '',
-    editorState: EditorState.createEmpty(),
-  },
-});
+export const InserterContext = createContext<
+  [InserterState, Dispatch<Action>] | undefined
+>(undefined);

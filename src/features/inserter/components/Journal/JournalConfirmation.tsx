@@ -1,21 +1,17 @@
-import React, { useContext } from 'react';
-import { Box, Divider, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import parse from 'html-react-parser';
 import DatePicker from '../DatePicker/DatePicker';
-import { InserterContext } from '../../context/InserterContext';
-import { InserterDispatchContext } from '../../context/InserterDispatchContext';
 import draftToHtml from 'draftjs-to-html';
 import { convertToRaw } from 'draft-js';
+import { useInserterContext } from '../../hooks/useInserterContext';
 
 export default function JournalConfirmation() {
   const {
-    journal: { title, date, editorState },
-  } = useContext(InserterContext);
-
-  const dispatch = useContext(InserterDispatchContext);
-
-  const handleChange = (newDate: Date | null) =>
-    dispatch({ type: 'SET_JOURNAL_DATE', payload: newDate });
+    state: {
+      journal: { title, date, editorState },
+    },
+    actions: { setDate },
+  } = useInserterContext();
 
   const rawContentState = convertToRaw(editorState.getCurrentContent());
 
@@ -44,7 +40,7 @@ export default function JournalConfirmation() {
       >
         {parse(draftToHtml(rawContentState))}
       </Box>
-      <DatePicker date={date} handleChange={handleChange} />
+      <DatePicker date={date} handleChange={setDate} />
     </>
   );
 }
