@@ -32,7 +32,7 @@ const CountryDetails = ({ info, trips }) => {
         sx={{ columnGap: 2, mt: 1 }}
       >
         {trips?.sort().map((trip) => (
-          <Chip key={trip} label={buildTripName(trip, true)} />
+          <Chip key={trip} label={buildTripName(trip)} />
         ))}
       </Stack>
     </Fragment>

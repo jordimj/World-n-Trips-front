@@ -13,6 +13,7 @@ function useFetchEphemeris() {
         ephemerisCount: Number(data?.length),
       };
     },
+    refetchOnWindowFocus: false,
   });
 }
 

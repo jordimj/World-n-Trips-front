@@ -35,8 +35,8 @@ export function formatFullDate(date: string) {
 }
 
 export function getYearsAgo(date: string) {
-  const yearDifference = new Date().getFullYear() - new Date(date).getFullYear();
+  const yearDifference = new Date(date).getFullYear() - new Date().getFullYear();
+  const rtf = new Intl.RelativeTimeFormat('en', { style: 'long' });
 
-  if (yearDifference === 1) return 'A year ago';
-  return yearDifference + ' years ago';
+  return rtf.format(yearDifference, 'year');
 }
