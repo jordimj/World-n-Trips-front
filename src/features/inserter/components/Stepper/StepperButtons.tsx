@@ -1,10 +1,11 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { STEPS } from '.';
 import useDataInsertion from '../../hooks/useDataInsertion';
 import Spinner from '../../../../template/components/Spinner/Spinner';
 import useSnackbar from '../../hooks/useSnackbar';
+import { AxiosError } from 'axios';
 
 interface StepperButtonsProps {
   activeStep: number;
@@ -21,7 +22,19 @@ export default function StepperButtons(props: StepperButtonsProps) {
   const handleNext = () => setActiveStep((prevStep) => ++prevStep);
   const handleBack = () => setActiveStep((prevStep) => --prevStep);
 
-  // if (mutation?.isSuccess) openSnackbar([{ label: 'Database insertion done!' }]);
+  useEffect(() => {
+    if (mutation.isSuccess) {
+      openSnackbar([{ label: 'Database insertion done!' }]);
+      setActiveStep(0);
+    }
+  }, [mutation.isSuccess]);
+
+  useEffect(() => {
+    if (mutation.isError) {
+      const errors: any = (mutation.error as AxiosError).response?.data;
+      openSnackbar([{ label: errors.message, severity: 'error' }]);
+    }
+  }, [mutation.isError]);
 
   return (
     <Stack direction="row" gap={1} sx={{ py: 1 }}>
@@ -39,7 +52,7 @@ export default function StepperButtons(props: StepperButtonsProps) {
         onClick={() => (activeStep === 3 ? mutation?.mutate() : handleNext())}
         disabled={isForwardDisabled(activeStep)}
       >
-        {activeStep === STEPS.length - 1 ? 'Import!' : 'Next'}
+        {activeStep === STEPS.length - 1 ? 'Go !' : 'Next'}
       </Button>
       {mutation?.isLoading && <Spinner />}
       {snackbar}

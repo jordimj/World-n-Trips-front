@@ -41,6 +41,7 @@ const theme = createTheme({
           boxSizing: 'border-box',
           color: 'white!important',
           height: '100%',
+          minWidth: '100px',
         },
         outlinedSecondary: {
           backgroundColor: 'white',
