@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import parse from 'html-react-parser';
-import DatePicker from '../DatePicker/DatePicker';
+import DatePicker from '../../../../template/components/DatePicker/DatePicker';
 import draftToHtml from 'draftjs-to-html';
 import { convertToRaw } from 'draft-js';
 import { useInserterContext } from '../../hooks/useInserterContext';
@@ -40,7 +40,7 @@ export default function JournalConfirmation() {
       >
         {parse(draftToHtml(rawContentState))}
       </Box>
-      <DatePicker date={date} handleChange={setDate} />
+      <DatePicker.Journal date={date} handleChange={setDate} />
     </>
   );
 }

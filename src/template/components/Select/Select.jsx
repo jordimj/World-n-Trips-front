@@ -20,7 +20,7 @@ function Select(props) {
   return (
     <FormControl
       disabled={disabled}
-      sx={{ width: '100%', backgroundColor: 'white', ...(maxWidth && { maxWidth }) }}
+      sx={{ width: '100%', ...(maxWidth && { maxWidth }) }}
     >
       <InputLabel id={`${label}-select-label`} className={styles.text}>
         {label}
@@ -32,6 +32,7 @@ function Select(props) {
         className={styles.select}
         value={value}
         onChange={onChange}
+        sx={{ backgroundColor: 'white' }}
         {...rest}
       >
         {children}

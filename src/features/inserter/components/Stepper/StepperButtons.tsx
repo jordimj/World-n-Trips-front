@@ -37,7 +37,7 @@ export default function StepperButtons(props: StepperButtonsProps) {
   }, [mutation.isError]);
 
   return (
-    <Stack direction="row" gap={1} sx={{ py: 1 }}>
+    <Stack direction="row" gap={2} sx={{ py: 2 }}>
       <Button
         disabled={activeStep === 0}
         onClick={handleBack}

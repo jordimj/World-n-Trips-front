@@ -7,6 +7,7 @@ const navigationItems = () => (
     <NavigationItem link="/countriesList">List of countries</NavigationItem>
     <NavigationItem link="/statistics">Travel stats</NavigationItem>
     <NavigationItem link="/trips">Trip journals</NavigationItem>
+    <NavigationItem link="/expenses">Expenses</NavigationItem>
   </ul>
 );
 

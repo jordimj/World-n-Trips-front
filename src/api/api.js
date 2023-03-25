@@ -37,3 +37,11 @@ export async function getAvailableDates() {
 export async function getEphemeris() {
   return (await instance.get('/ephemeris/')).data;
 }
+
+export async function getExpenses(filters) {
+  return (await instance.post('/expenses/', filters)).data;
+}
+
+export async function getCurrencies() {
+  return (await instance.get('/expenses/currencies')).data;
+}

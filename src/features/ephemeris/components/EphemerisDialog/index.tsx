@@ -66,7 +66,7 @@ function EphemerisDialog(props: EphemerisDialogProps) {
                   />
                   <Stack sx={{ ml: 3 }}>
                     <Typography>
-                      I slept at {ephemeris.city}, {ephemeris.country.name}
+                      I slept in {ephemeris.city}, {ephemeris.country.name}
                     </Typography>
                     <Typography>During the {buildTripName(ephemeris.trip)}</Typography>
                   </Stack>
