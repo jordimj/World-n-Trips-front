@@ -1,6 +1,7 @@
 interface Expense {
   id: number;
   day: string;
+  trip: string;
   country: string;
   category: string;
   subcategory: string;

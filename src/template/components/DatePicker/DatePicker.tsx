@@ -7,13 +7,20 @@ import useJournalAvailableDates from '../../../features/inserter/hooks/useJourna
 
 interface DatePickerProps {
   date: Date | null;
+  label?: string;
   handleChange: (date: Date | null) => void;
   loading?: boolean;
   shouldDisableDate?: (day: Date) => boolean;
 }
 
 function DatePicker(props: DatePickerProps) {
-  const { date, handleChange, loading = false, shouldDisableDate = () => false } = props;
+  const {
+    date,
+    handleChange,
+    label,
+    loading = false,
+    shouldDisableDate = () => false,
+  } = props;
 
   return (
     <Box sx={{ backgroundColor: 'white', borderRadius: 'var(--border-radius)' }}>
@@ -25,6 +32,7 @@ function DatePicker(props: DatePickerProps) {
           renderInput={(params) => <TextField {...params} />}
           shouldDisableDate={shouldDisableDate}
           loading={loading}
+          {...(label && { label })}
         />
       </LocalizationProvider>
     </Box>

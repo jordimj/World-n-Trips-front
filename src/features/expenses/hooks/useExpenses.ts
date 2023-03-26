@@ -22,7 +22,10 @@ function useExpenses(filters: ExpensesFilters) {
     queryFn: async () => {
       const data = await API.getExpenses(variables);
 
-      return data as Expenses;
+      return {
+        items: data.data as Expenses,
+        pagination: data.pagination,
+      };
     },
     refetchOnWindowFocus: false,
   });
