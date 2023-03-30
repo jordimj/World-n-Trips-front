@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import * as API from '../../../api/api';
 import { Expenses, ExpensesFilters } from '../interfaces';
 
@@ -7,7 +7,6 @@ function useExpenses(filters: ExpensesFilters) {
     filters;
 
   const variables = {
-    page,
     ...(query && { query }),
     ...(from && { from: new Intl.DateTimeFormat('en-CA').format(from) }),
     ...(to && { to: new Intl.DateTimeFormat('en-CA').format(to) }),
@@ -17,16 +16,21 @@ function useExpenses(filters: ExpensesFilters) {
     ...(currency && { currency }),
   };
 
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ['fetch-expenses', variables],
-    queryFn: async () => {
-      const data = await API.getExpenses(variables);
+    queryFn: async ({ pageParam = 1 }) => {
+      const data = await API.getExpenses({ ...variables, page: pageParam });
 
       return {
         items: data.data as Expenses,
         pagination: data.pagination,
       };
     },
+    getNextPageParam: (lastPage) => {
+      const nextPage = lastPage.pagination.currentPage + 1;
+      return nextPage <= lastPage.pagination.totalPages ? nextPage : undefined;
+    },
+    getPreviousPageParam: (firstPage) => firstPage.pagination.currentPage - 1,
     refetchOnWindowFocus: false,
   });
 }
