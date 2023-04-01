@@ -3,8 +3,7 @@ import * as API from '../../../api/api';
 import { Expenses, ExpensesFilters } from '../interfaces';
 
 function useExpenses(filters: ExpensesFilters) {
-  const { query, page, from, to, countries, categories, subcategories, currency } =
-    filters;
+  const { query, from, to, countries, categories, subcategories, currencies } = filters;
 
   const variables = {
     ...(query && { query }),
@@ -13,7 +12,7 @@ function useExpenses(filters: ExpensesFilters) {
     ...(countries && { countries }),
     ...(categories && { categories }),
     ...(subcategories && { subcategories }),
-    ...(currency && { currency }),
+    ...(currencies && { currencies }),
   };
 
   return useInfiniteQuery({

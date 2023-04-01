@@ -2,7 +2,8 @@ import { Stack } from '@mui/material';
 import DataTable from '../DataTable/DataTable';
 import JournalConfirmation from '../Journal/JournalConfirmation';
 import { useInserterContext } from '../../hooks/useInserterContext';
-import Autocomplete from '../../../../template/components/Autocomplete/Autocomplete';
+import AutocompleteTrips from '../../../../template/components/Autocomplete/AutocompleteTrips';
+import AutocompleteCountries from '../../../../template/components/Autocomplete/AutocompleteCountries';
 
 function Step3() {
   const {
@@ -22,9 +23,9 @@ function Step3() {
           {filename && <h5>Data read from: {filename}</h5>}
           <DataTable />
           {dataKind === 'day' ? (
-            <Autocomplete.Trips onChangeOption={setOption} />
+            <AutocompleteTrips onChangeOption={setOption} />
           ) : (
-            <Autocomplete.Countries onChangeOption={setOption} />
+            <AutocompleteCountries onChangeOption={setOption} />
           )}
         </>
       )}

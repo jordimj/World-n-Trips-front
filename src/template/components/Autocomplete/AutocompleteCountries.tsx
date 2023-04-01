@@ -1,5 +1,5 @@
 import useCountries from '../../../hooks/useCountries';
-import Autocomplete from './Autocomplete';
+import Autocomplete, { Options } from './Autocomplete';
 
 interface Props {
   onChangeOption: (optionId: number | null) => void;
@@ -18,5 +18,25 @@ function AutocompleteCountries(props: Props) {
     />
   );
 }
+
+interface MultipleProps {
+  onChangeOption: (options: Options) => void;
+}
+
+function AutocompleteMultipleCountries(props: MultipleProps) {
+  const { onChangeOption } = props;
+  const { data, isFetching } = useCountries();
+
+  return (
+    <Autocomplete.Multiple
+      label="Countries"
+      loading={isFetching}
+      options={data}
+      onChangeOption={onChangeOption}
+    />
+  );
+}
+
+AutocompleteCountries.Multiple = AutocompleteMultipleCountries;
 
 export default AutocompleteCountries;

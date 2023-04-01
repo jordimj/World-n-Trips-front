@@ -15,11 +15,10 @@ export interface Expenses extends Array<Expense> {}
 
 export interface ExpensesFilters {
   query?: string;
-  page: number;
   from?: Date | null;
   to?: Date | null;
   countries?: Array<number>;
   categories?: Array<number>;
   subcategories?: Array<number>;
-  currency?: string;
+  currencies?: Array<string>;
 }

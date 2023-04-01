@@ -1,24 +1,33 @@
 import { debounce, Stack, Typography } from '@mui/material';
 import { Fragment, useState } from 'react';
 import { ExpensesFilters } from '../../interfaces';
-import Autocomplete from '../../../../template/components/Autocomplete/Autocomplete';
 import SearchInput from '../../../countries/components/SearchInput/SearchInput';
 import DatePicker from '../../../../template/components/DatePicker/DatePicker';
 import ExpensesTable from './ExpensesTable';
+import { Options } from '../../../../template/components/Autocomplete/Autocomplete';
+import AutocompleteCountries from '../../../../template/components/Autocomplete/AutocompleteCountries';
+import AutocompleteTrips from '../../../../template/components/Autocomplete/AutocompleteTrips';
+import AutocompleteCurrencies from '../../../../template/components/Autocomplete/AutocompleteCurrencies';
 
 function Expenses() {
-  const [filters, setFilters] = useState<ExpensesFilters>({ page: 1 });
+  const [filters, setFilters] = useState<ExpensesFilters>({});
 
-  const onChangeCountry = (option: number | null) =>
+  const onChangeCountry = (options: Options) =>
     setFilters((prevFilters) => ({
       ...prevFilters,
-      countries: option === null ? [] : [option],
+      countries: options.map((option) => option.id),
     }));
 
-  const onChangeTrip = (option: number | null) =>
+  const onChangeTrip = (options: Options) =>
     setFilters((prevFilters) => ({
       ...prevFilters,
-      trips: option === null ? [] : [option],
+      trips: options.map((option) => option.id),
+    }));
+
+  const onChangeCurrency = (options: Options) =>
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      currencies: options.map((option) => option.name),
     }));
 
   const onChangeKeyword = (e: any) => {
@@ -51,12 +60,15 @@ function Expenses() {
           handleChange={onChangeFrom}
         />
         <DatePicker label="To" date={filters.to ?? null} handleChange={onChangeTo} />
-        <Autocomplete.Countries onChangeOption={onChangeCountry} />
-        <Autocomplete.Trips onChangeOption={onChangeTrip} />
         <SearchInput
           placeholder="Filter by keyword"
           onChange={debounce(onChangeKeyword, 300)}
         />
+      </Stack>
+      <Stack direction="row" gap={2} sx={{ p: 2 }}>
+        <AutocompleteCountries.Multiple onChangeOption={onChangeCountry} />
+        <AutocompleteTrips.Multiple onChangeOption={onChangeTrip} />
+        <AutocompleteCurrencies onChangeOption={onChangeCurrency} />
       </Stack>
       <ExpensesTable filters={filters} />
     </Fragment>
