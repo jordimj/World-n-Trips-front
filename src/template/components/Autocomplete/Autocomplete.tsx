@@ -1,4 +1,6 @@
-import { Autocomplete as MuiAutocomplete, TextField } from '@mui/material';
+import { Autocomplete as MuiAutocomplete, Checkbox, TextField } from '@mui/material';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 interface Option {
   id: number;
@@ -60,6 +62,17 @@ function AutocompleteMultiple(props: AutocompleteMultipleProps) {
       renderInput={(params) => <TextField {...params} label={label} />}
       multiple
       limitTags={3}
+      renderOption={(props, option, { selected }) => (
+        <li {...props}>
+          <Checkbox
+            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+            checkedIcon={<CheckBoxIcon fontSize="small" />}
+            style={{ marginRight: 8 }}
+            checked={selected}
+          />
+          {option.name}
+        </li>
+      )}
     />
   );
 }
