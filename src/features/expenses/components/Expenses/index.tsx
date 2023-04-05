@@ -5,7 +5,7 @@ import Table from '../Table';
 import Filters from '../Filters';
 
 function Expenses() {
-  const [filters, setFilters] = useState<ExpensesFilters>({});
+  const [filters, setFilters] = useState<ExpensesFilters>({ price: [0, 1000] });
 
   return (
     <Fragment>

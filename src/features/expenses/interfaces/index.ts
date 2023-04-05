@@ -21,4 +21,5 @@ export interface ExpensesFilters {
   categories?: Array<number>;
   subcategories?: Array<number>;
   currencies?: Array<string>;
+  price: Array<number>;
 }

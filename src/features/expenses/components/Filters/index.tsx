@@ -1,5 +1,5 @@
 import { Dispatch, Fragment, SetStateAction } from 'react';
-import { debounce, Stack } from '@mui/material';
+import { Box, debounce, Slider, Stack } from '@mui/material';
 import SearchInput from '../../../countries/components/SearchInput/SearchInput';
 import DatePicker from '../../../../template/components/DatePicker/DatePicker';
 import { Options } from '../../../../template/components/Autocomplete/Autocomplete';
@@ -54,26 +54,65 @@ function Filters(props: Props) {
       to: date,
     }));
 
+  const onChangePrice = (e: Event, newValue: number | number[], activeThumb: number) => {
+    if (!Array.isArray(newValue)) return;
+
+    setFilters((prevFilters) => {
+      const [minPrice, maxPrice] = prevFilters.price;
+      const [newMin, newMax] = newValue;
+
+      const price =
+        activeThumb === 0
+          ? [Math.min(newMin, maxPrice), maxPrice]
+          : [minPrice, Math.max(newMax, minPrice)];
+
+      return {
+        ...prevFilters,
+        price,
+      };
+    });
+  };
+
+  const sliderMarks = Array.from({ length: 11 }, (_, idx) => ({
+    value: idx * 100,
+    label: `${idx * 100} €`,
+  }));
+
   return (
-    <Fragment>
-      <Stack direction="row" gap={2} sx={{ p: 2 }}>
+    <Stack gap={2}>
+      <Stack direction="row" gap={2} sx={{ px: 2 }}>
         <DatePicker
           label="From"
           date={filters.from ?? null}
           handleChange={onChangeFrom}
         />
         <DatePicker label="To" date={filters.to ?? null} handleChange={onChangeTo} />
+      </Stack>
+      <Stack direction="row" gap={2} sx={{ px: 2 }}>
+        <AutocompleteCountries.Multiple onChangeOption={onChangeCountry} />
+        <AutocompleteTrips.Multiple onChangeOption={onChangeTrip} />
+        <AutocompleteCurrencies onChangeOption={onChangeCurrency} />
+      </Stack>
+      <Stack direction="row" gap={4} sx={{ px: 2 }}>
+        <Box sx={{ px: 2, width: '100%' }}>
+          <Slider
+            getAriaLabel={() => 'Minimum and maximum price'}
+            value={filters.price}
+            min={0}
+            max={1000}
+            onChange={debounce(onChangePrice, 300)}
+            valueLabelDisplay="auto"
+            getAriaValueText={(value) => `${value} €`}
+            disableSwap
+            marks={sliderMarks}
+          />
+        </Box>
         <SearchInput
           placeholder="Filter by keyword"
           onChange={debounce(onChangeKeyword, 300)}
         />
       </Stack>
-      <Stack direction="row" gap={2} sx={{ p: 2 }}>
-        <AutocompleteCountries.Multiple onChangeOption={onChangeCountry} />
-        <AutocompleteTrips.Multiple onChangeOption={onChangeTrip} />
-        <AutocompleteCurrencies onChangeOption={onChangeCurrency} />
-      </Stack>
-    </Fragment>
+    </Stack>
   );
 }
 

@@ -39,7 +39,7 @@ export async function getEphemeris() {
 }
 
 export async function getExpenses(filters) {
-  return (await instance.post('/expenses/', filters)).data;
+  return (await instance.post('/expenses', filters)).data;
 }
 
 export async function getCurrencies() {

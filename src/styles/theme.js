@@ -59,6 +59,16 @@ const theme = createTheme({
         },
       },
     },
+    MuiSlider: {
+      styleOverrides: {
+        colorPrimary: {
+          color: 'var(--secondary-color)',
+        },
+        markLabel: {
+          color: 'var(--secondary-color)',
+        },
+      },
+    },
     MuiDivider: {
       styleOverrides: {
         withChildren: {

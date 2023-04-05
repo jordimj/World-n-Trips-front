@@ -42,7 +42,7 @@ export default function ExpensesChart({ expensesByCategory }) {
         ],
       },
       options: {
-        aspectRatio: 2,
+        aspectRatio: 2.5,
         plugins: {
           legend: {
             position: 'right',

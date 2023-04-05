@@ -12,11 +12,11 @@ import {
   Typography,
 } from '@mui/material';
 import useElementOnScreen from '../../../../hooks/useElementOnScreen';
-import Spinner from '../../../../template/components/Spinner/Spinner';
 import { formatFullDate } from '../../../../utils/date';
 import { euroFormatter } from '../../../../utils/number';
 import useExpenses from '../../hooks/useExpenses';
 import { ExpensesFilters } from '../../interfaces';
+import Skeleton from './Skeleton';
 import styles from './index.module.css';
 
 interface Props {
@@ -41,11 +41,11 @@ function ExpensesTable(props: Props) {
   const items = pages.map((page) => page.items).flat();
   const hasResults = items && items.length > 0;
   const hasLocalCurrency = items.some((item) => item.value);
-  const isLoading = items.length === 0 && isFetching;
+  const isInitialLoading = items.length === 0 && isFetching;
 
   return (
     <Stack>
-      <Typography sx={{ ml: 'auto' }}>
+      <Typography sx={{ fontSize: 14, ml: 'auto', pt: 2 }}>
         Showing {items.length} expenses out of {pageParams.totalItems ?? 0} found
       </Typography>
       <TableContainer className={styles.paper} component={Paper}>
@@ -64,56 +64,54 @@ function ExpensesTable(props: Props) {
               <TableCell align="center">Value</TableCell>
             </TableRow>
           </TableHead>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <TableBody sx={{ scrollSnapType: 'y mandatory' }}>
-              {hasResults ? (
-                items?.map((expense) => (
-                  <Fragment>
-                    <TableRow key={expense.id} className={styles.row}>
+
+          <TableBody sx={{ scrollSnapType: 'y mandatory' }}>
+            {hasResults &&
+              items?.map((expense, idx) => (
+                <Fragment key={idx}>
+                  <TableRow key={expense.id} className={styles.row}>
+                    <TableCell align="center">
+                      <Typography>{formatFullDate(expense.day)}</Typography>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography>{expense.trip}</Typography>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography>{expense.country}</Typography>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography>{expense.category}</Typography>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography>{expense.subcategory}</Typography>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography>{expense.infoExtra}</Typography>
+                    </TableCell>
+                    {hasLocalCurrency && (
                       <TableCell align="center">
-                        <Typography>{formatFullDate(expense.day)}</Typography>
+                        <Typography>
+                          {expense.value ? `${expense.currency} ${expense.value}` : ' - '}
+                        </Typography>
                       </TableCell>
-                      <TableCell align="center">
-                        <Typography>{expense.trip}</Typography>
-                      </TableCell>
-                      <TableCell align="center">
-                        <Typography>{expense.country}</Typography>
-                      </TableCell>
-                      <TableCell align="center">
-                        <Typography>{expense.category}</Typography>
-                      </TableCell>
-                      <TableCell align="center">
-                        <Typography>{expense.subcategory}</Typography>
-                      </TableCell>
-                      <TableCell align="center">
-                        <Typography>{expense.infoExtra}</Typography>
-                      </TableCell>
-                      {hasLocalCurrency && (
-                        <TableCell align="center">
-                          <Typography>
-                            {expense.value
-                              ? `${expense.currency} ${expense.value}`
-                              : ' - '}
-                          </Typography>
-                        </TableCell>
-                      )}
-                      <TableCell align="center">
-                        <Typography>{euroFormatter(Number(expense.valueEur))}</Typography>
-                      </TableCell>
-                    </TableRow>
-                  </Fragment>
-                ))
-              ) : (
-                <TableRow>
-                  <Typography sx={{ px: 2, py: 1 }}>
-                    No results matching these criteria
-                  </Typography>
-                </TableRow>
-              )}
-            </TableBody>
-          )}
+                    )}
+                    <TableCell align="center">
+                      <Typography>{euroFormatter(Number(expense.valueEur))}</Typography>
+                    </TableCell>
+                  </TableRow>
+                </Fragment>
+              ))}
+            {!hasResults && !isFetching && (
+              <TableRow>
+                <Typography sx={{ px: 2, py: 1 }}>
+                  No results matching these criteria
+                </Typography>
+              </TableRow>
+            )}
+            {(hasNextPage || isInitialLoading) && (
+              <Skeleton cells={hasLocalCurrency ? 8 : 7} />
+            )}
+          </TableBody>
           <Box ref={intersectionRef} />
         </Table>
       </TableContainer>
