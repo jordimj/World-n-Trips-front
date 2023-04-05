@@ -14,9 +14,11 @@ import * as actions from '../../actions/actions';
 import { groupBy } from '../../../../utils';
 import { addDatesToTripCard } from '../../../../utils/date';
 import Chip from '../../../../template/components/Chip/Chip';
+import useLocalStorage from '../../../../hooks/useLocalStorage';
 
 export default function () {
   const trips = useSelector((state) => state.journals.trips);
+  const [filterTrips] = useLocalStorage('filter_trips');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,7 +27,10 @@ export default function () {
     if (trips !== []) dispatch(actions.fetchTrips());
   }, []);
 
-  const groupedTrips = groupBy(trips, (trip) => trip.departureDate.date.slice(0, 4));
+  const filteredTrips = filterTrips ? trips.filter((trip) => trip.hasJournals) : trips;
+  const groupedTrips = groupBy(filteredTrips, (trip) =>
+    trip.departureDate.date.slice(0, 4)
+  );
 
   return (
     <Box textAlign="center">

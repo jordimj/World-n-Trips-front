@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -22,6 +23,10 @@ export default function SettingsMenu() {
     'enabled_ephemeris',
     true
   );
+
+  const location = useLocation();
+  const isTrips = location.pathname === '/trips';
+  const [filterTrips, setFilterTrips] = useLocalStorage('filter_trips', false);
 
   return (
     <Stack direction="row" gap={3} alignItems="center">
@@ -64,6 +69,16 @@ export default function SettingsMenu() {
           />
           Travel ephemeris
         </MenuItem>
+        {isTrips && (
+          <MenuItem>
+            <Switch
+              color="primary"
+              checked={filterTrips}
+              onChange={(e) => setFilterTrips(e.target.checked)}
+            />
+            Filter trips with journals
+          </MenuItem>
+        )}
       </Menu>
     </Stack>
   );
