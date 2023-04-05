@@ -26,7 +26,7 @@ function EphemerisDialog(props: EphemerisDialogProps) {
   const navigate = useNavigate();
   const onCountryFlagClick = (countryCode: string) => {
     onClose();
-    navigate(`/country/${countryCode}/`);
+    navigate(`/countries/${countryCode}/`);
   };
 
   return (

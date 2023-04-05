@@ -33,7 +33,7 @@ function Map({ data, region }) {
     const selectedCountryPosition = selection[0].row + 1;
     const countryName = data[selectedCountryPosition][0];
 
-    navigate(`/country/${COUNTRIES[countryName]}/`);
+    navigate(`/countries/${COUNTRIES[countryName]}/`);
   };
 
   const waitToRedrawChart = ({ chartWrapper }) => {

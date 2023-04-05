@@ -19,7 +19,7 @@ function NeighboringCountries({ info }) {
             >
               <NavLink
                 key={countryCode}
-                to={`/country/${countryCode}/`}
+                to={`/countries/${countryCode}/`}
                 className={[styles.neighboringCountry, visited && styles.visited].filter(
                   Boolean
                 )}

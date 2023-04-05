@@ -4,9 +4,7 @@ import Layout from '../template/components/Layout/Layout';
 import Spinner from '../template/components/Spinner/Spinner';
 
 const Home = lazy(() => import('../features/countries/components/Home/Home'));
-const CountriesList = lazy(() =>
-  import('../features/countries/components/CountriesList/CountriesList')
-);
+const Countries = lazy(() => import('../features/countries/components/Countries'));
 const Country = lazy(() => import('../features/countries/components/Country/Country'));
 const TravelStats = lazy(() =>
   import('../features/statistics/components/TravelStats/TravelStats')
@@ -20,8 +18,8 @@ export const AppRouter = () => (
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/country/:countryCode" element={<Country />} />
-          <Route path="/countriesList" element={<CountriesList />} />
+          <Route path="/countries/:countryCode" element={<Country />} />
+          <Route path="/countries" element={<Countries />} />
           <Route path="/statistics" element={<TravelStats />} />
           <Route path="/trips" element={<Trips />} />
           <Route path="/journals/:tripId" element={<Journals />} />

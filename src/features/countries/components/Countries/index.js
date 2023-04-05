@@ -14,9 +14,9 @@ import CountryBox from './CountryBox/CountryBox';
 import SearchInput from '../SearchInput/SearchInput';
 import Select from '../../../../template/components/Select/Select';
 import { DATABASE_REGIONS } from '../../../../constants/continentsAndRegions';
-import styles from './CountriesList.module.css';
+import styles from './index.module.css';
 
-function CountriesList() {
+function Countries() {
   const visitedCountries = useSelector((state) => state.countries.visited);
   const loading = useSelector((state) => state.countries.loading);
 
@@ -31,7 +31,7 @@ function CountriesList() {
     if (visitedCountries.length === 0) dispatch(actions.fetchVisitedCountries());
   }, []);
 
-  const countrySelectedHandler = (countryName) => navigate(`/country/${countryName}/`);
+  const countrySelectedHandler = (countryName) => navigate(`/countries/${countryName}/`);
 
   const onInputChange = (e) => {
     e.preventDefault();
@@ -118,4 +118,4 @@ function CountriesList() {
   );
 }
 
-export default CountriesList;
+export default Countries;
