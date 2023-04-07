@@ -1,0 +1,13 @@
+.extraInfoList {
+  width: 100%;
+  min-width: 250px;
+  text-align: left;
+  list-style: none;
+}
+
+.extraInfoIcon {
+  color: inherit;
+  min-width: 0;
+  margin-left: var(--spacing-4);
+  margin-right: var(--spacing-4);
+}

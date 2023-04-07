@@ -29,7 +29,7 @@ export default function NightsChart({ data: count }) {
       },
       options: {
         responsive: true,
-        aspectRatio: 2.5,
+        aspectRatio: 3.5,
         plugins: {
           legend: {
             display: false,
