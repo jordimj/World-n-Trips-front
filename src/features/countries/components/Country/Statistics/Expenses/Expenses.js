@@ -1,4 +1,6 @@
-import { Box, Divider, Stack } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Box, Button, Divider, Stack } from '@mui/material';
 import MoneyIcon from '@mui/icons-material/Money';
 import EuroIcon from '@mui/icons-material/Euro';
 import ExpensesTable from './ExpensesTable';
@@ -12,18 +14,22 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
   const { sum, categories } = expenses;
   const sumWithoutDailyExp = deductNotDailyExpenses(sum, categories);
 
-  const detailedExpenses = Object.entries(categories).reduce(
-    (acc, current) => [
-      ...acc,
-      {
-        category: current[0],
-        amount: current[1],
-        percentage: current[1] / sum,
-        dailyAverage: current[1] / totalNights,
+  const navigate = useNavigate();
+  const countryId = useSelector((state) => state.countries.country.info.id);
+
+  const goToExpenses = () =>
+    navigate('/expenses', {
+      state: {
+        countryId,
       },
-    ],
-    []
-  );
+    });
+
+  const detailedExpenses = Object.entries(categories).map(([category, amount]) => ({
+    category,
+    amount,
+    percentage: amount / sum,
+    dailyAverage: amount / totalNights,
+  }));
 
   return (
     <Stack component="section" alignItems="center" gap={4}>
@@ -65,6 +71,9 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
         </Box>
       </Stack>
       <ExpensesTable expenses={detailedExpenses} />
+      <Button variant="text" onClick={goToExpenses}>
+        Go to detailed expenses
+      </Button>
     </Stack>
   );
 }

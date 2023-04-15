@@ -1,6 +1,5 @@
 .container {
   width: 80%;
-  padding: 2% 10%;
 }
 
 .header {
@@ -32,7 +31,6 @@
 .rows {
   box-shadow: var(--box-shadow);
   border-radius: 8px;
-  margin-bottom: 25px;
   padding: 1%;
   background-color: var(--background-color-light);
   text-align: center;

@@ -7,13 +7,14 @@ interface Props {
 
 function Skeleton(props: Props) {
   const { cells } = props;
+
   return (
     <Fragment>
-      {Array.from({ length: 3 }).map((row) => (
-        <TableRow>
+      {Array.from({ length: 3 }).map((row, idx) => (
+        <TableRow key={`row-${idx}`}>
           {Array.from({ length: cells }).map((item, idx) => (
-            <TableCell>
-              <MuiSkeleton key={idx} height={25} sx={{ mx: 3 }} />
+            <TableCell key={`cell-${idx}`}>
+              <MuiSkeleton height={25} sx={{ mx: 3 }} />
             </TableCell>
           ))}
         </TableRow>

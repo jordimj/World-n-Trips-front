@@ -1,5 +1,5 @@
 import { Fragment, ReactNode } from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 
 interface Props {
   icon: ReactNode;
@@ -16,7 +16,7 @@ function KPI(props: Props) {
   return (
     <Stack
       direction="row"
-      gap={3}
+      gap={1}
       alignItems="center"
       justifyContent="center"
       sx={{
@@ -26,13 +26,15 @@ function KPI(props: Props) {
         p: 3,
         fontSize: '75px',
         minWidth: '300px',
-        flexGrow: 1,
+        // flexGrow: 1,
       }}
     >
-      {icon}
+      <Stack alignItems="center" sx={{ flex: 1 }}>
+        {icon}
+      </Stack>
       {children ?? (
         <Fragment>
-          <Stack alignItems="center">
+          <Stack alignItems="center" sx={{ minWidth: '200px' }}>
             <Typography
               sx={{
                 textTransform: 'uppercase',
@@ -45,7 +47,7 @@ function KPI(props: Props) {
             <Typography sx={{ fontSize: 30, fontWeight: 700 }}>{KPI}</Typography>
           </Stack>
           {secondaryKPI && (
-            <Stack>
+            <Stack alignItems="center" sx={{ ml: 3, minWidth: '100px' }}>
               <Typography
                 sx={{
                   textTransform: 'uppercase',

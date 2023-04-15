@@ -47,6 +47,10 @@ const theme = createTheme({
           backgroundColor: 'white',
           color: '#1976D2!important',
         },
+        text: {
+          color: 'var(--text-color)!important',
+          textTransform: 'none',
+        },
       },
     },
     MuiSwitch: {
