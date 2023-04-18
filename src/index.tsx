@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 
