@@ -3,7 +3,7 @@ import * as actionTypes from '../types/actionTypes';
 import { visitedCountriesMock } from '../__mocks__/visitedCountriesMock';
 import { countryStatsMock } from '../__mocks__/countryStatsMock';
 
-const isBackMocked = process.env.REACT_APP_IS_BACKEND_MOCKED === 'true';
+const isBackMocked = import.meta.env.VITE_IS_BACKEND_MOCKED === 'true';
 
 const fetchVisitedCountriesStart = () => {
   return {
