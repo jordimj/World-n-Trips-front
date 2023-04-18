@@ -3,13 +3,10 @@
   margin: auto;
 }
 
-.content {
-  min-height: 95vh;
-}
-
 .main {
+  min-height: 90vh;
   padding-top: 4rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 
 .footer {

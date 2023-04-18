@@ -12,4 +12,5 @@ const rootReducer = combineReducers({
   journals: journalsReducer,
 });
 
+// todo: remove deprecated createStore
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

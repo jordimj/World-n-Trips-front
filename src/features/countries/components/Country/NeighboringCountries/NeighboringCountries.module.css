@@ -21,9 +21,13 @@
   filter: grayscale(100%);
 }
 
-.neighboringCountry:hover,
 .visited {
   opacity: 1;
-  filter: none;
+  filter: grayscale(0%);
+}
+
+.neighboringCountry:is(:hover, :focus) {
+  opacity: 1;
+  filter: grayscale(0%) drop-shadow(0 8px 8px rgba(0, 0, 0, 0.5));
   transition: 0.5s opacity, filter;
 }

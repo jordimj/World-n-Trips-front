@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -12,21 +12,22 @@ import useLocalStorage from '../../../hooks/useLocalStorage';
 import Inserter from '../../../features/inserter/pages/Inserter';
 
 export default function SettingsMenu() {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 
-  const handleOpen = (event) => setAnchorEl(event.currentTarget);
+  const handleOpen = (event: MouseEvent<HTMLButtonElement>) =>
+    setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
   const { fullWidth, saveFullWidth } = useFullWidth();
   const [enabledEphemeris, setEnabledEphemeris] = useLocalStorage(
     'enabled_ephemeris',
-    true
+    'true'
   );
 
   const location = useLocation();
   const isTrips = location.pathname === '/trips';
-  const [filterTrips, setFilterTrips] = useLocalStorage('filter_trips', false);
+  const [filterTrips, setFilterTrips] = useLocalStorage('filter_trips', 'false');
 
   return (
     <Stack direction="row" gap={3} alignItems="center">

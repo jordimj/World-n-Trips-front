@@ -2,7 +2,12 @@ import { Chip as MuiChip } from '@mui/material';
 import ComputerIcon from '@mui/icons-material/Computer';
 import WorkIcon from '@mui/icons-material/Work';
 
-function Chip({ variant = 'trip', label }) {
+interface Props {
+  variant: 'trip' | 'worktrip' | 'telework';
+  label: string;
+}
+
+function Chip({ variant = 'trip', label }: Props) {
   const isJournalChip = variant === 'worktrip' || variant === 'telework';
 
   return (

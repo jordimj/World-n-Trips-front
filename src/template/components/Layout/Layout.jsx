@@ -17,9 +17,7 @@ const Layout = ({ children }) => {
     >
       <Toolbar />
       {loading && <Spinner />}
-      <div className={styles.content}>
-        <main className={styles.main}>{children}</main>
-      </div>
+      <main className={styles.main}>{children}</main>
       <footer className={styles.footer}>Jordi MJ @ World-n-Trips</footer>
     </Box>
   );

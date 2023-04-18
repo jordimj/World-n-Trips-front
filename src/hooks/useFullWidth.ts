@@ -12,8 +12,8 @@ const useFullWidth = () => {
     return () => window.removeEventListener('storage', handleChangeStorage);
   }, []);
 
-  const saveFullWidth = (fullWidth) => {
-    localStorage.setItem('fullWidth', fullWidth);
+  const saveFullWidth = (fullWidth: boolean) => {
+    localStorage.setItem('fullWidth', String(fullWidth));
 
     // Since the storage Event is not caught by the same tab that dispatches it, we shall dispatch it
     window.dispatchEvent(new Event('storage'));

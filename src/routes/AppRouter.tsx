@@ -6,8 +6,8 @@ import Spinner from '../template/components/Spinner/Spinner';
 const Home = lazy(() => import('../features/countries/components/Home/Home'));
 const Countries = lazy(() => import('../features/countries/components/Countries'));
 const Country = lazy(() => import('../features/countries/components/Country/Country'));
-const TravelStats = lazy(() =>
-  import('../features/statistics/components/TravelStats/TravelStats')
+const TravelStats = lazy(
+  () => import('../features/statistics/components/TravelStats/TravelStats')
 );
 const Trips = lazy(() => import('../features/journals/components/Trips/Trips'));
 const Journals = lazy(() => import('../features/journals/components/Journals/Journals'));
