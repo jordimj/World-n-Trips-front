@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_ROOT_URL,
+  baseURL: import.meta.env.VITE_ROOT_URL,
 });
 
 export async function getVisitedCountries() {
@@ -12,11 +12,11 @@ export async function getStats() {
   return (await instance.get('/statistics')).data;
 }
 
-export async function getYearStats(year) {
+export async function getYearStats(year: string) {
   return (await instance.get(`/statistics/${year}`)).data;
 }
 
-export async function getCountryStats(countryName) {
+export async function getCountryStats(countryName: string) {
   return (await instance.get(`/countries/statistics/${countryName}/`)).data;
 }
 
@@ -24,7 +24,7 @@ export async function getTrips() {
   return (await instance.get('/trips/full')).data;
 }
 
-export async function getJournals(tripId) {
+export async function getJournals(tripId: number) {
   return (await instance.get(`/journals/trip/${tripId}`)).data;
 }
 
@@ -38,7 +38,8 @@ export async function getEphemeris() {
   return (await instance.get('/ephemeris/')).data;
 }
 
-export async function getExpenses(filters) {
+// todo: give it some love
+export async function getExpenses(filters: any) {
   return (await instance.post('/expenses', filters)).data;
 }
 
