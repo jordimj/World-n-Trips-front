@@ -3,8 +3,8 @@
   "name": "World-n-Trips App",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "192x192",
+      "src": "favicon.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
