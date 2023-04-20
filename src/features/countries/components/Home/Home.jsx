@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import { ALL_REGIONS } from '../../../../constants';
+import { ALL_REGIONS } from '@/constants';
 import * as actions from '../../actions/actions';
 import Map from '../Map/Map';
 import Sidebar from '../Sidebar/Sidebar';

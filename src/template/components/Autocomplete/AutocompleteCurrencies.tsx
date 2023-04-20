@@ -1,6 +1,6 @@
-import useCurrencies from '../../../hooks/useCurrencies';
 import { Options } from './Autocomplete';
 import Autocomplete from './Autocomplete';
+import useCurrencies from '@/hooks/useCurrencies';
 
 interface Props {
   onChangeOption: (options: Options) => void;

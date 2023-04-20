@@ -9,10 +9,10 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import Spinner from '@/template/components/Spinner/Spinner';
 import * as actions from '../../actions/actions';
-import JournalAccordion from './JournalAccordion';
 import useJournalSearch from '../../hooks/useJournalSearch';
-import Spinner from '../../../../template/components/Spinner/Spinner';
+import JournalAccordion from './JournalAccordion';
 
 export default function () {
   const { tripId } = useParams();

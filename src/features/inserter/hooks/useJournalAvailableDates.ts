@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getAvailableDates } from '../../../api/api';
+import { getAvailableDates } from '@/api/api';
 
 function useJournalAvailableDates() {
   return useQuery({

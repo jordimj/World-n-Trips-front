@@ -6,10 +6,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import ViewSidebarIcon from '@mui/icons-material/ViewSidebar';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import CONTINENTS_AND_REGIONS from '../../../../constants/continentsAndRegions';
-import { WORLD_MAP } from '../../../../constants';
+import CONTINENTS_AND_REGIONS from '@/constants/continentsAndRegions';
+import { WORLD_MAP } from '@/constants';
+import Select from '@/template/components/Select/Select';
 import useMapSidebar from '../../hooks/useMapSidebar';
-import Select from '../../../../template/components/Select/Select';
 import styles from './sidebar.module.css';
 
 export default function MapSidebar() {

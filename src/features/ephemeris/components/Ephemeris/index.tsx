@@ -1,9 +1,9 @@
 import { Fragment, useState } from 'react';
 import Badge from '@mui/material/Badge';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import Spinner from '@/template/components/Spinner/Spinner';
 import EphemerisDialog from '../EphemerisDialog';
 import useFetchEphemeris from '../../hooks/useFetchEphemeris';
-import Spinner from '../../../../template/components/Spinner/Spinner';
 
 function Ephemeris() {
   const { data, isFetching } = useFetchEphemeris();

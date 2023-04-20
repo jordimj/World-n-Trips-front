@@ -1,12 +1,9 @@
-import FormControl from '@mui/material/FormControl';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
+import { Box, Button, ButtonGroup, FormControl, Stack, TextField } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
-import TextEditor from './TextEditor/TextEditor';
-import { Box, Button, ButtonGroup } from '@mui/material';
 import useClipboard from '../../hooks/useClipboard';
 import { useInserterContext } from '../../hooks/useInserterContext';
+import TextEditor from './TextEditor/TextEditor';
 
 export default function Journal() {
   const {

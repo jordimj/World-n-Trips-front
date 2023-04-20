@@ -4,10 +4,10 @@ import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { DATA_APPENDICES } from '@/constants';
+import { numberFormatter } from '@/utils/number';
 import HitchhikesChart from './HitchikesChart';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
-import { DATA_APPENDICES } from '../../../../../../constants';
-import { numberFormatter } from '../../../../../../utils/number';
 import KPI from '../KPI/KPI';
 
 export default function HitchhikesStatistics({ hitchhikes, totalNights }) {

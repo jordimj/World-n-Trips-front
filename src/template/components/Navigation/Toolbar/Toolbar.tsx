@@ -1,5 +1,5 @@
-import NavigationItems from '../NavigationItems/NavigationItems';
-import SettingsMenu from '../../SettingsMenu/SettingsMenu';
+import SettingsMenu from '@/template/components/SettingsMenu/SettingsMenu';
+import NavigationItems from '@/template/components/Navigation/NavigationItems/NavigationItems';
 import styles from './Toolbar.module.css';
 
 function Toolbar() {

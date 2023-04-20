@@ -1,8 +1,7 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 import { convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import * as API from '../../../api/api';
-import axios from 'axios';
 import { useInserterContext } from './useInserterContext';
 
 function useDataInsertion() {

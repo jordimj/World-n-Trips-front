@@ -1,5 +1,5 @@
 import { MenuItem } from '@mui/material';
-import Select from '../../../../template/components/Select/Select';
+import Select from '@/template/components/Select/Select';
 
 function YearSelect({ year, onYearChange }) {
   const currentYear = new Date().getFullYear();

@@ -11,9 +11,9 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import useElementOnScreen from '../../../../hooks/useElementOnScreen';
-import { formatFullDate } from '../../../../utils/date';
-import { euroFormatter } from '../../../../utils/number';
+import useElementOnScreen from '@/hooks/useElementOnScreen';
+import { formatFullDate } from '@/utils/date';
+import { euroFormatter } from '@/utils/number';
 import useExpenses from '../../hooks/useExpenses';
 import { ExpensesFilters } from '../../interfaces';
 import Skeleton from './Skeleton';

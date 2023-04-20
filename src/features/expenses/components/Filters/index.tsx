@@ -1,11 +1,11 @@
 import { Dispatch, Fragment, SetStateAction } from 'react';
 import { Box, debounce, Slider, Stack } from '@mui/material';
-import SearchInput from '../../../countries/components/SearchInput/SearchInput';
-import DatePicker from '../../../../template/components/DatePicker/DatePicker';
-import { Options } from '../../../../template/components/Autocomplete/Autocomplete';
-import AutocompleteCountries from '../../../../template/components/Autocomplete/AutocompleteCountries';
-import AutocompleteTrips from '../../../../template/components/Autocomplete/AutocompleteTrips';
-import AutocompleteCurrencies from '../../../../template/components/Autocomplete/AutocompleteCurrencies';
+import SearchInput from '@/features/countries/components/SearchInput/SearchInput';
+import DatePicker from '@/template/components/DatePicker/DatePicker';
+import { Options } from '@/template/components/Autocomplete/Autocomplete';
+import AutocompleteCountries from '@/template/components/Autocomplete/AutocompleteCountries';
+import AutocompleteTrips from '@/template/components/Autocomplete/AutocompleteTrips';
+import AutocompleteCurrencies from '@/template/components/Autocomplete/AutocompleteCurrencies';
 import { ExpensesFilters } from '../../interfaces';
 
 interface Props {

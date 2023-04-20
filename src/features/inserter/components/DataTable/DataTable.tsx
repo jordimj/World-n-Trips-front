@@ -7,8 +7,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { TableData } from '../../types';
-import DataTableRow from './DataTableRow';
 import { useInserterContext } from '../../hooks/useInserterContext';
+import DataTableRow from './DataTableRow';
 import styles from './DataTable.module.css';
 
 const TABLE_HEADERS = {

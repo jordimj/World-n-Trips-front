@@ -2,10 +2,10 @@ import { Fragment } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import DetailRow from './DetailRow/DetailRow';
-import { DATA_APPENDICES } from '../../../../../constants';
-import { numberFormatter } from '../../../../../utils/number';
-import Chip from '../../../../../template/components/Chip/Chip';
-import { buildTripName } from '../../../../../utils';
+import { DATA_APPENDICES } from '@/constants';
+import Chip from '@/template/components/Chip/Chip';
+import { buildTripName } from '@/utils';
+import { numberFormatter } from '@/utils/number';
 import styles from './CountryDetails.module.css';
 
 const CountryDetails = ({ info, trips }) => {

@@ -1,8 +1,7 @@
-import React from 'react';
 import TableCell from '@mui/material/TableCell';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import ConditionalWrapper from '../../../../template/components/ConditionalWrapper/ConditionalWrapper';
+import ConditionalWrapper from '@/template/components/ConditionalWrapper/ConditionalWrapper';
 import DataTableEditableCell from './DataTableEditableCell';
 import DataTableSelectableCell from './DataTableSelectableCell';
 

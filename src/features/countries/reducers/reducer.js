@@ -1,5 +1,5 @@
+import { ALL_REGIONS, WORLD_MAP } from '@/constants';
 import * as actionTypes from '../types/actionTypes';
-import { ALL_REGIONS, WORLD_MAP } from '../../../constants';
 
 const initialState = {
   visited: [],

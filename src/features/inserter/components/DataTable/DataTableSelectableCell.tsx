@@ -1,8 +1,7 @@
-import React from 'react';
 import TableCell from '@mui/material/TableCell';
 import { MenuItem, Select, Tooltip } from '@mui/material';
+import ConditionalWrapper from '@/template/components/ConditionalWrapper/ConditionalWrapper';
 import useHover from '../../hooks/useHover';
-import ConditionalWrapper from '../../../../template/components/ConditionalWrapper/ConditionalWrapper';
 
 interface Props {
   value: string;

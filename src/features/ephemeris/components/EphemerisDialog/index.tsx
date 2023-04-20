@@ -7,8 +7,8 @@ import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
 import { IconButton, Stack } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { formatFullDate, getYearsAgo } from '../../../../utils/date';
-import { buildTripName } from '../../../../utils';
+import { formatFullDate, getYearsAgo } from '@/utils/date';
+import { buildTripName } from '@/utils';
 import { EphemerisList } from '../../interfaces';
 
 interface EphemerisDialogProps {

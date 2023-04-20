@@ -1,5 +1,5 @@
-import useTrips from '../../../hooks/useTrips';
 import Autocomplete, { Options } from './Autocomplete';
+import useTrips from '@/hooks/useTrips';
 
 interface Props {
   onChangeOption: (optionId: number | null) => void;

@@ -2,7 +2,7 @@ import { useState, useEffect, Fragment } from 'react';
 import { Stack, Typography } from '@mui/material';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { DARK_MODE, LIGHT_MODE } from '../../../constants';
+import { DARK_MODE, LIGHT_MODE } from '@/constants';
 
 type Theme = 'light' | 'dark';
 

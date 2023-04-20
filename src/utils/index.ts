@@ -1,4 +1,4 @@
-import { TABLE_DIRECTION_ASC, TABLE_DIRECTION_DESC } from '../constants';
+import { TABLE_DIRECTION_ASC, TABLE_DIRECTION_DESC } from '@/constants';
 
 export const deductNotDailyExpenses = (
   totalExpenses: number,

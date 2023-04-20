@@ -1,4 +1,4 @@
-import * as API from '../../../api/api';
+import * as API from '@/api/api';
 import * as actionTypes from '../types/actionTypes';
 
 const fetchJournalsStart = () => {

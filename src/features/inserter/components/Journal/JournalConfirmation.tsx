@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
-import parse from 'html-react-parser';
-import DatePicker from '../../../../template/components/DatePicker/DatePicker';
-import draftToHtml from 'draftjs-to-html';
 import { convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import parse from 'html-react-parser';
+import DatePicker from '@/template/components/DatePicker/DatePicker';
 import { useInserterContext } from '../../hooks/useInserterContext';
 
 export default function JournalConfirmation() {

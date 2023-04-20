@@ -5,11 +5,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
-import useFullWidth from '../../../hooks/useFullWidth';
+import Ephemeris from '@/features/ephemeris/components/Ephemeris';
+import Inserter from '@/features/inserter/pages/Inserter';
+import useFullWidth from '@/hooks/useFullWidth';
+import useLocalStorage from '@/hooks/useLocalStorage';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
-import Ephemeris from '../../../features/ephemeris/components/Ephemeris';
-import useLocalStorage from '../../../hooks/useLocalStorage';
-import Inserter from '../../../features/inserter/pages/Inserter';
 
 export default function SettingsMenu() {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);

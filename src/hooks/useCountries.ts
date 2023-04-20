@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import * as API from '@/api/api';
 
 interface Option {
   id: number;
@@ -14,8 +14,8 @@ function useCountries() {
   return useQuery(
     ['getCountries'],
     async () => {
-      const response = await axios.get(endpoint);
-      return response.data as Options;
+      const response = await API.getCountries();
+      return response as Options;
     },
     {
       refetchOnWindowFocus: false,

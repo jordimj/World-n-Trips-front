@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import * as API from '../../../api/api';
+import * as API from '@/api/api';
 import { EphemerisList } from '../interfaces';
 
 function useFetchEphemeris() {

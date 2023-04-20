@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { TABLE_DIRECTION_ASC, TABLE_DIRECTION_DESC } from '../../../../../../constants';
-import { tableOrderBy } from '../../../../../../utils';
-import { euroFormatter, percentageFormatter } from '../../../../../../utils/number';
-import { SortingArrow } from '../../../../../../template/components/SortingArrow/SortingArrow';
+import { TABLE_DIRECTION_ASC, TABLE_DIRECTION_DESC } from '@/constants';
+import { SortingArrow } from '@/template/components/SortingArrow/SortingArrow';
+import { tableOrderBy } from '@/utils';
+import { euroFormatter, percentageFormatter } from '@/utils/number';
 import styles from './ExpensesTable.module.css';
 
 const ORDER_BY_CATEGORY = 'category';

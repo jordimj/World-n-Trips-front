@@ -9,11 +9,11 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import { DATABASE_REGIONS } from '@/constants/continentsAndRegions';
+import Select from '@/template/components/Select/Select';
 import * as actions from '../../actions/actions';
 import CountryBox from './CountryBox/CountryBox';
 import SearchInput from '../SearchInput/SearchInput';
-import Select from '../../../../template/components/Select/Select';
-import { DATABASE_REGIONS } from '../../../../constants/continentsAndRegions';
 import styles from './index.module.css';
 
 function Countries() {

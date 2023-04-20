@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Box } from '@mui/material';
-import useFullWidth from '../../../hooks/useFullWidth';
+import useFullWidth from '@/hooks/useFullWidth';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import styles from './Layout.module.css';
 

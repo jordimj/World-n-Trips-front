@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
-import { HOUR_LABELS } from '../../../../../../constants';
+import { HOUR_LABELS } from '@/constants';
 
 const CHART_KIND_RIDES = 'rides';
 const CHART_KIND_DISTANCES = 'distances';

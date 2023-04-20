@@ -10,11 +10,11 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import useLocalStorage from '@/hooks/useLocalStorage';
+import Chip from '@/template/components/Chip/Chip';
+import { groupBy } from '@/utils';
+import { addDatesToTripCard } from '@/utils/date';
 import * as actions from '../../actions/actions';
-import { groupBy } from '../../../../utils';
-import { addDatesToTripCard } from '../../../../utils/date';
-import Chip from '../../../../template/components/Chip/Chip';
-import useLocalStorage from '../../../../hooks/useLocalStorage';
 
 export default function () {
   const trips = useSelector((state) => state.journals.trips);

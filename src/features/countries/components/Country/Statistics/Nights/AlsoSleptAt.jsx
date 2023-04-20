@@ -7,7 +7,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { getAdverbialNumber } from '../../../../../../utils/number';
+import { getAdverbialNumber } from '@/utils/number';
 import styles from './AlsoSleptAt.module.css';
 
 function getEmoji(string) {

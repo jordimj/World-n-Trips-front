@@ -1,5 +1,5 @@
-import useCountries from '../../../hooks/useCountries';
 import Autocomplete, { Options } from './Autocomplete';
+import useCountries from '@/hooks/useCountries';
 
 interface Props {
   onChangeOption: (optionId: number | null) => void;

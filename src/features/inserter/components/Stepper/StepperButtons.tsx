@@ -1,11 +1,11 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
+import { AxiosError } from 'axios';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { STEPS } from '.';
+import Spinner from '@/template/components/Spinner/Spinner';
 import useDataInsertion from '../../hooks/useDataInsertion';
-import Spinner from '../../../../template/components/Spinner/Spinner';
 import useSnackbar from '../../hooks/useSnackbar';
-import { AxiosError } from 'axios';
+import { STEPS } from '.';
 
 interface StepperButtonsProps {
   activeStep: number;

@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import * as API from '../../../api/api';
+import * as API from '@/api/api';
 import { Expenses, ExpensesFilters } from '../interfaces';
 
 function useExpenses(filters: ExpensesFilters) {

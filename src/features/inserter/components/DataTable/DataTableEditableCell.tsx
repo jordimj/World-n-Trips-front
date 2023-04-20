@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TableCell from '@mui/material/TableCell';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import IconButton from '@mui/material/IconButton';
@@ -8,7 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
-import ConditionalWrapper from '../../../../template/components/ConditionalWrapper/ConditionalWrapper';
+import ConditionalWrapper from '@/template/components/ConditionalWrapper/ConditionalWrapper';
 import useHover from '../../hooks/useHover';
 
 interface Props {

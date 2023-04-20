@@ -1,6 +1,6 @@
 import { capitalize, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import { MenuItem } from '@mui/material';
-import Select from '../../../../template/components/Select/Select';
+import Select from '@/template/components/Select/Select';
 import { KindOfData } from '../../types';
 import { useInserterContext } from '../../hooks/useInserterContext';
 

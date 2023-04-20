@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { Chart } from 'react-google-charts';
 import { useNavigate, useLocation } from 'react-router-dom';
-import COUNTRIES from '../../../../constants/countryCodes';
-import { WORLD_MAP } from '../../../../constants';
+import COUNTRIES from '@/constants/countryCodes';
+import { WORLD_MAP } from '@/constants';
 import styles from './Map.module.css';
 
 function Map({ data, region }) {
