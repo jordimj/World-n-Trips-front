@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -26,10 +25,9 @@ function DatePicker(props: DatePickerProps) {
     <Box sx={{ backgroundColor: 'white', borderRadius: 'var(--border-radius)' }}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <MuiDatePicker
-          inputFormat="DD/MM/YYYY"
+          format="DD/MM/YYYY"
           value={date}
           onChange={handleChange}
-          renderInput={(params) => <TextField {...params} />}
           shouldDisableDate={shouldDisableDate}
           loading={loading}
           {...(label && { label })}
