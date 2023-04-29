@@ -1,8 +1,22 @@
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
+import * as API from '@/api/api';
 import { useInserterContext } from './useInserterContext';
+import { ImportData } from '../types';
+
+interface JournalBody {
+  date: string;
+  parsedData: ImportData;
+  title: string;
+}
+
+interface CommonBody {
+  optionId: number;
+  parsedData: ImportData;
+}
+
+export type InserterBody = CommonBody | JournalBody;
 
 function useDataInsertion() {
   const {
@@ -30,7 +44,7 @@ function useDataInsertion() {
       };
 
   return useMutation({
-    mutationFn: () => axios.post(`http://localhost:8000/${dataKind}s/create`, body),
+    mutationFn: () => API.saveNewData(dataKind!, body),
     onSuccess: () => {
       resetState();
     },

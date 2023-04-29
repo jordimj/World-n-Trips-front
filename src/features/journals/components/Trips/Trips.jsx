@@ -24,7 +24,7 @@ export default function () {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (trips !== []) dispatch(actions.fetchTrips());
+    if (trips.length === 0) dispatch(actions.fetchTrips());
   }, []);
 
   const filteredTrips = filterTrips ? trips.filter((trip) => trip.hasJournals) : trips;

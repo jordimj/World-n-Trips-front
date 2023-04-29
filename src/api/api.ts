@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { KindOfData } from '@/features/inserter/types';
+import { InserterBody } from '@/features/inserter/hooks/useDataInsertion';
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_ROOT_URL,
@@ -20,12 +22,20 @@ export async function getCountryStats(countryName: string) {
   return (await instance.get(`/countries/statistics/${countryName}/`)).data;
 }
 
-export async function getTrips() {
-  return (await instance.get('/trips/full')).data;
+export async function getCountries() {
+  return (await instance.get('/countries')).data;
+}
+
+export async function getTrips(full: boolean = false) {
+  return (await instance.get(`/trips${full ? '/full' : ''}`)).data;
 }
 
 export async function getJournals(tripId: number) {
   return (await instance.get(`/journals/trip/${tripId}`)).data;
+}
+
+export async function saveNewData(dataKind: KindOfData, body: InserterBody) {
+  return (await instance.post(`/${dataKind}s/create`, body)).data;
 }
 
 export async function getAvailableDates() {
@@ -45,4 +55,8 @@ export async function getExpenses(filters: any) {
 
 export async function getCurrencies() {
   return (await instance.get('/expenses/currencies')).data;
+}
+
+export async function getCategories() {
+  return (await instance.get('/categories')).data;
 }

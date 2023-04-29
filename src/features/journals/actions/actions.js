@@ -59,7 +59,7 @@ export const fetchTrips = () => {
     dispatch(fetchTripsStart());
 
     try {
-      const trips = await API.getTrips();
+      const trips = await API.getTrips(true);
       dispatch(fetchTripsSuccess(trips));
     } catch (e) {
       dispatch(fetchTripsFail(e));

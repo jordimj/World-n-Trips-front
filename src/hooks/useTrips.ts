@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import * as API from '@/api/api';
 
 interface Option {
   id: number;
@@ -9,12 +9,10 @@ interface Option {
 interface Options extends Array<Option> {}
 
 function useTrips() {
-  const endpoint = `http://localhost:8000/trips`;
-
   return useQuery(
     ['getTrips'],
     async () => {
-      const response = await axios.get(endpoint);
+      const response = await API.getTrips();
       return response.data as Options;
     },
     {

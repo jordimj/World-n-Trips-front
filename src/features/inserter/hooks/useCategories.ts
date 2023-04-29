@@ -1,13 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import * as API from '@/api/api';
 
 function useCategories() {
-  const endpoint = `http://localhost:8000/categories`;
-
   return useQuery(
     ['getCategories'],
     async () => {
-      const response = await axios.get(endpoint);
+      const response = await API.getCategories();
       return response.data;
     },
     {

@@ -32,7 +32,6 @@ export default function () {
   } = useJournalSearch();
 
   const handleOccurrenceClick = () => {
-    console.log({ ref: matchRefs.current[currentOccurrence] });
     matchRefs.current[currentOccurrence].current.scrollIntoView();
     setCurrentOccurrence((currentOccurrence) => currentOccurrence + 1);
   };
@@ -40,15 +39,14 @@ export default function () {
   const trips = useSelector((state) => state.journals.trips);
 
   useEffect(() => {
-    if (trips !== []) dispatch(actions.fetchTrips());
-    if (journals !== []) dispatch(actions.fetchJournals(tripId));
+    if (trips.length === 0) dispatch(actions.fetchTrips());
+
+    dispatch(actions.fetchJournals(tripId));
   }, [tripId]);
 
-  const trip = trips.find((trip) => trip.id == tripId);
+  const trip = trips.find((trip) => trip.id === Number(tripId));
 
   if (!trip || journals.length === 0) return <Spinner />;
-
-  console.log({ keywordRef });
 
   return (
     <Box textAlign="center">
