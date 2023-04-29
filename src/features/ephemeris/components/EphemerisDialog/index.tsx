@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { IconButton, Stack } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { formatFullDate, getYearsAgo } from '@/utils/date';
-import { buildTripName } from '@/utils';
+import { buildTripName, getCountryFlagSrc } from '@/utils';
 import { EphemerisList } from '../../interfaces';
 
 interface EphemerisDialogProps {
@@ -56,7 +56,7 @@ function EphemerisDialog(props: EphemerisDialogProps) {
               {ephemeris.country ? (
                 <Stack direction="row" alignItems="center">
                   <img
-                    src={`/img/flags/${ephemeris.country.alpha3code}.png`}
+                    src={getCountryFlagSrc(ephemeris.country.alpha3code)}
                     alt={`${ephemeris.country.name}'s flag`}
                     onClick={() => onCountryFlagClick(ephemeris.country.alpha3code)}
                     width="75"

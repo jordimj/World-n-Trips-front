@@ -45,3 +45,5 @@ export function groupBy<T>(
 
 export const buildTripName = (trip: string) =>
   trip.endsWith('TRIP') ? trip : `${trip} TRIP`;
+
+export const getCountryFlagSrc = (countryCode: string) => `/img/flags/${countryCode}.png`;

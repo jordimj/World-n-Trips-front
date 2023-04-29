@@ -11,8 +11,10 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import COUNTRIES from '@/constants/countryCodes';
 import useElementOnScreen from '@/hooks/useElementOnScreen';
 import { formatFullDate } from '@/utils/date';
+import { getCountryFlagSrc } from '@/utils';
 import { euroFormatter } from '@/utils/number';
 import useExpenses from '../../hooks/useExpenses';
 import { ExpensesFilters } from '../../interfaces';
@@ -53,8 +55,6 @@ function ExpensesTable(props: Props) {
           <TableHead className={styles.head}>
             <TableRow>
               <TableCell align="center">Day</TableCell>
-              <TableCell align="center">Trip</TableCell>
-              <TableCell align="center">Country</TableCell>
               <TableCell align="center">Category</TableCell>
               <TableCell align="center">Subcategory</TableCell>
               <TableCell align="center">Detailed info</TableCell>
@@ -62,45 +62,68 @@ function ExpensesTable(props: Props) {
                 <TableCell align="center">Value (Local currency)</TableCell>
               )}
               <TableCell align="center">Value</TableCell>
+              <TableCell align="center">Country</TableCell>
+              <TableCell align="center">Trip</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody sx={{ scrollSnapType: 'y mandatory' }}>
             {hasResults &&
-              items?.map((expense, idx) => (
-                <Fragment key={idx}>
-                  <TableRow key={expense.id} className={styles.row}>
-                    <TableCell align="center">
-                      <Typography>{formatFullDate(expense.day)}</Typography>
-                    </TableCell>
-                    <TableCell align="center">
-                      <Typography>{expense.trip}</Typography>
-                    </TableCell>
-                    <TableCell align="center">
-                      <Typography>{expense.country}</Typography>
-                    </TableCell>
-                    <TableCell align="center">
-                      <Typography>{expense.category}</Typography>
-                    </TableCell>
-                    <TableCell align="center">
-                      <Typography>{expense.subcategory}</Typography>
-                    </TableCell>
-                    <TableCell align="center">
-                      <Typography>{expense.infoExtra}</Typography>
-                    </TableCell>
-                    {hasLocalCurrency && (
+              items?.map((expense, idx) => {
+                const {
+                  id,
+                  day,
+                  trip,
+                  country,
+                  category,
+                  subcategory,
+                  infoExtra,
+                  value,
+                  currency,
+                  valueEur,
+                } = expense;
+
+                const countryCode = COUNTRIES[country as keyof typeof COUNTRIES];
+
+                return (
+                  <Fragment key={idx}>
+                    <TableRow key={id} className={styles.row}>
                       <TableCell align="center">
-                        <Typography>
-                          {expense.value ? `${expense.currency} ${expense.value}` : ' - '}
-                        </Typography>
+                        <Typography>{formatFullDate(day)}</Typography>
                       </TableCell>
-                    )}
-                    <TableCell align="center">
-                      <Typography>{euroFormatter(Number(expense.valueEur))}</Typography>
-                    </TableCell>
-                  </TableRow>
-                </Fragment>
-              ))}
+                      <TableCell align="center">
+                        <Typography>{category}</Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Typography>{subcategory}</Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Typography>{infoExtra}</Typography>
+                      </TableCell>
+                      {hasLocalCurrency && (
+                        <TableCell align="center">
+                          <Typography>
+                            {value ? `${currency} ${value}` : ' - '}
+                          </Typography>
+                        </TableCell>
+                      )}
+                      <TableCell align="center">
+                        <Typography>{euroFormatter(Number(valueEur))}</Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <img
+                          src={getCountryFlagSrc(countryCode)}
+                          alt={`${country}'s flag`}
+                          height="34"
+                        />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Typography>{trip}</Typography>
+                      </TableCell>
+                    </TableRow>
+                  </Fragment>
+                );
+              })}
             {!hasResults && !isFetching && (
               <TableRow>
                 <Typography sx={{ px: 2, py: 1 }}>
