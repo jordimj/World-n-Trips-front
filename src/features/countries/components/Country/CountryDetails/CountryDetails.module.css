@@ -1,3 +1,8 @@
+.root {
+  width: 100%;
+  flex: 1;
+}
+
 .details {
   background-color: var(--background-color-light);
   box-shadow: var(--box-shadow);
@@ -5,7 +10,7 @@
 }
 
 .details img {
-  width: 97%;
-  border-radius: var(--border-radius);
-  margin: var(--spacing-2);
+  width: 100%;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
 }

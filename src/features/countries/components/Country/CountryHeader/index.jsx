@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Map from '../../Map/Map';
 import CountryDetails from '../CountryDetails/CountryDetails';
 import NeighboringCountries from '../NeighboringCountries';
@@ -8,10 +8,8 @@ function CountryHeader({ info, statesVisited, trips }) {
   const stateCodes = statesVisited.map((state) => [state.code]);
 
   return (
-    <Stack direction="row" gap={4} sx={{ mt: 5, mb: 4, alignItems: 'center' }}>
-      <Box className={styles.details}>
-        <CountryDetails info={info} trips={trips} />
-      </Box>
+    <Stack className={styles.header}>
+      <CountryDetails info={info} trips={trips} />
       <Stack className={styles.map} gap={1}>
         <Typography variant="h1">{info.name}</Typography>
         <Typography variant="subtitle1">{info.continent}</Typography>

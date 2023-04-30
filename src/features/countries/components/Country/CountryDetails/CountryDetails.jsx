@@ -10,7 +10,7 @@ import styles from './CountryDetails.module.css';
 
 const CountryDetails = ({ info, trips }) => {
   return (
-    <Fragment>
+    <Box className={styles.root}>
       <Box className={styles.details}>
         <img src={info.flagUrl} alt={`${info.name}'s flag`} />
         <DetailRow label="Capital" value={info.capital} />
@@ -35,7 +35,7 @@ const CountryDetails = ({ info, trips }) => {
           <Chip key={trip} label={buildTripName(trip)} />
         ))}
       </Stack>
-    </Fragment>
+    </Box>
   );
 };
 

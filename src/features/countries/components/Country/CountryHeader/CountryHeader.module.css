@@ -1,10 +1,18 @@
-.map {
+.header {
+  flex-direction: row;
   align-items: center;
-  background-color: var(--background-color-light);
-  padding: var(--spacing-2);
-  width: 65%;
+  gap: var(--spacing-5);
+  margin: var(--spacing-4);
 }
 
-.details {
-  width: 35%;
+@media (max-width: 750px) {
+  .header {
+    flex-direction: column;
+  }
+}
+
+.map {
+  align-items: center;
+  width: 100%;
+  flex: 2;
 }
