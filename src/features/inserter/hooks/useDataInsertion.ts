@@ -5,15 +5,15 @@ import * as API from '@/api/api';
 import { useInserterContext } from './useInserterContext';
 import { ImportData } from '../types';
 
-interface JournalBody {
-  date: string;
-  parsedData: ImportData;
-  title: string;
-}
-
 interface CommonBody {
   optionId: number;
   parsedData: ImportData;
+}
+
+interface JournalBody {
+  date: string;
+  parsedData: string;
+  title: string;
 }
 
 export type InserterBody = CommonBody | JournalBody;
@@ -33,15 +33,15 @@ function useDataInsertion() {
 
   const rawContentState = convertToRaw(editorState.getCurrentContent());
   const body = isJournal
-    ? {
+    ? ({
         date: new Intl.DateTimeFormat('en-CA').format(date!),
         title,
         parsedData: draftToHtml(rawContentState),
-      }
-    : {
+      } as JournalBody)
+    : ({
         parsedData,
         optionId,
-      };
+      } as CommonBody);
 
   return useMutation({
     mutationFn: () => API.saveNewData(dataKind!, body),
