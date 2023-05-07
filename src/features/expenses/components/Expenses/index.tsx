@@ -25,7 +25,7 @@ function Expenses() {
     <Fragment>
       <Typography variant="h2">Expenses</Typography>
       <Filters filters={filters} setFilters={setFilters} />
-      <Table filters={filters} />
+      <Table filters={filters} setFilters={setFilters} />
     </Fragment>
   );
 }

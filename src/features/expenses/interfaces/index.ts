@@ -5,13 +5,22 @@ interface Expense {
   country: string;
   category: string;
   subcategory: string;
-  infoExtra: string;
+  details: string;
   value: string;
   currency: string;
   valueEur: string;
 }
 
 export interface Expenses extends Array<Expense> {}
+
+export type OrderBy =
+  | 'day'
+  | 'category'
+  | 'subcategory'
+  | 'details'
+  | 'valueEur'
+  | 'country'
+  | 'trip';
 
 export interface ExpensesFilters {
   query?: string;
@@ -22,4 +31,6 @@ export interface ExpensesFilters {
   subcategories?: Array<number>;
   currencies?: Array<string>;
   price: Array<number>;
+  orderBy?: OrderBy;
+  order?: 'asc' | 'desc';
 }

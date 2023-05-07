@@ -3,8 +3,18 @@ import * as API from '@/api/api';
 import { Expenses, ExpensesFilters } from '../interfaces';
 
 function useExpenses(filters: ExpensesFilters) {
-  const { query, from, to, countries, categories, subcategories, currencies, price } =
-    filters;
+  const {
+    query,
+    from,
+    to,
+    countries,
+    categories,
+    subcategories,
+    currencies,
+    price,
+    order,
+    orderBy,
+  } = filters;
 
   const variables = {
     ...(query && { query }),
@@ -14,6 +24,8 @@ function useExpenses(filters: ExpensesFilters) {
     ...(categories && { categories }),
     ...(subcategories && { subcategories }),
     ...(currencies && { currencies }),
+    ...(order && { order }),
+    ...(orderBy && { orderBy }),
     price,
   };
 

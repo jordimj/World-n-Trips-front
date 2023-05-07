@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Dispatch, Fragment, SetStateAction, useEffect } from 'react';
 import {
   Box,
   Paper,
@@ -17,16 +17,18 @@ import { formatFullDate } from '@/utils/date';
 import { getCountryFlagSrc } from '@/utils';
 import { euroFormatter } from '@/utils/number';
 import useExpenses from '../../hooks/useExpenses';
-import { ExpensesFilters } from '../../interfaces';
+import { ExpensesFilters, OrderBy } from '../../interfaces';
+import SortableTableHead from './SortableTableHead';
 import Skeleton from './Skeleton';
 import styles from './index.module.css';
 
 interface Props {
   filters: ExpensesFilters;
+  setFilters: Dispatch<SetStateAction<ExpensesFilters>>;
 }
 
 function ExpensesTable(props: Props) {
-  const { filters } = props;
+  const { filters, setFilters } = props;
   const { data, isFetching, fetchNextPage, hasNextPage } = useExpenses(filters);
 
   const pages = data?.pages ?? [];
@@ -45,6 +47,14 @@ function ExpensesTable(props: Props) {
   const hasLocalCurrency = items.some((item) => item.value);
   const isInitialLoading = items.length === 0 && isFetching;
 
+  const sortBy = (newOrderBy: OrderBy) => {
+    if (filters.orderBy === newOrderBy) {
+      setFilters({ ...filters, order: filters.order === 'asc' ? 'desc' : 'asc' });
+    } else {
+      setFilters({ ...filters, orderBy: newOrderBy, order: 'asc' });
+    }
+  };
+
   return (
     <Stack>
       <Typography sx={{ fontSize: 14, ml: 'auto', pt: 2 }}>
@@ -54,16 +64,52 @@ function ExpensesTable(props: Props) {
         <Table size="small" aria-label="table" stickyHeader>
           <TableHead className={styles.head}>
             <TableRow>
-              <TableCell align="center">Day</TableCell>
-              <TableCell align="center">Category</TableCell>
-              <TableCell align="center">Subcategory</TableCell>
-              <TableCell align="center">Detailed info</TableCell>
+              <SortableTableHead
+                kind="day"
+                sortBy={sortBy}
+                orderBy={filters.orderBy ?? 'day'}
+                order={filters.order ?? 'asc'}
+              />
+              <SortableTableHead
+                kind="category"
+                sortBy={sortBy}
+                orderBy={filters.orderBy ?? 'day'}
+                order={filters.order ?? 'asc'}
+              />
+              <SortableTableHead
+                kind="subcategory"
+                sortBy={sortBy}
+                orderBy={filters.orderBy ?? 'day'}
+                order={filters.order ?? 'asc'}
+              />
+              {/* detailed info abans */}
+              <SortableTableHead
+                kind="details"
+                sortBy={sortBy}
+                orderBy={filters.orderBy ?? 'day'}
+                order={filters.order ?? 'asc'}
+              />
               {hasLocalCurrency && (
                 <TableCell align="center">Value (Local currency)</TableCell>
               )}
-              <TableCell align="center">Value</TableCell>
-              <TableCell align="center">Country</TableCell>
-              <TableCell align="center">Trip</TableCell>
+              <SortableTableHead
+                kind="valueEur"
+                sortBy={sortBy}
+                orderBy={filters.orderBy ?? 'day'}
+                order={filters.order ?? 'asc'}
+              />
+              <SortableTableHead
+                kind="country"
+                sortBy={sortBy}
+                orderBy={filters.orderBy ?? 'day'}
+                order={filters.order ?? 'asc'}
+              />
+              <SortableTableHead
+                kind="trip"
+                sortBy={sortBy}
+                orderBy={filters.orderBy ?? 'day'}
+                order={filters.order ?? 'asc'}
+              />
             </TableRow>
           </TableHead>
 
@@ -77,7 +123,7 @@ function ExpensesTable(props: Props) {
                   country,
                   category,
                   subcategory,
-                  infoExtra,
+                  details,
                   value,
                   currency,
                   valueEur,
@@ -98,7 +144,7 @@ function ExpensesTable(props: Props) {
                         <Typography>{subcategory}</Typography>
                       </TableCell>
                       <TableCell align="center">
-                        <Typography>{infoExtra}</Typography>
+                        <Typography>{details}</Typography>
                       </TableCell>
                       {hasLocalCurrency && (
                         <TableCell align="center">
