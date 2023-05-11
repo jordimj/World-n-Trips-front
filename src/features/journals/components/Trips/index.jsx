@@ -16,7 +16,7 @@ import { groupBy } from '@/utils';
 import { addDatesToTripCard } from '@/utils/date';
 import * as actions from '../../actions/actions';
 
-export default function () {
+function Trips() {
   const trips = useSelector((state) => state.journals.trips);
   const [filterTrips] = useLocalStorage('filter_trips');
 
@@ -89,3 +89,5 @@ export default function () {
     </Box>
   );
 }
+
+export default Trips;

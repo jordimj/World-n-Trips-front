@@ -9,8 +9,8 @@ const Country = lazy(() => import('@/features/countries/components/Country/Count
 const TravelStats = lazy(
   () => import('@/features/statistics/components/TravelStats/TravelStats')
 );
-const Trips = lazy(() => import('@/features/journals/components/Trips/Trips'));
-const Journals = lazy(() => import('@/features/journals/components/Journals/Journals'));
+const Trips = lazy(() => import('@/features/journals/components/Trips'));
+const Journals = lazy(() => import('@/features/journals/components/Journals'));
 const Expenses = lazy(() => import('@/features/expenses/components/Expenses'));
 
 export const AppRouter = () => (

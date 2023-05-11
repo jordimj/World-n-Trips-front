@@ -1,0 +1,10 @@
+.root {
+  position: sticky;
+  top: 120px;
+  z-index: 2;
+  width: 350px;
+  margin-left: auto;
+  background-color: white;
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
