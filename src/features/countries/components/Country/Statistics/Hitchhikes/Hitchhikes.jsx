@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { Box, Divider, Stack } from '@mui/material';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -8,7 +7,7 @@ import { DATA_APPENDICES } from '@/constants';
 import { numberFormatter } from '@/utils/number';
 import HitchhikesChart from './HitchikesChart';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
-import KPI from '../KPI/KPI';
+import KPI from '../KPI';
 
 export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
   const {
@@ -22,10 +21,10 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
   } = hitchhikes;
 
   return (
-    <Fragment>
+    <Box component="section" sx={{ mb: 3 }}>
       <Stack component="section" gap={5} alignItems="center">
         <Divider>Hitchhikes</Divider>
-        <Stack direction="row" gap={3}>
+        <Stack direction="row" gap={3} flexWrap="wrap">
           <KPI
             icon={<ThumbUpIcon fontSize="inherit" />}
             label="Kilometers hitchhiked"
@@ -53,15 +52,14 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
           direction="row"
           justifyContent="space-evenly"
           alignItems="center"
-          sx={{ width: '100%' }}
+          gap={2}
+          flexWrap="wrap"
+          sx={{ width: '75%' }}
         >
-          <Stack sx={{ width: '32%' }}>
+          <Stack sx={{ flex: 3, minWidth: '500px' }}>
             <DetailRow
-              label="Average kilometers per day in the country"
-              value={numberFormatter(
-                totalKilometers / totalNights,
-                DATA_APPENDICES.KM_PER_DAY
-              )}
+              label="Average kilometers per traveled day"
+              value={numberFormatter(totalKilometers / totalNights, DATA_APPENDICES.KM)}
             />
             <DetailRow
               label="Average kilometers per day on the road"
@@ -72,7 +70,7 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
               value={numberFormatter(totalCars / daysOnTheRoad, DATA_APPENDICES.RIDES)}
             />
           </Stack>
-          <Stack sx={{ width: '32%' }}>
+          <Stack sx={{ flex: 2, minWidth: '300px' }}>
             <DetailRow
               label="Longest distance per ride"
               value={numberFormatter(distances.longest, DATA_APPENDICES.KM)}
@@ -87,7 +85,7 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
             />
           </Stack>
           {minutesWaiting && (
-            <Stack sx={{ width: '32%' }}>
+            <Stack sx={{ flex: 2, minWidth: '300px' }}>
               <DetailRow
                 label="Longest wait per ride"
                 value={numberFormatter(
@@ -120,6 +118,6 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
           <HitchhikesChart stats={statsPerHour} chartKind="minutes" />
         </Box>
       )}
-    </Fragment>
+    </Box>
   );
 }

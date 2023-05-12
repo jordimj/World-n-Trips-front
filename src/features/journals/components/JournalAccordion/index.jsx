@@ -3,6 +3,7 @@ import parse from 'html-react-parser';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { formatFullDate } from '@/utils/date';
+import styles from './JournalAccordion.module.css';
 
 function JournalAccordion(props) {
   const { journal, day, keyword, isSearching } = props;
@@ -23,20 +24,16 @@ function JournalAccordion(props) {
   return (
     <Accordion disableGutters expanded={expanded} onClick={toggleExpanded}>
       <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls={`panel-${day}-content`}
         id={`panel-${day}-header`}
-        sx={{
-          position: 'sticky',
-          top: 'var(--sticky-header-top)',
-          borderRadius: 'var(--border-radius)',
-        }}
+        aria-controls={`panel-${day}-content`}
+        className={styles.summary}
+        expandIcon={<ExpandMoreIcon />}
       >
         <Typography>#{day}</Typography>
-        <Typography sx={{ ml: 3, mr: 'auto' }}>{journal.title}</Typography>
+        <Typography className={styles.title}>{journal.title}</Typography>
         <Typography>{formatFullDate(journal.date)}</Typography>
       </AccordionSummary>
-      <AccordionDetails sx={{ px: 20 }}>
+      <AccordionDetails className={styles.details}>
         <Typography variant="journal">{parsed}</Typography>
       </AccordionDetails>
     </Accordion>

@@ -7,7 +7,7 @@ import { deductNotDailyExpenses } from '@/utils';
 import { euroFormatter } from '@/utils/number';
 import ExpensesTable from './ExpensesTable';
 import ExpensesChart from './ExpensesChart';
-import KPI from '../KPI/KPI';
+import KPI from '../KPI';
 import styles from './Expenses.module.css';
 
 export default function ExpensesStatistics({ expenses, totalNights }) {
@@ -32,16 +32,18 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
   }));
 
   return (
-    <Stack component="section" alignItems="center" gap={4}>
+    <Stack component="section" alignItems="center" gap={4} sx={{ mb: 2 }}>
       <Divider>Expenses</Divider>
       <Stack
         direction="row"
         justifyContent="center"
         alignItems="center"
+        gap={3}
+        flexWrap="wrap"
         sx={{ width: '100%' }}
       >
         <Stack gap={3}>
-          <Stack direction="row" gap={3}>
+          <Stack direction="row" gap={3} flexWrap="wrap">
             <KPI
               icon={<EuroIcon fontSize="inherit" />}
               label="Total expenses"
@@ -53,7 +55,7 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
               KPI={euroFormatter(sum / totalNights)}
             />
           </Stack>
-          <Stack direction="row" gap={3}>
+          <Stack direction="row" gap={3} flexWrap="wrap">
             <KPI
               icon={<MoneyIcon fontSize="inherit" />}
               label="Total daily expenses"

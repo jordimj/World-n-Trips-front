@@ -1,0 +1,19 @@
+.root {
+  font-size: 75px;
+  background-color: var(--navbar-color);
+  color: white;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-5);
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 14px;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.kpi {
+  font-size: 30px;
+  font-weight: 700;
+}

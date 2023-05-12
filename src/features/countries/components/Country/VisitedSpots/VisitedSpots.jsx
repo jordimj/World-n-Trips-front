@@ -27,12 +27,11 @@ export default function VisitedSpots({ cities, states }) {
   const handleChange = (event, newValue) => setActive(newValue);
 
   return (
-    <Box className={styles.visitedSpotsContainer}>
+    <Box className={styles.root}>
       <Tabs
         value={active}
         onChange={handleChange}
         centered
-        sx={{ borderBottom: 1, borderColor: 'divider' }}
         TabIndicatorProps={{
           style: {
             backgroundColor: 'var(--navbar-color)',

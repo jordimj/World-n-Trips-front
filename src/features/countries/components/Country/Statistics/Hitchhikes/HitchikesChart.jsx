@@ -3,7 +3,7 @@ import Chart from 'chart.js/auto';
 import { HOUR_LABELS } from '@/constants';
 
 const CHART_KIND_RIDES = 'rides';
-const CHART_KIND_DISTANCES = 'distances';
+const CHART_KIND_DISTANCES = 'distance';
 const CHART_KIND_MINUTES = 'minutes';
 
 const TITLES = {
@@ -42,7 +42,7 @@ export default function HitchhikesChart({ stats, chartKind }) {
         ],
       },
       options: {
-        aspectRatio: 4,
+        aspectRatio: 3.5,
         plugins: {
           legend: {
             display: false,

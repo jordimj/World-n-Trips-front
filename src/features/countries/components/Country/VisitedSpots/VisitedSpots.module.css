@@ -1,9 +1,9 @@
-.visitedSpotsContainer {
+.root {
   background-color: var(--background-color-light);
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
   padding: var(--spacing-3);
-  margin-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-7);
 }
 
 .visitedSpots {

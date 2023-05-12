@@ -1,0 +1,14 @@
+.summary {
+  position: sticky;
+  top: var(--sticky-header-top);
+  border-radius: var(--border-radius);
+}
+
+.title {
+  margin-left: var(--spacing-4);
+  margin-right: auto;
+}
+
+.details {
+  padding: var(--spacing-6) var(--spacing-10) !important;
+}

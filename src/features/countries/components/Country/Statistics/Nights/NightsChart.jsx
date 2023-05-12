@@ -29,7 +29,7 @@ export default function NightsChart({ data: count }) {
       },
       options: {
         responsive: true,
-        aspectRatio: 3.5,
+        aspectRatio: 1,
         plugins: {
           legend: {
             display: false,
@@ -60,7 +60,7 @@ export default function NightsChart({ data: count }) {
   }, [count]);
 
   return (
-    <Box sx={{ width: '100%', height: '100%' }}>
+    <Box sx={{ width: '50%', height: '80px' }}>
       <canvas ref={chartRef} />
     </Box>
   );

@@ -4,7 +4,7 @@ import NightShelterIcon from '@mui/icons-material/NightShelter';
 import EuroIcon from '@mui/icons-material/Euro';
 import { numberFormatter } from '@/utils/number';
 import NightsTable from './NightsTable';
-import KPI from '../KPI/KPI';
+import KPI from '../KPI';
 import NightsChart from './NightsChart';
 import AlsoSleptAt from './AlsoSleptAt';
 
@@ -19,12 +19,7 @@ export default function NightsStatistics({ nights, kmWalked }) {
   return (
     <Stack alignItems="center" gap={5}>
       <Divider>Days & nights</Divider>
-      <Stack
-        direction="row"
-        gap={3}
-        justifyContent="space-between"
-        sx={{ width: '100%' }}
-      >
+      <Stack direction="row" gap={3} flexWrap="wrap">
         <KPI
           icon={<DirectionsWalkIcon fontSize="inherit" />}
           label="Kilometers walked"
@@ -41,7 +36,7 @@ export default function NightsStatistics({ nights, kmWalked }) {
           <NightsChart data={{ 'Free stays': count.free, 'Paid stays': count.paid }} />
         </KPI>
       </Stack>
-      <Stack direction="row" alignItems="center" gap={5} sx={{ width: '70%' }}>
+      <Stack direction="row" alignItems="center" gap={5} sx={{ width: '70%', mb: 6 }}>
         <NightsTable spots={detailedSpots} />
         <AlsoSleptAt infoExtra={infoExtra} />
       </Stack>
