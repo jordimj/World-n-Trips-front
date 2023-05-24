@@ -16,7 +16,9 @@ const theme = createTheme({
     MuiAccordion: {
       styleOverrides: {
         root: {
-          borderRadius: '5px',
+          borderRadius: 'var(--border-radius)',
+          borderTopLeftRadius: 'var(--border-radius)!important',
+          borderTopRightRadius: 'var(--border-radius)!important',
         },
       },
     },

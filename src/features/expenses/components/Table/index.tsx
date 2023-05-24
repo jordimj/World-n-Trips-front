@@ -82,7 +82,6 @@ function ExpensesTable(props: Props) {
                 orderBy={filters.orderBy ?? 'day'}
                 order={filters.order ?? 'asc'}
               />
-              {/* detailed info abans */}
               <SortableTableHead
                 kind="details"
                 sortBy={sortBy}

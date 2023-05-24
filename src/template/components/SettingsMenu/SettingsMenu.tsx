@@ -10,6 +10,7 @@ import Inserter from '@/features/inserter/pages/Inserter';
 import useFullWidth from '@/hooks/useFullWidth';
 import useLocalStorage from '@/hooks/useLocalStorage';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
+import Search from '@/features/search/components/Search';
 
 export default function SettingsMenu() {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -33,12 +34,15 @@ export default function SettingsMenu() {
     <Stack direction="row" gap={3} alignItems="center">
       {enabledEphemeris && <Ephemeris />}
       <Inserter />
+      <Search />
       <Button
         id="settings-button"
         aria-controls={open ? 'settings-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleOpen}
+        disableRipple
+        sx={{ color: 'white!important' }}
       >
         Settings
       </Button>
