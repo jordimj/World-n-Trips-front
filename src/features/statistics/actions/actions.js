@@ -1,4 +1,4 @@
-import * as API from '../../../api/api';
+import { getStats, getYearStats } from '@/api';
 import * as actionTypes from '../types/actionTypes';
 
 const fetchStatisticsStart = () => {
@@ -26,7 +26,7 @@ export const fetchStatistics = (year = null) => {
     dispatch(fetchStatisticsStart());
 
     try {
-      const stats = await (year ? API.getYearStats(year) : API.getStats());
+      const stats = await (year ? getYearStats(year) : getStats());
       dispatch(fetchStatisticsSuccess(stats));
     } catch (e) {
       dispatch(fetchStatisticsFail(e));

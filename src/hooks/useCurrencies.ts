@@ -1,12 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import * as API from '@/api/api';
+import { getCurrencies } from '@/api';
 
 function useCurrencies() {
   return useQuery({
-    queryKey: ['fetch-currencies'],
+    queryKey: ['currencies'],
     queryFn: async () => {
-      const data = await API.getCurrencies();
-
+      const data = await getCurrencies();
       return data as Array<string>;
     },
     refetchOnWindowFocus: false,

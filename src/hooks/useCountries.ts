@@ -1,26 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import * as API from '@/api/api';
-
-interface Option {
-  id: number;
-  name: string;
-}
-
-interface Options extends Array<Option> {}
+import { getCountries } from '@/api';
+import { Options } from '@/template/components/Autocomplete/Autocomplete';
 
 function useCountries() {
-  const endpoint = `http://localhost:8000/countries`;
-
-  return useQuery(
-    ['getCountries'],
-    async () => {
-      const response = await API.getCountries();
+  return useQuery({
+    queryKey: ['countries'],
+    queryFn: async () => {
+      const response = await getCountries();
       return response as Options;
     },
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+    refetchOnWindowFocus: false,
+  });
 }
 
 export default useCountries;

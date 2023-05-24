@@ -1,24 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import * as API from '@/api/api';
-
-interface Option {
-  id: number;
-  name: string;
-}
-
-interface Options extends Array<Option> {}
+import { getTrips } from '@/api';
+import { Options } from '@/template/components/Autocomplete/Autocomplete';
 
 function useTrips() {
-  return useQuery(
-    ['getTrips'],
-    async () => {
-      const response = await API.getTrips();
-      return response.data as Options;
+  return useQuery({
+    queryKey: ['trips'],
+    queryFn: async () => {
+      const response = await getTrips();
+      return response as Options;
     },
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+    refetchOnWindowFocus: false,
+  });
 }
 
 export default useTrips;

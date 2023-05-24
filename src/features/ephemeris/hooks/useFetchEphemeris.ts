@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import * as API from '@/api/api';
+import { getEphemeris } from '@/api';
 import { EphemerisList } from '../interfaces';
 
 function useFetchEphemeris() {
   return useQuery({
-    queryKey: ['fetch-ephemeris'],
+    queryKey: ['ephemeris'],
     queryFn: async () => {
-      const data = await API.getEphemeris();
+      const data = await getEphemeris();
 
       return {
         allEphemeris: data as EphemerisList,

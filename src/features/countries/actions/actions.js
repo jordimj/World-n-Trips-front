@@ -1,4 +1,4 @@
-import * as API from '@/api/api';
+import { getVisitedCountries, getCountryStats } from '@/api';
 import * as actionTypes from '../types/actionTypes';
 import { visitedCountriesMock } from '../__mocks__/visitedCountriesMock';
 import { countryStatsMock } from '../__mocks__/countryStatsMock';
@@ -32,7 +32,7 @@ export const fetchVisitedCountries = () => {
     try {
       const visitedCountries = isBackMocked
         ? visitedCountriesMock
-        : await API.getVisitedCountries();
+        : await getVisitedCountries();
 
       dispatch(fetchVisitedCountriesSuccess(visitedCountries));
     } catch (e) {
@@ -68,7 +68,7 @@ export const fetchCountryStatistics = (countryName) => {
     try {
       const countryStats = isBackMocked
         ? countryStatsMock
-        : await API.getCountryStats(countryName);
+        : await getCountryStats(countryName);
       dispatch(fetchCountryStatisticsSuccess(countryStats));
     } catch (e) {
       dispatch(fetchCountryStatisticsFail(e));

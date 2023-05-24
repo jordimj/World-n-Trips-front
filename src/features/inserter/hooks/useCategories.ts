@@ -1,17 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import * as API from '@/api/api';
+import { getCategories } from '@/api';
 
 function useCategories() {
-  return useQuery(
-    ['getCategories'],
-    async () => {
-      const response = await API.getCategories();
+  return useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const response = await getCategories();
       return response.data;
     },
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+    refetchOnWindowFocus: false,
+  });
 }
 
 export default useCategories;

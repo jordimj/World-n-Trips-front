@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import * as API from '@/api/api';
+import { getExpenses } from '@/api';
 import { Expenses, ExpensesFilters } from '../interfaces';
 
 function useExpenses(filters: ExpensesFilters) {
@@ -30,9 +30,9 @@ function useExpenses(filters: ExpensesFilters) {
   };
 
   return useInfiniteQuery({
-    queryKey: ['fetch-expenses', variables],
+    queryKey: ['expenses', variables],
     queryFn: async ({ pageParam = 1 }) => {
-      const data = await API.getExpenses({ ...variables, page: pageParam });
+      const data = await getExpenses({ ...variables, page: pageParam });
 
       return {
         items: data.data as Expenses,

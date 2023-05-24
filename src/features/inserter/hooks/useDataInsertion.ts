@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import * as API from '@/api/api';
+import { saveNewData } from '@/api';
 import { useInserterContext } from './useInserterContext';
 import { ImportData } from '../types';
 
@@ -44,7 +44,7 @@ function useDataInsertion() {
       } as CommonBody);
 
   return useMutation({
-    mutationFn: () => API.saveNewData(dataKind!, body),
+    mutationFn: () => saveNewData(dataKind!, body),
     onSuccess: () => {
       resetState();
     },

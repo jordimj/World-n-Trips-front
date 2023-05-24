@@ -1,4 +1,4 @@
-import * as API from '@/api/api';
+import { getJournals, getTrips } from '@/api';
 import * as actionTypes from '../types/actionTypes';
 
 const fetchJournalsStart = () => {
@@ -26,7 +26,7 @@ export const fetchJournals = (tripId) => {
     dispatch(fetchJournalsStart());
 
     try {
-      const journals = await API.getJournals(tripId);
+      const journals = await getJournals(tripId);
       dispatch(fetchJournalsSuccess(journals));
     } catch (e) {
       dispatch(fetchJournalsFail(e));
@@ -59,7 +59,7 @@ export const fetchTrips = () => {
     dispatch(fetchTripsStart());
 
     try {
-      const trips = await API.getTrips(true);
+      const trips = await getTrips(true);
       dispatch(fetchTripsSuccess(trips));
     } catch (e) {
       dispatch(fetchTripsFail(e));
