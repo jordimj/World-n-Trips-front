@@ -13,7 +13,7 @@ import {
 import useLocalStorage from '@/hooks/useLocalStorage';
 import Chip from '@/template/components/Chip/Chip';
 import { groupBy } from '@/utils';
-import { addDatesToTripCard } from '@/utils/date';
+import { formatDatesInTripCard } from '@/utils/date';
 import * as actions from '../../actions/actions';
 
 function Trips() {
@@ -39,7 +39,7 @@ function Trips() {
         <Stack direction="column">
           {Object.entries(groupedTrips)
             .reverse()
-            .map(([year, items]) => (
+            .map(([year, trips]) => (
               <Fragment key={year}>
                 <Divider textAlign="left">{year}</Divider>
                 <Stack
@@ -49,16 +49,16 @@ function Trips() {
                   flexWrap="wrap"
                   sx={{ pt: 3 }}
                 >
-                  {items.map((trip) => (
+                  {trips.map((trip) => (
                     <Card
                       key={trip.id}
                       sx={{
                         width: 380,
                         cursor: trip.hasJournals ? 'pointer' : 'auto',
                       }}
-                      onClick={() =>
-                        trip.hasJournals ? navigate(`/journals/${trip.id}`) : {}
-                      }
+                      {...(trip.hasJournals && {
+                        onClick: () => navigate(`/journals/${trip.id}`),
+                      })}
                     >
                       <CardMedia
                         component="img"
@@ -71,7 +71,7 @@ function Trips() {
                           {trip.name}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                          {addDatesToTripCard(
+                          {formatDatesInTripCard(
                             trip.arrivalDate.date,
                             trip.departureDate.date
                           )}

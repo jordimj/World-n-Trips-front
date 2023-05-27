@@ -6,6 +6,10 @@ import COUNTRIES from '@/constants/countryCodes';
 import useKeyDown from '@/hooks/useKeyDown';
 import SearchInput from '@/features/countries/components/SearchInput/SearchInput';
 import { getCountryFlagSrc } from '@/utils';
+import useSearch from '@/features/search/hooks/useSearch';
+import { euroFormatter } from '@/utils/number';
+import EXPENSE_CATEGORY_EMOJIS from '@/constants/expenseCategoryEmojis';
+import { formatDate } from '@/utils/date';
 
 interface SearchDialogProps {
   open: boolean;
@@ -23,6 +27,8 @@ function SearchDialog(props: SearchDialogProps) {
     setKeyword(e.target.value);
   };
 
+  const { data, isFetching } = useSearch(keyword);
+
   const shouldShow = keyword.length > 0;
 
   const filteredCountries = shouldShow
@@ -31,9 +37,17 @@ function SearchDialog(props: SearchDialogProps) {
       )
     : [];
 
+  const shouldShowCountries = shouldShow && filteredCountries.length > 0;
+
+  const expenses = data !== undefined ? data.expenses : [];
+  const shouldShowExpenses = shouldShow && expenses.length > 0;
+
+  const journals = data !== undefined ? data.journals : [];
+  const shouldShowJournals = shouldShow && journals.length > 0;
+
   return (
     <Backdrop open={open}>
-      <Box sx={{ position: 'relative' }}>
+      <Box sx={{ position: 'relative', zIndex: 3, width: '100%', maxWidth: '500px' }}>
         <SearchInput placeholder="Search anything" onChange={onChangeKeyword} autoFocus />
         <IconButton
           aria-label="close-search"
@@ -47,15 +61,12 @@ function SearchDialog(props: SearchDialogProps) {
         >
           <CloseIcon />
         </IconButton>
-        {shouldShow && (
-          <Box sx={{ backgroundColor: 'white', p: 1, border: 'var(--border)' }}>
-            <Typography sx={{ fontSize: 12 }}>COUNTRIES</Typography>
-            <Stack
-              sx={{
-                maxHeight: '300px',
-                // overflow: 'scroll',
-              }}
-            >
+        {shouldShowCountries && (
+          <Box sx={{ backgroundColor: 'white', p: 1, pt: 2, border: 'var(--border)' }}>
+            <Typography sx={{ fontSize: 14, fontWeight: 700, textAlign: 'center' }}>
+              COUNTRIES
+            </Typography>
+            <Stack>
               {filteredCountries.slice(0, 5).map(([name, code]) => (
                 <NavLink key={code} to={`/countries/${code}/`} onClick={onClose}>
                   <Stack direction="row" alignItems="center" gap={1} sx={{ p: 1 }}>
@@ -69,7 +80,92 @@ function SearchDialog(props: SearchDialogProps) {
                 </NavLink>
               ))}
               {filteredCountries.length > 5 && (
-                <Typography>+ {filteredCountries.length - 5} countries</Typography>
+                <Typography sx={{ color: 'var(--text-color-secondary)', ml: 'auto' }}>
+                  + {filteredCountries.length - 5} countries
+                </Typography>
+              )}
+            </Stack>
+          </Box>
+        )}
+        {shouldShowExpenses && (
+          <Box
+            sx={{
+              backgroundColor: 'white',
+              p: 1,
+              pt: 2,
+              border: 'var(--border)',
+            }}
+          >
+            <Typography sx={{ fontSize: 14, fontWeight: 700, textAlign: 'center' }}>
+              EXPENSES
+            </Typography>
+            <Stack>
+              {expenses.slice(0, 5).map((expense) => (
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  gap={1}
+                  sx={{ p: 1 }}
+                >
+                  <Stack direction="row" alignItems="center" gap={2}>
+                    <Typography sx={{ fontSize: 'var(--spacing-5)' }}>
+                      {
+                        EXPENSE_CATEGORY_EMOJIS[
+                          expense.category as keyof typeof EXPENSE_CATEGORY_EMOJIS
+                        ]
+                      }
+                    </Typography>
+                    <Stack>
+                      <Typography>{expense.details}</Typography>
+                      <Typography
+                        sx={{ fontSize: 12, color: 'var(--text-color-secondary)' }}
+                      >
+                        {expense.category} / {expense.subcategory}
+                      </Typography>
+                    </Stack>
+                  </Stack>
+                  <Stack alignItems="end">
+                    <Typography>{euroFormatter(expense.valueEur)}</Typography>
+                    <Typography
+                      sx={{ fontSize: 12, color: 'var(--text-color-secondary)' }}
+                    >
+                      {expense.country}
+                    </Typography>
+                  </Stack>
+                </Stack>
+              ))}
+              {expenses.length > 5 && (
+                <Typography sx={{ color: 'var(--text-color-secondary)', ml: 'auto' }}>
+                  + {expenses.length - 5} expenses
+                </Typography>
+              )}
+            </Stack>
+          </Box>
+        )}
+        {shouldShowJournals && (
+          <Box sx={{ backgroundColor: 'white', p: 1, pt: 2, border: 'var(--border)' }}>
+            <Typography sx={{ fontSize: 14, fontWeight: 700, textAlign: 'center' }}>
+              JOURNALS
+            </Typography>
+            <Stack>
+              {journals.slice(0, 5).map((journal) => (
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  gap={1}
+                  sx={{ p: 1 }}
+                >
+                  <Typography sx={{ fontSize: 12, color: 'var(--text-color-secondary)' }}>
+                    {formatDate(journal.date)}: {journal.title}
+                  </Typography>
+                </Stack>
+              ))}
+              {journals.length > 5 && (
+                <Typography sx={{ color: 'var(--text-color-secondary)', ml: 'auto' }}>
+                  + {journals.length - 5} journal entries
+                </Typography>
               )}
             </Stack>
           </Box>

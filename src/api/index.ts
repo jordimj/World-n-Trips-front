@@ -60,3 +60,7 @@ export async function getCurrencies() {
 export async function getCategories() {
   return (await instance.get('/categories')).data;
 }
+
+export async function search(keyword: string) {
+  return (await instance.get('/search', { params: { keyword } })).data;
+}
