@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { parse } from 'papaparse';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import { Day, Expense, Night, Spot, TableData } from '../../types';
+import useInserterContext from '../../hooks/useInserterContext';
 import useSnackbar from '../../hooks/useSnackbar';
-import { useInserterContext } from '../../hooks/useInserterContext';
 
 export default function DataParser() {
   const {

@@ -1,4 +1,4 @@
-import { useInserterContext } from '../../hooks/useInserterContext';
+import useInserterContext from '../../hooks/useInserterContext';
 import DataParser from '../DataParser/DataParser';
 import Journal from '../Journal/Journal';
 

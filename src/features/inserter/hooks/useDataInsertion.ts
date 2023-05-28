@@ -2,7 +2,8 @@ import { useMutation } from '@tanstack/react-query';
 import { convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import { saveNewData } from '@/api';
-import { useInserterContext } from './useInserterContext';
+import { formatDatabaseDate } from '@/utils/date';
+import useInserterContext from './useInserterContext';
 import { ImportData } from '../types';
 
 interface CommonBody {
@@ -34,7 +35,7 @@ function useDataInsertion() {
   const rawContentState = convertToRaw(editorState.getCurrentContent());
   const body = isJournal
     ? ({
-        date: new Intl.DateTimeFormat('en-CA').format(date!),
+        date: formatDatabaseDate(date!),
         title,
         parsedData: draftToHtml(rawContentState),
       } as JournalBody)

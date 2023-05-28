@@ -1,65 +1,77 @@
-import { Dispatch, Fragment, SetStateAction, useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { AxiosError } from 'axios';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Spinner from '@/template/components/Spinner/Spinner';
 import useDataInsertion from '../../hooks/useDataInsertion';
+import useInserterContext from '../../hooks/useInserterContext';
 import useSnackbar from '../../hooks/useSnackbar';
-import { STEPS } from '.';
+import { STEP_LABELS } from '../../constants';
 
-interface StepperButtonsProps {
-  activeStep: number;
-  setActiveStep: Dispatch<SetStateAction<number>>;
-  isForwardDisabled: (activeStep: number) => boolean;
-}
+export default function StepperButtons() {
+  const {
+    state: {
+      activeStep,
+      dataKind,
+      parsedData,
+      optionId,
+      journal: { date, title, editorState },
+    },
+    actions: { goNextStep, goLastStep },
+  } = useInserterContext();
 
-export default function StepperButtons(props: StepperButtonsProps) {
-  const { activeStep, setActiveStep, isForwardDisabled } = props;
-
-  const mutation = useDataInsertion();
+  const { isLoading, isSuccess, isError, error, mutate } = useDataInsertion();
   const { openSnackbar, snackbar } = useSnackbar();
 
-  const handleNext = () => setActiveStep((prevStep) => ++prevStep);
-  const handleBack = () => setActiveStep((prevStep) => --prevStep);
-
   useEffect(() => {
-    if (mutation.isSuccess) {
-      openSnackbar([{ label: 'Database insertion done!' }]);
-      setActiveStep(0);
-    }
-  }, [mutation.isSuccess]);
-
-  useEffect(() => {
-    if (mutation.isError) {
-      const errors: any = (mutation.error as AxiosError).response?.data;
+    if (isSuccess) openSnackbar([{ label: 'Database insertion done!' }]);
+    if (isError) {
+      const errors: any = (error as AxiosError).response?.data;
       openSnackbar([{ label: errors.message, severity: 'error' }]);
     }
-  }, [mutation.isError]);
+  }, [isSuccess, isError]);
+
+  const isJournal = dataKind === 'journal';
+
+  const isForwardDisabled = (activeStep: number): boolean => {
+    const shouldDisableStep2 = isJournal
+      ? title === '' || editorState.getCurrentContent().getPlainText() === ''
+      : parsedData?.length === 0;
+
+    const shouldDisableStep3 = isJournal ? date === null : optionId === null;
+
+    switch (activeStep) {
+      case 1:
+        return shouldDisableStep2;
+      case 2:
+        return shouldDisableStep3;
+      default:
+        return false;
+    }
+  };
 
   const shouldShowButtons = activeStep !== 0;
-
-  if (!shouldShowButtons) return <Fragment />;
+  const isLastStep = activeStep === STEP_LABELS.length - 1;
 
   return (
-    <Stack direction="row" gap={2} sx={{ py: 2 }}>
-      <Button
-        disabled={activeStep === 0}
-        onClick={handleBack}
-        variant="outlined"
-        color="secondary"
-      >
-        Back
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => (activeStep === 3 ? mutation?.mutate() : handleNext())}
-        disabled={isForwardDisabled(activeStep)}
-      >
-        {activeStep === STEPS.length - 1 ? 'Go !' : 'Next'}
-      </Button>
-      {mutation?.isLoading && <Spinner />}
+    <Fragment>
+      {shouldShowButtons && (
+        <Stack direction="row" gap={2} sx={{ py: 2 }}>
+          <Button onClick={goLastStep} variant="outlined" color="secondary">
+            Back
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => (isLastStep ? mutate : goNextStep)()}
+            disabled={isForwardDisabled(activeStep)}
+          >
+            {isLastStep ? 'Import !' : 'Next'}
+          </Button>
+        </Stack>
+      )}
+      {isLoading && <Spinner />}
       {snackbar}
-    </Stack>
+    </Fragment>
   );
 }

@@ -2,7 +2,7 @@ import { Box, Button, ButtonGroup, FormControl, Stack, TextField } from '@mui/ma
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import useClipboard from '../../hooks/useClipboard';
-import { useInserterContext } from '../../hooks/useInserterContext';
+import useInserterContext from '../../hooks/useInserterContext';
 import TextEditor from './TextEditor/TextEditor';
 
 export default function Journal() {

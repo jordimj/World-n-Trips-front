@@ -3,6 +3,7 @@ import { Action } from '../actions';
 import { ImportData, KindOfData } from '../types';
 
 export interface InserterState {
+  activeStep: number;
   dataKind: KindOfData | undefined;
   filename: string;
   parsedData?: ImportData;
@@ -15,6 +16,7 @@ export interface InserterState {
 }
 
 export const initialState: InserterState = {
+  activeStep: 0,
   dataKind: undefined,
   filename: '',
   parsedData: [],
@@ -28,10 +30,17 @@ export const initialState: InserterState = {
 
 function reducer(state: InserterState, action: Action) {
   switch (action.type) {
+    case 'SET_ACTIVE_STEP': {
+      return {
+        ...state,
+        activeStep: action.payload,
+      };
+    }
     case 'SET_DATA_KIND': {
       return {
         ...state,
         dataKind: action.payload,
+        activeStep: 1,
       };
     }
     case 'SET_FILENAME': {
@@ -82,9 +91,6 @@ function reducer(state: InserterState, action: Action) {
     case 'RESET_STATE': {
       return initialState;
     }
-    // default: {
-    //   throw Error('Unknown action: ' + action.type);
-    // }
   }
 }
 

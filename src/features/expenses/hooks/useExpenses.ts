@@ -1,5 +1,6 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { getExpenses } from '@/api';
+import { formatDatabaseDate } from '@/utils/date';
 import { Expenses, ExpensesFilters } from '../interfaces';
 
 function useExpenses(filters: ExpensesFilters) {
@@ -18,8 +19,8 @@ function useExpenses(filters: ExpensesFilters) {
 
   const variables = {
     ...(query && { query }),
-    ...(from && { from: new Intl.DateTimeFormat('en-CA').format(from) }),
-    ...(to && { to: new Intl.DateTimeFormat('en-CA').format(to) }),
+    ...(from && { from: formatDatabaseDate(from) }),
+    ...(to && { to: formatDatabaseDate(to) }),
     ...(countries && { countries }),
     ...(categories && { categories }),
     ...(subcategories && { subcategories }),

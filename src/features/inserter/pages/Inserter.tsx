@@ -17,7 +17,7 @@ function InserterDialog(props: InserterDialogProps) {
   return (
     <Dialog onClose={handleClose} open={open} fullWidth maxWidth="xl">
       <DialogTitle sx={{ display: 'flex' }}>
-        New data parser & inserter
+        Add new travel data
         <IconButton
           aria-label="close-inserter-dialog"
           onClick={onClose}

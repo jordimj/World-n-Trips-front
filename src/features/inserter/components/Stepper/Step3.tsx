@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material';
 import AutocompleteTrips from '@/template/components/Autocomplete/AutocompleteTrips';
 import AutocompleteCountries from '@/template/components/Autocomplete/AutocompleteCountries';
-import { useInserterContext } from '../../hooks/useInserterContext';
+import useInserterContext from '../../hooks/useInserterContext';
 import DataTable from '../DataTable/DataTable';
 import JournalConfirmation from '../Journal/JournalConfirmation';
 

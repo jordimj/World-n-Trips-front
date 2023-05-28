@@ -1,6 +1,11 @@
 import { EditorState } from 'draft-js';
 import { KindOfData, TableData } from '../types';
 
+type SetActiveStepAction = {
+  type: 'SET_ACTIVE_STEP';
+  payload: number;
+};
+
 type SetDataKindAction = {
   type: 'SET_DATA_KIND';
   payload: KindOfData | undefined;
@@ -41,6 +46,7 @@ type ResetStateAction = {
 };
 
 export type Action =
+  | SetActiveStepAction
   | SetDataKindAction
   | SetFilenameAction
   | SetParsedDataAction

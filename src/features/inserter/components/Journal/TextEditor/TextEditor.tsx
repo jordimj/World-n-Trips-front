@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '@mui/material/Button';
 import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
 import FormatBoldIcon from '@mui/icons-material/FormatBold';
@@ -11,7 +10,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import useClipboard from '../../../hooks/useClipboard';
-import { useInserterContext } from '../../../hooks/useInserterContext';
+import useInserterContext from '../../../hooks/useInserterContext';
 import styles from './TextEditor.module.css';
 
 export default function TextEditor() {

@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import TableRow from '@mui/material/TableRow';
 import DataTableCell from './DataTableCell';
 import { Day, Expense, Night, Spot, TableKind } from '../../types';
 import useDataValidation from '../../hooks/useDataValidation';
 import useCategories from '../../hooks/useCategories';
-import { useInserterContext } from '../../hooks/useInserterContext';
+import useInserterContext from '../../hooks/useInserterContext';
 
 // interface DayRow {
 //   dataKind: 'day';

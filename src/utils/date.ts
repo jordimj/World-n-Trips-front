@@ -10,6 +10,13 @@ export function formatDate(date: string) {
 }
 
 /**
+ * Format date as database format: YYYY-MM-DD with leading zeros
+ */
+export function formatDatabaseDate(date: Date) {
+  return new Intl.DateTimeFormat('en-CA').format(date);
+}
+
+/**
  * Format date as "Thursday, May 26, 2022"
  */
 export function formatFullDate(date: string) {

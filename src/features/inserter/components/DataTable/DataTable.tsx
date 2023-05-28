@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,8 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import useInserterContext from '../../hooks/useInserterContext';
 import { TableData } from '../../types';
-import { useInserterContext } from '../../hooks/useInserterContext';
 import DataTableRow from './DataTableRow';
 import styles from './DataTable.module.css';
 

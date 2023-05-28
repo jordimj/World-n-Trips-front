@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { InserterContext } from '../context/InserterContext';
 import { KindOfData, TableData } from '../types';
 
-export function useInserterContext() {
+function useInserterContext() {
   const context = useContext(InserterContext);
 
   if (context === undefined) {
@@ -11,6 +11,12 @@ export function useInserterContext() {
   }
 
   const [state, dispatch] = context;
+
+  const goNextStep = () =>
+    dispatch({ type: 'SET_ACTIVE_STEP', payload: ++state.activeStep });
+
+  const goLastStep = () =>
+    dispatch({ type: 'SET_ACTIVE_STEP', payload: --state.activeStep });
 
   const setDatakind = (datakind: KindOfData) =>
     dispatch({ type: 'SET_DATA_KIND', payload: datakind });
@@ -38,6 +44,8 @@ export function useInserterContext() {
   return {
     state,
     actions: {
+      goLastStep,
+      goNextStep,
       setDatakind,
       setFilename,
       setParsedData,
@@ -49,3 +57,5 @@ export function useInserterContext() {
     },
   };
 }
+
+export default useInserterContext;
