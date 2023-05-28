@@ -33,7 +33,7 @@ export default function Stepper() {
   function getStepContent(stepIndex: number) {
     // prettier-ignore
     switch (stepIndex) {
-      case 0: return <Step1 />;
+      case 0: return <Step1 goToStep2={() => setActiveStep(1)}/>;
       case 1: return <Step2 />;
       case 2: return <Step3 />;
       case 3: return <Step4 />;

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { Dispatch, Fragment, SetStateAction, useEffect } from 'react';
 import { AxiosError } from 'axios';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -35,6 +35,10 @@ export default function StepperButtons(props: StepperButtonsProps) {
       openSnackbar([{ label: errors.message, severity: 'error' }]);
     }
   }, [mutation.isError]);
+
+  const shouldShowButtons = activeStep !== 0;
+
+  if (!shouldShowButtons) return <Fragment />;
 
   return (
     <Stack direction="row" gap={2} sx={{ py: 2 }}>
