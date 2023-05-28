@@ -38,10 +38,9 @@ function Journals() {
 
   return (
     <Box textAlign="center">
-      <Typography variant="h1" sx={{ letterSpacing: 'var(--uppercase-letter-spacing)' }}>
-        {trip.name}
+      <Typography variant="h1" sx={{ textTransform: 'capitalize' }}>
+        {trip.name.toLowerCase()}
       </Typography>
-      <Typography variant="h2">Journal entries</Typography>
       <Search
         search={search}
         keywordRef={keywordRef}

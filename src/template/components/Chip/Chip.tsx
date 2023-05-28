@@ -15,7 +15,12 @@ function Chip({ variant = 'trip', label }: Props) {
       variant="outlined"
       label={isJournalChip ? variant : label}
       size={isJournalChip ? 'small' : 'medium'}
-      sx={{ px: isJournalChip ? 2 : 0, mt: 2, fontSize: '12px' }}
+      sx={{
+        backgroundColor: 'white',
+        fontSize: '12px',
+        px: isJournalChip ? 2 : 0,
+        mt: 2,
+      }}
       {...(isJournalChip && {
         icon: variant === 'worktrip' ? <WorkIcon /> : <ComputerIcon />,
       })}

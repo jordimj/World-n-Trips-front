@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import DetailRow from './DetailRow/DetailRow';
@@ -23,7 +22,6 @@ const CountryDetails = ({ info, trips }) => {
         <DetailRow label="Population" value={numberFormatter(info.population)} />
         <DetailRow label="Government form" value={info.governmentForm} />
         <DetailRow label="Independent from" value={info.independenceYear} />
-        {/* <DetailRow label="Currencies" value={info.currencies} /> */}
       </Box>
       <Stack
         direction="row"
