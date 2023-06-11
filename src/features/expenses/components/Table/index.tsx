@@ -18,6 +18,7 @@ import { getCountryFlagSrc } from '@/utils';
 import { euroFormatter } from '@/utils/number';
 import useExpenses from '../../hooks/useExpenses';
 import { ExpensesFilters, OrderBy } from '../../interfaces';
+import CountDisplay from './CountDisplay';
 import SortableTableHead from './SortableTableHead';
 import Skeleton from './Skeleton';
 import styles from './index.module.css';
@@ -47,6 +48,8 @@ function ExpensesTable(props: Props) {
   const hasLocalCurrency = items.some((item) => item.value);
   const isInitialLoading = items.length === 0 && isFetching;
 
+  const totalAmount = pages.at(-1)?.totalAmount;
+
   const sortBy = (newOrderBy: OrderBy) => {
     if (filters.orderBy === newOrderBy) {
       setFilters({ ...filters, order: filters.order === 'asc' ? 'desc' : 'asc' });
@@ -57,9 +60,12 @@ function ExpensesTable(props: Props) {
 
   return (
     <Stack>
-      <Typography sx={{ fontSize: 14, ml: 'auto', pt: 2 }}>
-        Showing {items.length} expenses out of {pageParams.totalItems ?? 0} found
-      </Typography>
+      <CountDisplay
+        items={items}
+        isFetching={isFetching}
+        totalAmount={totalAmount}
+        totalItems={pageParams.totalItems}
+      />
       <TableContainer className={styles.paper} component={Paper}>
         <Table size="small" aria-label="table" stickyHeader>
           <TableHead className={styles.head}>

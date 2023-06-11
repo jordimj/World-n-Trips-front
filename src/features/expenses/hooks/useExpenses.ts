@@ -37,6 +37,7 @@ function useExpenses(filters: ExpensesFilters) {
 
       return {
         items: data.data as Expenses,
+        totalAmount: data.amount as number,
         pagination: data.pagination,
       };
     },
