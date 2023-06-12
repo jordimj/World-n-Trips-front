@@ -19,7 +19,7 @@ function Step3() {
       {isJournal ? (
         <JournalConfirmation />
       ) : (
-        <>
+        <Stack alignItems="center" sx={{ maxHeight: 'calc(100vh - 510px)' }}>
           {filename && <h5>Data read from: {filename}</h5>}
           <DataTable />
           {dataKind === 'day' ? (
@@ -27,7 +27,7 @@ function Step3() {
           ) : (
             <AutocompleteCountries onChangeOption={setOption} />
           )}
-        </>
+        </Stack>
       )}
     </Stack>
   );

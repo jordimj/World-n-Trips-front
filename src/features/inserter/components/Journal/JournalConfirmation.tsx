@@ -27,7 +27,7 @@ export default function JournalConfirmation() {
           backgroundColor: 'var(--color-white)',
           border: 'var(--color-border)',
           borderRadius: 'var(--border-radius)',
-          maxHeight: '30vh',
+          maxHeight: 'calc(100vh - 690px)',
           overflow: 'auto',
           '::-webkit-scrollbar': {
             width: 'var(--spacing-2)',

@@ -3,6 +3,7 @@ import { parse } from 'papaparse';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import { Day, Expense, Night, Spot, TableData } from '../../types';
 import useInserterContext from '../../hooks/useInserterContext';
 import useSnackbar from '../../hooks/useSnackbar';
@@ -57,13 +58,13 @@ export default function DataParser() {
 
   return (
     <>
-      <h2>Insert the CSV data</h2>
+      <Typography variant="h2">Insert the CSV data</Typography>
       <Stack alignItems="center" sx={{ minWidth: '1200px' }}>
         <TextField
-          id="outlined-multiline-static"
-          label="Paste your CSV string in here"
+          id="csv-parser"
+          label="Paste your CSV here"
           multiline
-          rows={15}
+          rows={30}
           onChange={handleStringUpload}
           sx={{
             width: '100%',
@@ -73,9 +74,9 @@ export default function DataParser() {
           disabled={source === 'file'}
         />
 
-        <h3>Or select a file that contains it</h3>
+        <Typography variant="h3">Or select a file that contains it</Typography>
         <input
-          id="contained-button-file"
+          id="file-uploader"
           type="file"
           accept=".csv"
           onChange={handleFileUpload}
@@ -83,13 +84,13 @@ export default function DataParser() {
           disabled={source === 'string'}
         />
 
-        <label htmlFor="contained-button-file">
+        <label htmlFor="file-uploader">
           <Button variant="contained" component="span" disabled={source === 'string'}>
             Select file
           </Button>
         </label>
       </Stack>
-      {filename && <h5>Selected file: {filename}</h5>}
+      {filename && <Typography variant="h5">Selected file: {filename}</Typography>}
       {snackbar}
     </>
   );
