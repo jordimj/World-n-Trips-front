@@ -59,7 +59,7 @@ const ExpenseSchema = z.object({
 });
 
 const ALLOWED_CATEGORIES = [
-  'ALLOTJAMENT(',
+  'ALLOTJAMENT',
   'ACTIVITATS',
   'BEGUDA',
   'MENJAR',

@@ -6,7 +6,7 @@ function useCategories() {
     queryKey: ['categories'],
     queryFn: async () => {
       const response = await getCategories();
-      return response.data;
+      return response as Record<string, Array<string>>;
     },
     refetchOnWindowFocus: false,
   });
