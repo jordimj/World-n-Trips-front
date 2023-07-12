@@ -5,14 +5,13 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { DATA_APPENDICES } from '@/constants';
 import { numberFormatter } from '@/utils/number';
-import HitchhikesChart from './HitchikesChart';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import KPI from '../KPI';
+import HitchhikesCharts from './HitchhikesCharts';
 
 export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
   const {
     totalKilometers,
-    totalKilometersOpenAir,
     daysOnTheRoad,
     totalCars,
     distances,
@@ -111,13 +110,7 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
           )}
         </Stack>
       </Stack>
-      {minutesWaiting && (
-        <Box sx={{ mt: 4 }}>
-          <HitchhikesChart stats={statsPerHour} chartKind="rides" />
-          <HitchhikesChart stats={statsPerHour} chartKind="distance" />
-          <HitchhikesChart stats={statsPerHour} chartKind="minutes" />
-        </Box>
-      )}
+      {minutesWaiting && <HitchhikesCharts statsPerHour={statsPerHour} />}
     </Box>
   );
 }

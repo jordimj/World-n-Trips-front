@@ -3,14 +3,6 @@ import Chart from 'chart.js/auto';
 import { HOUR_LABELS } from '@/constants';
 
 const CHART_KIND_RIDES = 'rides';
-const CHART_KIND_DISTANCES = 'distance';
-const CHART_KIND_MINUTES = 'minutes';
-
-const TITLES = {
-  [CHART_KIND_RIDES]: 'Number of cars hitched per hour',
-  [CHART_KIND_DISTANCES]: 'Kilometers hitched per hour',
-  [CHART_KIND_MINUTES]: 'Minutes waiting on the road per hour',
-};
 
 const extractDesiredData = (data, chartKind) => {
   const reducedData = data.reduce((acc, stat) => {
@@ -46,14 +38,6 @@ export default function HitchhikesChart({ stats, chartKind }) {
         plugins: {
           legend: {
             display: false,
-          },
-          title: {
-            display: true,
-            text: TITLES[chartKind],
-            padding: 30,
-            font: {
-              size: 30,
-            },
           },
         },
         scales: {
