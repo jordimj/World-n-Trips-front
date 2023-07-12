@@ -12,6 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 import COUNTRIES from '@/constants/countryCodes';
+import EXPENSE_CATEGORY_EMOJIS from '@/constants/expenseCategoryEmojis';
 import useElementOnScreen from '@/hooks/useElementOnScreen';
 import { formatFullDate } from '@/utils/date';
 import { getCountryFlagSrc } from '@/utils';
@@ -143,7 +144,14 @@ function ExpensesTable(props: Props) {
                         <Typography>{formatFullDate(day)}</Typography>
                       </TableCell>
                       <TableCell align="center">
-                        <Typography>{category}</Typography>
+                        <Typography sx={{ fontSize: 'var(--spacing-5)!important' }}>
+                          {
+                            EXPENSE_CATEGORY_EMOJIS[
+                              category as keyof typeof EXPENSE_CATEGORY_EMOJIS
+                            ]
+                          }{' '}
+                          <Typography component="span">{category}</Typography>
+                        </Typography>
                       </TableCell>
                       <TableCell align="center">
                         <Typography>{subcategory}</Typography>
