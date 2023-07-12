@@ -1,52 +1,25 @@
 import { useState } from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import styles from '../VisitedSpots/VisitedSpots.module.css';
-
-function TabPanel({ children, active, index }) {
-  return (
-    <div role="tabpanel" hidden={active !== index}>
-      {active === index && children}
-    </div>
-  );
-}
-
-const getSpots = (spots) => (
-  <Box className={styles.visitedSpots}>
-    {spots.map((spot) => (
-      <Box key={spot} className={styles.item}>
-        {spot}
-      </Box>
-    ))}
-  </Box>
-);
+import Tabs from '@/template/components/Tabs';
+import Spots from './Spots';
+import styles from './VisitedSpots.module.css';
 
 export default function VisitedSpots({ cities, states }) {
-  const [active, setActive] = useState(0);
-  const handleChange = (event, newValue) => setActive(newValue);
+  const [tab, setTab] = useState(0);
+  const handleChange = (e, newValue) => setTab(newValue);
 
   return (
     <Box className={styles.root}>
-      <Tabs
-        value={active}
-        onChange={handleChange}
-        centered
-        TabIndicatorProps={{
-          style: {
-            backgroundColor: 'var(--navbar-color)',
-          },
-        }}
-      >
-        <Tab label="Visited cities" className={styles.tab} />
-        <Tab label="Visited states" className={styles.tab} />
+      <Tabs value={tab} onChange={handleChange} centered>
+        <Tabs.Item label="Visited cities" className={styles.tab} />
+        <Tabs.Item label="Visited states" className={styles.tab} />
       </Tabs>
-      <TabPanel active={active} index={0}>
-        {getSpots(cities)}
-      </TabPanel>
-      <TabPanel active={active} index={1}>
-        {getSpots(states.map((state) => state.name))}
-      </TabPanel>
+      <Tabs.Panel value={tab} index={0}>
+        <Spots spots={cities} />
+      </Tabs.Panel>
+      <Tabs.Panel value={tab} index={1}>
+        <Spots spots={states.map((state) => state.name)} />
+      </Tabs.Panel>
     </Box>
   );
 }

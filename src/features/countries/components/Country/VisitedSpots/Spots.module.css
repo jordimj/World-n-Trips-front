@@ -1,0 +1,12 @@
+.visitedSpots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: var(--spacing-4);
+  gap: var(--spacing-4);
+}
+
+.item {
+  min-width: 220px;
+}
