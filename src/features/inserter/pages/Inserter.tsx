@@ -15,7 +15,18 @@ function InserterDialog(props: InserterDialogProps) {
   const handleClose = () => onClose();
 
   return (
-    <Dialog onClose={handleClose} open={open} fullWidth maxWidth="xl">
+    <Dialog
+      onClose={handleClose}
+      open={open}
+      fullWidth
+      maxWidth="xl"
+      sx={{
+        '.MuiDialog-paper': {
+          height: 'calc(100% - 64px)',
+          maxHeight: 'calc(100% - 64px)',
+        },
+      }}
+    >
       <DialogTitle sx={{ display: 'flex' }}>
         Add new travel data
         <IconButton

@@ -20,20 +20,21 @@ export default function JournalConfirmation() {
       <Typography variant="h3">{title}</Typography>
       <Box
         sx={{
-          marginY: 2,
-          paddingY: 'var(--spacing-2)',
-          paddingX: 'var(--spacing-4)',
-          width: '100%',
+          width: '90%',
+          maxWidth: '1200px',
           backgroundColor: 'var(--color-white)',
-          border: 'var(--color-border)',
+          border: 'var(--border)',
           borderRadius: 'var(--border-radius)',
-          maxHeight: 'calc(100vh - 690px)',
+          py: 2,
+          px: 4,
+          mb: 3,
+          maxHeight: 'calc(100vh - 700px)',
           overflow: 'auto',
           '::-webkit-scrollbar': {
             width: 'var(--spacing-2)',
           },
           '::-webkit-scrollbar-thumb': {
-            backgroundColor: '#024385',
+            backgroundColor: 'var(--navbar-color)',
             borderRadius: '20px',
           },
         }}

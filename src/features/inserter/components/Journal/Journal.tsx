@@ -17,8 +17,18 @@ export default function Journal() {
   const pasteTitle = async () => setTitle((await pasteFromClipboard()) ?? '');
 
   return (
-    <Stack gap={2} justifyContent="center" alignItems="center" sx={{ width: '90%' }}>
-      <FormControl sx={{ maxWidth: '1600px', mt: 6, width: '50%', minWidth: '400px' }}>
+    <Stack
+      gap={3}
+      justifyContent="center"
+      alignItems="center"
+      sx={{
+        width: '90%',
+        maxWidth: '1200px',
+        height: '100%',
+        maxHeight: 'calc(100vh - 400px)',
+      }}
+    >
+      <FormControl sx={{ maxWidth: '1600px', width: '50%', minWidth: '400px' }}>
         <Stack direction="row" gap={2}>
           <TextField
             label="Title of the day"

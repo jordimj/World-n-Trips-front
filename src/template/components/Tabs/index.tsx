@@ -27,17 +27,19 @@ interface TabsProps {
   value: number;
   onChange: (event: SyntheticEvent, newTab: number) => void;
   ariaLabel: string;
+  centered?: boolean;
   children: ReactNode;
 }
 
 function Tabs(props: TabsProps) {
-  const { value, onChange, ariaLabel, children } = props;
+  const { value, onChange, ariaLabel, centered = false, children } = props;
 
   return (
     <MuiTabs
       value={value}
       onChange={onChange}
       aria-label={ariaLabel}
+      centered={centered}
       TabIndicatorProps={{
         style: {
           backgroundColor: 'var(--navbar-color)',
@@ -46,7 +48,7 @@ function Tabs(props: TabsProps) {
       sx={{
         width: '100%',
         '& .MuiTabs-flexContainer': {
-          justifyContent: 'space-between',
+          justifyContent: centered ? 'center' : 'space-between',
         },
         '& .MuiTab-root': {
           width: '100%',
