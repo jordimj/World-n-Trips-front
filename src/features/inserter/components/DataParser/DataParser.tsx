@@ -59,17 +59,31 @@ export default function DataParser() {
   return (
     <>
       <Typography variant="h2">Insert the CSV data</Typography>
-      <Stack alignItems="center" sx={{ minWidth: '1200px' }}>
+      <Stack
+        alignItems="center"
+        sx={{
+          minWidth: '1200px',
+          height: '100%',
+        }}
+      >
         <TextField
           id="csv-parser"
           label="Paste your CSV here"
           multiline
-          rows={30}
+          minRows={15}
           onChange={handleStringUpload}
           sx={{
             width: '100%',
+            height: '100%',
             backgroundColor: 'white',
             borderRadius: 'var(--border-radius)',
+            '& .MuiInputBase-root': {
+              height: '100%!important',
+            },
+            '& .MuiInputBase-input': {
+              height: '100%!important',
+              overflow: 'auto',
+            },
           }}
           disabled={source === 'file'}
         />
