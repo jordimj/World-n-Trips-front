@@ -25,7 +25,7 @@ const theme = createTheme({
     MuiAccordionSummary: {
       styleOverrides: {
         root: {
-          backgroundColor: 'var(--navbar-color)',
+          backgroundColor: 'var(--primary-color-900)',
           color: 'white',
           '& svg': {
             color: 'white',
@@ -33,10 +33,19 @@ const theme = createTheme({
         },
       },
     },
+    MuiButtonGroup: {
+      styleOverrides: {
+        root: {
+          '.MuiButtonGroup-grouped:not(:last-of-type)': {
+            borderColor: 'var(--primary-color-900)',
+          },
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
-          textDecoration: 'none',
+          textDecoration: 'none!important',
           textTransform: 'capitalize',
           fontSize: 'inherit',
           fontStyle: 'normal',
@@ -44,23 +53,36 @@ const theme = createTheme({
           color: 'white!important',
           height: '100%',
           minWidth: '100px',
+          backgroundColor: 'var(--primary-color-700)',
+          ':hover': {
+            backgroundColor: 'var(--primary-color-900)',
+          },
         },
         outlinedSecondary: {
           backgroundColor: 'white',
-          color: '#1976D2!important',
+          color: 'var(--primary-color-700)!important',
+          ':hover': {
+            backgroundColor: 'var(--primary-color-100)',
+          },
         },
         text: {
           color: 'var(--text-color)!important',
+          backgroundColor: 'transparent',
           textTransform: 'none',
+          textDecoration: 'underline',
+          ':hover': {
+            textDecoration: 'underline',
+            backgroundColor: 'var(--primary-color-100)',
+          },
         },
       },
     },
     MuiSwitch: {
       styleOverrides: {
         colorPrimary: {
-          color: 'var(--navbar-color)',
+          color: 'var(--primary-color-700)',
           '&.Mui-checked': {
-            color: 'var(--background-color-light)',
+            color: 'var(--primary-color-900)',
           },
         },
       },
@@ -68,7 +90,7 @@ const theme = createTheme({
     MuiSlider: {
       styleOverrides: {
         colorPrimary: {
-          color: 'var(--secondary-color)',
+          color: 'var(--primary-color-700)',
         },
         markLabel: {
           color: 'var(--secondary-color)',
@@ -109,7 +131,7 @@ const theme = createTheme({
     MuiCheckbox: {
       styleOverrides: {
         colorPrimary: {
-          color: 'var(--navbar-color)!important',
+          color: 'var(--primary-color-700)!important',
         },
       },
     },

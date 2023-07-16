@@ -23,7 +23,7 @@ function Step1() {
   return (
     <Stack alignItems="center" gap={2}>
       <Typography variant="h2">Select the kind of data to be imported</Typography>
-      <Stack direction="row" gap={3}>
+      <Stack direction="row" gap={3} flexWrap="wrap">
         {Object.keys(DATA_KINDS).map((kind) => (
           <Stack
             key={kind}

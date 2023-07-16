@@ -15,14 +15,14 @@ function Map({ data, region }) {
     location.pathname === '/'
       ? {
           region: region !== WORLD_MAP ? region : null,
-          colorAxis: { colors: ['#21b6b7'] },
-          defaultColor: '#21b6b7',
+          colorAxis: { colors: ['#16888b'] },
+          defaultColor: '#16888b',
         }
       : {
           region: country.info.alpha2code,
           resolution: 'provinces',
           enableRegionInteractivity: false,
-          defaultColor: '#21b6b7',
+          defaultColor: '#16888b',
         };
 
   const onChartClick = ({ chartWrapper }) => {

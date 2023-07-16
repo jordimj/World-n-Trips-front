@@ -34,7 +34,7 @@ export default function JournalConfirmation() {
             width: 'var(--spacing-2)',
           },
           '::-webkit-scrollbar-thumb': {
-            backgroundColor: 'var(--navbar-color)',
+            backgroundColor: 'var(--scrollbar-color)',
             borderRadius: '20px',
           },
         }}

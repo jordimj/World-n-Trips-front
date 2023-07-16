@@ -1,6 +1,6 @@
 .root {
   font-size: 75px;
-  background-color: var(--navbar-color);
+  background: linear-gradient(180deg, rgba(103, 99, 119, 1) 0%, rgba(67, 64, 74, 1) 100%);
   color: white;
   border-radius: var(--border-radius);
   padding: var(--spacing-5);
@@ -9,7 +9,7 @@
 .label {
   text-transform: uppercase;
   font-size: 14px;
-  color: var(--primary-color);
+  color: var(--header-text-color);
   text-align: center;
 }
 

@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   max-width: 1800px;
-  min-height: 300px;
+  min-height: calc(100% - 75px);
   background-color: var(--color-white);
   color: var(--color-black);
   border-radius: var(--border-radius);
@@ -20,6 +20,6 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--navbar-color);
+  background-color: var(--scrollbar-color);
   border-radius: 20px;
 }

@@ -42,7 +42,11 @@ export default function SettingsMenu() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleOpen}
         disableRipple
-        sx={{ color: 'white!important' }}
+        sx={{
+          color: 'white!important',
+          backgroundColor: 'transparent',
+          '&:hover': { backgroundColor: 'var(--primary-color-900)' },
+        }}
       >
         Settings
       </Button>
