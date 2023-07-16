@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Backdrop, Box, IconButton, Stack, Typography } from '@mui/material';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Backdrop, Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import COUNTRIES from '@/constants/countryCodes';
 import useKeyDown from '@/hooks/useKeyDown';
@@ -44,6 +44,16 @@ function SearchDialog(props: SearchDialogProps) {
 
   const journals = data !== undefined ? data.journals : [];
   const shouldShowJournals = shouldShow && journals.length > 0;
+
+  const navigate = useNavigate();
+  const goToExpenses = () => {
+    onClose();
+    navigate('/expenses', {
+      state: {
+        keyword,
+      },
+    });
+  };
 
   return (
     <Backdrop open={open}>
@@ -102,6 +112,7 @@ function SearchDialog(props: SearchDialogProps) {
             <Stack>
               {expenses.slice(0, 5).map((expense) => (
                 <Stack
+                  key={expense.id}
                   direction="row"
                   alignItems="center"
                   justifyContent="space-between"
@@ -136,9 +147,18 @@ function SearchDialog(props: SearchDialogProps) {
                 </Stack>
               ))}
               {expenses.length > 5 && (
-                <Typography sx={{ color: 'var(--text-color-secondary)', ml: 'auto' }}>
-                  + {expenses.length - 5} expenses
-                </Typography>
+                <Stack direction="row" alignItems="center" justifyContent="space-between">
+                  <Typography sx={{ pl: 2, fontSize: 14 }}>
+                    + {expenses.length - 5} expenses
+                  </Typography>
+                  <Button
+                    onClick={goToExpenses}
+                    variant="text"
+                    sx={{ color: 'var(--text-color-secondary)', fontSize: 14 }}
+                  >
+                    Show all
+                  </Button>
+                </Stack>
               )}
             </Stack>
           </Box>
@@ -151,6 +171,7 @@ function SearchDialog(props: SearchDialogProps) {
             <Stack>
               {journals.slice(0, 5).map((journal) => (
                 <Stack
+                  key={journal.id}
                   direction="row"
                   alignItems="center"
                   justifyContent="space-between"
