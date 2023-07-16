@@ -7,7 +7,7 @@ import { deductNotDailyExpenses } from '@/utils';
 import { euroFormatter } from '@/utils/number';
 import ExpensesTable from './ExpensesTable';
 import ExpensesChart from './ExpensesChart';
-import KPI from '../KPI';
+import Metric from '../Metric';
 import styles from './Expenses.module.css';
 
 export default function ExpensesStatistics({ expenses, totalNights }) {
@@ -15,7 +15,7 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
   const sumWithoutDailyExp = deductNotDailyExpenses(sum, categories);
 
   const navigate = useNavigate();
-  const countryId = useSelector((state) => state.countries.country.info.id);
+  const country = useSelector((state) => state.countries.country.info);
 
   const goToExpenses = () =>
     navigate('/expenses', {
@@ -44,27 +44,27 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
       >
         <Stack gap={3}>
           <Stack direction="row" gap={3} flexWrap="wrap">
-            <KPI
+            <Metric
               icon={<EuroIcon fontSize="inherit" />}
               label="Total expenses"
-              KPI={euroFormatter(sum)}
+              metric={euroFormatter(sum)}
             />
-            <KPI
+            <Metric
               icon={<EuroIcon fontSize="inherit" />}
               label="Expenses / day"
-              KPI={euroFormatter(sum / totalNights)}
+              metric={euroFormatter(sum / totalNights)}
             />
           </Stack>
           <Stack direction="row" gap={3} flexWrap="wrap">
-            <KPI
+            <Metric
               icon={<MoneyIcon fontSize="inherit" />}
               label="Total daily expenses"
-              KPI={euroFormatter(sumWithoutDailyExp)}
+              metric={euroFormatter(sumWithoutDailyExp)}
             />
-            <KPI
+            <Metric
               icon={<MoneyIcon fontSize="inherit" />}
               label="Daily expenses / day"
-              KPI={euroFormatter(sumWithoutDailyExp / totalNights)}
+              metric={euroFormatter(sumWithoutDailyExp / totalNights)}
             />
           </Stack>
         </Stack>
@@ -73,7 +73,7 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
         </Box>
       </Stack>
       <ExpensesTable expenses={detailedExpenses} />
-      <Button variant="text" onClick={goToExpenses}>
+      <Button variant="text" onClick={goToExpenses} sx={{ ml: 'auto' }}>
         Go to detailed expenses
       </Button>
     </Stack>

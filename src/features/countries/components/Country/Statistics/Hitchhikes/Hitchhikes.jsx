@@ -6,7 +6,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { DATA_APPENDICES } from '@/constants';
 import { numberFormatter } from '@/utils/number';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
-import KPI from '../KPI';
+import Metric from '../Metric';
 import HitchhikesCharts from './HitchhikesCharts';
 
 export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
@@ -24,27 +24,27 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
       <Stack component="section" gap={5} alignItems="center">
         <Divider>Hitchhikes</Divider>
         <Stack direction="row" gap={3} flexWrap="wrap">
-          <KPI
+          <Metric
             icon={<ThumbUpIcon fontSize="inherit" />}
             label="Kilometers hitchhiked"
-            KPI={numberFormatter(totalKilometers)}
+            metric={numberFormatter(totalKilometers)}
           />
-          <KPI
+          <Metric
             icon={<CalendarMonthIcon fontSize="inherit" />}
             label="Days on the road"
-            KPI={numberFormatter(daysOnTheRoad)}
+            metric={numberFormatter(daysOnTheRoad)}
           />
           {minutesWaiting && (
-            <KPI
+            <Metric
               icon={<AccessTimeIcon fontSize="inherit" />}
               label="Minutes waiting"
-              KPI={minutesWaiting.total}
+              metric={minutesWaiting.total}
             />
           )}
-          <KPI
+          <Metric
             icon={<DirectionsCarIcon fontSize="inherit" />}
             label="Cars hitchhiked"
-            KPI={numberFormatter(Math.trunc(totalCars))}
+            metric={numberFormatter(Math.trunc(totalCars))}
           />
         </Stack>
         <Stack

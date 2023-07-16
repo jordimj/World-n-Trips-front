@@ -1,18 +1,18 @@
 import { Fragment, ReactNode } from 'react';
 import { Stack, Typography } from '@mui/material';
-import styles from './KPI.module.css';
+import styles from './Metric.module.css';
 
 interface Props {
   icon: ReactNode;
   label?: string;
-  KPI: string;
+  metric: string;
   secondaryLabel?: string;
-  secondaryKPI?: string;
+  secondaryMetric?: string;
   children?: ReactNode;
 }
 
-function KPI(props: Props) {
-  const { icon, label, KPI, secondaryLabel, secondaryKPI, children } = props;
+function Metric(props: Props) {
+  const { icon, label, metric, secondaryLabel, secondaryMetric, children } = props;
 
   return (
     <Stack
@@ -22,7 +22,7 @@ function KPI(props: Props) {
       gap={1}
       className={styles.root}
       sx={{
-        width: secondaryKPI ? '500px' : '215px',
+        width: secondaryMetric ? '500px' : '215px',
       }}
     >
       <Stack alignItems="center" flex={1}>
@@ -32,12 +32,12 @@ function KPI(props: Props) {
         <Fragment>
           <Stack alignItems="center" flex={3}>
             <Typography className={styles.label}>{label}</Typography>
-            <Typography className={styles.kpi}>{KPI}</Typography>
+            <Typography className={styles.metric}>{metric}</Typography>
           </Stack>
-          {secondaryKPI && (
+          {secondaryMetric && (
             <Stack alignItems="center" flex={2}>
               <Typography className={styles.label}>{secondaryLabel}</Typography>
-              <Typography className={styles.kpi}>{secondaryKPI}</Typography>
+              <Typography className={styles.metric}>{secondaryMetric}</Typography>
             </Stack>
           )}
         </Fragment>
@@ -46,4 +46,4 @@ function KPI(props: Props) {
   );
 }
 
-export default KPI;
+export default Metric;
