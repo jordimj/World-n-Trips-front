@@ -5,7 +5,7 @@ import { percentageFormatter } from '@/utils/number';
 import * as actions from '../../actions/actions';
 import TravelStatsTable from './TravelStatsTable/TravelStatsTable';
 import BarChart from './Timeline/BarChart';
-import TravelTimeline from './Timeline/TravelTimeline';
+import Timeline from './Timeline';
 import YearSelect from './YearSelect';
 
 export default function () {
@@ -21,7 +21,7 @@ export default function () {
 
   if (!statistics) return <Fragment />;
 
-  const { countries, travels, top5, trips } = statistics;
+  const { countries, travels, top5 } = statistics;
 
   const onYearChange = (e) =>
     setYear(e.target.value !== 'All time' ? e.target.value : null);
@@ -53,11 +53,16 @@ export default function () {
           <BarChart data={travels.perMonth} kind="month" isAllTime={isAllTime} />
         </>
       )}
-      {trips && <TravelTimeline trips={trips} />}
+      {!isAllTime && <Timeline year={year} />}
       {top5 && (
         <>
           <Typography variant="h2">TOP 5</Typography>
-          <Stack direction="row" justifyContent="space-around">
+          <Box
+            display="grid"
+            gridTemplateColumns="repeat(auto-fill, minmax(400px, 1fr))"
+            gap={3}
+            sx={{ mx: 2 }}
+          >
             <TravelStatsTable
               stats={top5.longestInCountry}
               kind="country"
@@ -95,7 +100,7 @@ export default function () {
                 shortTable
               />
             )}
-          </Stack>
+          </Box>
         </>
       )}
     </Box>

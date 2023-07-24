@@ -9,7 +9,7 @@ const TITLES = {
   [PER_MONTH_CHART]: 'Number of days traveling per month',
 };
 
-const ALL_MONTHS = {
+const DEFAULT_ALL_MONTHS = {
   January: 0,
   February: 0,
   March: 0,
@@ -52,7 +52,7 @@ function getDatasets(data, kind, isAllTime) {
   if (kind === PER_MONTH_CHART && isAllTime) {
     return [
       {
-        data: { ...ALL_MONTHS, ...data.allTime },
+        data: { ...DEFAULT_ALL_MONTHS, ...data.allTime },
         backgroundColor: ['rgba(255,0,0, 0.5)'],
         fill: true,
         tension: 0.5,
@@ -69,7 +69,7 @@ function getDatasets(data, kind, isAllTime) {
   if (kind === PER_MONTH_CHART && !isAllTime) {
     return [
       {
-        data: { ...ALL_MONTHS, ...data.allTime },
+        data: { ...DEFAULT_ALL_MONTHS, ...data.allTime },
         backgroundColor: ['rgba(255,0,0, 0.5)'],
         fill: true,
         tension: 0.5,
