@@ -135,6 +135,18 @@ const theme = createTheme({
         },
       },
     },
+    MuiStepIcon: {
+      styleOverrides: {
+        root: {
+          '&.Mui-completed': {
+            color: 'var(--primary-color-700)',
+          },
+          '&.Mui-active': {
+            color: 'var(--primary-color-700)',
+          },
+        },
+      },
+    },
   },
   typography: {
     fontFamily: ['Poppins', 'sans-serif'].join(','),
