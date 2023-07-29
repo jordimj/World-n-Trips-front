@@ -1,3 +1,5 @@
+import { Options } from '@/template/components/Autocomplete/Autocomplete';
+
 interface Expense {
   id: number;
   day: string;
@@ -26,7 +28,7 @@ export interface ExpensesFilters {
   query?: string;
   from?: Date | null;
   to?: Date | null;
-  countries?: Array<number>;
+  countries?: Options;
   categories?: Array<number>;
   subcategories?: Array<number>;
   currencies?: Array<string>;

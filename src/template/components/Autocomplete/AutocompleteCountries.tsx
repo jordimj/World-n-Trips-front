@@ -21,10 +21,11 @@ function AutocompleteCountries(props: Props) {
 
 interface MultipleProps {
   onChangeOption: (options: Options) => void;
+  initial?: Options;
 }
 
 function AutocompleteMultipleCountries(props: MultipleProps) {
-  const { onChangeOption } = props;
+  const { onChangeOption, initial } = props;
   const { data, isFetching } = useCountries();
 
   return (
@@ -33,6 +34,7 @@ function AutocompleteMultipleCountries(props: MultipleProps) {
       loading={isFetching}
       options={data}
       onChangeOption={onChangeOption}
+      initial={initial}
     />
   );
 }

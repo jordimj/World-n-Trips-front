@@ -1,12 +1,14 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Typography } from '@mui/material';
+import { Option } from '@/template/components/Autocomplete/Autocomplete';
 import { ExpensesFilters } from '../../interfaces';
 import Table from '../Table';
 import Filters from '../Filters';
 
 interface LocationState {
-  countryId?: number;
+  country?: Option;
+  keyword?: string;
 }
 
 function Expenses() {
@@ -14,12 +16,12 @@ function Expenses() {
 
   const location = useLocation();
   const state = location.state as LocationState | undefined;
-  const countryId = state?.countryId;
+  const { country, keyword } = state ?? {};
 
   useEffect(() => {
-    if (countryId === undefined) return;
-    setFilters({ ...filters, countries: [countryId] });
-  }, [countryId]);
+    if (country !== undefined) setFilters({ ...filters, countries: [country] });
+    if (keyword !== undefined) setFilters({ ...filters, query: keyword });
+  }, [country, keyword]);
 
   return (
     <Fragment>

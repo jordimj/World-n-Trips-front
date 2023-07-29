@@ -20,7 +20,10 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
   const goToExpenses = () =>
     navigate('/expenses', {
       state: {
-        countryId,
+        country: {
+          id: country.id,
+          name: country.name,
+        },
       },
     });
 

@@ -19,7 +19,7 @@ function Filters(props: Props) {
   const onChangeCountry = (options: Options) =>
     setFilters((prevFilters) => ({
       ...prevFilters,
-      countries: options.map((option) => option.id),
+      countries: options,
     }));
 
   const onChangeTrip = (options: Options) =>
@@ -80,19 +80,25 @@ function Filters(props: Props) {
 
   return (
     <Stack gap={2}>
-      <Stack direction="row" gap={2} sx={{ px: 2 }}>
+      <Box
+        display="grid"
+        gridTemplateColumns="repeat(auto-fill, minmax(250px, 1fr))"
+        gap={2}
+        sx={{ px: 2 }}
+      >
         <DatePicker
           label="From"
           date={filters.from ?? null}
           handleChange={onChangeFrom}
         />
         <DatePicker label="To" date={filters.to ?? null} handleChange={onChangeTo} />
-      </Stack>
-      <Stack direction="row" gap={2} sx={{ px: 2 }}>
-        <AutocompleteCountries.Multiple onChangeOption={onChangeCountry} />
+        <AutocompleteCountries.Multiple
+          initial={filters.countries}
+          onChangeOption={onChangeCountry}
+        />
         <AutocompleteTrips.Multiple onChangeOption={onChangeTrip} />
         <AutocompleteCurrencies onChangeOption={onChangeCurrency} />
-      </Stack>
+      </Box>
       <Stack direction="row" gap={4} sx={{ px: 2 }}>
         <Box sx={{ px: 2, width: '100%' }}>
           <Slider

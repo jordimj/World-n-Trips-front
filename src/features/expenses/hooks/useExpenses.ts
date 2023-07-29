@@ -21,7 +21,7 @@ function useExpenses(filters: ExpensesFilters) {
     ...(query && { query }),
     ...(from && { from: formatDatabaseDate(from) }),
     ...(to && { to: formatDatabaseDate(to) }),
-    ...(countries && { countries }),
+    ...(countries && { countries: countries.map((country) => country.id) }),
     ...(categories && { categories }),
     ...(subcategories && { subcategories }),
     ...(currencies && { currencies }),
