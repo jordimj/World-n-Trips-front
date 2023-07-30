@@ -63,16 +63,11 @@ export default function SettingsMenu() {
           <ThemeSwitcher />
         </MenuItem>
         <MenuItem>
-          <Switch
-            color="primary"
-            checked={fullWidth}
-            onChange={(e) => saveFullWidth(e.target.checked)}
-          />
+          <Switch checked={fullWidth} onChange={(e) => saveFullWidth(e.target.checked)} />
           Full width
         </MenuItem>
         <MenuItem>
           <Switch
-            color="primary"
             checked={enabledEphemeris}
             onChange={(e) => setEnabledEphemeris(e.target.checked)}
           />
@@ -81,7 +76,6 @@ export default function SettingsMenu() {
         {isTrips && (
           <MenuItem>
             <Switch
-              color="primary"
               checked={filterTrips}
               onChange={(e) => setFilterTrips(e.target.checked)}
             />

@@ -1,12 +1,13 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { percentageFormatter } from '@/utils/number';
 import * as actions from '../../actions/actions';
-import TravelStatsTable from './TravelStatsTable/TravelStatsTable';
-import BarChart from './Timeline/BarChart';
-import Timeline from './Timeline';
-import YearSelect from './YearSelect';
+import TravelStatsTable from '../TravelStatsTable';
+import BarChart from '../BarChart';
+import Timeline from '../Timeline';
+import YearSelect from '../YearSelect';
+import Top5 from '../Top5';
 
 export default function () {
   const statistics = useSelector((state) => state.statistics.statistics);
@@ -27,7 +28,7 @@ export default function () {
     setYear(e.target.value !== 'All time' ? e.target.value : null);
 
   return (
-    <Box textAlign="center">
+    <Stack textAlign="center" gap={3}>
       <Typography variant="h1">Travel statistics</Typography>
       <YearSelect year={year} onYearChange={onYearChange} />
       {countries && (
@@ -54,55 +55,7 @@ export default function () {
         </>
       )}
       {!isAllTime && <Timeline year={year} />}
-      {top5 && (
-        <>
-          <Typography variant="h2">TOP 5</Typography>
-          <Box
-            display="grid"
-            gridTemplateColumns="repeat(auto-fill, minmax(400px, 1fr))"
-            gap={3}
-            sx={{ mx: 2 }}
-          >
-            <TravelStatsTable
-              stats={top5.longestInCountry}
-              kind="country"
-              title="Countries where I stayed the longest"
-              shortTable
-            />
-            <TravelStatsTable
-              stats={top5.longestInCities}
-              kind="city"
-              title="Cities where I stayed the longest"
-              shortTable
-            />
-            {top5.hitchhiked.length !== 0 && (
-              <TravelStatsTable
-                stats={top5.hitchhiked}
-                kind="country"
-                title="Countries where I hitchhiked the most"
-                format="kilometers"
-                shortTable
-              />
-            )}
-            <TravelStatsTable
-              stats={top5.mostSpent}
-              kind="country"
-              title="Countries where I spent the most"
-              format="currency"
-              shortTable
-            />
-            {top5.mostExpensiveVisas.length !== 0 && (
-              <TravelStatsTable
-                stats={top5.mostExpensiveVisas}
-                kind="country"
-                title="Most expensive country visas"
-                format="currency"
-                shortTable
-              />
-            )}
-          </Box>
-        </>
-      )}
-    </Box>
+      {top5 && <Top5 top5={top5} />}
+    </Stack>
   );
 }

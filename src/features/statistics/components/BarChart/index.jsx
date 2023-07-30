@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { Stack, Typography } from '@mui/material';
 import Chart from 'chart.js/auto';
 
 const PER_YEAR_CHART = 'year';
@@ -24,20 +25,12 @@ const DEFAULT_ALL_MONTHS = {
   December: 0,
 };
 
-function getChartOptions(kind) {
+function getChartOptions() {
   return {
     aspectRatio: 4,
     plugins: {
       legend: {
         display: false,
-      },
-      title: {
-        display: true,
-        text: TITLES[kind],
-        padding: 30,
-        font: {
-          size: 30,
-        },
       },
     },
     layout: {
@@ -94,13 +87,18 @@ function BarChart({ data, kind, isAllTime = true }) {
     const lineChart = new Chart(chartRef.current, {
       type: 'bar',
       data: { datasets: getDatasets(data, kind, isAllTime) },
-      options: getChartOptions(kind),
+      options: getChartOptions(),
     });
 
     return () => lineChart.destroy();
   }, [data]);
 
-  return <canvas ref={chartRef} />;
+  return (
+    <Stack>
+      <Typography variant="h2">{TITLES[kind]}</Typography>
+      <canvas ref={chartRef} />
+    </Stack>
+  );
 }
 
 export default BarChart;

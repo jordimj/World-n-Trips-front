@@ -15,6 +15,7 @@ function YearSelect({ year, onYearChange }) {
       value={year ?? 'All time'}
       onChange={onYearChange}
       maxWidth={300}
+      centered
     >
       {options.map((year) => (
         <MenuItem key={year} value={year}>

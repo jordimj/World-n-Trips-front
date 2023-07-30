@@ -2,7 +2,7 @@ import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Stack, Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import * as actions from '../../../../journals/actions/actions';
+import * as actions from '@/features/journals/actions/actions';
 import Day from './Day';
 import styles from './Timeline.module.css';
 

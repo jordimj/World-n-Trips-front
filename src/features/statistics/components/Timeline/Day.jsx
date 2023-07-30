@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 import { Box, Tooltip, Typography } from '@mui/material';
-import styles from './Day.module.css';
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
+import styles from './Day.module.css';
 
 dayjs.extend(dayOfYear);
 

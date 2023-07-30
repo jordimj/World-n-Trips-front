@@ -13,6 +13,7 @@ function Select(props) {
     children,
     helper,
     disabled = false,
+    centered = false,
     maxWidth,
     ...rest
   } = props;
@@ -20,7 +21,11 @@ function Select(props) {
   return (
     <FormControl
       disabled={disabled}
-      sx={{ width: '100%', ...(maxWidth && { maxWidth }) }}
+      sx={{
+        width: '100%',
+        ...(maxWidth && { maxWidth }),
+        ...(centered && { mx: 'auto' }),
+      }}
     >
       <InputLabel id={`${label}-select-label`} className={styles.text}>
         {label}

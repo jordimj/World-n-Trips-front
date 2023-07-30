@@ -62,7 +62,6 @@ export default function StepperButtons() {
           </Button>
           <Button
             variant="contained"
-            color="primary"
             onClick={() => (isLastStep ? mutate : goNextStep)()}
             disabled={isForwardDisabled(activeStep)}
           >
