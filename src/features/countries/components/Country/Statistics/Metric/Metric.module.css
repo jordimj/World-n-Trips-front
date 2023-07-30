@@ -1,6 +1,6 @@
 .root {
   font-size: 75px;
-  background: linear-gradient(180deg, rgba(103, 99, 119, 1) 0%, rgba(67, 64, 74, 1) 100%);
+  background: linear-gradient(135deg, rgba(103, 99, 119, 1) 0%, rgba(67, 64, 74, 1) 100%);
   color: white;
   border-radius: var(--border-radius);
   padding: var(--spacing-5);

@@ -52,8 +52,8 @@ function Timeline({ year }) {
         </Stack>
         <Stack direction="row" gap={1}>
           <Stack justifyContent="space-between" sx={{ height: 'auto', my: '4px' }}>
-            {days.map((day) => (
-              <Typography>{day}</Typography>
+            {days.map((day, idx) => (
+              <Typography key={idx}>{day}</Typography>
             ))}
           </Stack>
           <Box className={styles.grid} sx={{ gridColumnStart: firstDay.day() + 1 }}>

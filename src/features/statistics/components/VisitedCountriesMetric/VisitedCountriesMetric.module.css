@@ -1,0 +1,44 @@
+.root {
+  width: 400px;
+  height: 500px;
+  background: linear-gradient(135deg, rgba(103, 99, 119, 1) 0%, rgba(67, 64, 74, 1) 100%);
+  color: white;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-5);
+  position: relative;
+}
+
+.icon {
+  font-size: var(--spacing-10);
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: var(--spacing-5);
+  color: var(--header-text-color);
+  text-align: center;
+}
+
+.metric {
+  font-size: var(--spacing-9);
+  font-weight: 700;
+}
+
+.secondaryLabel {
+  text-transform: uppercase;
+  font-size: var(--spacing-5);
+  color: var(--text-color-secondary);
+  text-align: center;
+}
+
+.percentage {
+  position: absolute;
+  bottom: var(--spacing-5);
+  width: calc(100% - (var(--spacing-5) * 2));
+}
+
+.percentageLabel {
+  font-size: var(--spacing-4);
+  color: var(--header-text-color);
+  align-self: center;
+}

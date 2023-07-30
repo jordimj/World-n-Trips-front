@@ -8,6 +8,7 @@ import BarChart from '../BarChart';
 import Timeline from '../Timeline';
 import YearSelect from '../YearSelect';
 import Top5 from '../Top5';
+import VisitedCountriesMetric from '../VisitedCountriesMetric';
 
 export default function () {
   const statistics = useSelector((state) => state.statistics.statistics);
@@ -28,21 +29,16 @@ export default function () {
     setYear(e.target.value !== 'All time' ? e.target.value : null);
 
   return (
-    <Stack textAlign="center" gap={3}>
+    <Stack gap={3}>
       <Typography variant="h1">Travel statistics</Typography>
       <YearSelect year={year} onYearChange={onYearChange} />
       {countries && (
-        <Stack direction="row" spacing={3} justifyContent="center" sx={{ pt: 3 }}>
-          <Stack spacing={2} justifyContent="center" sx={{ pt: 3 }}>
-            <Typography fontSize={90}>
-              {countries.all.visited} / {countries.all.total}
-            </Typography>
-            <Typography fontSize={40}>
-              I've been to the {percentageFormatter(countries.all.percentage)}
-            </Typography>
-            <Typography fontSize={40} sx={{ mb: '40px' }}>
-              of the world's countries!
-            </Typography>
+        <Stack direction="row" gap={3} justifyContent="center" sx={{ pt: 3 }}>
+          <Stack gap={4} justifyContent="center" alignItems="center" sx={{ pt: 3 }}>
+            <VisitedCountriesMetric
+              visitedCountries={countries.all.visited}
+              percentage={countries.all.percentage}
+            />
             <TravelStatsTable stats={countries.byContinent} />
           </Stack>
           <TravelStatsTable stats={countries.byRegion} kind="region" />
