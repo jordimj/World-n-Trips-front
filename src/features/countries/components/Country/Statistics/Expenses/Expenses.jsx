@@ -1,13 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Box, Button, Divider, Stack } from '@mui/material';
-import MoneyIcon from '@mui/icons-material/Money';
-import EuroIcon from '@mui/icons-material/Euro';
+import Metric from '@/template/components/Metric';
 import { deductNotDailyExpenses } from '@/utils';
-import { euroFormatter } from '@/utils/number';
 import ExpensesTable from './ExpensesTable';
 import ExpensesChart from './ExpensesChart';
-import Metric from '../Metric';
 import styles from './Expenses.module.css';
 
 export default function ExpensesStatistics({ expenses, totalNights }) {
@@ -47,27 +44,19 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
       >
         <Stack gap={3}>
           <Stack direction="row" gap={3} flexWrap="wrap">
-            <Metric
-              icon={<EuroIcon fontSize="inherit" />}
-              label="Total expenses"
-              metric={euroFormatter(sum)}
-            />
-            <Metric
-              icon={<EuroIcon fontSize="inherit" />}
-              label="Expenses / day"
-              metric={euroFormatter(sum / totalNights)}
-            />
+            <Metric.Expenses metric={sum} />
+            <Metric.Expenses label="Expenses / day" metric={sum / totalNights} />
           </Stack>
           <Stack direction="row" gap={3} flexWrap="wrap">
-            <Metric
-              icon={<MoneyIcon fontSize="inherit" />}
+            <Metric.Expenses
               label="Total daily expenses"
-              metric={euroFormatter(sumWithoutDailyExp)}
+              metric={sumWithoutDailyExp}
+              withMoneyIcon
             />
-            <Metric
-              icon={<MoneyIcon fontSize="inherit" />}
+            <Metric.Expenses
               label="Daily expenses / day"
-              metric={euroFormatter(sumWithoutDailyExp / totalNights)}
+              metric={sumWithoutDailyExp / totalNights}
+              withMoneyIcon
             />
           </Stack>
         </Stack>

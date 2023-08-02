@@ -1,12 +1,11 @@
 import { Box, Divider, Stack } from '@mui/material';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { DATA_APPENDICES } from '@/constants';
 import { numberFormatter } from '@/utils/number';
+import Metric from '@/template/components/Metric';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
-import Metric from '../Metric';
 import HitchhikesCharts from './HitchhikesCharts';
 
 export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
@@ -24,11 +23,7 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
       <Stack component="section" gap={5} alignItems="center">
         <Divider>Hitchhikes</Divider>
         <Stack direction="row" gap={3} flexWrap="wrap">
-          <Metric
-            icon={<ThumbUpIcon fontSize="inherit" />}
-            label="Kilometers hitchhiked"
-            metric={numberFormatter(totalKilometers)}
-          />
+          <Metric.Hitchhikes metric={totalKilometers} />
           <Metric
             icon={<CalendarMonthIcon fontSize="inherit" />}
             label="Days on the road"

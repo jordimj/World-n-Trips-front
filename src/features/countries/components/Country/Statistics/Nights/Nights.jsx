@@ -1,10 +1,9 @@
 import { Divider, Stack } from '@mui/material';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
-import NightShelterIcon from '@mui/icons-material/NightShelter';
 import EuroIcon from '@mui/icons-material/Euro';
 import { numberFormatter } from '@/utils/number';
+import Metric from '@/template/components/Metric';
 import NightsTable from './NightsTable';
-import Metric from '../Metric';
 import NightsChart from './NightsChart';
 import AlsoSleptAt from './AlsoSleptAt';
 
@@ -27,11 +26,7 @@ export default function NightsStatistics({ nights, kmWalked }) {
           secondaryLabel="Km / day"
           secondaryMetric={numberFormatter(kmWalked / count.total)}
         />
-        <Metric
-          icon={<NightShelterIcon fontSize="inherit" />}
-          label="Nights spent"
-          metric={count.total}
-        />
+        <Metric.Nights metric={count.total} />
         <Metric icon={<EuroIcon fontSize="inherit" />}>
           <NightsChart data={{ 'Free stays': count.free, 'Paid stays': count.paid }} />
         </Metric>

@@ -41,7 +41,7 @@ const TravelStatsTable = ({
   };
 
   return (
-    <Stack gap={1}>
+    <Stack gap={1} sx={{ textAlign: 'center' }}>
       {title !== '' && (
         <Typography
           variant="h6"

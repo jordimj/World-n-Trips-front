@@ -1,0 +1,19 @@
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-5);
+}
+
+.root {
+  background-color: var(--background-color-light);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-3);
+  margin-top: var(--spacing-5);
+  margin-bottom: var(--spacing-7);
+}
+
+.tab {
+  width: 25%;
+  font-size: 16px;
+}
