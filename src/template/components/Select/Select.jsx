@@ -21,8 +21,8 @@ function Select(props) {
   return (
     <FormControl
       disabled={disabled}
+      className={styles.form}
       sx={{
-        width: '100%',
         ...(maxWidth && { maxWidth }),
         ...(centered && { mx: 'auto' }),
       }}

@@ -2,8 +2,15 @@
 .text,
 .select {
   color: var(--text-color) !important;
+  background-color: transparent;
 }
 
 .formHelperText {
   text-align: end;
+}
+
+.form {
+  width: 100%;
+  background-color: var(--background-color-dark) !important;
+  border-radius: var(--border-radius);
 }
