@@ -26,6 +26,7 @@ export default function MapSidebar() {
     <>
       <IconButton
         size="large"
+        aria-label={`${isVisible ? 'close' : 'open'} sidebar`}
         title={`${isVisible ? 'Close' : 'Open'} sidebar`}
         className={styles.toggleButton}
         onClick={toggleSidebar}
@@ -73,11 +74,10 @@ export default function MapSidebar() {
               onChange={toggleColoring}
             />
           }
-          label="Colour the map according to the number of places I've been to"
+          label="Color the map according to the number of places I've been to"
         />
-
         <IconButton
-          aria-label="close"
+          aria-label="close sidebar"
           title="Close sidebar"
           onClick={toggleSidebar}
           sx={{ fontSize: '80px', width: 'fit-content', alignSelf: 'center' }}

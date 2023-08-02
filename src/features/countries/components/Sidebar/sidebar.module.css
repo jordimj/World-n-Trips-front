@@ -21,8 +21,8 @@
 .toggleButton {
   position: absolute;
   align-items: center;
-  left: 0;
-  bottom: 1vh;
+  left: var(--spacing-1);
+  bottom: var(--spacing-1);
   transition: transform 1s;
 }
 
@@ -32,6 +32,6 @@
 }
 
 .toggleButton:hover {
-  transform: rotate(360deg) scale(1.2);
+  transform: scale(1.1);
   transition: transform 0.5s;
 }

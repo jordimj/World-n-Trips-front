@@ -18,7 +18,6 @@ const Layout = ({ children }: Props) => {
     >
       <Toolbar />
       <main className={styles.main}>{children}</main>
-      <footer className={styles.footer}>Jordi MJ @ World-n-Trips</footer>
     </Box>
   );
 };
