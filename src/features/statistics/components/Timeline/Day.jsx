@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
-import { Box, Tooltip, Typography } from '@mui/material';
+import { Box, Stack, Tooltip, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
+import { buildTripName } from '@/utils';
 import styles from './Day.module.css';
 
 dayjs.extend(dayOfYear);
@@ -13,29 +13,30 @@ function Day({ day, trip, gridRowStart, daysInYear }) {
   return (
     <Tooltip
       title={
-        <Fragment>
+        <Stack gap={1} sx={{ m: 1 }}>
           <Typography>{day.format('dddd, MMMM D, YYYY')}</Typography>
-          <Typography>{trip?.name}</Typography>
-        </Fragment>
+          {trip?.name && (
+            <Typography fontWeight={700}>{buildTripName(trip?.name)}</Typography>
+          )}
+        </Stack>
       }
       arrow
     >
       <Box
-        className={[styles.day, trip === undefined && styles.empty]}
+        className={[styles.day, trip === undefined ? styles.empty : styles.visited]}
         sx={{
-          backgroundColor: trip !== undefined ? 'red!important' : '',
           ...(gridRowStart !== undefined && { gridRowStart }),
-          ...((day.dayOfYear() === 1 || day.day() === 1) && {
-            borderTop: '3px dashed black !important',
+          ...((day.dayOfYear() === 1 || day.day() === 1 || day.date() === 1) && {
+            borderTop: '2px dashed black !important',
           }),
           ...((day.dayOfYear() === daysInYear || day.day() === 0) && {
-            borderBottom: '3px dashed black !important',
+            borderBottom: '2px dashed black !important',
           }),
-          ...(firstWeek.includes(day.dayOfYear()) && {
-            borderLeft: '3px dashed black !important',
+          ...((firstWeek.includes(day.dayOfYear()) || firstWeek.includes(day.date())) && {
+            borderLeft: '2px dashed black !important',
           }),
           ...(lastWeek.includes(day.dayOfYear()) && {
-            borderRight: '3px dashed black !important',
+            borderRight: '2px dashed black !important',
           }),
         }}
       ></Box>

@@ -1,11 +1,17 @@
 .day {
   min-width: 20px;
-  width: 27px;
+  width: 29px;
   max-width: 30px;
   aspect-ratio: 1;
   background-color: lightgray;
   border: var(--border);
   border-color: white;
+  box-sizing: border-box;
+}
+
+.visited {
+  background-color: #ff0000;
+  opacity: 0.5;
 }
 
 .empty {

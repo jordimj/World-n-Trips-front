@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box, Stack, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import * as actions from '@/features/journals/actions/actions';
+import { MONTHS, WEEK_DAYS } from '../../constants';
 import Day from './Day';
 import styles from './Timeline.module.css';
 
@@ -24,40 +25,23 @@ function Timeline({ year }) {
 
   const daysInYear = firstDay.endOf('year').dayOfYear();
 
-  const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
-
-  const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-
   return (
     <Fragment>
       <Typography variant="h2">Travel Timeline</Typography>
       <Stack gap={1}>
-        <Stack direction="row" justifyContent="space-between" sx={{ mx: 5 }}>
-          {months.map((month) => (
+        <Stack direction="row" justifyContent="space-between" sx={{ mx: '100px' }}>
+          {MONTHS.map((month) => (
             <Typography key={month}>{month}</Typography>
           ))}
         </Stack>
         <Stack direction="row" gap={1}>
-          <Stack justifyContent="space-between" sx={{ height: 'auto', my: '4px' }}>
-            {days.map((day, idx) => (
+          <Stack alignItems="center" justifyContent="space-between" sx={{ my: '2px' }}>
+            {WEEK_DAYS.map((day, idx) => (
               <Typography key={idx}>{day}</Typography>
             ))}
           </Stack>
           <Box className={styles.grid} sx={{ gridColumnStart: firstDay.day() + 1 }}>
-            {Array.from({ length: daysInYear }).map((item, idx) => (
+            {Array.from({ length: daysInYear }).map((_, idx) => (
               <Day
                 key={idx}
                 day={firstDay.add(idx, 'day')}
@@ -67,8 +51,8 @@ function Timeline({ year }) {
                     firstDay
                       .add(idx, 'day')
                       .isBetween(trip.arrivalDate.date, trip.departureDate.date) ||
-                    firstDay.add(idx, 'day').isSame(trip.arrivalDate.date) ||
-                    firstDay.add(idx, 'day').isSame(trip.departureDate.date)
+                    firstDay.add(idx, 'day').isSame(trip.arrivalDate.date, 'day') ||
+                    firstDay.add(idx, 'day').isSame(trip.departureDate.date, 'day')
                 )}
                 {...(idx === 0 && {
                   gridRowStart: firstDay.day() === 0 ? 7 : firstDay.day(),
