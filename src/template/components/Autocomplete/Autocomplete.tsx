@@ -1,6 +1,7 @@
 import { Autocomplete as MuiAutocomplete, Checkbox, TextField } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import styles from './Autocomplete.module.css';
 
 export interface Option {
   id: number;
@@ -27,7 +28,10 @@ function Autocomplete(props: Props) {
       options={options ?? []}
       loading={loading}
       getOptionLabel={(option) => option.name}
-      sx={{ width: 300, backgroundColor: 'white', borderRadius: 'var(--border-radius)' }}
+      classes={{
+        root: styles.root,
+        paper: styles.paper,
+      }}
       onChange={(e, value) => onChangeOption(value?.id ?? null)}
       renderInput={(params) => <TextField {...params} label={label} />}
     />
@@ -56,24 +60,37 @@ function AutocompleteMultiple(props: AutocompleteMultipleProps) {
       loading={loading}
       getOptionLabel={(option) => option.name}
       onChange={(e, value) => onChangeOption(value)}
-      renderInput={(params) => <TextField {...params} label={label} />}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label={label}
+          sx={{
+            '& label': { color: 'var(--text-color)' },
+            '& label.Mui-focused': { color: 'var(--text-color)!important' },
+          }}
+        />
+      )}
       multiple
       limitTags={1}
       renderOption={(props, option, { selected }) => (
         <li {...props}>
           <Checkbox
-            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
-            checkedIcon={<CheckBoxIcon fontSize="small" />}
+            icon={<CheckBoxOutlineBlankIcon />}
+            checkedIcon={<CheckBoxIcon />}
             style={{ marginRight: 8 }}
             checked={selected}
           />
           {option.name}
         </li>
       )}
+      classes={{
+        root: styles.root,
+        paper: styles.paper,
+      }}
       sx={{
-        minWidth: 250,
-        backgroundColor: 'white',
-        borderRadius: 'var(--border-radius)',
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: 'var(--primary-color-500)!important',
+        },
       }}
     />
   );

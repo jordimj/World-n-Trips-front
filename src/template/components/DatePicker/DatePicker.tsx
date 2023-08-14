@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -22,18 +21,31 @@ function DatePicker(props: DatePickerProps) {
   } = props;
 
   return (
-    <Box sx={{ backgroundColor: 'white', borderRadius: 'var(--border-radius)' }}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <MuiDatePicker
-          format="DD/MM/YYYY"
-          value={date}
-          onChange={handleChange}
-          shouldDisableDate={shouldDisableDate}
-          loading={loading}
-          {...(label && { label })}
-        />
-      </LocalizationProvider>
-    </Box>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <MuiDatePicker
+        format="DD/MM/YYYY"
+        value={date}
+        onChange={handleChange}
+        shouldDisableDate={shouldDisableDate}
+        loading={loading}
+        {...(label && { label })}
+        sx={{
+          color: 'var(--text-color)',
+          width: '100%',
+          backgroundColor: 'var(--background-color-dark)!important',
+          borderRadius: 'var(--border-radius)',
+          '& .MuiInputBase-root': {
+            color: 'var(--text-color)',
+          },
+          '& svg': { fill: 'var(--text-color)' },
+          '& label': { color: 'var(--text-color)' },
+          '& label.Mui-focused': { color: 'var(--text-color)!important' },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'var(--primary-color-500)!important',
+          },
+        }}
+      />
+    </LocalizationProvider>
   );
 }
 

@@ -1,16 +1,11 @@
-.form {
+.root {
   width: 100%;
   background-color: var(--background-color-dark) !important;
   border-radius: var(--border-radius);
-}
-
-.formHelperText,
-.text,
-.select {
   color: var(--text-color) !important;
-  background-color: transparent;
 }
 
-.formHelperText {
-  text-align: end;
+.paper {
+  background-color: var(--background-color-dark) !important;
+  color: var(--text-color) !important;
 }

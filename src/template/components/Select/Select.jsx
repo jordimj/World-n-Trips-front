@@ -37,7 +37,11 @@ function Select(props) {
         className={styles.select}
         value={value}
         onChange={onChange}
-        sx={{ backgroundColor: 'white' }}
+        sx={{
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'var(--primary-color-500)',
+          },
+        }}
         {...rest}
       >
         {children}
