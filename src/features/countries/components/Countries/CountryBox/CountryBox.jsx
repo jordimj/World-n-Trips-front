@@ -1,11 +1,11 @@
 import { Stack, Typography } from '@mui/material';
-import { getCountryFlagSrc } from '@/utils';
+import CountryFlag from '@/template/components/CountryFlag';
 import styles from './CountryBox.module.css';
 
-const CountryBox = ({ name, code, onClick }) => (
+const CountryBox = ({ name, onClick }) => (
   <Stack className={styles.countryBox} onClick={onClick}>
-    <Typography variant="cardTitle">{name}</Typography>
-    <img src={getCountryFlagSrc(code)} alt={`${name}'s flag`} />
+    <Typography variant="cardTitle">{name.toUpperCase()}</Typography>
+    <CountryFlag name={name} />
   </Stack>
 );
 

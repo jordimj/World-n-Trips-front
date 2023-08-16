@@ -5,11 +5,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import COUNTRIES from '@/constants/countryCodes';
 import useKeyDown from '@/hooks/useKeyDown';
 import SearchInput from '@/features/countries/components/SearchInput/SearchInput';
-import { getCountryFlagSrc } from '@/utils';
 import useSearch from '@/features/search/hooks/useSearch';
 import { euroFormatter } from '@/utils/number';
 import EXPENSE_CATEGORY_EMOJIS from '@/constants/expenseCategoryEmojis';
 import { formatDate } from '@/utils/date';
+import CountryFlag from '@/template/components/CountryFlag';
 
 interface SearchDialogProps {
   open: boolean;
@@ -80,11 +80,7 @@ function SearchDialog(props: SearchDialogProps) {
               {filteredCountries.slice(0, 5).map(([name, code]) => (
                 <NavLink key={code} to={`/countries/${code}/`} onClick={onClose}>
                   <Stack direction="row" alignItems="center" gap={1} sx={{ p: 1 }}>
-                    <img
-                      src={getCountryFlagSrc(code)}
-                      alt={`${name}'s flag`}
-                      height="34"
-                    />
+                    <CountryFlag name={name} height={32} />
                     <Typography>{name}</Typography>
                   </Stack>
                 </NavLink>

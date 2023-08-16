@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { Box, Stack, Tooltip, Typography, Zoom } from '@mui/material';
-import { getCountryFlagSrc } from '@/utils';
+import CountryFlag from '@/template/components/CountryFlag';
 import styles from './NeighboringCountries.module.css';
 
 function NeighboringCountries({ info }) {
@@ -25,7 +25,7 @@ function NeighboringCountries({ info }) {
                   Boolean
                 )}
               >
-                <img src={getCountryFlagSrc(countryCode)} alt={countryName} />
+                <CountryFlag name={countryName} />
               </NavLink>
             </Tooltip>
           ))

@@ -1,5 +1,11 @@
-import Autocomplete, { Options } from './Autocomplete';
+import { Checkbox, Stack, Typography } from '@mui/material';
+import {
+  CheckBox as CheckBoxIcon,
+  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
+} from '@mui/icons-material';
 import useCountries from '@/hooks/useCountries';
+import CountryFlag from '@/template/components/CountryFlag';
+import Autocomplete, { Options } from './Autocomplete';
 
 interface Props {
   onChangeOption: (optionId: number | null) => void;
@@ -15,6 +21,18 @@ function AutocompleteCountries(props: Props) {
       loading={isFetching}
       options={data}
       onChangeOption={onChangeOption}
+      renderOption={(props, option, { selected }) => (
+        <Stack component="li" direction="row" gap={1} {...props}>
+          <Checkbox
+            icon={<CheckBoxOutlineBlankIcon />}
+            checkedIcon={<CheckBoxIcon />}
+            sx={{ m: 0 }}
+            checked={selected}
+          />
+          <CountryFlag name={option.name} height={32} />
+          <Typography sx={{ ml: 1 }}>{option.name}</Typography>
+        </Stack>
+      )}
     />
   );
 }
@@ -35,6 +53,18 @@ function AutocompleteMultipleCountries(props: MultipleProps) {
       options={data}
       onChangeOption={onChangeOption}
       initial={initial}
+      renderOption={(props, option, { selected }) => (
+        <Stack component="li" direction="row" gap={1} {...props}>
+          <Checkbox
+            icon={<CheckBoxOutlineBlankIcon />}
+            checkedIcon={<CheckBoxIcon />}
+            sx={{ m: 0 }}
+            checked={selected}
+          />
+          <CountryFlag name={option.name} height={32} />
+          <Typography sx={{ ml: 1 }}>{option.name}</Typography>
+        </Stack>
+      )}
     />
   );
 }

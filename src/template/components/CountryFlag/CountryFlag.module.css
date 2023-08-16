@@ -1,0 +1,13 @@
+img {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+img:before {
+  content: '';
+  display: block;
+  height: 32px;
+  width: 32px;
+  background-color: lightgrey;
+  border-radius: 50%;
+}

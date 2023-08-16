@@ -14,8 +14,8 @@ import {
 import COUNTRIES from '@/constants/countryCodes';
 import EXPENSE_CATEGORY_EMOJIS from '@/constants/expenseCategoryEmojis';
 import useElementOnScreen from '@/hooks/useElementOnScreen';
+import CountryFlag from '@/template/components/CountryFlag';
 import { formatFullDate } from '@/utils/date';
-import { getCountryFlagSrc } from '@/utils';
 import { euroFormatter } from '@/utils/number';
 import useExpenses from '../../hooks/useExpenses';
 import { ExpensesFilters, OrderBy } from '../../interfaces';
@@ -170,11 +170,7 @@ function ExpensesTable(props: Props) {
                         <Typography>{euroFormatter(Number(valueEur))}</Typography>
                       </TableCell>
                       <TableCell align="center">
-                        <img
-                          src={getCountryFlagSrc(countryCode)}
-                          alt={`${country}'s flag`}
-                          height="34"
-                        />
+                        <CountryFlag name={country} height={32} />
                       </TableCell>
                       <TableCell align="center">
                         <Typography>{trip}</Typography>

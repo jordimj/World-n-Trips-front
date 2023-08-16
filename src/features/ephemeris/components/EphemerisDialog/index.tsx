@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -7,8 +7,9 @@ import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
 import { IconButton, Stack } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import CountryFlag from '@/template/components/CountryFlag';
 import { formatFullDate, getYearsAgo } from '@/utils/date';
-import { buildTripName, getCountryFlagSrc } from '@/utils';
+import { buildTripName } from '@/utils';
 import { EphemerisList } from '../../interfaces';
 
 interface EphemerisDialogProps {
@@ -22,12 +23,6 @@ function EphemerisDialog(props: EphemerisDialogProps) {
 
   const [showTimeAgo, setShowTimeAgo] = useState(true);
   const toggleShowTimeAgo = () => setShowTimeAgo((prev) => !prev);
-
-  const navigate = useNavigate();
-  const onCountryFlagClick = (countryCode: string) => {
-    onClose();
-    navigate(`/countries/${countryCode}/`);
-  };
 
   return (
     <Dialog onClose={onClose} open={open}>
@@ -55,15 +50,12 @@ function EphemerisDialog(props: EphemerisDialogProps) {
               </Typography>
               {ephemeris.country ? (
                 <Stack direction="row" alignItems="center">
-                  <img
-                    src={getCountryFlagSrc(ephemeris.country.alpha3code)}
-                    alt={`${ephemeris.country.name}'s flag`}
-                    onClick={() => onCountryFlagClick(ephemeris.country.alpha3code)}
-                    width="75"
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                  />
+                  <NavLink
+                    to={`/countries/${ephemeris.country.alpha3code}/`}
+                    onClick={onClose}
+                  >
+                    <CountryFlag name={ephemeris.country.name} height={75} />
+                  </NavLink>
                   <Stack sx={{ ml: 3 }}>
                     <Typography>
                       I slept in {ephemeris.city}, {ephemeris.country.name}

@@ -1,6 +1,13 @@
-import { Autocomplete as MuiAutocomplete, Checkbox, TextField } from '@mui/material';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import {
+  Autocomplete as MuiAutocomplete,
+  Checkbox,
+  TextField,
+  AutocompleteProps,
+} from '@mui/material';
+import {
+  CheckBox as CheckBoxIcon,
+  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
+} from '@mui/icons-material';
 import styles from './Autocomplete.module.css';
 
 export interface Option {
@@ -10,7 +17,8 @@ export interface Option {
 
 export interface Options extends Array<Option> {}
 
-interface Props {
+interface Props
+  extends Pick<AutocompleteProps<Option, false, false, false>, 'renderOption'> {
   label: string;
   loading: boolean;
   options?: Options;
@@ -18,7 +26,7 @@ interface Props {
 }
 
 function Autocomplete(props: Props) {
-  const { label, loading, options, onChangeOption } = props;
+  const { label, loading, options, onChangeOption, renderOption } = props;
 
   return (
     <MuiAutocomplete
@@ -34,11 +42,13 @@ function Autocomplete(props: Props) {
       }}
       onChange={(e, value) => onChangeOption(value?.id ?? null)}
       renderInput={(params) => <TextField {...params} label={label} />}
+      {...(renderOption !== undefined && { renderOption })}
     />
   );
 }
 
-interface AutocompleteMultipleProps {
+interface AutocompleteMultipleProps
+  extends Pick<AutocompleteProps<Option, true, false, false>, 'renderOption'> {
   label: string;
   loading: boolean;
   options?: Options;
@@ -47,7 +57,7 @@ interface AutocompleteMultipleProps {
 }
 
 function AutocompleteMultiple(props: AutocompleteMultipleProps) {
-  const { label, loading, options, onChangeOption, initial } = props;
+  const { label, loading, options, onChangeOption, initial, renderOption } = props;
 
   return (
     <MuiAutocomplete
@@ -72,17 +82,20 @@ function AutocompleteMultiple(props: AutocompleteMultipleProps) {
       )}
       multiple
       limitTags={1}
-      renderOption={(props, option, { selected }) => (
-        <li {...props}>
-          <Checkbox
-            icon={<CheckBoxOutlineBlankIcon />}
-            checkedIcon={<CheckBoxIcon />}
-            style={{ marginRight: 8 }}
-            checked={selected}
-          />
-          {option.name}
-        </li>
-      )}
+      renderOption={
+        renderOption ??
+        ((props, option, { selected }) => (
+          <li {...props}>
+            <Checkbox
+              icon={<CheckBoxOutlineBlankIcon />}
+              checkedIcon={<CheckBoxIcon />}
+              style={{ marginRight: 8 }}
+              checked={selected}
+            />
+            {option.name}
+          </li>
+        ))
+      }
       classes={{
         root: styles.root,
         paper: styles.paper,

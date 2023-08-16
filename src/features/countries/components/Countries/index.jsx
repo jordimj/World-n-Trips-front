@@ -31,7 +31,7 @@ function Countries() {
     if (visitedCountries.length === 0) dispatch(actions.fetchVisitedCountries());
   }, []);
 
-  const countrySelectedHandler = (countryName) => navigate(`/countries/${countryName}/`);
+  const onCountryClick = (countryName) => navigate(`/countries/${countryName}/`);
 
   const onInputChange = (e) => {
     e.preventDefault();
@@ -107,9 +107,8 @@ function Countries() {
           filteredCountries.map((country) => (
             <CountryBox
               key={country.alpha3code}
-              name={country.name.toUpperCase()}
-              code={country.alpha3code}
-              onClick={() => countrySelectedHandler(country.alpha3code)}
+              name={country.name}
+              onClick={() => onCountryClick(country.alpha3code)}
             />
           ))
         )}
