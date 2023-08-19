@@ -22,8 +22,8 @@ export async function getCountryStats(countryName: string) {
   return (await instance.get(`/countries/statistics/${countryName}/`)).data;
 }
 
-export async function getCountries() {
-  return (await instance.get('/countries')).data;
+export async function getCountries(onlyVisited: boolean = false) {
+  return (await instance.get('/countries', { params: { onlyVisited } })).data;
 }
 
 export async function getTrips(full: boolean = false) {

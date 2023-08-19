@@ -44,7 +44,7 @@ interface MultipleProps {
 
 function AutocompleteMultipleCountries(props: MultipleProps) {
   const { onChangeOption, initial } = props;
-  const { data, isFetching } = useCountries();
+  const { data, isFetching } = useCountries(true);
 
   return (
     <Autocomplete.Multiple
