@@ -13,7 +13,7 @@ function CountryFlag(props: Props) {
 
   return (
     <img
-      className={styles.img}
+      className={styles.flag}
       src={getCountryFlagSrc(countryCode)}
       alt={`${name}'s flag`}
       loading="lazy"

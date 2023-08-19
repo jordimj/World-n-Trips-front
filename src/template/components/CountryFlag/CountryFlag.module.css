@@ -1,9 +1,9 @@
-img {
+.flag {
   position: relative;
   aspect-ratio: 1;
 }
 
-img:before {
+.flag:before {
   content: '';
   display: block;
   height: 32px;
