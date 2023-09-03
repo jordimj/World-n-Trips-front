@@ -1,12 +1,12 @@
-import SettingsMenu from '@/template/components/SettingsMenu/SettingsMenu';
-import NavigationItems from '@/template/components/Navigation/NavigationItems/NavigationItems';
+import NavigationItems from '../NavigationItems/NavigationItems';
+import Settings from '../Settings';
 import styles from './Toolbar.module.css';
 
 function Toolbar() {
   return (
     <nav className={styles.toolbar}>
       <NavigationItems />
-      <SettingsMenu />
+      <Settings />
     </nav>
   );
 }

@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchDialog from '../SearchDialog';
 import useKeyDown from '@/hooks/useKeyDown';
+import { IconButton } from '@mui/material';
 
 function Search() {
   const [open, setOpen] = useState(false);
@@ -13,7 +14,9 @@ function Search() {
 
   return (
     <Fragment>
-      <SearchIcon onClick={handleOpen} sx={{ color: 'white' }} />
+      <IconButton aria-label="open search dialog" color="secondary" onClick={handleOpen}>
+        <SearchIcon />
+      </IconButton>
       {open && <SearchDialog open onClose={handleClose} />}
     </Fragment>
   );

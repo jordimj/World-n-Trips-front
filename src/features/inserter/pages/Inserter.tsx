@@ -52,7 +52,13 @@ export default function Inserter() {
 
   return (
     <>
-      <PublishIcon onClick={handleClickOpen} sx={{ color: 'white' }} />
+      <IconButton
+        color="secondary"
+        aria-label="open inserter dialog"
+        onClick={handleClickOpen}
+      >
+        <PublishIcon />
+      </IconButton>
       <InserterDialog open={open} onClose={handleClose} />
     </>
   );

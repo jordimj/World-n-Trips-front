@@ -77,6 +77,15 @@ const theme = createTheme({
         },
       },
     },
+    MuiIconButton: {
+      styleOverrides: {
+        colorSecondary: {
+          color: 'white',
+          '&:hover': { backgroundColor: 'var(--primary-color-900)' },
+          '&:focus': { backgroundColor: 'var(--primary-color-900)' },
+        },
+      },
+    },
     MuiSwitch: {
       styleOverrides: {
         colorPrimary: {

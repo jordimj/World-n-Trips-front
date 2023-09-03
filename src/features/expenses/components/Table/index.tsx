@@ -11,7 +11,6 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import COUNTRIES from '@/constants/countryCodes';
 import EXPENSE_CATEGORY_EMOJIS from '@/constants/expenseCategoryEmojis';
 import useElementOnScreen from '@/hooks/useElementOnScreen';
 import CountryFlag from '@/template/components/CountryFlag';
@@ -134,8 +133,6 @@ function ExpensesTable(props: Props) {
                   currency,
                   valueEur,
                 } = expense;
-
-                const countryCode = COUNTRIES[country as keyof typeof COUNTRIES];
 
                 return (
                   <Fragment key={idx}>

@@ -1,5 +1,6 @@
 import { Fragment, useState } from 'react';
 import Badge from '@mui/material/Badge';
+import { IconButton } from '@mui/material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Spinner from '@/template/components/Spinner/Spinner';
 import EphemerisDialog from '../EphemerisDialog';
@@ -22,13 +23,15 @@ function Ephemeris() {
       {isFetching ? (
         <Spinner />
       ) : (
-        <Badge
-          color="error"
-          badgeContent={ephemerisCount}
-          sx={{ ml: 'auto', color: 'white' }}
+        <IconButton
+          color="secondary"
+          aria-label="open ephemeris dialog"
+          onClick={handleOpen}
         >
-          <CalendarMonthIcon onClick={handleOpen} />
-        </Badge>
+          <Badge color="secondary" badgeContent={ephemerisCount}>
+            <CalendarMonthIcon />
+          </Badge>
+        </IconButton>
       )}
       <EphemerisDialog open={open} allEphemeris={allEphemeris} onClose={handleClose} />
     </Fragment>
