@@ -7,20 +7,20 @@ const isBackMocked = import.meta.env.VITE_IS_BACKEND_MOCKED === 'true';
 
 const fetchVisitedCountriesStart = () => {
   return {
-    type: actionTypes.FETCH_COUNTRIES_BEEN_START,
+    type: actionTypes.FETCH_VISITED_COUNTRIES_START,
   };
 };
 
 const fetchVisitedCountriesSuccess = (countries) => {
   return {
-    type: actionTypes.FETCH_COUNTRIES_BEEN_SUCCESS,
+    type: actionTypes.FETCH_VISITED_COUNTRIES_SUCCESS,
     countries,
   };
 };
 
 const fetchVisitedCountriesFail = (error) => {
   return {
-    type: actionTypes.FETCH_COUNTRIES_BEEN_FAIL,
+    type: actionTypes.FETCH_VISITED_COUNTRIES_FAIL,
     error,
   };
 };

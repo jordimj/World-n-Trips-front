@@ -15,19 +15,19 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_COUNTRIES_BEEN_START:
+    case actionTypes.FETCH_VISITED_COUNTRIES_START:
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case actionTypes.FETCH_COUNTRIES_BEEN_SUCCESS:
+    case actionTypes.FETCH_VISITED_COUNTRIES_SUCCESS:
       return {
         ...state,
         visited: action.countries,
         loading: false,
       };
-    case actionTypes.FETCH_COUNTRIES_BEEN_FAIL:
+    case actionTypes.FETCH_VISITED_COUNTRIES_FAIL:
       return {
         ...state,
         loading: false,
