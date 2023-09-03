@@ -7,7 +7,7 @@ const instance = axios.create({
 });
 
 export async function getVisitedCountries() {
-  return (await instance.get('/countries/visited')).data;
+  return (await instance.get('/countries/visited/')).data;
 }
 
 export async function getStats() {
