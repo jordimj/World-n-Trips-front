@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import Chip from '@/template/components/Chip/Chip';
-import { formatDatesInTripCard } from '@/utils/date';
+import { formatTripDates } from '@/utils/date';
 
 function TripCard({ trip }) {
   const navigate = useNavigate();
@@ -32,11 +32,11 @@ function TripCard({ trip }) {
         </Box>
       )}
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5">
           {trip.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {formatDatesInTripCard(trip.arrivalDate.date, trip.departureDate.date)}
+          {formatTripDates(trip.arrivalDate.date, trip.departureDate.date)}
         </Typography>
       </CardContent>
     </Card>

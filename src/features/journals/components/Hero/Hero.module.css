@@ -1,0 +1,26 @@
+.image {
+  display: grid;
+  place-items: center;
+
+  height: 50%;
+  min-height: 600px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+}
+
+.text h1 {
+  color: white;
+  font-size: var(--spacing-9);
+}
+
+.text h5 {
+  font-size: var(--spacing-7);
+  color: white;
+}

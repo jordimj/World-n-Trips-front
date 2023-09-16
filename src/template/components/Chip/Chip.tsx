@@ -16,9 +16,10 @@ function Chip({ variant = 'trip', label }: Props) {
       label={isJournalChip ? variant : label}
       size={isJournalChip ? 'small' : 'medium'}
       sx={{
-        backgroundColor: 'white',
-        fontSize: '12px',
-        px: isJournalChip ? 2 : 0,
+        width: 'fit-content',
+        backgroundColor: isJournalChip ? 'white' : 'var(--background-color-dark)',
+        fontSize: isJournalChip ? 12 : 16,
+        px: isJournalChip ? 2 : 1,
         mt: 2,
       }}
       {...(isJournalChip && {

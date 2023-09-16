@@ -37,7 +37,7 @@ function formatCardDate(date: Date, withYear = true) {
   return Intl.DateTimeFormat('en-US', defaultOptions).format(date);
 }
 
-export const formatDatesInTripCard = (arrivalDate: string, departureDate: string) => {
+export const formatTripDates = (arrivalDate: string, departureDate: string) => {
   const arrival = new Date(arrivalDate);
   const departure = new Date(departureDate);
 

@@ -1,14 +1,13 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import Spinner from '@/template/components/Spinner/Spinner';
 import * as actions from '../../actions/actions';
 import useJournalSearch from '../../hooks/useJournalSearch';
 import JournalAccordion from '../JournalAccordion';
 import Search from '../Search';
+import Hero from '../Hero';
 
 function Journals() {
   const { tripId } = useParams();
@@ -37,10 +36,8 @@ function Journals() {
   if (!trip || journals.length === 0) return <Spinner />;
 
   return (
-    <Box textAlign="center">
-      <Typography variant="h1" sx={{ textTransform: 'capitalize' }}>
-        {trip.name.toLowerCase()}
-      </Typography>
+    <Fragment>
+      <Hero trip={trip} />
       <Search
         search={search}
         keywordRef={keywordRef}
@@ -68,7 +65,7 @@ function Journals() {
           ))}
         </Stack>
       )}
-    </Box>
+    </Fragment>
   );
 }
 
