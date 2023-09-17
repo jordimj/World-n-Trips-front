@@ -3,10 +3,8 @@ import styles from './SearchInput.module.css';
 
 const SearchInput = ({ ...rest }) => (
   <div className={styles.searchInput}>
-    <div className={styles.wrapper}>
-      <SearchRounded color="inherit" />
-      <input className={styles.input} {...rest} />
-    </div>
+    <SearchRounded color="inherit" />
+    <input className={styles.input} {...rest} />
   </div>
 );
 

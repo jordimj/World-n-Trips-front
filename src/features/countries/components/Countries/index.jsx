@@ -10,10 +10,10 @@ import {
   Typography,
 } from '@mui/material';
 import { DATABASE_REGIONS } from '@/constants/continentsAndRegions';
+import SearchInput from '@/template/components/SearchInput';
 import Select from '@/template/components/Select/Select';
 import * as actions from '../../actions/actions';
 import CountryBox from './CountryBox/CountryBox';
-import SearchInput from '../SearchInput/SearchInput';
 import styles from './index.module.css';
 
 function Countries() {
