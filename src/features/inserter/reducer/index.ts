@@ -8,6 +8,14 @@ export interface InserterState {
   filename: string;
   parsedData?: ImportData;
   optionId: number | null;
+  trip?: {
+    name: string;
+    summary: string;
+    coverImage: string;
+    work: 'telework' | 'worktrip' | null;
+    arrivalDate: Date;
+    departureDate: Date;
+  };
   journal: {
     date: Date | null;
     title: string;
@@ -85,6 +93,60 @@ function reducer(state: InserterState, action: Action) {
         journal: {
           ...state.journal,
           editorState: action.payload,
+        },
+      };
+    }
+    case 'SET_TRIP_NAME': {
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          name: action.payload,
+        },
+      };
+    }
+    case 'SET_TRIP_SUMMARY': {
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          summary: action.payload,
+        },
+      };
+    }
+    case 'SET_TRIP_COVER': {
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          coverImage: action.payload,
+        },
+      };
+    }
+    case 'SET_TRIP_WITH_WORK': {
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          work: action.payload,
+        },
+      };
+    }
+    case 'SET_TRIP_ARRIVAL_DATE': {
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          arrivalDate: action.payload,
+        },
+      };
+    }
+    case 'SET_TRIP_DEPARTURE_DATE': {
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          departureDate: action.payload,
         },
       };
     }

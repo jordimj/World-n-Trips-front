@@ -1,0 +1,23 @@
+.textField {
+  background-color: var(--background-color-light);
+  border-radius: var(--border-radius);
+  width: 100%;
+  position: relative;
+}
+
+.textField input {
+  width: calc(100% - 150px);
+}
+
+.buttons {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.hovered {
+  opacity: 1;
+  transition: opacity 0.5s;
+}

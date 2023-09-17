@@ -1,7 +1,7 @@
 export type ImportData = TableData | string;
 export type TableData = Days | Nights | Expenses | Spots;
 
-export type KindOfData = TableKind | 'journal';
+export type KindOfData = TableKind | 'trip' | 'journal';
 export type TableKind = 'day' | 'night' | 'expense' | 'spot';
 
 export interface Day {
@@ -59,3 +59,13 @@ export interface Journal {
 }
 
 export interface Journals extends Array<Journal> {}
+
+export interface Trip {
+  title: string;
+  summary: string;
+  coverImage: string;
+  arrivalDate: Date;
+  departureDate: Date;
+  worktrip: boolean;
+  telework: boolean;
+}

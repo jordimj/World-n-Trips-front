@@ -1,13 +1,17 @@
 import { capitalize, Stack, Typography } from '@mui/material';
-import EuroIcon from '@mui/icons-material/Euro';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import NightShelterIcon from '@mui/icons-material/NightShelter';
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import RoomIcon from '@mui/icons-material/Room';
+import {
+  NightShelter as NightShelterIcon,
+  LightMode as LightModeIcon,
+  Euro as EuroIcon,
+  Room as RoomIcon,
+  EditNote as EditNoteIcon,
+  LocalAirport as LocalAirportIcon,
+} from '@mui/icons-material';
 import useInserterContext from '../../hooks/useInserterContext';
 import { KindOfData } from '../../types';
 
 const DATA_KINDS = {
+  trip: <LocalAirportIcon fontSize="inherit" />,
   day: <LightModeIcon fontSize="inherit" />,
   night: <NightShelterIcon fontSize="inherit" />,
   spot: <RoomIcon fontSize="inherit" />,
@@ -39,6 +43,7 @@ function Step1() {
               borderRadius: 'var(--border-radius)',
               '&:hover': {
                 backgroundColor: 'var(--border)',
+                borderColor: 'var(--secondary-color)',
               },
             }}
           >
