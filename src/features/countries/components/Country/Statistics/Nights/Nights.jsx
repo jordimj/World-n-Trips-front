@@ -1,7 +1,8 @@
-import { Divider, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 import EuroIcon from '@mui/icons-material/Euro';
 import { numberFormatter } from '@/utils/number';
+import Divider from '@/template/components/Divider';
 import Metric from '@/template/components/Metric';
 import NightsTable from './NightsTable';
 import NightsChart from './NightsChart';

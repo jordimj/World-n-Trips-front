@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Box, Button, Divider, Stack } from '@mui/material';
+import { Box, Button, Stack } from '@mui/material';
+import Divider from '@/template/components/Divider';
 import Metric from '@/template/components/Metric';
 import { deductNotDailyExpenses } from '@/utils';
 import ExpensesTable from './ExpensesTable';

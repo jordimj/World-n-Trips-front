@@ -1,7 +1,8 @@
 import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Divider, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import useLocalStorage from '@/hooks/useLocalStorage';
+import Divider from '@/template/components/Divider';
 import { groupBy } from '@/utils';
 import * as actions from '../../actions/actions';
 import TripCard from '../TripCard';

@@ -1,15 +1,16 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/material';
+import Divider from '@/template/components/Divider';
 import TravelStatsTable from '../TravelStatsTable';
 
 function Top5({ top5 }) {
   return (
     <Stack>
-      <Typography variant="h2">TOP 5</Typography>
+      <Divider sx={{ alignSelf: 'center' }}>TOP 5</Divider>
       <Box
         display="grid"
         gridTemplateColumns="repeat(auto-fill, minmax(400px, 1fr))"
         gap={3}
-        sx={{ mx: 2 }}
+        sx={{ mx: 2, mt: 3 }}
       >
         <TravelStatsTable
           stats={top5.longestInCountry}

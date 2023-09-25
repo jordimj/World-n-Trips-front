@@ -1,10 +1,11 @@
-import { Box, Divider, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { DATA_APPENDICES } from '@/constants';
-import { numberFormatter } from '@/utils/number';
+import Divider from '@/template/components/Divider';
 import Metric from '@/template/components/Metric';
+import { numberFormatter } from '@/utils/number';
 import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import HitchhikesCharts from './HitchhikesCharts';
 
