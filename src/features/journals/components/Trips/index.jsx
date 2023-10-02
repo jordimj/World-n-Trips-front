@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box, Stack, Typography } from '@mui/material';
 import useLocalStorage from '@/hooks/useLocalStorage';
 import Divider from '@/template/components/Divider';
+import TripCard from '@/template/components/TripCard';
 import { groupBy } from '@/utils';
 import * as actions from '../../actions/actions';
-import TripCard from '../TripCard';
 
 function Trips() {
   const trips = useSelector((state) => state.journals.trips);

@@ -1,6 +1,6 @@
-import useInserterContext from '../../hooks/useInserterContext';
-import TripCard from '@/features/journals/components/TripCard';
 import { Fragment } from 'react';
+import TripCard from '@/template/components/TripCard';
+import useInserterContext from '../../hooks/useInserterContext';
 
 export default function TripConfirmation() {
   const {
