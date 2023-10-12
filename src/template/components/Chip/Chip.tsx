@@ -5,14 +5,16 @@ import WorkIcon from '@mui/icons-material/Work';
 interface Props {
   variant: 'trip' | 'worktrip' | 'telework';
   label: string;
+  className?: string;
 }
 
-function Chip({ variant = 'trip', label }: Props) {
+function Chip({ variant = 'trip', label, className }: Props) {
   const isJournalChip = variant === 'worktrip' || variant === 'telework';
 
   return (
     <MuiChip
       variant="outlined"
+      {...(className && { className })}
       label={isJournalChip ? variant : label}
       size={isJournalChip ? 'small' : 'medium'}
       sx={{

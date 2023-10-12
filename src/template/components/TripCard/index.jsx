@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import Chip from '@/template/components/Chip/Chip';
 import { formatTripDates } from '@/utils/date';
+import styles from './TripCard.module.css';
 
 function TripCard({ trip }) {
   const navigate = useNavigate();
@@ -16,29 +17,14 @@ function TripCard({ trip }) {
   const hasChip = trip.telework || trip.worktrip;
 
   return (
-    <Card
-      sx={{
-        position: 'relative',
-        width: 380,
-        border: '1px solid var(--primary-color-100)',
-        '&:hover': {
-          boxShadow: 'var(--card-box-shadow)',
-          border: '1px solid var(--primary-color-700)',
-        },
-      }}
-    >
+    <Card className={styles.card}>
       <CardActionArea onClick={() => navigate(`/journals/${trip.id}`)}>
         <CardMedia component="img" alt={trip.name} height="250" image={trip.picture} />
         {hasChip && (
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 0,
-              right: 'var(--spacing-4)',
-            }}
-          >
-            <Chip variant={trip.telework ? 'telework' : 'worktrip'} />
-          </Box>
+          <Chip
+            className={styles.chip}
+            variant={trip.telework ? 'telework' : 'worktrip'}
+          />
         )}
         <CardContent>
           <Typography gutterBottom variant="h5">

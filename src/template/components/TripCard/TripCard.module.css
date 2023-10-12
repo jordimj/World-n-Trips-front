@@ -1,0 +1,16 @@
+.card {
+  position: relative;
+  width: 380px;
+  border: 1px solid var(--primary-color-100);
+
+  &:hover {
+    box-shadow: var(--card-box-shadow);
+    border: 1px solid var(--primary-color-700);
+  }
+}
+
+.chip {
+  position: absolute;
+  top: 0;
+  right: var(--spacing-4);
+}
