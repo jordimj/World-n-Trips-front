@@ -26,9 +26,9 @@ const theme = createTheme({
           '&:hover svg': {
             color: 'var(--text-color-secondary)!important',
           },
-        },
-        active: {
-          color: 'var(--color-white)!important',
+          '&.Mui-active': {
+            color: 'var(--color-white)!important',
+          },
         },
       },
     },
