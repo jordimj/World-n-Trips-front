@@ -1,21 +1,28 @@
 .paper {
-  width: 100%;
-  margin: 10px;
   max-height: calc(100vh - 380px);
 }
 
-.head {
+.head th {
+  background-color: var(--header-background-color) !important;
+  color: var(--color-white);
   height: 60px;
-  position: relative;
-  z-index: 1;
+}
+
+.row td {
+  text-align: center;
 }
 
 .row p {
   font-size: 14px;
+  color: var(--text-color);
 }
 
 .row:nth-child(even) {
   background-color: var(--background-color);
+}
+
+.row:nth-child(odd) {
+  background-color: var(--background-color-light);
 }
 
 .row:hover {

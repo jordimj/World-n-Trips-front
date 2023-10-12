@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { Skeleton as MuiSkeleton, TableCell, TableRow } from '@mui/material';
+import styles from '../Table/index.module.css';
 
 interface Props {
   cells: number;
@@ -11,10 +12,10 @@ function Skeleton(props: Props) {
   return (
     <Fragment>
       {Array.from({ length: 3 }).map((row, idx) => (
-        <TableRow key={`row-${idx}`}>
+        <TableRow key={`row-${idx}`} className={styles.row}>
           {Array.from({ length: cells }).map((item, idx) => (
             <TableCell key={`cell-${idx}`}>
-              <MuiSkeleton height={25} sx={{ mx: 3 }} />
+              <MuiSkeleton height={36} sx={{ mx: 3 }} />
             </TableCell>
           ))}
         </TableRow>

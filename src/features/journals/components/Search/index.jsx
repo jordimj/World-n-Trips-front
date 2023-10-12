@@ -48,7 +48,12 @@ function Search({
       </Stack>
       {isSearching &&
         (totalMatches > 0 ? (
-          <Fragment>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ pl: 2, pr: 1 }}
+          >
             <Typography>{totalMatches} occurrences found!</Typography>
             <Stack direction="row" alignItems="center" justifyContent="center">
               <Typography sx={{ pr: 1 }}>
@@ -69,7 +74,7 @@ function Search({
                 <ArrowDownwardIcon />
               </IconButton>
             </Stack>
-          </Fragment>
+          </Stack>
         ) : (
           <Typography>No occurrences found.</Typography>
         ))}

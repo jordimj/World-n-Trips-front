@@ -25,7 +25,7 @@ function CountDisplay(props: Props) {
   const currentAmount = items.reduce((acc, cur) => acc + Number(cur.valueEur), 0);
 
   return (
-    <Typography sx={{ fontSize: 14, pt: 2, px: 2, ml: 'auto' }}>
+    <Typography sx={{ fontSize: 12, pt: 2, ml: 'auto' }}>
       Showing {items.length} expenses ({euroFormatter(currentAmount)}) out of {totalItems}{' '}
       found ({euroFormatter(totalAmount)})
     </Typography>

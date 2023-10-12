@@ -13,6 +13,25 @@ const theme = createTheme({
         },
       },
     },
+    MuiTableSortLabel: {
+      styleOverrides: {
+        root: {
+          color: 'var(--color-white)!important',
+          '& svg': {
+            fill: 'var(--color-white)!important',
+          },
+          '&:hover': {
+            color: 'var(--text-color-secondary)!important',
+          },
+          '&:hover svg': {
+            color: 'var(--text-color-secondary)!important',
+          },
+        },
+        active: {
+          color: 'var(--color-white)!important',
+        },
+      },
+    },
     MuiAccordion: {
       styleOverrides: {
         root: {
@@ -29,6 +48,16 @@ const theme = createTheme({
           color: 'white',
           '& svg': {
             color: 'white',
+          },
+        },
+      },
+    },
+    MuiAutocomplete: {
+      styleOverrides: {
+        root: {
+          borderRadius: 'var(--border-radius)',
+          '& .MuiInputBase-root': {
+            borderRadius: 'var(--border-radius)',
           },
         },
       },
@@ -103,6 +132,13 @@ const theme = createTheme({
         },
         markLabel: {
           color: 'var(--secondary-color)',
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          borderRadius: 'var(--border-radius)',
         },
       },
     },

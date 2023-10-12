@@ -1,4 +1,4 @@
-import { Dispatch, Fragment, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import {
   Box,
   Paper,
@@ -45,7 +45,7 @@ function ExpensesTable(props: Props) {
 
   const items = pages.map((page) => page.items).flat();
   const hasResults = items && items.length > 0;
-  const hasLocalCurrency = items.some((item) => item.value);
+  const hasLocalCurrency = items.length > 0 ? items.some((item) => item.value) : true;
   const isInitialLoading = items.length === 0 && isFetching;
 
   const totalAmount = pages.at(-1)?.totalAmount;
@@ -59,7 +59,7 @@ function ExpensesTable(props: Props) {
   };
 
   return (
-    <Stack>
+    <Stack gap={2} sx={{ mx: 2 }}>
       <CountDisplay
         items={items}
         isFetching={isFetching}
@@ -67,7 +67,7 @@ function ExpensesTable(props: Props) {
         totalItems={pageParams.totalItems}
       />
       <TableContainer className={styles.paper} component={Paper}>
-        <Table size="small" aria-label="table" stickyHeader>
+        <Table size="small" aria-label="expenses table" stickyHeader>
           <TableHead className={styles.head}>
             <TableRow>
               <SortableTableHead
@@ -118,9 +118,9 @@ function ExpensesTable(props: Props) {
             </TableRow>
           </TableHead>
 
-          <TableBody sx={{ scrollSnapType: 'y mandatory' }}>
+          <TableBody>
             {hasResults &&
-              items?.map((expense, idx) => {
+              items?.map((expense) => {
                 const {
                   id,
                   day,
@@ -135,45 +135,41 @@ function ExpensesTable(props: Props) {
                 } = expense;
 
                 return (
-                  <Fragment key={idx}>
-                    <TableRow key={id} className={styles.row}>
-                      <TableCell align="center">
-                        <Typography>{formatFullDate(day)}</Typography>
+                  <TableRow key={id} className={styles.row}>
+                    <TableCell>
+                      <Typography>{formatFullDate(day)}</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography sx={{ fontSize: 'var(--spacing-5)!important' }}>
+                        {
+                          EXPENSE_CATEGORY_EMOJIS[
+                            category as keyof typeof EXPENSE_CATEGORY_EMOJIS
+                          ]
+                        }{' '}
+                        <Typography component="span">{category}</Typography>
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>{subcategory}</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>{details}</Typography>
+                    </TableCell>
+                    {hasLocalCurrency && (
+                      <TableCell>
+                        <Typography>{value ? `${currency} ${value}` : '-'}</Typography>
                       </TableCell>
-                      <TableCell align="center">
-                        <Typography sx={{ fontSize: 'var(--spacing-5)!important' }}>
-                          {
-                            EXPENSE_CATEGORY_EMOJIS[
-                              category as keyof typeof EXPENSE_CATEGORY_EMOJIS
-                            ]
-                          }{' '}
-                          <Typography component="span">{category}</Typography>
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="center">
-                        <Typography>{subcategory}</Typography>
-                      </TableCell>
-                      <TableCell align="center">
-                        <Typography>{details}</Typography>
-                      </TableCell>
-                      {hasLocalCurrency && (
-                        <TableCell align="center">
-                          <Typography>
-                            {value ? `${currency} ${value}` : ' - '}
-                          </Typography>
-                        </TableCell>
-                      )}
-                      <TableCell align="center">
-                        <Typography>{euroFormatter(Number(valueEur))}</Typography>
-                      </TableCell>
-                      <TableCell align="center">
-                        <CountryFlag name={country} height={32} />
-                      </TableCell>
-                      <TableCell align="center">
-                        <Typography>{trip}</Typography>
-                      </TableCell>
-                    </TableRow>
-                  </Fragment>
+                    )}
+                    <TableCell>
+                      <Typography>{euroFormatter(Number(valueEur))}</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <CountryFlag name={country} height={32} />
+                    </TableCell>
+                    <TableCell>
+                      <Typography>{trip}</Typography>
+                    </TableCell>
+                  </TableRow>
                 );
               })}
             {!hasResults && !isFetching && (
