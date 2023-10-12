@@ -1,12 +1,14 @@
 /**
  * Format date as DD/MM/YYYY with leading zeros
  */
-export function formatDate(date: string) {
+export function formatDate(date: Date | string) {
+  const newDate = typeof date === 'string' ? new Date(date) : date;
+
   return new Intl.DateTimeFormat('ca-CA', {
     month: '2-digit',
     day: '2-digit',
     year: 'numeric',
-  }).format(new Date(date));
+  }).format(newDate);
 }
 
 /**
