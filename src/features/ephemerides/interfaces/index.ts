@@ -11,4 +11,4 @@ interface Ephemeris {
   };
 }
 
-export interface EphemerisList extends Array<Ephemeris> {}
+export interface Ephemerides extends Array<Ephemeris> {}

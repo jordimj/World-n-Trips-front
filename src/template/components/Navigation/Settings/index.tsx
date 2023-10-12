@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
 import { Settings as SettingsIcon } from '@mui/icons-material';
-import Ephemeris from '@/features/ephemeris/components/Ephemeris';
+import Ephemerides from '@/features/ephemerides/components/Ephemerides';
 import Inserter from '@/features/inserter/pages/Inserter';
 import Search from '@/features/search/components/Search';
 import useFullWidth from '@/hooks/useFullWidth';
@@ -23,8 +23,8 @@ export default function Settings() {
 
   const { fullWidth, saveFullWidth } = useFullWidth();
   const [filterTrips, setFilterTrips] = useLocalStorage('filter_trips', 'false');
-  const [enabledEphemeris, setEnabledEphemeris] = useLocalStorage(
-    'enabled_ephemeris',
+  const [enabledEphemerides, setEnabledEphemerides] = useLocalStorage(
+    'enabled_ephemerides',
     'true'
   );
 
@@ -33,7 +33,7 @@ export default function Settings() {
 
   return (
     <Stack direction="row" gap={1} alignItems="center">
-      {enabledEphemeris && <Ephemeris />}
+      {enabledEphemerides && <Ephemerides />}
       <Inserter />
       <Search />
       <IconButton color="secondary" onClick={handleOpen}>
@@ -49,10 +49,10 @@ export default function Settings() {
         </MenuItem>
         <MenuItem>
           <Switch
-            checked={enabledEphemeris}
-            onChange={(e) => setEnabledEphemeris(e.target.checked)}
+            checked={enabledEphemerides}
+            onChange={(e) => setEnabledEphemerides(e.target.checked)}
           />
-          Travel ephemeris
+          Travel ephemerides
         </MenuItem>
         {isTrips && (
           <MenuItem>

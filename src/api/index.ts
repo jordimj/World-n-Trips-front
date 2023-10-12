@@ -44,7 +44,7 @@ export async function getAvailableDates() {
   ).data;
 }
 
-export async function getEphemeris() {
+export async function getEphemerides() {
   return (await instance.get('/ephemeris/')).data;
 }
 

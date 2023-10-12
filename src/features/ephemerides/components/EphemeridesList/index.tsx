@@ -2,42 +2,29 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
-import { IconButton, Stack } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import { Stack } from '@mui/material';
 import CountryFlag from '@/template/components/CountryFlag';
 import { formatFullDate, getYearsAgo } from '@/utils/date';
 import { buildTripName } from '@/utils';
-import { EphemerisList } from '../../interfaces';
+import { Ephemerides } from '../../interfaces';
 
-interface EphemerisDialogProps {
-  open: boolean;
+interface EphemeridesListProps {
   onClose: () => void;
-  allEphemeris: EphemerisList;
+  ephemerides: Ephemerides;
 }
 
-function EphemerisDialog(props: EphemerisDialogProps) {
-  const { open, onClose, allEphemeris } = props;
+function EphemeridesList(props: EphemeridesListProps) {
+  const { onClose, ephemerides } = props;
 
   const [showTimeAgo, setShowTimeAgo] = useState(true);
   const toggleShowTimeAgo = () => setShowTimeAgo((prev) => !prev);
 
   return (
-    <Dialog onClose={onClose} open={open}>
-      <DialogTitle sx={{ display: 'flex', alignItems: 'center' }}>
-        Travel ephemeris of the day
-        <IconButton
-          aria-label="close-ephemeris-dialog"
-          onClick={onClose}
-          sx={{ ml: 'auto' }}
-        >
-          <CloseIcon />
-        </IconButton>
-      </DialogTitle>
-      <List sx={{ m: 2, mt: 0, p: 0 }}>
-        {allEphemeris.map((ephemeris, idx) => (
+    <Stack gap={2} sx={{ m: 2, mb: 1 }}>
+      <Typography sx={{ fontSize: 20 }}>Travel ephemerides of the day</Typography>
+      <List sx={{ p: 0, marginTrim: 'inline-end' }}>
+        {ephemerides.map((ephemeris, idx) => (
           <ListItem key={idx} sx={{ p: 2 }}>
             <Stack sx={{ width: '100%' }}>
               <Typography
@@ -70,8 +57,8 @@ function EphemerisDialog(props: EphemerisDialogProps) {
           </ListItem>
         ))}
       </List>
-    </Dialog>
+    </Stack>
   );
 }
 
-export default EphemerisDialog;
+export default EphemeridesList;
