@@ -240,12 +240,11 @@ const theme = createTheme({
       fontStyle: 'italic',
     },
     journal: {
-      fontSize: 60,
+      fontSize: 52,
       fontFamily: 'Just Another Hand, cursive',
       hyphens: 'auto',
-      textAlign: 'justify',
       textIndent: 'var(--spacing-7)',
-      lineHeight: '1.3em',
+      lineHeight: '1.5em',
     },
   },
 });
