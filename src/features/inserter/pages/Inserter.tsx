@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Stepper from '../components/Stepper';
 import { InserterProvider } from '../context/InserterProvider';
 
-export interface InserterDialogProps {
+interface InserterDialogProps {
   open: boolean;
   onClose: () => void;
 }
