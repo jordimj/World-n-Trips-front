@@ -33,6 +33,7 @@ function getChartOptions() {
         display: false,
       },
       tooltip: {
+        yAlign: 'bottom',
         caretSize: 10,
         padding: 16,
         titleMarginBottom: 8,

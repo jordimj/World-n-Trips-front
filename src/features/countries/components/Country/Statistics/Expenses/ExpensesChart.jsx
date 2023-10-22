@@ -61,6 +61,7 @@ export default function ExpensesChart({ expensesByCategory }) {
             callbacks: {
               label: (item) => `${item.formattedValue} €`,
             },
+            yAlign: 'top',
           },
         },
       },
