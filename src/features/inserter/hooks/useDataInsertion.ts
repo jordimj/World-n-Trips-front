@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import { saveNewData } from '@/api';
@@ -17,7 +17,17 @@ interface JournalBody {
   title: string;
 }
 
-export type InserterBody = CommonBody | JournalBody;
+interface TripBody {
+  title: string;
+  // summary: string;
+  coverImage: string;
+  arrivalDate: string;
+  departureDate: string;
+  worktrip: boolean;
+  telework: boolean;
+}
+
+export type InserterBody = CommonBody | JournalBody | TripBody;
 
 function useDataInsertion() {
   const {
@@ -26,11 +36,15 @@ function useDataInsertion() {
       parsedData,
       optionId,
       journal: { date, title, editorState },
+      trip,
     },
     actions: { resetState },
   } = useInserterContext();
 
+  const queryClient = useQueryClient();
+
   const isJournal = dataKind === 'journal';
+  const isTrip = dataKind === 'trip';
 
   const rawContentState = convertToRaw(editorState.getCurrentContent());
   const body = isJournal
@@ -39,6 +53,12 @@ function useDataInsertion() {
         title,
         parsedData: draftToHtml(rawContentState),
       } as JournalBody)
+    : isTrip
+    ? ({
+        ...trip,
+        arrivalDate: formatDatabaseDate(trip?.arrivalDate!),
+        departureDate: formatDatabaseDate(trip?.departureDate!),
+      } as TripBody)
     : ({
         parsedData,
         optionId,
@@ -47,6 +67,9 @@ function useDataInsertion() {
   return useMutation({
     mutationFn: () => saveNewData(dataKind!, body),
     onSuccess: () => {
+      if (isTrip) {
+        queryClient.invalidateQueries({ queryKey: ['trips'] });
+      }
       resetState();
     },
   });

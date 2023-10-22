@@ -4,7 +4,7 @@ import { Day, Expense, Night, Spot, TableKind } from '../types';
 type MapFunc<T = any> = (val: T, index?: number, arr?: T[]) => T;
 const isString = <T = any>(str: string | T): str is string => typeof str === 'string';
 
-const groupBy = <T = any>(arr: T[], fn: MapFunc<T> | string, sortKey?: string) => {
+export const groupBy = <T = any>(arr: T[], fn: MapFunc<T> | string, sortKey?: string) => {
   if (sortKey === undefined) {
     return arr.map(isString(fn) ? (val: any) => val[fn] : fn).reduce((acc, val, i) => {
       acc[val] = (acc[val] || []).concat(arr[i]);

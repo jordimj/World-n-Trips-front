@@ -61,11 +61,10 @@ export interface Journal {
 export interface Journals extends Array<Journal> {}
 
 export interface Trip {
-  title: string;
+  name: string;
   summary: string;
   coverImage: string;
+  work: 'telework' | 'worktrip' | null;
   arrivalDate: Date;
   departureDate: Date;
-  worktrip: boolean;
-  telework: boolean;
 }

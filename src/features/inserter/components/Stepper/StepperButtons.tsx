@@ -6,6 +6,7 @@ import Spinner from '@/template/components/Spinner/Spinner';
 import useDataInsertion from '../../hooks/useDataInsertion';
 import useInserterContext from '../../hooks/useInserterContext';
 import useSnackbar from '../../hooks/useSnackbar';
+import useTripValidation from '../../hooks/useTripValidation';
 import { STEP_LABELS } from '../../constants';
 
 export default function StepperButtons() {
@@ -16,10 +17,12 @@ export default function StepperButtons() {
       parsedData,
       optionId,
       journal: { date, title, editorState },
+      trip,
     },
     actions: { goNextStep, goLastStep },
   } = useInserterContext();
 
+  const { isValid: isTripValid } = useTripValidation({ trip });
   const { isLoading, isSuccess, isError, error, mutate } = useDataInsertion();
   const { openSnackbar, snackbar } = useSnackbar();
 
@@ -32,19 +35,28 @@ export default function StepperButtons() {
   }, [isSuccess, isError]);
 
   const isJournal = dataKind === 'journal';
+  const isTrip = dataKind === 'trip';
+
+  const shouldDisableStep2 = () => {
+    if (isTrip) return !isTripValid;
+    if (isJournal) return title === '' || editorState.getCurrentContent().getPlainText() === '';
+
+    return parsedData?.length === 0;
+  };
+
+  const shouldDisableStep3 = () => {
+    if (isTrip) return trip === undefined;
+    if (isJournal) return date === null;
+
+    return optionId === null;
+  };
 
   const isForwardDisabled = (activeStep: number): boolean => {
-    const shouldDisableStep2 = isJournal
-      ? title === '' || editorState.getCurrentContent().getPlainText() === ''
-      : parsedData?.length === 0;
-
-    const shouldDisableStep3 = isJournal ? date === null : optionId === null;
-
     switch (activeStep) {
       case 1:
-        return shouldDisableStep2;
+        return shouldDisableStep2();
       case 2:
-        return shouldDisableStep3;
+        return shouldDisableStep3();
       default:
         return false;
     }

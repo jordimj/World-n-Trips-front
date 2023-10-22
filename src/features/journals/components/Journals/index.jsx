@@ -33,7 +33,7 @@ function Journals() {
 
   const trip = trips.find((trip) => trip.id === Number(tripId));
 
-  if (!trip || journals.length === 0) return <Spinner />;
+  if (!trip) return <Spinner />;
 
   return (
     <Fragment>
