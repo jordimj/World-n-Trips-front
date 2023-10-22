@@ -32,6 +32,21 @@ function getChartOptions() {
       legend: {
         display: false,
       },
+      tooltip: {
+        caretSize: 10,
+        padding: 16,
+        titleMarginBottom: 8,
+        titleFont: {
+          size: 14,
+        },
+        bodyFont: {
+          size: 24,
+          weight: 900,
+        },
+        callbacks: {
+          label: (item) => `${item.formattedValue} days`,
+        },
+      },
     },
     layout: {
       padding: {

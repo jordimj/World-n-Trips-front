@@ -49,10 +49,17 @@ export default function ExpensesChart({ expensesByCategory }) {
           },
           tooltip: {
             caretSize: 10,
-            padding: 10,
+            padding: 16,
+            titleMarginBottom: 8,
+            titleFont: {
+              size: 14,
+            },
             bodyFont: {
-              size: 15,
+              size: 24,
               weight: 900,
+            },
+            callbacks: {
+              label: (item) => `${item.formattedValue} €`,
             },
           },
         },
