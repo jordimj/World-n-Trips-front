@@ -3,7 +3,7 @@
   place-items: center;
 
   height: 50%;
-  min-height: 600px;
+  min-height: 750px;
 
   background-position: center;
   background-repeat: no-repeat;
@@ -20,7 +20,12 @@
   font-size: var(--spacing-9);
 }
 
-.text h5 {
-  font-size: var(--spacing-7);
+.text h2 {
   color: white;
+  font-size: var(--spacing-6);
+}
+
+.text h3 {
+  color: var(--text-color-secondary);
+  font-size: var(--spacing-7);
 }
