@@ -69,6 +69,8 @@
   --background-color-dark: #3c393f;
   --background-color-light: #120f13;
   --icon-color: var(--text-color);
+
+  --primary-color-100: #17474a;
 }
 
 html,

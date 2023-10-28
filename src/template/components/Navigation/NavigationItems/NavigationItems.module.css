@@ -1,8 +1,46 @@
 .navigationItems {
-  padding: 0;
   list-style: none;
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   align-items: center;
-  height: 100%;
+  width: 60px;
+  padding: var(--spacing-2);
+  transition: width 0.5s ease-in-out;
+
+  position: fixed;
+  top: 0;
+  left: var(--spacing-4);
+  z-index: 9;
+
+  background-color: var(--background-color-light);
+  border-radius: var(--border-radius);
+  border: var(--border);
+}
+
+.navigationItems span {
+  white-space: nowrap;
+  animation: fade-in 0s forwards;
+}
+
+.navigationItems:hover {
+  width: 220px;
+  transition: width 0.25s ease-in-out;
+}
+
+.navigationItems:hover span {
+  animation: fade-out 2s forwards;
+}
+
+@keyframes fade-in {
+  to {
+    display: none;
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    display: block;
+    opacity: 1;
+  }
 }

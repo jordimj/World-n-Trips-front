@@ -1,6 +1,6 @@
 .summary {
   position: sticky;
-  top: var(--sticky-header-top);
+  top: 0;
   border-radius: var(--border-radius);
 }
 
