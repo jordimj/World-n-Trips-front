@@ -1,12 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import {
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Typography,
-} from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
 import Chip from '@/template/components/Chip/Chip';
 import { formatTripDates } from '@/utils/date';
 import styles from './TripCard.module.css';

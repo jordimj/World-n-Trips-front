@@ -1,7 +1,7 @@
 import { getVisitedCountries, getCountryStats } from '@/api';
-import * as actionTypes from '../types/actionTypes';
-import { visitedCountriesMock } from '../__mocks__/visitedCountriesMock';
 import { countryStatsMock } from '../__mocks__/countryStatsMock';
+import { visitedCountriesMock } from '../__mocks__/visitedCountriesMock';
+import * as actionTypes from '../types/actionTypes';
 
 const isBackMocked = import.meta.env.VITE_IS_BACKEND_MOCKED === 'true';
 
