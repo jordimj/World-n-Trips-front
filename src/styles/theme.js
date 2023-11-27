@@ -109,9 +109,9 @@ const theme = createTheme({
     MuiIconButton: {
       styleOverrides: {
         colorSecondary: {
-          color: 'white',
-          '&:hover': { backgroundColor: 'var(--primary-color-900)' },
-          '&:focus': { backgroundColor: 'var(--primary-color-900)' },
+          color: 'var(--icon-color)',
+          '&:hover': { backgroundColor: 'var(--primary-color-100)' },
+          '&:focus': { backgroundColor: 'var(--primary-color-100)' },
         },
       },
     },

@@ -1,8 +1,8 @@
 import { Fragment, useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import SearchDialog from '../SearchDialog';
-import useKeyDown from '@/hooks/useKeyDown';
 import { IconButton } from '@mui/material';
+import useKeyDown from '@/hooks/useKeyDown';
+import SearchDialog from '../SearchDialog';
 
 function Search() {
   const [open, setOpen] = useState(false);

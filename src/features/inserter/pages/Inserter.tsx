@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Dialog, DialogTitle, IconButton } from '@mui/material';
-import PublishIcon from '@mui/icons-material/Publish';
 import CloseIcon from '@mui/icons-material/Close';
+import PublishIcon from '@mui/icons-material/Publish';
+import { Dialog, DialogTitle, IconButton } from '@mui/material';
 import Stepper from '../components/Stepper';
 import { InserterProvider } from '../context/InserterProvider';
 

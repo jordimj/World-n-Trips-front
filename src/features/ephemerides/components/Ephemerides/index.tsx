@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
-import { Badge, IconButton, Popover } from '@mui/material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { Badge, IconButton, Popover } from '@mui/material';
 import Spinner from '@/template/components/Spinner/Spinner';
 import useFetchEphemerides from '../../hooks/useFetchEphemerides';
 import EphemeridesList from '../EphemeridesList';

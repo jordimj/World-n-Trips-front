@@ -1,11 +1,11 @@
 import { MouseEvent, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Settings as SettingsIcon } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
-import { Settings as SettingsIcon } from '@mui/icons-material';
 import Ephemerides from '@/features/ephemerides/components/Ephemerides';
 import Inserter from '@/features/inserter/pages/Inserter';
 import Search from '@/features/search/components/Search';
@@ -32,7 +32,7 @@ export default function Settings() {
   const isTrips = location.pathname === '/trips';
 
   return (
-    <Stack direction="row" gap={1} alignItems="center">
+    <Stack direction="row" gap={1} alignItems="center" sx={{ ml: 'auto' }}>
       {enabledEphemerides && <Ephemerides />}
       <Inserter />
       <Search />
