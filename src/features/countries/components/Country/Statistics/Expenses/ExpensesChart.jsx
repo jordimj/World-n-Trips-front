@@ -46,6 +46,12 @@ export default function ExpensesChart({ expensesByCategory }) {
         plugins: {
           legend: {
             position: 'right',
+            labels: {
+              font: {
+                size: 14,
+                family: 'Poppins',
+              },
+            },
           },
           tooltip: {
             caretSize: 10,

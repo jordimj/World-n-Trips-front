@@ -38,7 +38,7 @@ function getChartOptions() {
         padding: 16,
         titleMarginBottom: 8,
         titleFont: {
-          size: 14,
+          size: 18,
         },
         bodyFont: {
           size: 24,
