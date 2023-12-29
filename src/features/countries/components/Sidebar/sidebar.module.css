@@ -7,28 +7,23 @@
   justify-content: center;
   position: fixed;
   top: 0;
-  left: -100%;
+  right: -100%;
   transition: 1s ease-in-out;
   padding: 0 var(--spacing-6);
   gap: var(--spacing-6);
-  border: var(--border);
+  border-left: var(--border);
+  z-index: 2;
 }
 
 .visible {
-  left: 0;
+  right: 0;
 }
 
 .toggleButton {
   position: absolute;
-  align-items: center;
-  left: var(--spacing-1);
+  right: var(--spacing-1);
   bottom: var(--spacing-1);
   transition: transform 1s;
-}
-
-.toggleButton svg,
-.sidebar svg {
-  fill: var(--icon-color);
 }
 
 .toggleButton:hover {

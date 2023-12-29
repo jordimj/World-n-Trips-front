@@ -1,13 +1,13 @@
+import CloseIcon from '@mui/icons-material/Close';
+import ViewSidebarRoundedIcon from '@mui/icons-material/ViewSidebarRounded';
 import Box from '@mui/material/Box';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
-import CloseIcon from '@mui/icons-material/Close';
-import ViewSidebarIcon from '@mui/icons-material/ViewSidebar';
 import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import CONTINENTS_AND_REGIONS from '@/constants/continentsAndRegions';
+import Typography from '@mui/material/Typography';
 import { WORLD_MAP } from '@/constants';
+import CONTINENTS_AND_REGIONS from '@/constants/continentsAndRegions';
 import Select from '@/template/components/Select/Select';
 import useMapSidebar from '../../hooks/useMapSidebar';
 import styles from './sidebar.module.css';
@@ -31,7 +31,7 @@ export default function MapSidebar() {
         className={styles.toggleButton}
         onClick={toggleSidebar}
       >
-        <ViewSidebarIcon fontSize="large" />
+        <ViewSidebarRoundedIcon fontSize="large" />
       </IconButton>
       <Box className={[styles.sidebar, isVisible && styles.visible].filter(Boolean)}>
         <Typography variant="h3">Map filters</Typography>
