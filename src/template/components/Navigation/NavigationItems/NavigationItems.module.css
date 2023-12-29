@@ -3,18 +3,22 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  width: 60px;
+  width: 80px;
   padding: var(--spacing-2);
   transition: width 0.5s ease-in-out;
 
   position: fixed;
-  top: 0;
-  left: var(--spacing-4);
+  top: calc(50% - 210px);
+  left: var(--spacing-2);
   z-index: 9;
 
   background-color: var(--background-color-light);
   border-radius: var(--border-radius);
   border: var(--border);
+}
+
+.navigationItems svg {
+  font-size: var(--spacing-7);
 }
 
 .navigationItems span {

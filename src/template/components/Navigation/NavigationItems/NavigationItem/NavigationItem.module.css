@@ -22,14 +22,14 @@
 }
 
 .navigationItem a:hover {
-  border-right: 5px solid var(--text-color);
+  border-right: 6px solid var(--text-color);
   background-color: var(--primary-color-100);
   border-top-left-radius: var(--border-radius);
   border-bottom-left-radius: var(--border-radius);
 }
 
 .active {
-  border-right: 5px solid var(--primary-color);
+  border-right: 6px solid var(--primary-color);
   background-color: var(--primary-color-100);
   border-top-left-radius: var(--border-radius);
   border-bottom-left-radius: var(--border-radius);
