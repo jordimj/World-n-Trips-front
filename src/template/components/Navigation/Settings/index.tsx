@@ -22,14 +22,10 @@ export default function Settings() {
   const handleClose = () => setAnchorEl(null);
 
   const { fullWidth, saveFullWidth } = useFullWidth();
-  const [filterTrips, setFilterTrips] = useLocalStorage('filter_trips', 'false');
   const [enabledEphemerides, setEnabledEphemerides] = useLocalStorage(
     'enabled_ephemerides',
     'true'
   );
-
-  const location = useLocation();
-  const isTrips = location.pathname === '/trips';
 
   return (
     <Stack direction="row" gap={1} alignItems="center" sx={{ ml: 'auto' }}>
@@ -54,15 +50,6 @@ export default function Settings() {
           />
           Travel ephemerides
         </MenuItem>
-        {isTrips && (
-          <MenuItem>
-            <Switch
-              checked={filterTrips}
-              onChange={(e) => setFilterTrips(e.target.checked)}
-            />
-            Filter trips with journals
-          </MenuItem>
-        )}
       </Menu>
     </Stack>
   );

@@ -1,6 +1,6 @@
 import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, FormControlLabel, Stack, Switch, Typography } from '@mui/material';
 import useLocalStorage from '@/hooks/useLocalStorage';
 import Divider from '@/template/components/Divider';
 import TripCard from '@/template/components/TripCard';
@@ -9,7 +9,7 @@ import * as actions from '../../actions/actions';
 
 function Trips() {
   const trips = useSelector((state) => state.journals.trips);
-  const [filterTrips] = useLocalStorage('filter_trips');
+  const [filterTrips, setFilterTrips] = useLocalStorage('filter_trips', 'false');
 
   const dispatch = useDispatch();
 
@@ -25,6 +25,17 @@ function Trips() {
   return (
     <Box textAlign="center">
       <Typography variant="h1">My trips</Typography>
+      <FormControlLabel
+          control={
+            <Switch
+              color="default"
+              checked={filterTrips}
+              onChange={prev => setFilterTrips(prev=> !prev)}
+            />
+          }
+          label="Show only trips with journals"
+          sx={{ width: '100%', placeContent: 'end' }}
+        />
       {groupedTrips && (
         <Stack direction="column">
           {Object.entries(groupedTrips)
