@@ -32,6 +32,7 @@ function useExpenses(filters: ExpensesFilters) {
 
   return useInfiniteQuery({
     queryKey: ['expenses', variables],
+    initialPageParam: 1,
     queryFn: async ({ pageParam = 1 }) => {
       const data = await getExpenses({ ...variables, page: pageParam });
 
