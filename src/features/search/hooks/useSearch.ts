@@ -1,6 +1,28 @@
 import { useQuery } from '@tanstack/react-query';
 import { search } from '@/api';
-import { Expenses, Journals } from '@/features/inserter/types';
+
+export interface Expense {
+  id: number;
+  day: string;
+  category: string;
+  subcategory: string;
+  details: string;
+  value: number;
+  currency: string;
+  valueEur: number;
+  country: string;
+}
+
+export interface Expenses extends Array<Expense> {}
+
+export interface Journal {
+  id: number;
+  date: string;
+  title: string;
+  text: string;
+}
+
+export interface Journals extends Array<Journal> {}
 
 interface SearchResult {
   expenses: Expenses;
