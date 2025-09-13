@@ -165,17 +165,17 @@
     "@babel/helper-string-parser" "^7.27.1"
     "@babel/helper-validator-identifier" "^7.27.1"
 
-"@date-io/core@^2.17.0":
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-2.17.0.tgz#360a4d0641f069776ed22e457876e8a8a58c205e"
-  integrity sha512-+EQE8xZhRM/hsY0CDTVyayMDDY5ihc4MqXCrPxooKw19yAzUIC6uUqsZeaOFNL9YKTNxYKrJP5DFgE8o5xRCOw==
+"@date-io/core@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-3.2.0.tgz#7c8985ac26ccacf4f1b1fec10e2e22c75a28288a"
+  integrity sha512-hqwXvY8/YBsT9RwQITG868ZNb1MVFFkF7W1Ecv4P472j/ZWa7EFcgSmxy8PUElNVZfvhdvfv+a8j6NWJqOX5mA==
 
-"@date-io/dayjs@^2.17.0":
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/@date-io/dayjs/-/dayjs-2.17.0.tgz#ec3e2384136c028971ca2f78800a6877b9fdbe62"
-  integrity sha512-Iq1wjY5XzBh0lheFA0it6Dsyv94e8mTiNR8vuTai+KopxDkreL3YjwTmZHxkgB7/vd0RMIACStzVgWvPATnDCA==
+"@date-io/dayjs@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@date-io/dayjs/-/dayjs-3.2.0.tgz#87475a87ca8d9a53106a0c4bf882ff1621147aea"
+  integrity sha512-+3LV+3N+cpQbEtmrFo8odg07k02AFY7diHgbi2EKYYANOOCPkDYUjDr2ENiHuYNidTs3tZwzDKckZoVNN4NXxg==
   dependencies:
-    "@date-io/core" "^2.17.0"
+    "@date-io/core" "^3.2.0"
 
 "@emotion/babel-plugin@^11.13.5":
   version "11.13.5"
@@ -738,11 +738,6 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@remix-run/router@1.23.0":
-  version "1.23.0"
-  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.23.0.tgz#35390d0e7779626c026b11376da6789eb8389242"
-  integrity sha512-O3rHJzAQKamUz1fvE0Qaw0xSFqsA/yafi2iqeE0pvdFtCO1viYx8QL6f3Ln/aCCTLxs68SLf0KPM9eSeM8yBnA==
-
 "@rolldown/pluginutils@1.0.0-beta.34":
   version "1.0.0-beta.34"
   resolved "https://registry.yarnpkg.com/@rolldown/pluginutils/-/pluginutils-1.0.0-beta.34.tgz#4421645c676926faa4574940d72fa7ce0ec7d419"
@@ -950,17 +945,17 @@
     "@svgr/hast-util-to-babel-ast" "8.0.0"
     svg-parser "^2.0.4"
 
-"@tanstack/query-core@5.87.1":
-  version "5.87.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.87.1.tgz#9b8b9331714749d505a7ceb0ae52b6ad6ae8a461"
-  integrity sha512-HOFHVvhOCprrWvtccSzc7+RNqpnLlZ5R6lTmngb8aq7b4rc2/jDT0w+vLdQ4lD9bNtQ+/A4GsFXy030Gk4ollA==
+"@tanstack/query-core@5.87.4":
+  version "5.87.4"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.87.4.tgz#1601d05ee5bf611328f2852cec763ed0c9a090cd"
+  integrity sha512-uNsg6zMxraEPDVO2Bn+F3/ctHi+Zsk+MMpcN8h6P7ozqD088F6mFY5TfGM7zuyIrL7HKpDyu6QHfLWiDxh3cuw==
 
-"@tanstack/react-query@^5.87.1":
-  version "5.87.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.87.1.tgz#074bd2238173f49ef8804a9b6d94f63374828a78"
-  integrity sha512-YKauf8jfMowgAqcxj96AHs+Ux3m3bWT1oSVKamaRPXSnW2HqSznnTCEkAVqctF1e/W9R/mPcyzzINIgpOH94qg==
+"@tanstack/react-query@^5.87.4":
+  version "5.87.4"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.87.4.tgz#f0b0af38ffab642e8999c156e986dfc384662fe6"
+  integrity sha512-T5GT/1ZaNsUXf5I3RhcYuT17I4CPlbZgyLxc/ZGv7ciS6esytlbjb3DgUFO6c8JWYMDpdjSWInyGZUErgzqhcA==
   dependencies:
-    "@tanstack/query-core" "5.87.1"
+    "@tanstack/query-core" "5.87.4"
 
 "@trivago/prettier-plugin-sort-imports@^5.2.2":
   version "5.2.2"
@@ -1081,10 +1076,17 @@
     "@types/react" "^18"
     "@types/react-addons-linked-state-mixin" "*"
 
-"@types/node@*", "@types/node@^24.3.1":
+"@types/node@*":
   version "24.3.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-24.3.1.tgz#b0a3fb2afed0ef98e8d7f06d46ef6349047709f3"
   integrity sha512-3vXmQDXy+woz+gnrTvuvNrPzekOi+Ds0ReMxw0LzBiK3a+1k0kQn9f2NWk+lgD4rJehFUmYy2gMhJ2ZI+7YP9g==
+  dependencies:
+    undici-types "~7.10.0"
+
+"@types/node@^24.3.3":
+  version "24.3.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.3.3.tgz#6d195b95af3cda4e74dcef7bb3797a1941e7d2d1"
+  integrity sha512-GKBNHjoNw3Kra1Qg5UXttsY5kiWMEfoHq2TmXb+b1rcm6N7B3wTrFYIf/oSZ1xNQ+hVVijgLkiDZh7jRRsh+Gw==
   dependencies:
     undici-types "~7.10.0"
 
@@ -1138,7 +1140,7 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
-"@types/react@^19.1.12":
+"@types/react@^19.1.13":
   version "19.1.13"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-19.1.13.tgz#fc650ffa680d739a25a530f5d7ebe00cdd771883"
   integrity sha512-hHkbU/eoO3EG5/MZkuFSKmYqPbSVk5byPFa3e7y/8TybHiLMACgI8seVYlicwk7H5K/rI2px9xrQp/C+AUDTiQ==
@@ -1316,10 +1318,10 @@ available-typed-arrays@^1.0.7:
   dependencies:
     possible-typed-array-names "^1.0.0"
 
-axios@^1.11.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.11.0.tgz#c2ec219e35e414c025b2095e8b8280278478fdb6"
-  integrity sha512-1Lx3WLFQWm3ooKDYZD1eXmoGO9fxYQjrycfHFC8P0sCfQVXyROp0p9PFWBehewBOdCwHc+f/b8I0fMto5eSfwA==
+axios@^1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.12.1.tgz#0747b39c5b615f81f93f2c138e6d82a71426937f"
+  integrity sha512-Kn4kbSXpkFHCGE6rBFNwIv0GQs4AvDT80jlveJDKFxjbTYMUeB4QtsdPCv6H8Cm19Je7IU6VFtRl2zWZI0rudQ==
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.4"
@@ -1463,6 +1465,11 @@ convert-source-map@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-2.0.0.tgz#4b560f649fc4e918dd0ab75cf4961e8bc882d82a"
   integrity sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==
+
+cookie@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-1.0.2.tgz#27360701532116bd3f1f9416929d176afe1e4610"
+  integrity sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==
 
 core-js@^3.6.4:
   version "3.45.1"
@@ -2980,10 +2987,10 @@ react-dom@^19.1.1:
   dependencies:
     scheduler "^0.26.0"
 
-react-google-charts@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-4.0.1.tgz#b7713856a48009b77318f8951ddf2c3ba39f991b"
-  integrity sha512-V/hcMcNuBgD5w49BYTUDye+bUKaPmsU5vy/9W/Nj2xEeGn+6/AuH9IvBkbDcNBsY00cV9OeexdmgfI5RFHgsXQ==
+react-google-charts@5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-5.2.1.tgz#d9cbe8ed45d7c0fafefea5c7c3361bee76648454"
+  integrity sha512-mCbPiObP8yWM5A9ogej7Qp3/HX4EzOwuEzUYvcfHtL98Xt4V/brD14KgfDzSNNtyD48MNXCpq5oVaYKt0ykQUQ==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
@@ -3022,20 +3029,20 @@ react-refresh@^0.17.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.17.0.tgz#b7e579c3657f23d04eccbe4ad2e58a8ed51e7e53"
   integrity sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==
 
-react-router-dom@^6.17.0:
-  version "6.30.1"
-  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.30.1.tgz#da2580c272ddb61325e435478566be9563a4a237"
-  integrity sha512-llKsgOkZdbPU1Eg3zK8lCn+sjD9wMRZZPuzmdWWX5SUs8OFkN5HnFVC0u5KMeMaC9aoancFI/KoLuKPqN+hxHw==
+react-router-dom@^7.9.1:
+  version "7.9.1"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-7.9.1.tgz#48044923701773da6362f9003ec46f308f293f15"
+  integrity sha512-U9WBQssBE9B1vmRjo9qTM7YRzfZ3lUxESIZnsf4VjR/lXYz9MHjvOxHzr/aUm4efpktbVOrF09rL/y4VHa8RMw==
   dependencies:
-    "@remix-run/router" "1.23.0"
-    react-router "6.30.1"
+    react-router "7.9.1"
 
-react-router@6.30.1:
-  version "6.30.1"
-  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.30.1.tgz#ecb3b883c9ba6dbf5d319ddbc996747f4ab9f4c3"
-  integrity sha512-X1m21aEmxGXqENEPG3T6u0Th7g0aS4ZmoNynhbs+Cn+q+QGTLt+d5IQ2bHAXKzKcxGJjxACpVbnYQSCRcfxHlQ==
+react-router@7.9.1:
+  version "7.9.1"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-7.9.1.tgz#b227410c31f24dd416c939ca5d0f8d5c8a1404d4"
+  integrity sha512-pfAByjcTpX55mqSDGwGnY9vDCpxqBLASg0BMNAuMmpSGESo/TaOUG6BllhAtAkCGx8Rnohik/XtaqiYUJtgW2g==
   dependencies:
-    "@remix-run/router" "1.23.0"
+    cookie "^1.0.1"
+    set-cookie-parser "^2.6.0"
 
 react-transition-group@^4.4.5:
   version "4.4.5"
@@ -3180,6 +3187,11 @@ semver@^6.3.1:
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.1.tgz#556d2ef8689146e46dcea4bfdd095f3434dffcb4"
   integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
+
+set-cookie-parser@^2.6.0:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/set-cookie-parser/-/set-cookie-parser-2.7.1.tgz#3016f150072202dfbe90fadee053573cc89d2943"
+  integrity sha512-IOc8uWeOZgnb3ptbCURJWNjWUPcO3ZnTTdzsurqERrP6nPyv+paC55vJM0LpOlT2ne+Ix+9+CRG1MNLlyZ4GjQ==
 
 set-function-length@^1.2.2:
   version "1.2.2"
