@@ -11,8 +11,8 @@ export function InserterProvider(props: InserterProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <InserterContext.Provider value={[state, dispatch]}>
+    (<InserterContext value={[state, dispatch]}>
       {children}
-    </InserterContext.Provider>
+    </InserterContext>)
   );
 }

@@ -1,7 +1,9 @@
+import { ReactNode } from 'react';
+
 interface Props {
   condition: boolean;
-  wrapper: (child: JSX.Element) => JSX.Element;
-  children: JSX.Element;
+  wrapper: (child: ReactNode) => ReactNode;
+  children: ReactNode;
 }
 
 function ConditionalWrapper(props: Props) {
