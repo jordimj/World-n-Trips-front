@@ -1,31 +1,25 @@
-import { Fragment, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Box, Stack, Typography } from '@mui/material';
+import { Fragment, useState } from 'react';
 import TodayIcon from '@mui/icons-material/Today';
+import { Box, Stack, Typography } from '@mui/material';
 import Metric from '@/template/components/Metric';
 import Tabs from '@/template/components/Tabs';
-import * as actions from '../../actions/actions';
-import TravelStatsTable from '../TravelStatsTable';
+import useStatistics from '../../hooks/useStatistics';
 import BarChart from '../BarChart';
 import Timeline from '../Timeline';
-import YearSelect from '../YearSelect';
 import Top5 from '../Top5';
+import TravelStatsTable from '../TravelStatsTable';
 import VisitedCountriesMetric from '../VisitedCountriesMetric';
+import YearSelect from '../YearSelect';
 import styles from './TravelStats.module.css';
 
 export default function () {
-  const statistics = useSelector((state) => state.statistics.statistics);
-  const dispatch = useDispatch();
-
   const [year, setYear] = useState(null);
   const isAllTime = year === null;
 
   const [tab, setTab] = useState(0);
   const handleChange = (e, newValue) => setTab(newValue);
 
-  useEffect(() => {
-    dispatch(actions.fetchStatistics(year));
-  }, [year]);
+  const { data: statistics } = useStatistics(year);
 
   if (!statistics) return <Fragment />;
 
@@ -34,6 +28,8 @@ export default function () {
 
   const onYearChange = (e) =>
     setYear(e.target.value !== 'All time' ? e.target.value : null);
+
+  console.log({ travels, top5 });
 
   return (
     <Stack gap={3}>
