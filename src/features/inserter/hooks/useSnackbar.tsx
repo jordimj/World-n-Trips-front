@@ -1,12 +1,8 @@
-import { forwardRef, useState } from 'react';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertColor, AlertProps } from '@mui/material/Alert';
+import { useState } from 'react';
+import Alert, { AlertColor } from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+import Snackbar from '@mui/material/Snackbar';
+import Stack from '@mui/material/Stack';
 
 interface SnackbarMessage {
   label: string;
@@ -31,9 +27,14 @@ function useSnackbar() {
     <Stack spacing={2} sx={{ width: '100%' }}>
       {messages.map((message, idx) => (
         <Snackbar key={idx} open={open} autoHideDuration={5000} onClose={closeSnackbar}>
-          <Alert severity={message.severity ?? 'success'} sx={{ width: '100%' }}>
+          <Alert
+            elevation={6}
+            variant="filled"
+            severity={message.severity ?? 'success'}
+            sx={{ width: '100%' }}
+          >
             <AlertTitle sx={{ fontWeight: 600 }}>{message.label}</AlertTitle>
-            {message.sublabel ?? null}
+            {message.sublabel}
           </Alert>
         </Snackbar>
       ))}

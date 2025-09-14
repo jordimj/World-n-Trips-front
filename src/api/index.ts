@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { KindOfData } from '@/features/inserter/types';
 import { InserterBody } from '@/features/inserter/hooks/useDataInsertion';
+import { KindOfData } from '@/features/inserter/types';
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_ROOT_URL,
@@ -10,12 +10,8 @@ export async function getVisitedCountries() {
   return (await instance.get('/countries/visited/')).data;
 }
 
-export async function getStats() {
-  return (await instance.get('/statistics')).data;
-}
-
-export async function getYearStats(year: string) {
-  return (await instance.get(`/statistics/${year}`)).data;
+export async function getStats(year: string | null) {
+  return (await instance.get(year ? `/statistics/${year}` : '/statistics')).data;
 }
 
 export async function getCountryStats(countryName: string) {
