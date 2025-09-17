@@ -33,7 +33,11 @@ export default function MapSidebar() {
       >
         <ViewSidebarRoundedIcon fontSize="large" />
       </IconButton>
-      <Box className={[styles.sidebar, isVisible && styles.visible].filter(Boolean)}>
+      <Box
+        className={[styles.sidebar, isVisible && styles.visible]
+          .filter(Boolean)
+          .join(' ')}
+      >
         <Typography variant="h3">Map filters</Typography>
         <Select
           label="Continent"

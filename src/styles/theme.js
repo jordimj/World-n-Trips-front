@@ -145,7 +145,6 @@ const theme = createTheme({
     MuiDivider: {
       styleOverrides: {
         withChildren: {
-          borderWidth: 20,
           fontSize: 40,
           width: '80%',
           marginTop: 20,

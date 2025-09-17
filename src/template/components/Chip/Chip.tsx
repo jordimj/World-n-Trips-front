@@ -1,9 +1,9 @@
-import { Chip as MuiChip } from '@mui/material';
 import ComputerIcon from '@mui/icons-material/Computer';
 import WorkIcon from '@mui/icons-material/Work';
+import { Chip as MuiChip } from '@mui/material';
 
 interface Props {
-  variant: 'trip' | 'worktrip' | 'telework';
+  variant?: 'trip' | 'worktrip' | 'telework';
   label: string;
   className?: string;
 }

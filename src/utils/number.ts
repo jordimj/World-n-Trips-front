@@ -11,7 +11,9 @@ export const percentageFormatter = (number: number) =>
     maximumFractionDigits: 2,
   }).format(number);
 
-export const numberFormatter = (number: number, appendix: string = '') => {
+export const numberFormatter = (number?: number, appendix: string = '') => {
+  if (number === undefined) return '';
+
   const noDecimals = number % 1 === 0;
   return (
     new Intl.NumberFormat('en-US', {

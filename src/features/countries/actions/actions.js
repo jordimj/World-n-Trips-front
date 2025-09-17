@@ -1,5 +1,4 @@
-import { getVisitedCountries, getCountryStats } from '@/api';
-import { countryStatsMock } from '../__mocks__/countryStatsMock';
+import { getVisitedCountries } from '@/api';
 import { visitedCountriesMock } from '../__mocks__/visitedCountriesMock';
 import * as actionTypes from '../types/actionTypes';
 
@@ -37,41 +36,6 @@ export const fetchVisitedCountries = () => {
       dispatch(fetchVisitedCountriesSuccess(visitedCountries));
     } catch (e) {
       dispatch(fetchVisitedCountriesFail(e));
-    }
-  };
-};
-
-const fetchCountryStatisticsStart = () => {
-  return {
-    type: actionTypes.FETCH_COUNTRY_STATS_START,
-  };
-};
-
-const fetchCountryStatisticsSuccess = (countryStatistics) => {
-  return {
-    type: actionTypes.FETCH_COUNTRY_STATS_SUCCESS,
-    countryStatistics,
-  };
-};
-
-const fetchCountryStatisticsFail = (error) => {
-  return {
-    type: actionTypes.FETCH_COUNTRY_STATS_FAIL,
-    error,
-  };
-};
-
-export const fetchCountryStatistics = (countryName) => {
-  return async (dispatch) => {
-    dispatch(fetchCountryStatisticsStart());
-
-    try {
-      const countryStats = isBackMocked
-        ? countryStatsMock
-        : await getCountryStats(countryName);
-      dispatch(fetchCountryStatisticsSuccess(countryStats));
-    } catch (e) {
-      dispatch(fetchCountryStatisticsFail(e));
     }
   };
 };

@@ -3,7 +3,6 @@ import * as actionTypes from '../types/actionTypes';
 
 const initialState = {
   visited: [],
-  country: null,
   worldMapConf: {
     graduallyColored: false,
     selectedContinent: WORLD_MAP,
@@ -28,27 +27,6 @@ const reducer = (state = initialState, action) => {
         loading: false,
       };
     case actionTypes.FETCH_VISITED_COUNTRIES_FAIL:
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
-    case actionTypes.FETCH_COUNTRY_STATS_START:
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
-    case actionTypes.FETCH_COUNTRY_STATS_SUCCESS:
-      const { info, citiesVisited, statesVisited, ...statistics } =
-        action.countryStatistics;
-
-      return {
-        ...state,
-        country: { info, citiesVisited, statesVisited, statistics },
-        loading: false,
-      };
-    case actionTypes.FETCH_COUNTRY_STATS_FAIL:
       return {
         ...state,
         loading: false,

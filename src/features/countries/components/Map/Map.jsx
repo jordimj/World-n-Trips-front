@@ -1,13 +1,10 @@
-import { useSelector } from 'react-redux';
 import { Chart } from 'react-google-charts';
 import { useNavigate, useLocation } from 'react-router-dom';
-import COUNTRIES from '@/constants/countryCodes';
 import { WORLD_MAP } from '@/constants';
+import COUNTRIES from '@/constants/countryCodes';
 import styles from './Map.module.css';
 
 function Map({ data, region }) {
-  const country = useSelector((state) => state.countries.country);
-
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,9 +14,10 @@ function Map({ data, region }) {
           region: region !== WORLD_MAP ? region : null,
           colorAxis: { colors: ['#16888b'] },
           defaultColor: '#16888b',
+          tooltip: { trigger: 'none' },
         }
       : {
-          region: country.info.alpha2code,
+          region,
           resolution: 'provinces',
           enableRegionInteractivity: false,
           defaultColor: '#16888b',

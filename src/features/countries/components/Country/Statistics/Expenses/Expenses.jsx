@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { Box, Button, Stack } from '@mui/material';
+import useCountry from '@/features/countries/hooks/useCountry';
 import Divider from '@/template/components/Divider';
 import Metric from '@/template/components/Metric';
 import { deductNotDailyExpenses } from '@/utils';
-import ExpensesTable from './ExpensesTable';
 import ExpensesChart from './ExpensesChart';
+import ExpensesTable from './ExpensesTable';
 import styles from './Expenses.module.css';
 
 export default function ExpensesStatistics({ expenses, totalNights }) {
@@ -13,7 +13,7 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
   const sumWithoutDailyExp = deductNotDailyExpenses(sum, categories);
 
   const navigate = useNavigate();
-  const country = useSelector((state) => state.countries.country.info);
+  const { data: country } = useCountry();
 
   const goToExpenses = () =>
     navigate('/expenses', {
