@@ -17,7 +17,10 @@ const Layout = ({ children }: Props) => {
       <NavigationItems />
       <Box
         className={styles.container}
-        sx={{ width: fullWidth ? '90%' : '1600px', transition: 'ease-in-out 1s' }}
+        sx={{
+          width: fullWidth ? '90%' : 'min(1600px, 90vw)',
+          transition: 'ease-in-out 1s',
+        }}
       >
         <Toolbar />
         <main className={styles.main}>{children}</main>

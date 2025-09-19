@@ -1,5 +1,4 @@
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
+import { Skeleton, Box, Stack } from '@mui/material';
 import { DATA_APPENDICES } from '@/constants';
 import Chip from '@/template/components/Chip/Chip';
 import { buildTripName } from '@/utils';
@@ -20,7 +19,11 @@ const CountryDetails = (props: Props) => {
   return (
     <Box className={styles.root}>
       <Box className={styles.details}>
-        <img src={info?.flagUrl} alt={`${info?.name}'s flag`} />
+        {isLoading ? (
+          <Skeleton variant="rounded" height={340} />
+        ) : (
+          <img src={info?.flagUrl} alt={`${info?.name}'s flag`} />
+        )}
         <DetailRow label="Capital" value={info?.capital} isLoading={isLoading} />
         <DetailRow label="Region" value={info?.region} isLoading={isLoading} />
         <DetailRow label="Local name" value={info?.localName} isLoading={isLoading} />

@@ -3,7 +3,8 @@ import thunk from 'redux-thunk';
 import countriesReducer from '@/features/countries/reducers/reducer';
 import journalsReducer from '@/features/journals/reducers/reducer';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers =
+  (window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] as typeof compose) || compose;
 
 const rootReducer = combineReducers({
   countries: countriesReducer,
@@ -12,3 +13,5 @@ const rootReducer = combineReducers({
 
 // todo: remove deprecated createStore
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+
+export type RootState = ReturnType<typeof rootReducer>;

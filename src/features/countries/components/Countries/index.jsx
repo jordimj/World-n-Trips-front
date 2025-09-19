@@ -1,5 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Checkbox,
@@ -10,26 +9,19 @@ import {
   Typography,
 } from '@mui/material';
 import { DATABASE_REGIONS } from '@/constants/continentsAndRegions';
+import useVisitedCountries from '@/features/countries/hooks/useVisitedCountries';
 import SearchInput from '@/template/components/SearchInput';
 import Select from '@/template/components/Select/Select';
-import * as actions from '../../actions/actions';
 import CountryBox from './CountryBox/CountryBox';
 import styles from './index.module.css';
 
 function Countries() {
-  const visitedCountries = useSelector((state) => state.countries.visited);
-  const loading = useSelector((state) => state.countries.loading);
-
   const [selectedContinents, setSelectedContinents] = useState([]);
   const [selectedRegions, setSelectedRegions] = useState([]);
   const [keyword, setKeyword] = useState('');
 
-  const dispatch = useDispatch();
+  const { data: visitedCountries, isLoading } = useVisitedCountries();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (visitedCountries.length === 0) dispatch(actions.fetchVisitedCountries());
-  }, []);
 
   const onCountryClick = (countryName) => navigate(`/countries/${countryName}/`);
 
@@ -48,7 +40,7 @@ function Countries() {
       typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value
     );
 
-  const filteredCountries = visitedCountries.filter((country) => {
+  const filteredCountries = visitedCountries?.filter((country) => {
     if (selectedContinents.length === 0 && selectedRegions.length === 0)
       return country.name.toLowerCase().includes(keyword);
 
@@ -101,10 +93,10 @@ function Countries() {
         <SearchInput placeholder="Filter by name" onChange={onInputChange} />
       </Stack>
       <section className={styles.countries}>
-        {visitedCountries.length === 0 && !loading ? (
+        {visitedCountries?.length === 0 && !isLoading ? (
           <Typography>Something went wrong!</Typography>
         ) : (
-          filteredCountries.map((country) => (
+          filteredCountries?.map((country) => (
             <CountryBox
               key={country.alpha3code}
               name={country.name}

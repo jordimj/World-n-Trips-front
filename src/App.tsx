@@ -1,8 +1,8 @@
 import { Provider } from 'react-redux';
-import { ThemeProvider } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ThemeProvider } from '@mui/material';
 import { AppRouter } from './routes/AppRouter';
-import { store } from './store/store';
+import { store } from './store';
 import theme from './styles/theme';
 import './styles/index.css';
 

@@ -23,10 +23,8 @@ function CountryHeader(props: Props) {
           <Typography variant="h1">
             <Skeleton width={220} height={80} />
           </Typography>
-          <Typography variant="subtitle1">
-            <Skeleton width={220} height={40} />
-          </Typography>
-          <Skeleton width={900} height={700} />
+          <Skeleton width={220} height={40} />
+          <Skeleton variant="rounded" width="100%" height={627} />
           <NeighboringCountries info={info} isLoading />
         </Stack>
       </Stack>

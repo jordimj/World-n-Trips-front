@@ -1,37 +1,17 @@
 import { ALL_REGIONS, WORLD_MAP } from '@/constants';
+import { MapAction } from '../actions';
 import * as actionTypes from '../types/actionTypes';
 
 const initialState = {
-  visited: [],
   worldMapConf: {
     graduallyColored: false,
     selectedContinent: WORLD_MAP,
     selectedRegion: ALL_REGIONS,
   },
-  loading: false,
-  error: null,
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: MapAction) => {
   switch (action.type) {
-    case actionTypes.FETCH_VISITED_COUNTRIES_START:
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
-    case actionTypes.FETCH_VISITED_COUNTRIES_SUCCESS:
-      return {
-        ...state,
-        visited: action.countries,
-        loading: false,
-      };
-    case actionTypes.FETCH_VISITED_COUNTRIES_FAIL:
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
     case actionTypes.TOGGLE_GRADUAL_COLORING:
       return {
         ...state,
