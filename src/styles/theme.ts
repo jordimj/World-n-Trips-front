@@ -144,12 +144,12 @@ const theme = createTheme({
     },
     MuiDivider: {
       styleOverrides: {
-        withChildren: {
-          fontSize: 40,
-          width: '80%',
-          marginTop: 20,
-          textAlign: '-webkit-center',
-        },
+        // withChildren: {
+        //   fontSize: 40,
+        //   width: '80%',
+        //   marginTop: 20,
+        //   textAlign: '-webkit-center',
+        // },
         textAlignLeft: {
           width: '100%',
           marginTop: 50,
@@ -215,11 +215,6 @@ const theme = createTheme({
       marginTop: 30,
       marginBottom: 20,
     },
-    cardTitle: {
-      fontWeight: 600,
-      fontSize: 22,
-      letterSpacing: 'var(--uppercase-letter-spacing)',
-    },
     subtitle1: {
       fontSize: 16,
       color: 'var(--text-color-secondary)',
@@ -237,13 +232,6 @@ const theme = createTheme({
     },
     button: {
       fontStyle: 'italic',
-    },
-    journal: {
-      fontSize: 52,
-      fontFamily: 'Just Another Hand, cursive',
-      hyphens: 'auto',
-      textIndent: 'var(--spacing-7)',
-      lineHeight: '1.5em',
     },
   },
 });

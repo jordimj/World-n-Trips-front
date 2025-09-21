@@ -1,12 +1,11 @@
-import { Fragment } from 'react';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import CloseIcon from '@mui/icons-material/Close';
+import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import CloseIcon from '@mui/icons-material/Close';
-import SearchIcon from '@mui/icons-material/Search';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import styles from './Search.module.css';
 
 function Search({
@@ -34,7 +33,7 @@ function Search({
           inputProps={{ 'aria-label': 'search by keyword' }}
           inputRef={keywordRef}
           onKeyDown={handleKeyDown}
-          sx={{ ml: 1 }}
+          sx={{ ml: 1, mr: 'auto' }}
         />
         {isSearching ? (
           <IconButton onClick={handleStopSearch} aria-label="close search">

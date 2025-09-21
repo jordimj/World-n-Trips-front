@@ -12,3 +12,12 @@
 .details {
   padding: var(--spacing-8) 250px !important;
 }
+
+.journal {
+  font-size: 52px;
+  font-family:
+    Just Another Hand,
+    cursive;
+  hyphens: auto;
+  text-indent: var(--spacing-7);
+}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import { formatFullDate } from '@/utils/date';
 import styles from './JournalAccordion.module.css';
 
@@ -34,7 +34,7 @@ function JournalAccordion(props) {
         <Typography>{formatFullDate(journal.date)}</Typography>
       </AccordionSummary>
       <AccordionDetails className={styles.details}>
-        <Typography variant="journal">{parsed}</Typography>
+        <Typography className={styles.journal}>{parsed}</Typography>
       </AccordionDetails>
     </Accordion>
   );
