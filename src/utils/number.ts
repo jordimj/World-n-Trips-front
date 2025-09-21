@@ -1,11 +1,11 @@
 export const euroFormatter = (expense: number) =>
-  new Intl.NumberFormat('de-DE', {
+  new Intl.NumberFormat('ca-CA', {
     style: 'currency',
     currency: 'EUR',
   }).format(expense);
 
 export const percentageFormatter = (number: number) =>
-  new Intl.NumberFormat('en-US', {
+  new Intl.NumberFormat('ca-CA', {
     style: 'percent',
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -16,7 +16,7 @@ export const numberFormatter = (number?: number, appendix: string = '') => {
 
   const noDecimals = number % 1 === 0;
   return (
-    new Intl.NumberFormat('en-US', {
+    new Intl.NumberFormat('ca-CA', {
       minimumFractionDigits: noDecimals ? 0 : 2,
       maximumFractionDigits: noDecimals ? 0 : 2,
     }).format(number) +

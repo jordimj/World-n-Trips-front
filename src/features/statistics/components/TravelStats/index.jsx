@@ -21,15 +21,12 @@ export default function () {
 
   const { data: statistics } = useStatistics(year);
 
-  if (!statistics) return <Fragment />;
+  if (statistics === undefined) return <Fragment />;
 
   const { metrics, countries, travels, top5 } = statistics;
   const { days, nights, kilometersWalked, expenses, trips, hitchhikes } = metrics ?? {};
 
-  const onYearChange = (e) =>
-    setYear(e.target.value !== 'All time' ? e.target.value : null);
-
-  console.log({ travels, top5 });
+  const onYearChange = (e) => setYear(e.target.value !== 'All time' ? e.target.value : null);
 
   return (
     <Stack gap={3}>
@@ -42,7 +39,7 @@ export default function () {
             percentage={countries.all.percentage}
           />
           <Box className={styles.metricsGrid}>
-            <Metric icon={<TodayIcon fontSize="inherit" />} label="Days" metric={days} />
+            <Metric.Days metric={days} />
             <Metric.Nights metric={nights} />
             <Metric.Trips metric={trips} />
             <Metric.Walked metric={kilometersWalked} />

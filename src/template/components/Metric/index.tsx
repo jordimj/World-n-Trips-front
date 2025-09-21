@@ -1,13 +1,14 @@
 import { Fragment, ReactNode } from 'react';
-import { Stack, Typography } from '@mui/material';
 import {
+  DirectionsWalk as DirectionsWalkIcon,
+  Euro as EuroIcon,
+  LocalAirport as LocalAirportIcon,
+  Money as MoneyIcon,
   NightShelter as NightShelterIcon,
   ThumbUp as ThumbUpIcon,
-  Euro as EuroIcon,
-  Money as MoneyIcon,
-  DirectionsWalk as DirectionsWalkIcon,
-  LocalAirport as LocalAirportIcon,
+  Today as TodayIcon,
 } from '@mui/icons-material';
+import { Stack, Typography } from '@mui/material';
 import { euroFormatter, numberFormatter } from '@/utils/number';
 import styles from './Metric.module.css';
 
@@ -55,6 +56,14 @@ function Metric(props: Props) {
   );
 }
 
+Metric.Days = (props: { metric: number }) => {
+  const { metric } = props;
+
+  return (
+    <Metric icon={<TodayIcon fontSize="inherit" />} label="Days" metric={numberFormatter(metric)} />
+  );
+};
+
 Metric.Walked = (props: { metric: number }) => {
   const { metric } = props;
 
@@ -67,18 +76,12 @@ Metric.Walked = (props: { metric: number }) => {
   );
 };
 
-Metric.Expenses = (props: {
-  metric: number;
-  label?: string;
-  withMoneyIcon?: boolean;
-}) => {
+Metric.Expenses = (props: { metric: number; label?: string; withMoneyIcon?: boolean }) => {
   const { metric, label = 'Total expenses', withMoneyIcon = false } = props;
 
   return (
     <Metric
-      icon={
-        withMoneyIcon ? <MoneyIcon fontSize="inherit" /> : <EuroIcon fontSize="inherit" />
-      }
+      icon={withMoneyIcon ? <MoneyIcon fontSize="inherit" /> : <EuroIcon fontSize="inherit" />}
       label={label}
       metric={euroFormatter(metric)}
     />
@@ -104,7 +107,7 @@ Metric.Nights = (props: { metric: string }) => {
     <Metric
       icon={<NightShelterIcon fontSize="inherit" />}
       label="Nights spent"
-      metric={metric}
+      metric={numberFormatter(parseInt(metric))}
     />
   );
 };
@@ -112,13 +115,7 @@ Metric.Nights = (props: { metric: string }) => {
 Metric.Trips = (props: { metric: string }) => {
   const { metric } = props;
 
-  return (
-    <Metric
-      icon={<LocalAirportIcon fontSize="inherit" />}
-      label="Trips"
-      metric={metric}
-    />
-  );
+  return <Metric icon={<LocalAirportIcon fontSize="inherit" />} label="Trips" metric={metric} />;
 };
 
 export default Metric;
