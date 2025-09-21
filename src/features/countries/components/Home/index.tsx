@@ -5,7 +5,7 @@ import { ALL_REGIONS } from '@/constants';
 import useVisitedCountries from '@/features/countries/hooks/useVisitedCountries';
 import { RootState } from '@/store';
 import Map from '../Map/Map';
-import Sidebar from '../Sidebar/Sidebar';
+import Sidebar from '../Sidebar';
 import styles from './Home.module.css';
 
 function Home() {

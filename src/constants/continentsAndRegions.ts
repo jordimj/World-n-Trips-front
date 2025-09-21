@@ -154,4 +154,4 @@ export const DATABASE_REGIONS = {
     'Polynesia',
   ],
   'South America': ['South America'],
-};
+} as const;

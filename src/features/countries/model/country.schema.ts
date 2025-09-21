@@ -1,12 +1,19 @@
 import { z } from 'zod';
+import { DATABASE_REGIONS } from '@/constants/continentsAndRegions';
+
+export type Continent = keyof typeof DATABASE_REGIONS;
+export const ContinentSchema = z.enum(Object.keys(DATABASE_REGIONS) as [Continent, ...Continent[]]);
+
+export type Region = (typeof DATABASE_REGIONS)[Continent][number];
+export const RegionSchema = z.enum(Object.values(DATABASE_REGIONS).flat());
 
 export const CountryInfoSchema = z.object({
   id: z.number(),
   name: z.string(),
-  region: z.string(),
-  continent: z.string(),
-  alpha2code: z.string(),
-  alpha3code: z.string(),
+  region: RegionSchema,
+  continent: ContinentSchema,
+  alpha2code: z.string().length(2),
+  alpha3code: z.string().length(3),
   capital: z.string(),
   surfaceArea: z.number(),
   population: z.number(),
@@ -18,13 +25,13 @@ export const CountryInfoSchema = z.object({
   fullyRecognized: z.boolean(),
   visited: z.boolean(),
   statistics: z.boolean(),
-  flagUrl: z.string().url(),
+  flagUrl: z.url(),
   borders: z.array(z.tuple([z.string(), z.string(), z.boolean()])),
 });
 
 export const StateVisitedSchema = z.object({
   name: z.string(),
-  code: z.string(),
+  code: z.string().regex(/^[A-Z]{2}-[A-Z0-9]{1,3}$/),
 });
 
 export const StatesVisitedSchema = z.array(StateVisitedSchema);
@@ -43,7 +50,7 @@ export const NightsSchema = z.object({
 });
 
 export const StatPerHourSchema = z.object({
-  hour: z.number(),
+  hour: z.number().nullable(),
   rides: z.number(),
   distance: z.string(),
   minutes: z.string(),

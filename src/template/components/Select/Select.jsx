@@ -1,8 +1,8 @@
 import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MuiSelect from '@mui/material/Select';
 import FormHelperText from '@mui/material/FormHelperText';
+import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import MuiSelect from '@mui/material/Select';
 import styles from './Select.module.css';
 
 function Select(props) {
@@ -38,6 +38,7 @@ function Select(props) {
         value={value}
         onChange={onChange}
         sx={{
+          backgroundColor: 'white!important',
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: 'var(--primary-color-500)',
           },

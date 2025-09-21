@@ -1,44 +1,46 @@
-import { Fragment, useState } from 'react';
+import { ChangeEvent, Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Checkbox,
   ListItemText,
   ListSubheader,
   MenuItem,
+  SelectChangeEvent,
   Stack,
   Typography,
 } from '@mui/material';
 import { DATABASE_REGIONS } from '@/constants/continentsAndRegions';
 import useVisitedCountries from '@/features/countries/hooks/useVisitedCountries';
+import { Continent, Region } from '@/features/countries/model/country.schema';
 import SearchInput from '@/template/components/SearchInput';
 import Select from '@/template/components/Select/Select';
-import CountryBox from './CountryBox/CountryBox';
+import CountryBox from './CountryBox';
 import styles from './index.module.css';
 
 function Countries() {
-  const [selectedContinents, setSelectedContinents] = useState([]);
-  const [selectedRegions, setSelectedRegions] = useState([]);
+  const [selectedContinents, setSelectedContinents] = useState<Array<Continent>>([]);
+  const [selectedRegions, setSelectedRegions] = useState<Array<Region>>([]);
   const [keyword, setKeyword] = useState('');
 
   const { data: visitedCountries, isLoading } = useVisitedCountries();
   const navigate = useNavigate();
 
-  const onCountryClick = (countryName) => navigate(`/countries/${countryName}/`);
+  const onCountryClick = (countryName: string) => navigate(`/countries/${countryName}/`);
 
-  const onInputChange = (e) => {
+  const onInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
     setKeyword(e.target.value.toLowerCase());
   };
 
-  const onContinentChange = (e) =>
-    setSelectedContinents(
-      typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value
-    );
+  const onContinentChange = (e: SelectChangeEvent<typeof selectedContinents>) => {
+    if (typeof e.target.value === 'string') return;
+    setSelectedContinents(e.target.value);
+  };
 
-  const onRegionChange = (e) =>
-    setSelectedRegions(
-      typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value
-    );
+  const onRegionChange = (e: SelectChangeEvent<typeof selectedRegions>) => {
+    if (typeof e.target.value === 'string') return;
+    setSelectedRegions(e.target.value);
+  };
 
   const filteredCountries = visitedCountries?.filter((country) => {
     if (selectedContinents.length === 0 && selectedRegions.length === 0)
@@ -50,25 +52,18 @@ function Countries() {
         selectedContinents.includes(country.continent)
       );
 
-    return (
-      country.name.toLowerCase().includes(keyword) &&
-      selectedRegions.includes(country.region)
-    );
+    return country.name.toLowerCase().includes(keyword) && selectedRegions.includes(country.region);
   });
 
   return (
     <Fragment>
       <Typography variant="h1">Countries I've been to</Typography>
       <Stack direction="row" gap={3} sx={{ m: 5 }}>
-        <Select.Multiple
-          label="Continent"
-          value={selectedContinents}
-          onChange={onContinentChange}
-        >
-          {Object.keys(DATABASE_REGIONS).map((region) => (
-            <MenuItem key={region} value={region}>
-              <Checkbox checked={selectedContinents.indexOf(region) > -1} />
-              <ListItemText primary={region} />
+        <Select.Multiple label="Continent" value={selectedContinents} onChange={onContinentChange}>
+          {(Object.keys(DATABASE_REGIONS) as Array<Continent>).map((continent) => (
+            <MenuItem key={continent} value={continent}>
+              <Checkbox checked={selectedContinents.indexOf(continent) > -1} />
+              <ListItemText primary={continent} />
             </MenuItem>
           ))}
         </Select.Multiple>

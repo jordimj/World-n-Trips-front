@@ -62,9 +62,11 @@ export default function MapSidebar() {
             All
           </MenuItem>
           {selectedContinent !== WORLD_MAP &&
-            CONTINENTS_AND_REGIONS.find(
-              (continent) => continent.code === selectedContinent
-            ).regions.map((region) => (
+            (
+              CONTINENTS_AND_REGIONS.find(
+                (continent) => continent.code === selectedContinent
+              )?.regions ?? []
+            ).map((region) => (
               <MenuItem key={region.name} value={region.code}>
                 {region.name}
               </MenuItem>

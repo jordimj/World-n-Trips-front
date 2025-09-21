@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from '@/template/components/Layout/Layout';
 import Spinner from '@/template/components/Spinner/Spinner';
 
-const Home = lazy(() => import('@/features/countries/components/Home/Home'));
+const Home = lazy(() => import('@/features/countries/components/Home'));
 const Countries = lazy(() => import('@/features/countries/components/Countries'));
 const Country = lazy(() => import('@/features/countries/components/Country'));
 const TravelStats = lazy(() => import('@/features/statistics/components/TravelStats'));
