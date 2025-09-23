@@ -23,7 +23,7 @@ export async function getCountries(onlyVisited: boolean = false) {
 }
 
 export async function getTrips(full: boolean = false) {
-  return (await instance.get(`/trips${full ? '/full' : ''}`)).data;
+  return (await instance.get('/trips')).data;
 }
 
 export async function getJournals(tripId: number) {

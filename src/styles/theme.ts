@@ -144,12 +144,11 @@ const theme = createTheme({
     },
     MuiDivider: {
       styleOverrides: {
-        // withChildren: {
-        //   fontSize: 40,
-        //   width: '80%',
-        //   marginTop: 20,
-        //   textAlign: '-webkit-center',
-        // },
+        withChildren: {
+          fontSize: 40,
+          width: '80%',
+          marginTop: 20,
+        },
         textAlignLeft: {
           width: '100%',
           marginTop: 50,

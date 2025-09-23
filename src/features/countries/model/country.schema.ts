@@ -7,7 +7,7 @@ export const ContinentSchema = z.enum(Object.keys(DATABASE_REGIONS) as [Continen
 export type Region = (typeof DATABASE_REGIONS)[Continent][number];
 export const RegionSchema = z.enum(Object.values(DATABASE_REGIONS).flat());
 
-export const CountryInfoSchema = z.object({
+const CountryInfoSchema = z.object({
   id: z.number(),
   name: z.string(),
   region: RegionSchema,
@@ -29,14 +29,14 @@ export const CountryInfoSchema = z.object({
   borders: z.array(z.tuple([z.string(), z.string(), z.boolean()])),
 });
 
-export const StateVisitedSchema = z.object({
+const StateVisitedSchema = z.object({
   name: z.string(),
   code: z.string().regex(/^[A-Z]{2}-[A-Z0-9]{1,3}$/),
 });
 
-export const StatesVisitedSchema = z.array(StateVisitedSchema);
+const StatesVisitedSchema = z.array(StateVisitedSchema);
 
-export const NightsSchema = z.object({
+const NightsSchema = z.object({
   count: z.object({
     free: z.number(),
     paid: z.number(),
@@ -49,14 +49,14 @@ export const NightsSchema = z.object({
   ),
 });
 
-export const StatPerHourSchema = z.object({
+const StatPerHourSchema = z.object({
   hour: z.number().nullable(),
   rides: z.number(),
   distance: z.string(),
   minutes: z.string(),
 });
 
-export const HitchhikesSchema = z.object({
+const HitchhikesSchema = z.object({
   totalKilometers: z.number(),
   totalKilometersOpenAir: z.number().nullable(),
   daysOnTheRoad: z.number(),
@@ -79,7 +79,7 @@ export const HitchhikesSchema = z.object({
   statsPerHour: z.array(StatPerHourSchema).nullable(),
 });
 
-export const ExpensesSchema = z.object({
+const ExpensesSchema = z.object({
   sum: z.number().nullable(),
   categories: z.preprocess(
     (val) => (Array.isArray(val) ? {} : val),
@@ -100,8 +100,3 @@ export const CountryResponseSchema = z.object({
 
 export type CountryInfo = z.infer<typeof CountryInfoSchema>;
 export type StatesVisited = z.infer<typeof StatesVisitedSchema>;
-export type Nights = z.infer<typeof NightsSchema>;
-export type StatPerHour = z.infer<typeof StatPerHourSchema>;
-export type Hitchhikes = z.infer<typeof HitchhikesSchema>;
-export type Expenses = z.infer<typeof ExpensesSchema>;
-export type CountryResponse = z.infer<typeof CountryResponseSchema>;

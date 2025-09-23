@@ -21,10 +21,10 @@ export function formatDatabaseDate(date: Date) {
 /**
  * Format date as "Thursday, May 26, 2022"
  */
-export function formatFullDate(date: string) {
+export function formatFullDate(date: Date | string) {
   return new Intl.DateTimeFormat('en-US', {
     dateStyle: 'full',
-  }).format(new Date(date));
+  }).format(typeof date === 'string' ? new Date(date) : date);
 }
 
 /**
@@ -39,17 +39,14 @@ function formatCardDate(date: Date, withYear = true) {
   return Intl.DateTimeFormat('en-US', defaultOptions).format(date);
 }
 
-export const formatTripDates = (arrivalDate: string, departureDate: string) => {
-  const arrival = new Date(arrivalDate);
-  const departure = new Date(departureDate);
+export const formatTripDates = (arrivalDate: Date, departureDate: Date) => {
+  if (arrivalDate.getFullYear() !== departureDate.getFullYear())
+    return formatCardDate(arrivalDate) + ' - ' + formatCardDate(departureDate);
 
-  if (arrival.getFullYear() !== departure.getFullYear())
-    return formatCardDate(arrival) + ' - ' + formatCardDate(departure);
+  if (arrivalDate.getMonth() !== departureDate.getMonth())
+    return formatCardDate(arrivalDate, false) + ' - ' + formatCardDate(departureDate);
 
-  if (arrival.getMonth() !== departure.getMonth())
-    return formatCardDate(arrival, false) + ' - ' + formatCardDate(departure);
-
-  return formatCardDate(arrival);
+  return formatCardDate(arrivalDate);
 };
 
 export function getYearsAgo(date: string) {

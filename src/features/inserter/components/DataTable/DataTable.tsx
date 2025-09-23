@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import useInserterContext from '../../hooks/useInserterContext';
 import { TableData } from '../../types';
 import DataTableRow from './DataTableRow';
@@ -15,15 +15,7 @@ const TABLE_HEADERS = {
   day: ['Date', 'Kilometers'],
   night: ['Date', 'City', 'Slept At', 'Extra Info', 'Free'],
   spot: ['Spot', 'Spot kind', 'State', 'Shire'],
-  expense: [
-    'Date',
-    'Category',
-    'Subcategory',
-    'Extra info',
-    'Value',
-    'Currency',
-    'Value (EUR)',
-  ],
+  expense: ['Date', 'Category', 'Subcategory', 'Extra info', 'Value', 'Currency', 'Value (EUR)'],
 };
 
 export default function DataTable() {
@@ -31,7 +23,7 @@ export default function DataTable() {
     state: { dataKind, parsedData: rows },
   } = useInserterContext();
 
-  if (dataKind === undefined || dataKind === 'journal') return <Fragment />;
+  if (dataKind === undefined || dataKind === 'journal' || dataKind === 'trip') return <Fragment />;
 
   return (
     <TableContainer className={styles.paper} component={Paper}>

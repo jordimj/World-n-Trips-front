@@ -1,8 +1,7 @@
-import { Fragment, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Fragment } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import * as actions from '@/features/journals/actions/actions';
+import useTrips from '@/hooks/useTrips';
 import { MONTHS, WEEK_DAYS } from '../../constants';
 import Day from './Day';
 import styles from './Timeline.module.css';
@@ -10,12 +9,7 @@ import styles from './Timeline.module.css';
 function Timeline({ year }) {
   const firstDay = dayjs(`1-1-${year}`);
 
-  const trips = useSelector((state) => state.journals.trips);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (trips.length === 0) dispatch(actions.fetchTrips());
-  }, []);
+  const { data: trips = [] } = useTrips();
 
   const filteredTrips = trips.filter(
     (trip) =>

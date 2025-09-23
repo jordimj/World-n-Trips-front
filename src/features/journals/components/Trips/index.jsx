@@ -1,41 +1,32 @@
-import { Fragment, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Fragment } from 'react';
 import { Box, FormControlLabel, Stack, Switch, Typography } from '@mui/material';
 import useLocalStorage from '@/hooks/useLocalStorage';
 import Divider from '@/template/components/Divider';
 import TripCard from '@/template/components/TripCard';
 import { groupBy } from '@/utils';
-import * as actions from '../../actions/actions';
+import useTrips from '../../hooks/useTrips';
 
 function Trips() {
-  const trips = useSelector((state) => state.journals.trips);
+  const { data: trips = [] } = useTrips();
   const [filterTrips, setFilterTrips] = useLocalStorage('filter_trips', 'false');
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (trips.length === 0) dispatch(actions.fetchTrips());
-  }, []);
-
   const filteredTrips = filterTrips ? trips.filter((trip) => trip.hasJournals) : trips;
-  const groupedTrips = groupBy(filteredTrips, (trip) =>
-    trip.departureDate.date.slice(0, 4)
-  );
+  const groupedTrips = groupBy(filteredTrips, (trip) => trip.departureDate.date.getFullYear());
 
   return (
     <Box textAlign="center">
       <Typography variant="h1">My trips</Typography>
       <FormControlLabel
-          control={
-            <Switch
-              color="default"
-              checked={filterTrips}
-              onChange={prev => setFilterTrips(prev=> !prev)}
-            />
-          }
-          label="Show only trips with journals"
-          sx={{ width: '100%', placeContent: 'end' }}
-        />
+        control={
+          <Switch
+            color="default"
+            checked={filterTrips}
+            onChange={() => setFilterTrips((prev) => !prev)}
+          />
+        }
+        label="Show only trips with journals"
+        sx={{ width: '100%', placeContent: 'end' }}
+      />
       {groupedTrips && (
         <Stack direction="column">
           {Object.entries(groupedTrips)
