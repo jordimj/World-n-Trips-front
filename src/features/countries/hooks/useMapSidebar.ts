@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SelectChangeEvent } from '@mui/material';
 import { RootState } from '@/store';
-import * as actions from '../actions';
+import * as actions from '../slice';
 
 function useMapSidebar() {
   const [isVisible, setIsVisible] = useState(false);

@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 
-const initialState = {
+interface SearchState {
+  isSearching: boolean;
+  occurrences: Array<HTMLElement>;
+  current: number | null;
+  totalMatches: number;
+}
+
+const initialState: SearchState = {
   isSearching: false,
   occurrences: [],
   current: null,
@@ -8,12 +15,16 @@ const initialState = {
 };
 
 const useJournalSearch = () => {
-  const [search, setSearch] = useState(initialState);
-  const keywordRef = useRef(null);
+  const [search, setSearch] = useState<SearchState>(initialState);
+  const keywordRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const elements = document.querySelectorAll('.occurrence');
-    setSearch({ ...search, occurrences: elements, totalMatches: elements.length });
+    const elements = document.querySelectorAll<HTMLElement>('.occurrence');
+    setSearch({
+      ...search,
+      occurrences: Array.from(elements),
+      totalMatches: elements.length,
+    });
   }, [search.isSearching]);
 
   useEffect(() => {
@@ -25,7 +36,7 @@ const useJournalSearch = () => {
   }, [search.current]);
 
   const handleSearch = () => {
-    if (keywordRef.current.value === '') return;
+    if (keywordRef.current?.value === '') return;
 
     setSearch({
       ...initialState,
@@ -35,6 +46,7 @@ const useJournalSearch = () => {
 
   const handleStopSearch = () => {
     setSearch(initialState);
+    if (keywordRef.current === null) return;
     keywordRef.current.value = '';
   };
 
@@ -45,7 +57,10 @@ const useJournalSearch = () => {
     }));
 
   const handleLastOccurrence = () =>
-    setSearch((prevSearch) => ({ ...prevSearch, current: prevSearch.current - 1 }));
+    setSearch((prevSearch) => ({
+      ...prevSearch,
+      current: prevSearch.current !== null ? prevSearch.current - 1 : 0,
+    }));
 
   return {
     search,

@@ -1,15 +1,15 @@
-import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
-import countriesReducer from '@/features/countries/reducers/reducer';
-
-const composeEnhancers =
-  (window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] as typeof compose) || compose;
+import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
+import countriesReducer from '@/features/countries/slice';
 
 const rootReducer = combineReducers({
   countries: countriesReducer,
 });
 
-// todo: remove deprecated createStore
-export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+export const store = configureStore({
+  reducer: rootReducer,
+  devTools: process.env.NODE_ENV !== 'production',
+});
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
