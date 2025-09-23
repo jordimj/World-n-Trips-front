@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Backdrop, Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { Backdrop, Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import COUNTRIES from '@/constants/countryCodes';
 import EXPENSE_CATEGORY_EMOJIS from '@/constants/expenseCategoryEmojis';
 import useKeyDown from '@/hooks/useKeyDown';
 import CountryFlag from '@/template/components/CountryFlag';
 import SearchInput from '@/template/components/SearchInput';
-import { euroFormatter } from '@/utils/number';
 import { formatDate } from '@/utils/date';
-import useSearch from '@/features/search/hooks/useSearch';
+import { euroFormatter } from '@/utils/number';
+import useSearch from '../../hooks/useSearch';
 
 interface SearchDialogProps {
   open: boolean;
