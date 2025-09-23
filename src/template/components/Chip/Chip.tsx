@@ -4,7 +4,7 @@ import { Chip as MuiChip } from '@mui/material';
 
 interface Props {
   variant?: 'trip' | 'worktrip' | 'telework';
-  label: string;
+  label?: string;
   className?: string;
 }
 

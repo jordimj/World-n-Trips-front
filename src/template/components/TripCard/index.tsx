@@ -4,9 +4,28 @@ import Chip from '@/template/components/Chip/Chip';
 import { formatTripDates } from '@/utils/date';
 import styles from './TripCard.module.css';
 
-function TripCard({ trip }) {
-  const navigate = useNavigate();
+interface Trip {
+  id: number;
+  name: string;
+  picture?: string;
+  telework?: boolean;
+  worktrip?: boolean;
+  arrivalDate: {
+    date: Date;
+  };
+  departureDate: {
+    date: Date;
+  };
+}
 
+interface Props {
+  trip: Trip;
+}
+
+function TripCard(props: Props) {
+  const { trip } = props;
+
+  const navigate = useNavigate();
   const hasChip = trip.telework || trip.worktrip;
 
   return (
@@ -14,10 +33,7 @@ function TripCard({ trip }) {
       <CardActionArea onClick={() => navigate(`/journals/${trip.id}`)}>
         <CardMedia component="img" alt={trip.name} height="250" image={trip.picture} />
         {hasChip && (
-          <Chip
-            className={styles.chip}
-            variant={trip.telework ? 'telework' : 'worktrip'}
-          />
+          <Chip className={styles.chip} variant={trip.telework ? 'telework' : 'worktrip'} />
         )}
         <CardContent>
           <Typography gutterBottom variant="h5">

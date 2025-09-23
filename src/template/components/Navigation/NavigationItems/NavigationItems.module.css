@@ -8,7 +8,7 @@
   transition: width 0.5s ease-in-out;
 
   position: fixed;
-  top: calc(50% - 210px);
+  top: calc(50% - 214px);
   left: var(--spacing-2);
   z-index: 9;
 
