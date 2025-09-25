@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
 import Chip from '@/template/components/Chip/Chip';
+import ConditionalWrapper from '@/template/components/ConditionalWrapper/ConditionalWrapper';
 import { formatTripDates } from '@/utils/date';
 import styles from './TripCard.module.css';
 
 interface Trip {
-  id: number;
+  id?: number;
   name: string;
   picture?: string;
   telework?: boolean;
@@ -30,7 +31,14 @@ function TripCard(props: Props) {
 
   return (
     <Card className={styles.card}>
-      <CardActionArea onClick={() => navigate(`/journals/${trip.id}`)}>
+      <ConditionalWrapper
+        condition={trip.id !== undefined}
+        wrapper={(children) => (
+          <CardActionArea onClick={() => navigate(`/journals/${trip.id}`)}>
+            {children}
+          </CardActionArea>
+        )}
+      >
         <CardMedia component="img" alt={trip.name} height="250" image={trip.picture} />
         {hasChip && (
           <Chip className={styles.chip} variant={trip.telework ? 'telework' : 'worktrip'} />
@@ -43,7 +51,7 @@ function TripCard(props: Props) {
             {formatTripDates(trip.arrivalDate.date, trip.departureDate.date)}
           </Typography>
         </CardContent>
-      </CardActionArea>
+      </ConditionalWrapper>
     </Card>
   );
 }

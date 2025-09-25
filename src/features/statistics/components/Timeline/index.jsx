@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import useTrips from '@/hooks/useTrips';
+import useTrips from '@/features/inserter/hooks/useTripOptions';
 import { MONTHS, WEEK_DAYS } from '../../constants';
 import Day from './Day';
 import styles from './Timeline.module.css';

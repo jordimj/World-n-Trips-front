@@ -1,5 +1,5 @@
+import useTripOptions from '@/features/inserter/hooks/useTripOptions';
 import Autocomplete, { Options } from './Autocomplete';
-import useTrips from '@/hooks/useTrips';
 
 interface Props {
   onChangeOption: (optionId: number | null) => void;
@@ -7,7 +7,7 @@ interface Props {
 
 function AutocompleteTrips(props: Props) {
   const { onChangeOption } = props;
-  const { data, isFetching } = useTrips();
+  const { data, isFetching } = useTripOptions();
 
   return (
     <Autocomplete
@@ -25,7 +25,7 @@ interface MultipleProps {
 
 function AutocompleteMultipleTrips(props: MultipleProps) {
   const { onChangeOption } = props;
-  const { data, isFetching } = useTrips();
+  const { data, isFetching } = useTripOptions();
 
   return (
     <Autocomplete.Multiple

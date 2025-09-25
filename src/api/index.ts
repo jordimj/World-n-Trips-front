@@ -22,8 +22,8 @@ export async function getCountries(onlyVisited: boolean = false) {
   return (await instance.get('/countries', { params: { onlyVisited } })).data;
 }
 
-export async function getTrips(full: boolean = false) {
-  return (await instance.get('/trips')).data;
+export async function getTrips() {
+  return (await instance.get('/trips/')).data;
 }
 
 export async function getJournals(tripId: number) {
@@ -54,7 +54,7 @@ export async function getCurrencies() {
 }
 
 export async function getCategories() {
-  return (await instance.get('/categories')).data;
+  return (await instance.get('/categories/')).data;
 }
 
 export async function search(keyword: string) {

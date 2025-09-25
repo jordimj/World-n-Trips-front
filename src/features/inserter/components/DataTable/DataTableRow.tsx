@@ -51,7 +51,7 @@ export default function DataTableRow(props: DataTableRowProps) {
     actions: { setParsedData },
   } = useInserterContext();
 
-  const { data: categories } = useCategories();
+  const { data: categories } = useCategories(dataKind === 'expense');
   const { validationErrors } = useDataValidation({ dataKind, row });
 
   const updateParsedData = (

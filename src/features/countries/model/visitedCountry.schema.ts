@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { ContinentSchema, RegionSchema } from '@/features/countries/model/country.schema';
 
 export const VisitedCountrySchema = z.object({
+  id: z.number(),
   name: z.string(),
   continent: ContinentSchema,
   region: RegionSchema,
