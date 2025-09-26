@@ -1,49 +1,33 @@
 import { Fragment } from 'react';
 import TableRow from '@mui/material/TableRow';
-import DataTableCell from './DataTableCell';
-import { Day, Expense, Night, Spot, TableKind } from '../../types';
-import useDataValidation from '../../hooks/useDataValidation';
 import useCategories from '../../hooks/useCategories';
+import useDataValidation from '../../hooks/useDataValidation';
 import useInserterContext from '../../hooks/useInserterContext';
+import { Day, Expense, Night, Spot, TableKind } from '../../types';
+import DataTableCell from './DataTableCell';
 
-// interface DayRow {
-//   dataKind: 'day';
-//   row: Day;
-// }
+function isDayRow(row: unknown, dataKind: string): row is Day {
+  return dataKind === 'day';
+}
 
-// interface NightRow {
-//   dataKind: 'night';
-//   row: Night;
-// }
+function isNightRow(row: unknown, dataKind: string): row is Night {
+  return dataKind === 'night';
+}
 
-// interface SpotRow {
-//   dataKind: 'spot';
-//   row: Spot;
-// }
+function isExpenseRow(row: unknown, dataKind: string): row is Expense {
+  return dataKind === 'expense';
+}
 
-// interface ExpenseRow {
-//   dataKind: 'expense';
-//   row: Expense;
-// }
+function isSpotRow(row: unknown, dataKind: string): row is Spot {
+  return dataKind === 'spot';
+}
 
-// type DataTableRowProps = (DayRow | NightRow | SpotRow | ExpenseRow) & {
-//   updateParsedData: (
-//     id: number,
-//     key: 'category' | 'subcategory' | 'extraInfo',
-//     value: any
-//   ) => void;
-// };
-
-type DataTableRowProps = {
+interface Props {
   dataKind: TableKind;
-  row: Day | Night | Spot | Expense;
-};
+  row: Day | Night | Expense | Spot;
+}
 
-const EDITABLE_CELL_KEYS = {
-  expense: ['category', 'subcategory', 'extraInfo'],
-};
-
-export default function DataTableRow(props: DataTableRowProps) {
+export default function DataTableRow(props: Props) {
   const { dataKind, row } = props;
 
   const {
@@ -77,95 +61,59 @@ export default function DataTableRow(props: DataTableRowProps) {
 
   return (
     <TableRow key={row.id}>
-      {dataKind === 'day' && (
+      {isDayRow(row, dataKind) && (
         <Fragment>
-          <DataTableCell
-            value={(row as Day).date}
-            validationErrors={validationErrors['date']}
-          />
-          <DataTableCell
-            value={(row as Day).kilometers}
-            validationErrors={validationErrors['kilometers']}
-          />
+          <DataTableCell value={row.date} validationErrors={validationErrors['date']} />
+          <DataTableCell value={row.kilometers} validationErrors={validationErrors['kilometers']} />
         </Fragment>
       )}
-      {dataKind === 'night' && (
+      {isNightRow(row, dataKind) && (
         <Fragment>
+          <DataTableCell value={row.date} validationErrors={validationErrors['date']} />
+          <DataTableCell value={row.city} validationErrors={validationErrors['city']} />
+          <DataTableCell value={row.sleptAt} validationErrors={validationErrors['sleptAt']} />
+          <DataTableCell value={row.extraInfo} validationErrors={validationErrors['extraInfo']} />
           <DataTableCell
-            value={(row as Night).date}
-            validationErrors={validationErrors['date']}
-          />
-          <DataTableCell
-            value={(row as Night).city}
-            validationErrors={validationErrors['city']}
-          />
-          <DataTableCell
-            value={(row as Night).sleptAt}
-            validationErrors={validationErrors['sleptAt']}
-          />
-          <DataTableCell
-            value={(row as Night).extraInfo}
-            validationErrors={validationErrors['extraInfo']}
-          />
-          <DataTableCell
-            value={!!Number((row as Night).free) ? 'Yes' : 'No'}
+            value={!!Number(row.free) ? 'Yes' : 'No'}
             validationErrors={validationErrors['free']}
           />
         </Fragment>
       )}
-      {dataKind === 'spot' && (
+      {isSpotRow(row, dataKind) && (
         <Fragment>
-          <DataTableCell
-            value={(row as Spot).name}
-            validationErrors={validationErrors['name']}
-          />
-          <DataTableCell
-            value={(row as Spot).spotKind}
-            validationErrors={validationErrors['spotKind']}
-          />
-          <DataTableCell
-            value={(row as Spot).state}
-            validationErrors={validationErrors['state']}
-          />
-          <DataTableCell
-            value={(row as Spot).shire}
-            validationErrors={validationErrors['shire']}
-          />
+          <DataTableCell value={row.name} validationErrors={validationErrors['name']} />
+          <DataTableCell value={row.spotKind} validationErrors={validationErrors['spotKind']} />
+          <DataTableCell value={row.state} validationErrors={validationErrors['state']} />
+          <DataTableCell value={row.shire} validationErrors={validationErrors['shire']} />
         </Fragment>
       )}
-      {dataKind === 'expense' && (
+      {isExpenseRow(row, dataKind) && (
         <Fragment>
-          <DataTableCell
-            value={(row as Expense).date}
-            validationErrors={validationErrors['date']}
-          />
+          <DataTableCell value={row.date} validationErrors={validationErrors['date']} />
           <DataTableCell.Selectable
-            value={(row as Expense).category}
+            value={row.category}
             validationErrors={validationErrors['category']}
             onEdit={(value: string) => updateParsedData(row.id!, 'category', value)}
             selectOptions={Object.keys(categories ?? {})}
           />
           <DataTableCell.Selectable
-            value={(row as Expense).subcategory}
+            value={row.subcategory}
             validationErrors={validationErrors['subcategory']}
             onEdit={(value: string) => updateParsedData(row.id!, 'subcategory', value)}
-            selectOptions={categories?.[(row as Expense).category] ?? []}
+            selectOptions={categories?.[row.category] ?? []}
           />
           <DataTableCell.Editable
-            value={(row as Expense).extraInfo}
+            value={row.extraInfo}
             validationErrors={validationErrors['extraInfo']}
             onEdit={(value: string) => updateParsedData(row.id!, 'extraInfo', value)}
           />
+          <DataTableCell value={row?.value ?? ''} validationErrors={validationErrors['value']} />
           <DataTableCell
-            value={(row as Expense)?.value ?? ''}
-            validationErrors={validationErrors['value']}
-          />
-          <DataTableCell
-            value={(row as Expense).currency ?? ''}
+            value={row.currency ?? ''}
             validationErrors={validationErrors['currency']}
           />
           <DataTableCell
-            value={(row as Expense)?.valueEur ?? ''}
+            value={row?.valueEur ?? ''}
             validationErrors={validationErrors['valueEur']}
           />
         </Fragment>

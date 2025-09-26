@@ -1,10 +1,10 @@
 import { EditorState } from 'draft-js';
 import { Action } from '../actions';
-import { ImportData, KindOfData } from '../types';
+import { ImportData, ImportKind } from '../types';
 
 export interface InserterState {
   activeStep: number;
-  dataKind: KindOfData | undefined;
+  dataKind: ImportKind | undefined;
   filename: string;
   parsedData?: ImportData;
   optionId: number | null;

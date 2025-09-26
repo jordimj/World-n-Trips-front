@@ -1,8 +1,8 @@
-export type ImportData = TableData | string;
 export type TableData = Days | Nights | Expenses | Spots;
+export type ImportData = TableData | string;
 
-export type KindOfData = TableKind | 'trip' | 'journal';
 export type TableKind = 'day' | 'night' | 'expense' | 'spot';
+export type ImportKind = TableKind | 'trip' | 'journal';
 
 export interface Day {
   id?: number;

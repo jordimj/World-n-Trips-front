@@ -1,4 +1,3 @@
-import { capitalize, Stack, Typography } from '@mui/material';
 import {
   NightShelter as NightShelterIcon,
   LightMode as LightModeIcon,
@@ -7,8 +6,8 @@ import {
   EditNote as EditNoteIcon,
   LocalAirport as LocalAirportIcon,
 } from '@mui/icons-material';
+import { capitalize, Stack, Typography } from '@mui/material';
 import useInserterContext from '../../hooks/useInserterContext';
-import { KindOfData } from '../../types';
 
 const DATA_KINDS = {
   trip: <LocalAirportIcon fontSize="inherit" />,
@@ -28,13 +27,13 @@ function Step1() {
     <Stack alignItems="center" gap={2}>
       <Typography variant="h2">Select the kind of data to be imported</Typography>
       <Stack direction="row" gap={3} flexWrap="wrap">
-        {Object.keys(DATA_KINDS).map((kind) => (
+        {(Object.keys(DATA_KINDS) as (keyof typeof DATA_KINDS)[]).map((kind) => (
           <Stack
             key={kind}
             role="button"
             justifyContent="center"
             alignItems="center"
-            onClick={() => setDatakind(kind as KindOfData)}
+            onClick={() => setDatakind(kind)}
             sx={{
               backgroundColor: 'white',
               minWidth: '150px',
@@ -47,9 +46,7 @@ function Step1() {
               },
             }}
           >
-            <Typography fontSize="120px">
-              {DATA_KINDS[kind as keyof typeof DATA_KINDS]}
-            </Typography>
+            <Typography fontSize="120px">{DATA_KINDS[kind]}</Typography>
             <Typography>{capitalize(kind)}</Typography>
           </Stack>
         ))}

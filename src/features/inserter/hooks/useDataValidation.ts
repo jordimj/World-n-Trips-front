@@ -85,28 +85,6 @@ const getSchema = (variant: TableKind) => {
   }[variant];
 };
 
-// interface DayRow {
-//   dataKind: 'day';
-//   row: Day;
-// }
-
-// interface NightRow {
-//   dataKind: 'night';
-//   row: Night;
-// }
-
-// interface SpotRow {
-//   dataKind: 'spot';
-//   row: Spot;
-// }
-
-// interface ExpenseRow {
-//   dataKind: 'expense';
-//   row: Expense;
-// }
-
-// type Props = DayRow | NightRow | SpotRow | ExpenseRow;
-
 interface Props {
   dataKind: TableKind;
   row: Day | Night | Spot | Expense;

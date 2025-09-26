@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { parse } from 'papaparse';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { Day, Expense, Night, Spot, TableData } from '../../types';
+import { parse } from 'papaparse';
 import useInserterContext from '../../hooks/useInserterContext';
 import useSnackbar from '../../hooks/useSnackbar';
+import { TableData } from '../../types';
 
 export default function DataParser() {
   const {
@@ -21,7 +21,6 @@ export default function DataParser() {
   const parseCsvData = (data: string | File) => {
     parse(data, {
       header: true,
-      // dynamicTyping: true,
       encoding: 'ISO-8859-1',
       complete: (result: any) => {
         if (result.errors.length > 0) {
@@ -35,9 +34,7 @@ export default function DataParser() {
         }
 
         const data = result.data as TableData;
-        data.forEach(
-          (item: Day | Night | Expense | Spot, i: number) => (item.id = i + 1)
-        );
+        data.forEach((item, idx) => (item.id = idx + 1));
 
         setParsedData(data);
       },

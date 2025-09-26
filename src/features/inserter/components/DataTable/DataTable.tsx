@@ -7,7 +7,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import useInserterContext from '../../hooks/useInserterContext';
-import { TableData } from '../../types';
 import DataTableRow from './DataTableRow';
 import styles from './DataTable.module.css';
 
@@ -23,7 +22,14 @@ export default function DataTable() {
     state: { dataKind, parsedData: rows },
   } = useInserterContext();
 
-  if (dataKind === undefined || dataKind === 'journal' || dataKind === 'trip') return <Fragment />;
+  if (
+    dataKind === undefined ||
+    dataKind === 'journal' ||
+    dataKind === 'trip' ||
+    rows === undefined ||
+    typeof rows === 'string'
+  )
+    return <Fragment />;
 
   return (
     <TableContainer className={styles.paper} component={Paper}>
@@ -38,7 +44,7 @@ export default function DataTable() {
           </TableRow>
         </TableHead>
         <TableBody sx={{ scrollSnapType: 'y mandatory' }}>
-          {(rows as TableData).map((row) => (
+          {rows.map((row) => (
             <DataTableRow key={row.id} row={row} dataKind={dataKind} />
           ))}
         </TableBody>

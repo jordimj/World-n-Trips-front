@@ -1,5 +1,5 @@
 import { EditorState } from 'draft-js';
-import { KindOfData, TableData } from '../types';
+import { ImportKind, TableData } from '../types';
 
 type SetActiveStepAction = {
   type: 'SET_ACTIVE_STEP';
@@ -8,7 +8,7 @@ type SetActiveStepAction = {
 
 type SetDataKindAction = {
   type: 'SET_DATA_KIND';
-  payload: KindOfData | undefined;
+  payload: ImportKind | undefined;
 };
 
 type SetFilenameAction = {
