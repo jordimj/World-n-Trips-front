@@ -11,6 +11,6 @@
 
 .chip {
   position: absolute;
-  top: 0;
+  top: var(--spacing-4);
   right: var(--spacing-4);
 }

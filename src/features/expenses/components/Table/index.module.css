@@ -8,10 +8,6 @@
   height: 60px;
 }
 
-.row td {
-  text-align: center;
-}
-
 .row p {
   font-size: 14px;
   color: var(--text-color);

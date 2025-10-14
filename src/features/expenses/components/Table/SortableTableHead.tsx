@@ -1,6 +1,6 @@
-import { OrderBy } from '@/features/expenses/interfaces';
 import { Box, TableCell, TableSortLabel, capitalize } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
+import { OrderBy } from '@/features/expenses/interfaces';
 
 interface Props {
   kind: OrderBy;
@@ -12,7 +12,7 @@ interface Props {
 function SortableTableHead(props: Props) {
   const { kind, sortBy, order, orderBy } = props;
 
-  const label = kind === 'valueEur' ? 'Value' : capitalize(kind);
+  const label = kind === 'valueEur' ? 'Amount' : capitalize(kind);
 
   return (
     <TableCell align="center">
@@ -22,11 +22,11 @@ function SortableTableHead(props: Props) {
         onClick={() => sortBy(kind)}
       >
         {label}
-        {orderBy === kind ? (
+        {orderBy === kind && (
           <Box component="span" sx={visuallyHidden}>
             {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
           </Box>
-        ) : null}
+        )}
       </TableSortLabel>
     </TableCell>
   );

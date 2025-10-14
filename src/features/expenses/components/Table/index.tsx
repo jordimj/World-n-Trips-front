@@ -11,16 +11,16 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import EXPENSE_CATEGORY_EMOJIS from '@/constants/expenseCategoryEmojis';
 import useElementOnScreen from '@/hooks/useElementOnScreen';
+import Chip from '@/template/components/Chip/Chip';
 import CountryFlag from '@/template/components/CountryFlag';
 import { formatFullDate } from '@/utils/date';
 import { euroFormatter } from '@/utils/number';
 import useExpenses from '../../hooks/useExpenses';
 import { ExpensesFilters, OrderBy } from '../../interfaces';
 import CountDisplay from './CountDisplay';
-import SortableTableHead from './SortableTableHead';
 import Skeleton from './Skeleton';
+import SortableTableHead from './SortableTableHead';
 import styles from './index.module.css';
 
 interface Props {
@@ -45,7 +45,6 @@ function ExpensesTable(props: Props) {
 
   const items = pages.map((page) => page.items).flat();
   const hasResults = items && items.length > 0;
-  const hasLocalCurrency = items.length > 0 ? items.some((item) => item.value) : true;
   const isInitialLoading = items.length === 0 && isFetching;
 
   const totalAmount = pages.at(-1)?.totalAmount;
@@ -94,9 +93,6 @@ function ExpensesTable(props: Props) {
                 orderBy={filters.orderBy ?? 'day'}
                 order={filters.order ?? 'asc'}
               />
-              {hasLocalCurrency && (
-                <TableCell align="center">Value (Local currency)</TableCell>
-              )}
               <SortableTableHead
                 kind="valueEur"
                 sortBy={sortBy}
@@ -140,14 +136,7 @@ function ExpensesTable(props: Props) {
                       <Typography>{formatFullDate(day)}</Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography sx={{ fontSize: 'var(--spacing-5)!important' }}>
-                        {
-                          EXPENSE_CATEGORY_EMOJIS[
-                            category as keyof typeof EXPENSE_CATEGORY_EMOJIS
-                          ]
-                        }{' '}
-                        <Typography component="span">{category}</Typography>
-                      </Typography>
+                      <Chip label={category} isCategory />
                     </TableCell>
                     <TableCell>
                       <Typography>{subcategory}</Typography>
@@ -155,33 +144,34 @@ function ExpensesTable(props: Props) {
                     <TableCell>
                       <Typography>{details}</Typography>
                     </TableCell>
-                    {hasLocalCurrency && (
-                      <TableCell>
-                        <Typography>{value ? `${currency} ${value}` : '-'}</Typography>
-                      </TableCell>
-                    )}
                     <TableCell>
                       <Typography>{euroFormatter(Number(valueEur))}</Typography>
+                      {value && (
+                        <Typography
+                          sx={{
+                            fontSize: '12px!important',
+                            color: 'var(--primary-color-700)!important',
+                          }}
+                        >
+                          {value ? `${currency} ${value}` : '-'}
+                        </Typography>
+                      )}
                     </TableCell>
                     <TableCell>
                       <CountryFlag name={country} height={32} />
                     </TableCell>
                     <TableCell>
-                      <Typography>{trip}</Typography>
+                      <Chip label={trip} />
                     </TableCell>
                   </TableRow>
                 );
               })}
             {!hasResults && !isFetching && (
               <TableRow>
-                <Typography sx={{ px: 2, py: 1 }}>
-                  No results matching these criteria
-                </Typography>
+                <Typography sx={{ px: 2, py: 1 }}>No results matching these criteria</Typography>
               </TableRow>
             )}
-            {(hasNextPage || isInitialLoading) && (
-              <Skeleton cells={hasLocalCurrency ? 8 : 7} />
-            )}
+            {(hasNextPage || isInitialLoading) && <Skeleton cells={7} />}
           </TableBody>
           <Box ref={intersectionRef} />
         </Table>
