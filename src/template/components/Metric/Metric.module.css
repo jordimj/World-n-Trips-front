@@ -4,16 +4,21 @@
   color: white;
   border-radius: var(--border-radius);
   padding: var(--spacing-5);
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); */
+
+  & svg {
+    fill: var(--primary-color-100);
+  }
 }
 
 .label {
   text-transform: uppercase;
   font-size: 14px;
-  color: var(--header-text-color);
+  color: var(--primary-color-200);
   text-align: center;
 }
 
 .metric {
-  font-size: 30px;
+  font-size: var(--spacing-6);
   font-weight: 700;
 }

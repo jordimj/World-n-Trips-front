@@ -1,13 +1,13 @@
 import { z } from 'zod';
 
-export const CountryGroupSchema = z.object({
+const CountryGroupSchema = z.object({
   name: z.string(),
   total: z.number(),
   visited: z.number(),
   percentage: z.number(),
 });
 
-export const MonthBreakdownSchema = z.object({
+const MonthBreakdownSchema = z.object({
   January: z.number().optional(),
   February: z.number().optional(),
   March: z.number().optional(),
@@ -22,14 +22,35 @@ export const MonthBreakdownSchema = z.object({
   December: z.number().optional(),
 });
 
-export const TopEntryNumberSchema = z.object({
+const TopEntrySchema = z.object({
   name: z.string(),
-  total: z.number(),
+  total: z.preprocess((val) => (typeof val === 'string' ? parseFloat(val) : val), z.number()),
 });
 
-export const TopEntryStringSchema = z.object({
-  name: z.string(),
-  total: z.string(),
+const Top5Schema = z.object({
+  longestInCountry: z.array(TopEntrySchema),
+  longestInCities: z.array(TopEntrySchema),
+  hitchhiked: z.array(TopEntrySchema),
+  mostSpent: z.array(TopEntrySchema),
+  mostExpensiveVisas: z.array(TopEntrySchema),
+});
+
+const WorldExplorationSchema = z.object({
+  all: z.object({
+    total: z.number(),
+    visited: z.number(),
+    percentage: z.number(),
+  }),
+  byContinent: z.array(CountryGroupSchema),
+  byRegion: z.array(CountryGroupSchema),
+});
+
+export const TravelsSchema = z.object({
+  perYear: z.record(z.string(), z.number()).optional(),
+  perMonth: z.object({
+    allTime: MonthBreakdownSchema,
+    afterLongTrip: MonthBreakdownSchema.optional(),
+  }),
 });
 
 export const TravelStatsSchema = z
@@ -39,37 +60,20 @@ export const TravelStatsSchema = z
         days: z.number(),
         nights: z.number(),
         kilometersWalked: z.number(),
-        expenses: z.string(),
+        expenses: z.string().transform((val) => parseFloat(val)),
         trips: z.number(),
         hitchhikes: z.number(),
       })
       .optional(),
-    countries: z
-      .object({
-        all: z.object({
-          total: z.number(),
-          visited: z.number(),
-          percentage: z.number(),
-        }),
-        byContinent: z.array(CountryGroupSchema),
-        byRegion: z.array(CountryGroupSchema),
-      })
-      .optional(),
-    travels: z.object({
-      perYear: z.record(z.string(), z.number()).optional(),
-      perMonth: z.object({
-        allTime: MonthBreakdownSchema,
-        afterLongTrip: MonthBreakdownSchema.optional(),
-      }),
-    }),
-    top5: z.object({
-      longestInCountry: z.array(TopEntryNumberSchema),
-      longestInCities: z.array(TopEntryNumberSchema),
-      hitchhiked: z.array(TopEntryStringSchema),
-      mostSpent: z.array(TopEntryStringSchema),
-      mostExpensiveVisas: z.array(TopEntryStringSchema),
-    }),
+    countries: WorldExplorationSchema.optional(),
+    travels: TravelsSchema,
+    top5: Top5Schema,
   })
   .nullable();
+
+export type ContinentStats = z.infer<typeof CountryGroupSchema>;
+export type Top5Stats = z.infer<typeof Top5Schema>;
+export type RegionsExplored = z.infer<typeof WorldExplorationSchema>;
+export type Travels = z.infer<typeof TravelsSchema>;
 
 export type TravelStats = z.infer<typeof TravelStatsSchema>;

@@ -1,11 +1,16 @@
 .root {
-  width: 400px;
-  height: 400px;
+  min-width: 400px;
+  min-height: 400px;
   background: linear-gradient(135deg, rgba(103, 99, 119, 1) 0%, rgba(67, 64, 74, 1) 100%);
   color: white;
   border-radius: var(--border-radius);
   padding: var(--spacing-5);
   position: relative;
+  grid-row: 1 / 4;
+
+  & svg {
+    fill: var(--primary-color-100);
+  }
 }
 
 .icon {
@@ -15,20 +20,13 @@
 .label {
   text-transform: uppercase;
   font-size: var(--spacing-5);
-  color: var(--header-text-color);
+  color: var(--primary-color-200);
   text-align: center;
 }
 
 .metric {
   font-size: var(--spacing-9);
   font-weight: 700;
-}
-
-.secondaryLabel {
-  text-transform: uppercase;
-  font-size: var(--spacing-5);
-  color: var(--text-color-secondary);
-  text-align: center;
 }
 
 .percentage {

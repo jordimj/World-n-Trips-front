@@ -1,5 +1,5 @@
-import { LinearProgress, Stack, Typography } from '@mui/material';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import { LinearProgress, Stack, Typography } from '@mui/material';
 import { percentageFormatter } from '@/utils/number';
 import styles from './VisitedCountriesMetric.module.css';
 
@@ -8,7 +8,7 @@ interface Props {
   percentage: number;
 }
 
-function VisitedCountriesMetric(props: Props) {
+export default function VisitedCountriesMetric(props: Props) {
   const { visitedCountries, percentage } = props;
 
   return (
@@ -18,7 +18,7 @@ function VisitedCountriesMetric(props: Props) {
         <Stack alignItems="center">
           <Typography className={styles.label}>Visited countries</Typography>
           <Typography className={styles.metric}>{visitedCountries}</Typography>
-          <Typography className={styles.secondaryLabel}>out of 196</Typography>
+          <Typography className={styles.label}>out of 196</Typography>
         </Stack>
       </Stack>
       <Stack gap={1} className={styles.percentage}>
@@ -30,5 +30,3 @@ function VisitedCountriesMetric(props: Props) {
     </Stack>
   );
 }
-
-export default VisitedCountriesMetric;

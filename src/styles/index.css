@@ -7,10 +7,12 @@
   --primary-color: #21b6b7;
   --secondary-color: #2e2c33;
   --navbar-color: #252329;
+  --accent-color: #2563eb;
 
   --border-color: lightgray;
   --border: 0.5px solid var(--border-color);
   --border-radius: 8px;
+  --nested-border-radius: 6px;
   --header-background-color: var(--primary-color-800);
   --header-text-color: white;
   --scrollbar-color: #17474a;

@@ -1,7 +1,7 @@
 .day {
   min-width: 20px;
-  width: 29px;
-  max-width: 30px;
+  width: 28px;
+  max-width: 28px;
   aspect-ratio: 1;
   background-color: lightgray;
   border: var(--border);

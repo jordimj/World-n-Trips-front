@@ -15,7 +15,7 @@ import styles from './Metric.module.css';
 interface Props {
   icon: ReactNode;
   label?: string;
-  metric: string;
+  metric: string | number;
   secondaryLabel?: string;
   secondaryMetric?: string;
   children?: ReactNode;
@@ -32,7 +32,7 @@ function Metric(props: Props) {
       gap={1}
       className={styles.root}
       sx={{
-        width: secondaryMetric ? '500px' : '215px',
+        width: secondaryMetric ? '500px' : '240px',
       }}
     >
       <Stack alignItems="center" flex={1}>
@@ -100,19 +100,19 @@ Metric.Hitchhikes = (props: { metric: number }) => {
   );
 };
 
-Metric.Nights = (props: { metric: string }) => {
+Metric.Nights = (props: { metric: number }) => {
   const { metric } = props;
 
   return (
     <Metric
       icon={<NightShelterIcon fontSize="inherit" />}
-      label="Nights spent"
-      metric={numberFormatter(parseInt(metric))}
+      label="Nights away"
+      metric={numberFormatter(metric)}
     />
   );
 };
 
-Metric.Trips = (props: { metric: string }) => {
+Metric.Trips = (props: { metric: number }) => {
   const { metric } = props;
 
   return <Metric icon={<LocalAirportIcon fontSize="inherit" />} label="Trips" metric={metric} />;

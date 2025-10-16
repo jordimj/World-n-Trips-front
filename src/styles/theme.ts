@@ -190,6 +190,19 @@ const theme = createTheme({
         },
       },
     },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: {
+          height: 'var(--spacing-2)',
+          borderRadius: 'var(--border-radius)',
+          backgroundColor: 'var(--primary-color-200)',
+        },
+        bar: {
+          borderRadius: 'var(--border-radius)',
+          backgroundColor: 'var(--accent-color)',
+        },
+      },
+    },
   },
   typography: {
     fontFamily: ['Poppins', 'sans-serif'].join(','),

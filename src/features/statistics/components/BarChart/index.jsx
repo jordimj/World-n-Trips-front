@@ -1,14 +1,7 @@
 import { useRef, useEffect } from 'react';
-import { Stack, Typography } from '@mui/material';
 import Chart from 'chart.js/auto';
 
-const PER_YEAR_CHART = 'year';
 const PER_MONTH_CHART = 'month';
-
-const TITLES = {
-  [PER_YEAR_CHART]: 'Number of days traveling per year',
-  [PER_MONTH_CHART]: 'Number of days traveling per month',
-};
 
 const DEFAULT_ALL_MONTHS = {
   January: 0,
@@ -28,6 +21,9 @@ const DEFAULT_ALL_MONTHS = {
 function getChartOptions() {
   return {
     aspectRatio: 4,
+    layout: {
+      padding: 8,
+    },
     plugins: {
       legend: {
         display: false,
@@ -45,13 +41,8 @@ function getChartOptions() {
           weight: 900,
         },
         callbacks: {
-          label: (item) => `${item.formattedValue} days`,
+          label: (item) => ` ${item.formattedValue} days`,
         },
-      },
-    },
-    layout: {
-      padding: {
-        bottom: 30,
       },
     },
   };
@@ -109,12 +100,7 @@ function BarChart({ data, kind, isAllTime = true }) {
     return () => lineChart.destroy();
   }, [data]);
 
-  return (
-    <Stack>
-      <Typography variant="h2">{TITLES[kind]}</Typography>
-      <canvas ref={chartRef} />
-    </Stack>
-  );
+  return <canvas ref={chartRef} />;
 }
 
 export default BarChart;
