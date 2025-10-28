@@ -58,7 +58,7 @@ function Countries() {
   return (
     <Fragment>
       <Typography variant="h1">Countries I've been to</Typography>
-      <Stack direction="row" gap={3} sx={{ m: 5 }}>
+      <Stack direction="row" gap={2} sx={{ m: 2 }}>
         <Select.Multiple label="Continent" value={selectedContinents} onChange={onContinentChange}>
           {(Object.keys(DATABASE_REGIONS) as Array<Continent>).map((continent) => (
             <MenuItem key={continent} value={continent}>

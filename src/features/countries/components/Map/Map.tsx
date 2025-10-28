@@ -2,15 +2,12 @@ import { Chart, ReactGoogleChartEvent } from 'react-google-charts';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { WORLD_MAP } from '@/constants';
 import COUNTRIES from '@/constants/countryCodes';
+import { isCountryKey } from '@/template/components/CountryFlag';
 import styles from './Map.module.css';
-
-function isCountryKey(value: string | number): value is keyof typeof COUNTRIES {
-  return value in COUNTRIES;
-}
 
 interface Props {
   data: Array<Array<string | number>>;
-  region: string | null;
+  region?: string;
 }
 
 function Map(props: Props) {
@@ -54,21 +51,14 @@ function Map(props: Props) {
       eventName: 'error',
       callback: ({ chartWrapper }) => {
         // When storage Event is caught, should wait a second and redraw the chart
-        window.addEventListener('storage', () =>
-          setTimeout(() => chartWrapper?.draw(), 1000)
-        );
+        window.addEventListener('storage', () => setTimeout(() => chartWrapper?.draw(), 1000));
       },
     },
   ];
 
   return (
     <div className={styles.container}>
-      <Chart
-        chartType="GeoChart"
-        chartEvents={chartEvents}
-        data={data}
-        options={options}
-      />
+      <Chart chartType="GeoChart" chartEvents={chartEvents} data={data} options={options} />
     </div>
   );
 }

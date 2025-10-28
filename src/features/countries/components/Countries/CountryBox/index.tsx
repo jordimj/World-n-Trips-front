@@ -11,8 +11,8 @@ const CountryBox = ({ name, onClick }: Props) => (
   <Stack className={styles.countryBox} onClick={onClick}>
     <Typography
       sx={{
-        fontWeight: 700,
-        fontSize: 22,
+        fontWeight: 500,
+        fontSize: 'var(--spacing-4)',
         letterSpacing: 'var(--uppercase-letter-spacing)',
         textTransform: 'uppercase',
       }}

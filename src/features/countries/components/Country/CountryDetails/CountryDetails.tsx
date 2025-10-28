@@ -17,7 +17,7 @@ const CountryDetails = (props: Props) => {
   const { info, trips, isLoading = false } = props;
 
   return (
-    <Box className={styles.root}>
+    <Stack className={styles.root}>
       <Box className={styles.details}>
         {isLoading ? (
           <Skeleton variant="rounded" height={340} />
@@ -37,28 +37,20 @@ const CountryDetails = (props: Props) => {
           value={numberFormatter(info?.population)}
           isLoading={isLoading}
         />
-        <DetailRow
-          label="Government form"
-          value={info?.governmentForm}
-          isLoading={isLoading}
-        />
-        <DetailRow
-          label="Independent from"
-          value={info?.independenceYear}
-          isLoading={isLoading}
-        />
+        <DetailRow label="Government form" value={info?.governmentForm} isLoading={isLoading} />
+        <DetailRow label="Independent from" value={info?.independenceYear} isLoading={isLoading} />
       </Box>
       <Stack
         direction="row"
         justifyContent="center"
         flexWrap="wrap"
-        sx={{ columnGap: 2, mt: 1 }}
+        sx={{ columnGap: 2, rowGap: 2 }}
       >
         {trips?.sort().map((trip) => (
           <Chip key={trip} label={buildTripName(trip)} />
         ))}
       </Stack>
-    </Box>
+    </Stack>
   );
 };
 

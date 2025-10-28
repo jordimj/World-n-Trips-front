@@ -1,13 +1,18 @@
 .flag {
-  position: relative;
+  height: 32px;
   aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: #d1d5db;
+  background-image: var(--flag-url, none), linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+  background-size: cover;
+  background-position: center;
 }
 
-.flag:before {
-  content: '';
-  display: block;
-  height: 32px;
-  width: 32px;
-  background-color: lightgrey;
-  border-radius: 50%;
+.flag[alt] {
+  font-size: 0;
+  color: transparent;
+}
+
+.xl {
+  height: 75px;
 }

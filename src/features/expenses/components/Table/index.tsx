@@ -158,7 +158,7 @@ function ExpensesTable(props: Props) {
                       )}
                     </TableCell>
                     <TableCell>
-                      <CountryFlag name={country} height={32} />
+                      <CountryFlag name={country} />
                     </TableCell>
                     <TableCell>
                       <Chip label={trip} />

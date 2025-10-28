@@ -38,12 +38,7 @@ function NeighboringCountries(props: Props) {
           <Typography>{`${info.name} has none`}</Typography>
         ) : (
           info?.borders.map(([countryCode, countryName, visited]) => (
-            <Tooltip
-              key={countryName}
-              title={countryName}
-              arrow
-              TransitionComponent={Zoom}
-            >
+            <Tooltip key={countryName} title={countryName} arrow TransitionComponent={Zoom}>
               <NavLink
                 key={countryCode}
                 to={`/countries/${countryCode}/`}
@@ -51,7 +46,7 @@ function NeighboringCountries(props: Props) {
                   .filter(Boolean)
                   .join(' ')}
               >
-                <CountryFlag name={countryName} />
+                <CountryFlag name={countryName} isXL />
               </NavLink>
             </Tooltip>
           ))

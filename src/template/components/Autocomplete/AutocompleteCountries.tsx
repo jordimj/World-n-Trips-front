@@ -1,8 +1,8 @@
-import { Checkbox, Stack, Typography } from '@mui/material';
 import {
   CheckBox as CheckBoxIcon,
   CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
 } from '@mui/icons-material';
+import { Checkbox, Stack, Typography } from '@mui/material';
 import useCountries from '@/hooks/useCountries';
 import CountryFlag from '@/template/components/CountryFlag';
 import Autocomplete, { Options } from './Autocomplete';
@@ -29,7 +29,7 @@ function AutocompleteCountries(props: Props) {
             sx={{ m: 0 }}
             checked={selected}
           />
-          <CountryFlag name={option.name} height={32} />
+          <CountryFlag name={option.name} />
           <Typography sx={{ ml: 1 }}>{option.name}</Typography>
         </Stack>
       )}
@@ -61,7 +61,7 @@ function AutocompleteMultipleCountries(props: MultipleProps) {
             sx={{ m: 0 }}
             checked={selected}
           />
-          <CountryFlag name={option.name} height={32} />
+          <CountryFlag name={option.name} />
           <Typography sx={{ ml: 1 }}>{option.name}</Typography>
         </Stack>
       )}

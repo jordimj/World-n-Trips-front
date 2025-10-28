@@ -34,17 +34,12 @@ function EphemeridesList(props: EphemeridesListProps) {
                   sx={{ fontSize: 14, fontWeight: 700, ml: 'auto' }}
                   onClick={toggleShowTimeAgo}
                 >
-                  {showTimeAgo
-                    ? getYearsAgo(ephemeris.date)
-                    : formatFullDate(ephemeris.date)}
+                  {showTimeAgo ? getYearsAgo(ephemeris.date) : formatFullDate(ephemeris.date)}
                 </Typography>
                 {ephemeris.country ? (
                   <Stack direction="row" alignItems="center">
-                    <NavLink
-                      to={`/countries/${ephemeris.country.alpha3code}/`}
-                      onClick={onClose}
-                    >
-                      <CountryFlag name={ephemeris.country.name} height={75} />
+                    <NavLink to={`/countries/${ephemeris.country.alpha3code}/`} onClick={onClose}>
+                      <CountryFlag name={ephemeris.country.name} isXL />
                     </NavLink>
                     <Stack sx={{ ml: 3 }}>
                       <Typography>
