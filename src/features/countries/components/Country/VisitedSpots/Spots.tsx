@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import Chip from '@/template/components/Chip/Chip';
 import styles from './Spots.module.css';
 
 interface Props {
@@ -10,9 +11,7 @@ function Spots(props: Props) {
   return (
     <Box className={styles.visitedSpots}>
       {spots.map((spot) => (
-        <Box key={spot} className={styles.item}>
-          {spot}
-        </Box>
+        <Chip key={spot} variant="city" label={spot} className={styles.item} />
       ))}
     </Box>
   );

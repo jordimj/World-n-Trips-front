@@ -3,6 +3,7 @@
   background-color: #f3f4f6; /* bg-gray-100 */
   border-radius: var(--border-radius);
   padding: var(--spacing-1);
+  width: fit-content;
 }
 
 .button {

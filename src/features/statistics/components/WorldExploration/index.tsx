@@ -45,8 +45,8 @@ export default function WorldExploration(props: Props) {
         />
       </Stack>
       <Grid container spacing={3}>
-        {groupedRegions.map((region) => (
-          <Grid item xs={12} md={6} lg={groupedBy === 'continent' ? 4 : 3}>
+        {groupedRegions.map((region, idx) => (
+          <Grid item key={idx} xs={12} md={6} lg={groupedBy === 'continent' ? 4 : 3}>
             <WorldExplorationMetric {...region} />
           </Grid>
         ))}

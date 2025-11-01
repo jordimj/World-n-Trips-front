@@ -27,17 +27,16 @@ export default function TravelStats() {
       <Typography variant="h1">Travel statistics</Typography>
       <YearSelect year={year} onYearChange={onYearChange} />
       {countries && metrics && (
-        <Stack className={styles.grid}>
-          <VisitedCountriesMetric
-            visitedCountries={countries.all.visited}
-            percentage={countries.all.percentage}
-          />
-          <Metric.Days metric={metrics.days} />
-          <Metric.Nights metric={metrics.nights} />
-          <Metric.Trips metric={metrics.trips} />
-          <Metric.Walked metric={metrics.kilometersWalked} />
-          <Metric.Expenses metric={metrics.expenses} />
-          <Metric.Hitchhikes metric={metrics.hitchhikes} />
+        <Stack direction="row" gap={3} flexWrap="wrap" sx={{ placeSelf: 'center' }}>
+          <VisitedCountriesMetric visitedCountries={countries.all.visited} />
+          <Stack className={styles.metricsGrid}>
+            <Metric.Days metric={metrics.days} />
+            <Metric.Nights metric={metrics.nights} />
+            <Metric.Trips metric={metrics.trips} />
+            <Metric.Walked metric={metrics.kilometersWalked} />
+            <Metric.Expenses metric={metrics.expenses} />
+            <Metric.Hitchhikes metric={metrics.hitchhikes} />
+          </Stack>
         </Stack>
       )}
       {isAllTime && countries && <WorldExploration countries={countries} />}

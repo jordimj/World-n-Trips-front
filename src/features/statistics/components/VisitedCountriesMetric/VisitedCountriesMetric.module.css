@@ -1,5 +1,4 @@
 .root {
-  min-width: 400px;
   min-height: 400px;
   background: linear-gradient(135deg, rgba(103, 99, 119, 1) 0%, rgba(67, 64, 74, 1) 100%);
   color: white;

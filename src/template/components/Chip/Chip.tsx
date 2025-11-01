@@ -4,17 +4,25 @@ import { capitalize, Chip as MuiChip, Stack, Typography } from '@mui/material';
 import EXPENSE_CATEGORIES from '@/constants/expenseCategoryEmojis';
 
 interface Props {
-  variant?: 'trip' | 'worktrip' | 'telework';
+  variant?: 'trip' | 'worktrip' | 'telework' | 'city' | 'category';
   label?: string;
   className?: string;
-  isCategory?: boolean;
 }
 
 function Chip(props: Props) {
-  const { variant = 'trip', label, className, isCategory = false } = props;
+  const { variant = 'trip', label, className } = props;
   const isJournalChip = variant === 'worktrip' || variant === 'telework';
 
-  if (isCategory) {
+  if (variant === 'city') {
+    return (
+      <MuiChip
+        label={label}
+        sx={{ width: 'fit-content', backgroundColor: 'var(--background-color-dark)' }}
+      />
+    );
+  }
+
+  if (variant === 'category') {
     const { background, color, emoji } =
       EXPENSE_CATEGORIES[label as keyof typeof EXPENSE_CATEGORIES];
 
@@ -28,7 +36,6 @@ function Chip(props: Props) {
             </Typography>
           </Stack>
         }
-        size={'medium'}
         sx={{
           width: 'fit-content',
           backgroundColor: background,

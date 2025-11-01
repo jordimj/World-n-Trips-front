@@ -136,7 +136,7 @@ function ExpensesTable(props: Props) {
                       <Typography>{formatFullDate(day)}</Typography>
                     </TableCell>
                     <TableCell>
-                      <Chip label={category} isCategory />
+                      <Chip label={category} variant="category" />
                     </TableCell>
                     <TableCell>
                       <Typography>{subcategory}</Typography>

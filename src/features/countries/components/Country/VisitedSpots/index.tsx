@@ -1,7 +1,7 @@
-import { SyntheticEvent, useState } from 'react';
-import Box from '@mui/material/Box';
+import { useState } from 'react';
+import { Stack } from '@mui/material';
 import { StatesVisited } from '@/features/countries/model/country.schema';
-import Tabs from '@/template/components/Tabs';
+import ToggleButton from '@/template/components/ToggleButton';
 import Spots from './Spots';
 import styles from './VisitedSpots.module.css';
 
@@ -13,27 +13,26 @@ interface Props {
 export default function VisitedSpots(props: Props) {
   const { cities, states } = props;
 
-  const [tab, setTab] = useState(0);
-  const handleChange = (e: SyntheticEvent<Element, Event>, newValue: number) =>
-    setTab(newValue);
+  const [active, setActive] = useState<'cities' | 'states'>('cities');
 
   return (
-    <Box className={styles.root}>
-      <Tabs
-        value={tab}
-        onChange={handleChange}
-        centered
-        ariaLabel="Tabs with visisted cities & states"
-      >
-        <Tabs.Item label="Visited cities" className={styles.tab} />
-        <Tabs.Item label="Visited states" className={styles.tab} />
-      </Tabs>
-      <Tabs.Panel value={tab} index={0}>
-        <Spots spots={cities} />
-      </Tabs.Panel>
-      <Tabs.Panel value={tab} index={1}>
-        <Spots spots={states.map((state) => state.name)} />
-      </Tabs.Panel>
-    </Box>
+    <Stack className={styles.root} gap={4}>
+      <ToggleButton
+        active={active}
+        options={[
+          {
+            id: 'cities',
+            label: `Visited cities (${cities.length})`,
+            onClick: () => setActive('cities'),
+          },
+          {
+            id: 'states',
+            label: `Visited states (${states.length})`,
+            onClick: () => setActive('states'),
+          },
+        ]}
+      />
+      <Spots spots={active === 'cities' ? cities : states.map((state) => state.name)} />
+    </Stack>
   );
 }

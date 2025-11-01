@@ -5,11 +5,12 @@ import styles from './VisitedCountriesMetric.module.css';
 
 interface Props {
   visitedCountries: number;
-  percentage: number;
 }
 
 export default function VisitedCountriesMetric(props: Props) {
-  const { visitedCountries, percentage } = props;
+  const { visitedCountries } = props;
+
+  const percentage = visitedCountries / 196;
 
   return (
     <Stack justifyContent="center" gap={1} className={styles.root}>

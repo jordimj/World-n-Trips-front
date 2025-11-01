@@ -2,11 +2,9 @@
   background-color: var(--background-color-light);
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
-  padding: var(--spacing-3);
-  margin-bottom: var(--spacing-7);
-}
+  padding: var(--spacing-4);
 
-.tab {
-  width: 25%;
-  font-size: 16px;
+  & > div:first-child {
+    margin-left: auto;
+  }
 }
