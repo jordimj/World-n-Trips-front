@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getStats } from '@/api';
 import { TravelStatsSchema } from '../types';
 
-export default function useStatistics(year: string | null) {
+export default function useStatistics(year: string | null = null) {
   return useQuery({
     queryKey: ['statistics', year],
     queryFn: async () => {

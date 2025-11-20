@@ -5,12 +5,13 @@
   align-items: center;
   width: 80px;
   padding: var(--spacing-2);
-  transition: width 0.5s ease-in-out;
+  gap: var(--spacing-2);
+  transition: width 0.3s ease-out;
 
   position: fixed;
   top: calc(50% - 214px);
   left: var(--spacing-2);
-  z-index: 9;
+  z-index: 1;
 
   background-color: var(--background-color-light);
   border-radius: var(--border-radius);
@@ -23,16 +24,16 @@
 
 .navigationItems span {
   white-space: nowrap;
-  animation: fade-in 0s forwards;
+  animation: fade-in 0.2s forwards;
 }
 
 .navigationItems:hover {
   width: 220px;
-  transition: width 0.25s ease-in-out;
+  transition: width 0.2s ease-out;
 }
 
 .navigationItems:hover span {
-  animation: fade-out 2s forwards;
+  animation: fade-out 0.3s forwards;
 }
 
 @keyframes fade-in {

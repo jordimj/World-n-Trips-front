@@ -2,6 +2,7 @@ import { Chart, ReactGoogleChartEvent } from 'react-google-charts';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { WORLD_MAP } from '@/constants';
 import COUNTRIES from '@/constants/countryCodes';
+import Sidebar from '@/features/home/components/Sidebar';
 import { isCountryKey } from '@/template/components/CountryFlag';
 import styles from './Map.module.css';
 
@@ -15,21 +16,21 @@ function Map(props: Props) {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const isHome = location.pathname === '/';
 
-  const options =
-    location.pathname === '/'
-      ? {
-          region: region !== WORLD_MAP ? region : null,
-          colorAxis: { colors: ['#16888b'] },
-          defaultColor: '#16888b',
-          tooltip: { trigger: 'none' },
-        }
-      : {
-          region,
-          resolution: 'provinces',
-          enableRegionInteractivity: false,
-          defaultColor: '#16888b',
-        };
+  const options = isHome
+    ? {
+        region: region !== WORLD_MAP ? region : null,
+        colorAxis: { colors: ['#16888b'] },
+        defaultColor: '#16888b',
+        tooltip: { trigger: 'none' },
+      }
+    : {
+        region,
+        resolution: 'provinces',
+        enableRegionInteractivity: false,
+        defaultColor: '#16888b',
+      };
 
   const chartEvents: ReactGoogleChartEvent[] = [
     {
@@ -44,7 +45,7 @@ function Map(props: Props) {
 
         if (!isCountryKey(countryName)) return;
 
-        navigate(`/countries/${COUNTRIES[countryName]}/`);
+        navigate(`/countries/${COUNTRIES[countryName]}`);
       },
     },
     {
@@ -59,6 +60,7 @@ function Map(props: Props) {
   return (
     <div className={styles.container}>
       <Chart chartType="GeoChart" chartEvents={chartEvents} data={data} options={options} />
+      {isHome && <Sidebar />}
     </div>
   );
 }

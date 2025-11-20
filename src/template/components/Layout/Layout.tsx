@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import useFullWidth from '@/hooks/useFullWidth';
 import NavigationItems from '../Navigation/NavigationItems/NavigationItems';
@@ -12,13 +13,18 @@ interface Props {
 const Layout = ({ children }: Props) => {
   const { fullWidth } = useFullWidth();
 
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
   return (
     <>
       <NavigationItems />
       <Box
-        className={styles.container}
+        className={`${styles.container} ${isHome ? styles.home : ''}`}
         sx={{
-          width: fullWidth ? '90%' : 'min(1600px, 90vw)',
+          width: fullWidth
+            ? 'calc(100% - var(--spacing-4) * 2)'
+            : `min(${isHome ? 2000 : 1600}px, calc(100% - var(--spacing-4) * 2))`,
           transition: 'ease-in-out 1s',
         }}
       >

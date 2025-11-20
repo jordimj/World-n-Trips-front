@@ -3,6 +3,7 @@
 }
 
 .main {
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 70px - var(--spacing-5));
   padding: var(--spacing-5) 0;
+  padding-top: 70px;
 }

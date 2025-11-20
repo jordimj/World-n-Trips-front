@@ -9,31 +9,19 @@ import styles from './NavigationItems.module.css';
 const navigationItems = () => (
   <nav>
     <ul className={styles.navigationItems}>
-      <NavigationItem
-        icon={<PublicIcon fontSize="large" />}
-        label="World map"
-        link="/"
-      ></NavigationItem>
-      <NavigationItem
-        icon={<FlagIcon fontSize="large" />}
-        label="Countries"
-        link="/countries"
-      ></NavigationItem>
+      <NavigationItem icon={<PublicIcon fontSize="large" />} label="World map" link="/" />
+      <NavigationItem icon={<FlagIcon fontSize="large" />} label="Countries" link="/countries" />
       <NavigationItem
         icon={<TravelExploreIcon fontSize="large" />}
         label="Travel stats"
         link="/statistics"
-      ></NavigationItem>
+      />
       <NavigationItem
         icon={<EditNoteIcon fontSize="large" />}
         label="Trip journals"
         link="/trips"
-      ></NavigationItem>
-      <NavigationItem
-        icon={<EuroIcon fontSize="large" />}
-        label="Expenses"
-        link="/expenses"
-      ></NavigationItem>
+      />
+      <NavigationItem icon={<EuroIcon fontSize="large" />} label="Expenses" link="/expenses" />
     </ul>
   </nav>
 );

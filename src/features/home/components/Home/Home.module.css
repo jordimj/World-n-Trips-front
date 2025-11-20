@@ -1,0 +1,9 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  margin-top: var(--spacing-6);
+  padding: var(--spacing-4);
+  gap: var(--spacing-4);
+}

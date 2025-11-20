@@ -1,8 +1,8 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import countriesReducer from '@/features/countries/slice';
+import homeReducer from '@/features/home/slice';
 
 const rootReducer = combineReducers({
-  countries: countriesReducer,
+  home: homeReducer,
 });
 
 export const store = configureStore({

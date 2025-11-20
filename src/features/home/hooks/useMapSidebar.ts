@@ -8,7 +8,7 @@ function useMapSidebar() {
   const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch();
 
-  const worldMapConf = useSelector((state: RootState) => state.countries.worldMapConf);
+  const worldMapConf = useSelector((state: RootState) => state.home.worldMapConf);
 
   const toggleSidebar = () => setIsVisible((isVisible) => !isVisible);
   const toggleColoring = () => dispatch(actions.toggleGradualColoring());

@@ -33,11 +33,7 @@ export default function MapSidebar() {
       >
         <ViewSidebarRoundedIcon fontSize="large" />
       </IconButton>
-      <Box
-        className={[styles.sidebar, isVisible && styles.visible]
-          .filter(Boolean)
-          .join(' ')}
-      >
+      <Box className={[styles.sidebar, isVisible && styles.visible].filter(Boolean).join(' ')}>
         <Typography variant="h3">Map filters</Typography>
         <Select
           label="Continent"
@@ -63,9 +59,8 @@ export default function MapSidebar() {
           </MenuItem>
           {selectedContinent !== WORLD_MAP &&
             (
-              CONTINENTS_AND_REGIONS.find(
-                (continent) => continent.code === selectedContinent
-              )?.regions ?? []
+              CONTINENTS_AND_REGIONS.find((continent) => continent.code === selectedContinent)
+                ?.regions ?? []
             ).map((region) => (
               <MenuItem key={region.name} value={region.code}>
                 {region.name}
@@ -73,13 +68,8 @@ export default function MapSidebar() {
             ))}
         </Select>
         <FormControlLabel
-          control={
-            <Switch
-              color="default"
-              checked={graduallyColored}
-              onChange={toggleColoring}
-            />
-          }
+          control={<Switch color="default" checked={graduallyColored} onChange={toggleColoring} />}
+          sx={{ ml: 0 }}
           label="Color the map according to the number of places I've been to"
         />
         <IconButton

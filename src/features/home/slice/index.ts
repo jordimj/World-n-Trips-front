@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ALL_REGIONS, WORLD_MAP } from '@/constants';
 
-export type CountriesState = {
+export type HomeState = {
   worldMapConf: {
     graduallyColored: boolean;
     selectedContinent: string;
@@ -9,7 +9,7 @@ export type CountriesState = {
   };
 };
 
-const initialState: CountriesState = {
+const initialState: HomeState = {
   worldMapConf: {
     graduallyColored: false,
     selectedContinent: WORLD_MAP,
@@ -17,8 +17,8 @@ const initialState: CountriesState = {
   },
 };
 
-const countriesSlice = createSlice({
-  name: 'countries',
+const homeSlice = createSlice({
+  name: 'home',
   initialState,
   reducers: {
     toggleGradualColoring(state) {
@@ -34,7 +34,6 @@ const countriesSlice = createSlice({
   },
 });
 
-export const { toggleGradualColoring, setSelectedContinent, setSelectedRegion } =
-  countriesSlice.actions;
+export const { toggleGradualColoring, setSelectedContinent, setSelectedRegion } = homeSlice.actions;
 
-export default countriesSlice.reducer;
+export default homeSlice.reducer;
