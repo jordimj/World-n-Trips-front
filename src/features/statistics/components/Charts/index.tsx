@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 import { Travels } from '@/features/statistics/types';
 import ToggleButton from '@/template/components/ToggleButton';
@@ -8,14 +8,14 @@ import styles from './Charts.module.css';
 
 interface Props {
   travels: Travels;
-  isAllTime: boolean;
   year: string | null;
 }
 
 export default function Charts(props: Props) {
-  const { travels, isAllTime, year } = props;
+  const { travels, year } = props;
 
   const [visibleChart, setVisibleChart] = useState<'year' | 'month' | 'timeline'>('year');
+  const isAllTime = year === null;
 
   return (
     <Box className={styles.root}>

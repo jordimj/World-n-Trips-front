@@ -40,7 +40,7 @@ export default function TravelStats() {
         </Stack>
       )}
       {isAllTime && countries && <WorldExploration countries={countries} />}
-      <Charts travels={travels} year={year} isAllTime={isAllTime} />
+      <Charts travels={travels} year={year} />
       {top5 && <Top5 top5={top5} />}
     </Stack>
   );

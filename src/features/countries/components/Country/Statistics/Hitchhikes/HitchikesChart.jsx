@@ -59,11 +59,6 @@ export default function HitchhikesChart({ stats, chartKind }) {
             },
           },
         },
-        layout: {
-          padding: {
-            bottom: 30,
-          },
-        },
       },
     });
 
