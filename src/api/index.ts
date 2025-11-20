@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { InserterBody } from '@/features/inserter/hooks/useDataInsertion';
-import { KindOfData } from '@/features/inserter/types';
+import { ImportKind } from '@/features/inserter/types';
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_ROOT_URL,
 });
 
 export async function getVisitedCountries() {
-  return (await instance.get('/countries/visited/')).data;
+  return (await instance.get('/countries/visited')).data;
 }
 
 export async function getStats(year: string | null) {
@@ -15,7 +15,11 @@ export async function getStats(year: string | null) {
 }
 
 export async function getCountryStats(countryName: string) {
-  return (await instance.get(`/countries/statistics/${countryName}/`)).data;
+  return (await instance.get(`/countries/statistics/${countryName}`)).data;
+}
+
+export async function setCountryVisited(countryCode: string, visited: boolean) {
+  return (await instance.put(`/countries/${countryCode}/visited`, { visited })).data;
 }
 
 export async function getCountries(onlyVisited: boolean = false) {
@@ -23,14 +27,14 @@ export async function getCountries(onlyVisited: boolean = false) {
 }
 
 export async function getTrips() {
-  return (await instance.get('/trips/')).data;
+  return (await instance.get('/trips')).data;
 }
 
 export async function getJournals(tripId: number) {
   return (await instance.get(`/journals/trip/${tripId}`)).data;
 }
 
-export async function saveNewData(dataKind: KindOfData, body: InserterBody) {
+export async function saveNewData(dataKind: ImportKind, body: InserterBody) {
   return (await instance.post(`/${dataKind}s/create`, body)).data;
 }
 
@@ -41,7 +45,7 @@ export async function getAvailableDates() {
 }
 
 export async function getEphemerides() {
-  return (await instance.get('/ephemeris/')).data;
+  return (await instance.get('/ephemeris')).data;
 }
 
 // todo: give it some love
@@ -54,7 +58,7 @@ export async function getCurrencies() {
 }
 
 export async function getCategories() {
-  return (await instance.get('/categories/')).data;
+  return (await instance.get('/categories')).data;
 }
 
 export async function search(keyword: string) {

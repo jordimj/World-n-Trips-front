@@ -145,12 +145,14 @@ function ExpensesTable(props: Props) {
                       <Typography>{details}</Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography>{euroFormatter(Number(valueEur))}</Typography>
+                      <Typography sx={{ fontWeight: 500 }}>
+                        {euroFormatter(Number(valueEur))}
+                      </Typography>
                       {value && (
                         <Typography
                           sx={{
                             fontSize: '12px!important',
-                            color: 'var(--primary-color-700)!important',
+                            color: 'var(--primary-color-600)!important',
                           }}
                         >
                           {value ? `${currency} ${value}` : '-'}

@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
-import PublishIcon from '@mui/icons-material/Publish';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Dialog, DialogTitle, IconButton } from '@mui/material';
 import Stepper from '../components/Stepper';
 import { InserterProvider } from '../context/InserterProvider';
@@ -29,11 +29,7 @@ function InserterDialog(props: InserterDialogProps) {
     >
       <DialogTitle sx={{ display: 'flex' }}>
         Add new travel data
-        <IconButton
-          aria-label="close-inserter-dialog"
-          onClick={onClose}
-          sx={{ ml: 'auto' }}
-        >
+        <IconButton aria-label="close-inserter-dialog" onClick={onClose} sx={{ ml: 'auto' }}>
           <CloseIcon />
         </IconButton>
       </DialogTitle>
@@ -45,19 +41,21 @@ function InserterDialog(props: InserterDialogProps) {
 }
 
 export default function Inserter() {
-  const [open, setOpen] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const open = searchParams.get('dialog') === 'inserter';
 
-  const handleClickOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClickOpen = () => setSearchParams({ dialog: 'inserter' });
+
+  const handleClose = () => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete('dialog');
+    setSearchParams(newParams);
+  };
 
   return (
     <>
-      <IconButton
-        color="secondary"
-        aria-label="open inserter dialog"
-        onClick={handleClickOpen}
-      >
-        <PublishIcon />
+      <IconButton color="secondary" aria-label="open inserter dialog" onClick={handleClickOpen}>
+        <FileUploadIcon />
       </IconButton>
       <InserterDialog open={open} onClose={handleClose} />
     </>
