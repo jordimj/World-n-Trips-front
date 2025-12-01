@@ -1,0 +1,22 @@
+.dialog {
+  position: relative;
+  z-index: 999;
+  width: 100%;
+  max-width: 750px;
+  height: 56px;
+
+  transition: height 0.1s ease-out;
+}
+
+.dialog > div:first-child:focus-within {
+  border: transparent;
+}
+
+.open {
+  height: 687px;
+}
+
+.open > div:first-child {
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
