@@ -44,7 +44,7 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
         flexWrap="wrap"
         sx={{ width: '100%' }}
       >
-        <Stack sx={{ flex: 1, minWidth: '500px' }}>
+        <Stack sx={{ flex: 1, minWidth: 'var(--spacing-14)' }}>
           <DetailRow
             label="Average kilometers per traveled day"
             value={numberFormatter(totalKilometers / totalNights, DATA_APPENDICES.KM)}
@@ -58,7 +58,7 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
             value={numberFormatter(totalCars / daysOnTheRoad, DATA_APPENDICES.RIDES)}
           />
         </Stack>
-        <Stack sx={{ flex: 1, minWidth: '300px' }}>
+        <Stack sx={{ flex: 1, minWidth: 'var(--spacing-14)' }}>
           <DetailRow
             label="Longest distance per ride"
             value={numberFormatter(distances.longest, DATA_APPENDICES.KM)}
@@ -73,7 +73,7 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
           />
         </Stack>
         {minutesWaiting && (
-          <Stack sx={{ flex: 1, minWidth: '300px' }}>
+          <Stack sx={{ flex: 1, minWidth: 'var(--spacing-14)' }}>
             <DetailRow
               label="Longest wait per ride"
               value={numberFormatter(minutesWaiting.waits.longest, DATA_APPENDICES.MINS)}

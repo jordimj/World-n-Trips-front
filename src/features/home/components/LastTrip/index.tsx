@@ -33,21 +33,26 @@ export default function LastTrip() {
   return (
     <Stack className={styles.root}>
       <Typography className={styles.label}>Last trip</Typography>
-      <Stack gap={2}>
+      <Stack gap={3}>
         <img src={lastTrip.picture} />
-        <Stack sx={{ color: 'var(--primary-color-700)' }}>
-          <Stack direction="row" justifyContent="space-between">
-            <Typography sx={{ color: 'var(--primary-color-950)' }}>{lastTrip.name}</Typography>
-            <Typography sx={{ fontSize: 14 }}>
+        <Stack gap={1}>
+          <Stack direction="row" justifyContent="space-between" alignItems="center">
+            <Typography sx={{ fontSize: 24, color: 'white' }}>{lastTrip.name}</Typography>
+            <Typography sx={{ fontSize: 14, color: 'var(--primary-color-200)' }}>
               {formatTripDates(lastTrip.arrivalDate.date, lastTrip.departureDate.date)}
             </Typography>
           </Stack>
-          {lastTrip.summary && <Typography sx={{ fontSize: 12 }}>{lastTrip.summary}</Typography>}
+          {lastTrip.summary && (
+            <Typography sx={{ fontSize: 14, color: 'var(--primary-color-200)' }}>
+              {lastTrip.summary}
+            </Typography>
+          )}
         </Stack>
         <Button
+          variant="contained"
           endIcon={<ArrowForward />}
           onClick={() => navigate(`/journals/${lastTrip.id}`)}
-          sx={{ fontSize: 14, width: 'fit-content', px: 1, ml: 'auto' }}
+          sx={{ width: 'fit-content', px: 2, ml: 'auto', mt: 1 }}
         >
           View trip details
         </Button>

@@ -60,7 +60,7 @@ export default function NightsChart({ data: count }) {
   }, [count]);
 
   return (
-    <Box sx={{ width: '50%', height: '80px' }}>
+    <Box sx={{ width: '50%', height: 'var(--spacing-9)' }}>
       <canvas ref={chartRef} />
     </Box>
   );

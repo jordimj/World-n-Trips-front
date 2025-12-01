@@ -1,6 +1,7 @@
+import { SxProps } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import useJournalAvailableDates from '@/features/inserter/hooks/useJournalAvailableDates';
 
 interface DatePickerProps {
@@ -9,16 +10,11 @@ interface DatePickerProps {
   handleChange: (date: Date | null) => void;
   loading?: boolean;
   shouldDisableDate?: (day: Date) => boolean;
+  sx?: SxProps;
 }
 
 function DatePicker(props: DatePickerProps) {
-  const {
-    date,
-    handleChange,
-    label,
-    loading = false,
-    shouldDisableDate = () => false,
-  } = props;
+  const { date, handleChange, label, loading = false, shouldDisableDate = () => false, sx } = props;
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -30,11 +26,11 @@ function DatePicker(props: DatePickerProps) {
         loading={loading}
         {...(label && { label })}
         sx={{
+          backgroundColor: 'white!important',
           color: 'var(--text-color)',
           width: '100%',
-          backgroundColor: 'var(--background-color-dark)!important',
-          borderRadius: 'var(--border-radius)',
           '& .MuiInputBase-root': {
+            borderRadius: 'var(--border-radius)',
             color: 'var(--text-color)',
           },
           '& svg': { fill: 'var(--text-color)' },
@@ -43,6 +39,7 @@ function DatePicker(props: DatePickerProps) {
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: 'var(--primary-color-500)!important',
           },
+          ...sx,
         }}
       />
     </LocalizationProvider>
@@ -63,6 +60,7 @@ function DatePickerJournal(props: DatePickerProps) {
       handleChange={handleChange}
       shouldDisableDate={handleDisableDate}
       loading={isFetching}
+      sx={{ width: 'var(--spacing-12)' }}
     />
   );
 }

@@ -53,7 +53,7 @@ function getDatasets(data, kind, isAllTime) {
     return [
       {
         data: { ...DEFAULT_ALL_MONTHS, ...data.allTime },
-        backgroundColor: ['rgba(255,0,0, 0.5)'],
+        backgroundColor: ['#2563eb'],
         fill: true,
         tension: 0.5,
       },
@@ -70,7 +70,7 @@ function getDatasets(data, kind, isAllTime) {
     return [
       {
         data: { ...DEFAULT_ALL_MONTHS, ...data.allTime },
-        backgroundColor: ['rgba(255,0,0, 0.5)'],
+        backgroundColor: ['#2563eb'],
         fill: true,
         tension: 0.5,
       },
@@ -80,7 +80,7 @@ function getDatasets(data, kind, isAllTime) {
   return [
     {
       data,
-      backgroundColor: ['rgba(255,0,0, 0.5)'],
+      backgroundColor: ['#2563eb'],
       fill: true,
       tension: 0.5,
     },

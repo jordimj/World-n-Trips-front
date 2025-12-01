@@ -17,6 +17,10 @@ export default function Charts(props: Props) {
   const [visibleChart, setVisibleChart] = useState<'year' | 'month' | 'timeline'>('year');
   const isAllTime = year === null;
 
+  useEffect(() => {
+    setVisibleChart(year === null ? 'year' : 'timeline');
+  }, [year]);
+
   return (
     <Box className={styles.root}>
       <Stack

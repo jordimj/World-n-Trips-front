@@ -4,7 +4,7 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 import FlagIcon from '@mui/icons-material/Flag';
 import { Button, Stack, Typography } from '@mui/material';
 import useCountry from '@/features/countries/hooks/useCountry';
-import useSetCountryVisited from '@/features/countries/hooks/useUpdateCountryVisited';
+import useSetCountryVisited from '@/features/countries/hooks/useSetCountryVisited';
 import CountryHeader from './CountryHeader';
 import ExpensesStatistics from './Statistics/Expenses/Expenses';
 import HitchhikesStatistics from './Statistics/Hitchhikes/Hitchhikes';

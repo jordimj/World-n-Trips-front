@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import TableCell from '@mui/material/TableCell';
+import DoneIcon from '@mui/icons-material/Done';
+import EditIcon from '@mui/icons-material/Edit';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import TableCell from '@mui/material/TableCell';
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import EditIcon from '@mui/icons-material/Edit';
-import DoneIcon from '@mui/icons-material/Done';
 import ConditionalWrapper from '@/template/components/ConditionalWrapper/ConditionalWrapper';
 import useHover from '../../hooks/useHover';
 
@@ -32,19 +32,14 @@ export default function DataTableEditableCell(props: Props) {
   return (
     <ClickAwayListener onClickAway={() => setIsEditing(false)}>
       <TableCell align="center" ref={ref}>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          position="relative"
-        >
+        <Stack direction="row" alignItems="center" justifyContent="center" position="relative">
           {isEditing ? (
             <TextField
               variant="outlined"
               defaultValue={value}
               value={editedValue}
               onChange={(e) => setEditedValue(e.target.value)}
-              sx={{ '.MuiOutlinedInput-input': { padding: '5px' } }}
+              sx={{ '.MuiOutlinedInput-input': { padding: 'var(--spacing-1)' } }}
             />
           ) : (
             <ConditionalWrapper

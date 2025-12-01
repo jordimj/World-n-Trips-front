@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment } from 'react';
-import { Stack, Typography } from '@mui/material';
-import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import { Stack, Typography } from '@mui/material';
 import { DARK_MODE, LIGHT_MODE } from '@/constants';
 
 type Theme = 'light' | 'dark';
@@ -29,12 +29,12 @@ export default () => {
     <Stack direction="row" alignItems="center" onClick={switchTheme}>
       {theme === LIGHT_MODE ? (
         <Fragment>
-          <DarkModeIcon fontSize="large" sx={{ width: '58px' }} />
+          <DarkModeIcon fontSize="large" sx={{ minWidth: 'var(--spacing-8)' }} />
           <Typography>Dark mode</Typography>
         </Fragment>
       ) : (
         <Fragment>
-          <LightModeIcon fontSize="large" sx={{ width: '58px' }} />
+          <LightModeIcon fontSize="large" sx={{ minWidth: 'var(--spacing-8)' }} />
           <Typography>Light mode</Typography>
         </Fragment>
       )}

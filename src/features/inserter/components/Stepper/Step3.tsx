@@ -1,10 +1,10 @@
 import { Stack } from '@mui/material';
-import AutocompleteTrips from '@/template/components/Autocomplete/AutocompleteTrips';
+import TripConfirmation from '@/features/inserter/components/Trip/TripConfirmation';
 import AutocompleteCountries from '@/template/components/Autocomplete/AutocompleteCountries';
+import AutocompleteTrips from '@/template/components/Autocomplete/AutocompleteTrips';
 import useInserterContext from '../../hooks/useInserterContext';
 import DataTable from '../DataTable/DataTable';
 import JournalConfirmation from '../Journal/JournalConfirmation';
-import TripConfirmation from '@/features/inserter/components/Trip/TripConfirmation';
 
 function Step3() {
   const {
@@ -25,9 +25,9 @@ function Step3() {
           {filename && <h5>Data read from: {filename}</h5>}
           <DataTable />
           {dataKind === 'day' ? (
-            <AutocompleteTrips onChangeOption={setOption} />
+            <AutocompleteTrips onChangeOption={setOption} sx={{ width: 'var(--spacing-12)' }} />
           ) : (
-            <AutocompleteCountries onChangeOption={setOption} />
+            <AutocompleteCountries onChangeOption={setOption} sx={{ width: 'var(--spacing-12)' }} />
           )}
         </Stack>
       )}

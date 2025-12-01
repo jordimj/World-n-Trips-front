@@ -76,7 +76,7 @@ export default function MapSidebar() {
           aria-label="close sidebar"
           title="Close sidebar"
           onClick={toggleSidebar}
-          sx={{ fontSize: '80px', width: 'fit-content', alignSelf: 'center' }}
+          sx={{ fontSize: 'var(--spacing-8)', width: 'fit-content', alignSelf: 'center', mt: 2 }}
         >
           <CloseIcon fontSize="inherit" />
         </IconButton>

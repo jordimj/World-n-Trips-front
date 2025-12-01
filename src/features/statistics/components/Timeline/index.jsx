@@ -21,7 +21,7 @@ export default function Timeline({ year }) {
 
   return (
     <Stack gap={1}>
-      <Stack direction="row" justifyContent="space-between" sx={{ mx: '100px' }}>
+      <Stack direction="row" justifyContent="space-between" sx={{ mx: 'var(--spacing-9)' }}>
         {MONTHS.map((month) => (
           <Typography key={month}>{month}</Typography>
         ))}

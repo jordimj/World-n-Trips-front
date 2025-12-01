@@ -1,11 +1,14 @@
+import { useNavigate } from 'react-router-dom';
+import ArrowForward from '@mui/icons-material/ArrowForward';
 import LocalAirportIcon from '@mui/icons-material/LocalAirport';
 import TodayIcon from '@mui/icons-material/Today';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import { Skeleton, Stack, Typography } from '@mui/material';
+import { Button, Skeleton, Stack, Typography } from '@mui/material';
 import useStatistics from '@/features/statistics/hooks/useStatistics';
 import styles from './TravelSummary.module.css';
 
 export default function TravelSummary() {
+  const navigate = useNavigate();
   const { data: statistics, isLoading } = useStatistics();
 
   const visited = statistics?.countries?.all.visited;
@@ -33,6 +36,14 @@ export default function TravelSummary() {
         value={days}
         isLoading={isLoading}
       />
+      <Button
+        variant="contained"
+        endIcon={<ArrowForward />}
+        onClick={() => navigate('/statistics')}
+        sx={{ width: 'fit-content', px: 2, ml: 'auto', mt: 1 }}
+      >
+        Check all stats
+      </Button>
     </Stack>
   );
 }

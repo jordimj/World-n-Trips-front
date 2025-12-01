@@ -8,14 +8,14 @@ interface Props {
 function Skeleton(props: Props) {
   const { cells } = props;
 
-  return Array.from({ length: 3 }).map((row, idx) => (
-    <TableRow key={`row-${idx}`} className={styles.row}>
-      {Array.from({ length: cells }).map((item, idx) => (
-        <TableCell key={`cell-${idx}`}>
+  return Array.from({ length: 3 }).map((_, rowIdx) => (
+    <TableRow key={`row-${rowIdx}`} className={styles.row}>
+      {Array.from({ length: cells }).map((_, cellIdx) => (
+        <TableCell key={`cell-${cellIdx}`}>
           <MuiSkeleton
-            variant={idx === 5 ? 'circular' : 'text'}
+            variant={cellIdx === 5 ? 'circular' : 'text'}
             height={32}
-            width={idx === 5 ? '32px' : '90%'}
+            width={cellIdx === 5 ? 'var(--spacing-6)' : '80%'}
           />
         </TableCell>
       ))}

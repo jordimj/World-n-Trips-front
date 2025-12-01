@@ -8,7 +8,7 @@ import {
   ThumbUp as ThumbUpIcon,
   Today as TodayIcon,
 } from '@mui/icons-material';
-import { Stack, Typography } from '@mui/material';
+import { Stack, SxProps, Typography } from '@mui/material';
 import { euroFormatter, numberFormatter } from '@/utils/number';
 import styles from './Metric.module.css';
 
@@ -19,10 +19,11 @@ interface Props {
   secondaryLabel?: string;
   secondaryMetric?: string;
   children?: ReactNode;
+  sx?: SxProps;
 }
 
 function Metric(props: Props) {
-  const { icon, label, metric, secondaryLabel, secondaryMetric, children } = props;
+  const { icon, label, metric, secondaryLabel, secondaryMetric, children, sx } = props;
 
   return (
     <Stack
@@ -32,7 +33,8 @@ function Metric(props: Props) {
       gap={1}
       className={styles.root}
       sx={{
-        width: secondaryMetric ? '500px' : '240px',
+        width: secondaryMetric ? 'var(--spacing-14)' : 'var(--spacing-12)',
+        ...sx,
       }}
     >
       <Stack alignItems="center" flex={1}>
@@ -76,14 +78,25 @@ Metric.Walked = (props: { metric: number }) => {
   );
 };
 
-Metric.Expenses = (props: { metric: number; label?: string; withMoneyIcon?: boolean }) => {
-  const { metric, label = 'Total expenses', withMoneyIcon = false } = props;
+Metric.Expenses = (props: {
+  metric: number;
+  label?: string;
+  withMoneyIcon?: boolean;
+  formattedAsNumber?: boolean;
+}) => {
+  const {
+    metric,
+    label = 'Total expenses',
+    withMoneyIcon = false,
+    formattedAsNumber = false,
+  } = props;
 
   return (
     <Metric
       icon={withMoneyIcon ? <MoneyIcon fontSize="inherit" /> : <EuroIcon fontSize="inherit" />}
       label={label}
-      metric={euroFormatter(metric)}
+      metric={formattedAsNumber ? numberFormatter(metric) : euroFormatter(metric)}
+      sx={{ flexGrow: 1 }}
     />
   );
 };
@@ -96,6 +109,7 @@ Metric.Hitchhikes = (props: { metric: number }) => {
       icon={<ThumbUpIcon fontSize="inherit" />}
       label="Kilometers hitchhiked"
       metric={numberFormatter(metric)}
+      sx={{ flexGrow: 1 }}
     />
   );
 };

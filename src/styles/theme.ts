@@ -75,13 +75,13 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textDecoration: 'none!important',
-          textTransform: 'capitalize',
+          textTransform: 'none',
           fontSize: 'inherit',
           fontStyle: 'normal',
           boxSizing: 'border-box',
           color: 'white!important',
           height: '100%',
-          minWidth: '100px',
+          minWidth: 'var(--spacing-10)',
           backgroundColor: 'var(--primary-color-700)',
           ':hover': {
             backgroundColor: 'var(--primary-color-900)',
@@ -175,6 +175,13 @@ const theme = createTheme({
       styleOverrides: {
         colorPrimary: {
           color: 'var(--primary-color-700)!important',
+        },
+      },
+    },
+    MuiBadge: {
+      styleOverrides: {
+        badge: {
+          backgroundColor: 'var(--accent-color)',
         },
       },
     },

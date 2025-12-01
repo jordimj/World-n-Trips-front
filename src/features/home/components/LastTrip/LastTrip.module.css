@@ -1,19 +1,28 @@
 .root {
   background-color: var(--background-color-light);
-  padding: var(--spacing-3);
+  padding: var(--spacing-4);
   border-radius: var(--border-radius);
   border: var(--border);
   display: flex;
-  gap: var(--spacing-3);
+  gap: var(--spacing-4);
+
+  box-shadow: var(--box-shadow);
+  background: linear-gradient(135deg, rgba(103, 99, 119, 1) 0%, rgba(67, 64, 74, 1) 100%);
+  color: white;
 
   & img {
-    max-width: 250px;
+    border: var(--border);
+    border-color: var(--primary-color-900);
+    width: 300px;
+    height: 300px;
+    aspect-ratio: 1;
+    object-fit: cover;
     border-radius: var(--border-radius);
   }
 }
 
 .label {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   line-height: 1.6;
   font-weight: 500;
 }

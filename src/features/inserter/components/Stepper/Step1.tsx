@@ -26,28 +26,37 @@ function Step1() {
   return (
     <Stack alignItems="center" gap={2}>
       <Typography variant="h2">Select the kind of data to be imported</Typography>
-      <Stack direction="row" gap={3} flexWrap="wrap">
+      <Stack
+        direction="row"
+        gap={3}
+        flexWrap="wrap"
+        sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}
+      >
         {(Object.keys(DATA_KINDS) as (keyof typeof DATA_KINDS)[]).map((kind) => (
           <Stack
             key={kind}
             role="button"
             justifyContent="center"
             alignItems="center"
+            gap={3}
             onClick={() => setDatakind(kind)}
             sx={{
               backgroundColor: 'white',
-              minWidth: '150px',
-              p: 2,
+              py: 3,
+              px: 5,
               border: 'var(--border)',
               borderRadius: 'var(--border-radius)',
               '&:hover': {
                 backgroundColor: 'var(--border)',
                 borderColor: 'var(--secondary-color)',
               },
+              '& svg': {
+                fontSize: 'var(--spacing-11)',
+              },
             }}
           >
-            <Typography fontSize="120px">{DATA_KINDS[kind]}</Typography>
-            <Typography>{capitalize(kind)}</Typography>
+            {DATA_KINDS[kind]}
+            <Typography fontSize="var(--spacing-6)">{capitalize(kind)}</Typography>
           </Stack>
         ))}
       </Stack>

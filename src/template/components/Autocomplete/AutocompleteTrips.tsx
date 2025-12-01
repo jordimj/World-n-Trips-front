@@ -1,12 +1,15 @@
+import { SxProps } from '@mui/material';
+import { Theme } from '@mui/material/styles';
 import useTripOptions from '@/features/inserter/hooks/useTripOptions';
 import Autocomplete, { Options } from './Autocomplete';
 
 interface Props {
   onChangeOption: (optionId: number | null) => void;
+  sx?: SxProps<Theme>;
 }
 
 function AutocompleteTrips(props: Props) {
-  const { onChangeOption } = props;
+  const { onChangeOption, sx } = props;
   const { data, isFetching } = useTripOptions();
 
   return (
@@ -15,16 +18,18 @@ function AutocompleteTrips(props: Props) {
       loading={isFetching}
       options={data}
       onChangeOption={onChangeOption}
+      {...(sx && { sx })}
     />
   );
 }
 
 interface MultipleProps {
   onChangeOption: (options: Options) => void;
+  sx?: SxProps<Theme>;
 }
 
 function AutocompleteMultipleTrips(props: MultipleProps) {
-  const { onChangeOption } = props;
+  const { onChangeOption, sx } = props;
   const { data, isFetching } = useTripOptions();
 
   return (
@@ -33,6 +38,7 @@ function AutocompleteMultipleTrips(props: MultipleProps) {
       loading={isFetching}
       options={data}
       onChangeOption={onChangeOption}
+      {...(sx && { sx })}
     />
   );
 }

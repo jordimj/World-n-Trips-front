@@ -1,10 +1,9 @@
-import { ButtonGroup, FormControl, IconButton, Stack, TextField } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+import { ButtonGroup, FormControl, IconButton, Stack, TextField } from '@mui/material';
 import useClipboard from '@/features/inserter/hooks/useClipboard';
 import useHover from '@/features/inserter/hooks/useHover';
 import styles from './CopyPastableField.module.css';
-import { Fragment } from 'react';
 
 interface Props {
   label: string;
@@ -20,7 +19,7 @@ function CopyPastableField(props: Props) {
   const { ref, isHovering } = useHover<HTMLDivElement>();
 
   return (
-    <FormControl ref={ref} sx={{ maxWidth: '1600px', width: '100%', minWidth: '400px' }}>
+    <FormControl ref={ref} sx={{ maxWidth: '1600px', width: '100%' }}>
       <TextField
         label={label}
         variant="outlined"
@@ -29,9 +28,7 @@ function CopyPastableField(props: Props) {
         className={styles.textField}
       />
       <ButtonGroup
-        className={[styles.buttons, isHovering && styles.hovered]
-          .filter(Boolean)
-          .join(' ')}
+        className={[styles.buttons, isHovering && styles.hovered].filter(Boolean).join(' ')}
       >
         <IconButton size="large" onClick={() => copyToClipboard(value)}>
           <ContentCopyIcon />

@@ -27,7 +27,7 @@ export default function HitchhikesChart({ stats, chartKind }) {
         datasets: [
           {
             data,
-            backgroundColor: ['rgba(255,0,0, 0.5)'],
+            backgroundColor: ['#2563eb'],
             fill: true,
             tension: 0.5,
           },

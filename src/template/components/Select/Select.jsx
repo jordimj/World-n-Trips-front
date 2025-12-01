@@ -39,6 +39,7 @@ function Select(props) {
         onChange={onChange}
         sx={{
           backgroundColor: 'white!important',
+          borderRadius: 'var(--border-radius)',
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: 'var(--primary-color-500)',
           },

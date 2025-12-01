@@ -1,13 +1,13 @@
 import {
+  CheckBox as CheckBoxIcon,
+  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
+} from '@mui/icons-material';
+import {
   Autocomplete as MuiAutocomplete,
   Checkbox,
   TextField,
   AutocompleteProps,
 } from '@mui/material';
-import {
-  CheckBox as CheckBoxIcon,
-  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
-} from '@mui/icons-material';
 import styles from './Autocomplete.module.css';
 
 export interface Option {
@@ -18,7 +18,7 @@ export interface Option {
 export interface Options extends Array<Option> {}
 
 interface Props
-  extends Pick<AutocompleteProps<Option, false, false, false>, 'renderOption'> {
+  extends Pick<AutocompleteProps<Option, false, false, false>, 'renderOption' | 'sx'> {
   label: string;
   loading: boolean;
   options?: Options;
@@ -26,7 +26,7 @@ interface Props
 }
 
 function Autocomplete(props: Props) {
-  const { label, loading, options, onChangeOption, renderOption } = props;
+  const { label, loading, options, onChangeOption, renderOption, sx } = props;
 
   return (
     <MuiAutocomplete
@@ -43,6 +43,7 @@ function Autocomplete(props: Props) {
       onChange={(e, value) => onChangeOption(value?.id ?? null)}
       renderInput={(params) => <TextField {...params} label={label} />}
       {...(renderOption !== undefined && { renderOption })}
+      {...(sx && { sx })}
     />
   );
 }
@@ -101,6 +102,7 @@ function AutocompleteMultiple(props: AutocompleteMultipleProps) {
         paper: styles.paper,
       }}
       sx={{
+        backgroundColor: 'white!important',
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
           borderColor: 'var(--primary-color-500)!important',
         },

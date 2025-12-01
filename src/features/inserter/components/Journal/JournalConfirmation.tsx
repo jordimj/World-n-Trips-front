@@ -1,7 +1,7 @@
+import parse from 'html-react-parser';
 import { Box, Typography } from '@mui/material';
 import { convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import parse from 'html-react-parser';
 import DatePicker from '@/template/components/DatePicker/DatePicker';
 import useInserterContext from '../../hooks/useInserterContext';
 
@@ -35,7 +35,6 @@ export default function JournalConfirmation() {
           },
           '::-webkit-scrollbar-thumb': {
             backgroundColor: 'var(--scrollbar-color)',
-            borderRadius: '20px',
           },
         }}
       >

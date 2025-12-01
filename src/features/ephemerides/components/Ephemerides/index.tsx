@@ -32,7 +32,7 @@ function Ephemerides() {
           aria-label="open popover with travel ephemerides"
           onClick={handleOpen}
         >
-          <Badge color="secondary" badgeContent={ephemeridesCount}>
+          <Badge color="primary" badgeContent={ephemeridesCount}>
             <CalendarMonthIcon />
           </Badge>
         </IconButton>
