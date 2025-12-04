@@ -11,12 +11,8 @@ interface Trip {
   picture?: string;
   telework?: boolean;
   worktrip?: boolean;
-  arrivalDate: {
-    date: Date;
-  };
-  departureDate: {
-    date: Date;
-  };
+  arrivalDate?: Date;
+  departureDate?: Date;
 }
 
 interface Props {
@@ -47,9 +43,11 @@ function TripCard(props: Props) {
           <Typography gutterBottom variant="h5">
             {trip.name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {formatTripDates(trip.arrivalDate.date, trip.departureDate.date)}
-          </Typography>
+          {trip.arrivalDate && trip.departureDate && (
+            <Typography variant="body2" color="text.secondary">
+              {formatTripDates(trip.arrivalDate, trip.departureDate)}
+            </Typography>
+          )}
         </CardContent>
       </ConditionalWrapper>
     </Card>

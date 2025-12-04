@@ -1,27 +1,19 @@
-import { Checkbox, FormControlLabel, FormGroup, Stack, Typography } from '@mui/material';
-import WorkIcon from '@mui/icons-material/Work';
-import WorkOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
 import KeyboardIcon from '@mui/icons-material/Keyboard';
 import KeyboardAltOutlinedIcon from '@mui/icons-material/KeyboardAltOutlined';
+import WorkIcon from '@mui/icons-material/Work';
+import WorkOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
+import { Checkbox, FormControlLabel, FormGroup, Stack, Typography } from '@mui/material';
 import CopyPastableField from '@/template/components/CopyPastableField';
-import DatePicker from '@/template/components/DatePicker/DatePicker';
 import useInserterContext from '../../hooks/useInserterContext';
 import styles from './Trip.module.css';
 
 export default function Trip() {
   const {
     state: { trip },
-    actions: {
-      setTripName,
-      setTripSummary,
-      setTripCover,
-      setTripWork,
-      setArrivalTripDate,
-      setDepartureTripDate,
-    },
+    actions: { setTripName, setTripSummary, setTripCover, setTripWork },
   } = useInserterContext();
 
-  const { name, summary, coverImage, arrivalDate, departureDate, work } = trip ?? {};
+  const { name, summary, coverImage, work } = trip ?? {};
 
   const isTelework = work === 'telework';
   const isWorktrip = work === 'worktrip';
@@ -30,35 +22,9 @@ export default function Trip() {
     <Stack className={styles.container} gap={3}>
       <Typography variant="h2">Add new trip</Typography>
       <Stack gap={3} justifyContent="center" alignItems="center">
-        <CopyPastableField
-          label="Title of the trip"
-          value={name}
-          setValue={setTripName}
-        />
+        <CopyPastableField label="Title of the trip" value={name} setValue={setTripName} />
         <CopyPastableField label="Summary" value={summary} setValue={setTripSummary} />
-        <CopyPastableField
-          label="Cover image"
-          value={coverImage}
-          setValue={setTripCover}
-        />
-        <Stack
-          direction="row"
-          gap={3}
-          justifyContent="center"
-          alignItems="center"
-          sx={{ width: '100%' }}
-        >
-          <DatePicker
-            label="From"
-            date={arrivalDate ?? null}
-            handleChange={setArrivalTripDate}
-          />
-          <DatePicker
-            label="To"
-            date={departureDate ?? null}
-            handleChange={setDepartureTripDate}
-          />
-        </Stack>
+        <CopyPastableField label="Cover image" value={coverImage} setValue={setTripCover} />
         <FormGroup className={styles.form}>
           <Typography className={styles.formText}>Traveling while working?</Typography>
           <FormControlLabel
@@ -66,12 +32,7 @@ export default function Trip() {
             checked={isTelework}
             labelPlacement="bottom"
             onChange={() => setTripWork(isTelework ? null : 'telework')}
-            control={
-              <Checkbox
-                icon={<KeyboardAltOutlinedIcon />}
-                checkedIcon={<KeyboardIcon />}
-              />
-            }
+            control={<Checkbox icon={<KeyboardAltOutlinedIcon />} checkedIcon={<KeyboardIcon />} />}
             sx={{
               '& .MuiTypography-root': {
                 fontWeight: isTelework ? 700 : 400,

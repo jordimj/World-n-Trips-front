@@ -12,8 +12,6 @@ export default function TripConfirmation() {
   const parsedTrip = {
     ...trip,
     picture: trip.coverImage,
-    arrivalDate: { date: trip.arrivalDate },
-    departureDate: { date: trip.departureDate },
   };
 
   return <TripCard trip={parsedTrip} />;

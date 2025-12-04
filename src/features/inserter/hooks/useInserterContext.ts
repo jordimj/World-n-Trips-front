@@ -45,12 +45,6 @@ function useInserterContext() {
   const setTripWork = (work: 'worktrip' | 'telework' | null) =>
     dispatch({ type: 'SET_TRIP_WITH_WORK', payload: work });
 
-  const setArrivalTripDate = (newDate: Date | null) =>
-    dispatch({ type: 'SET_TRIP_ARRIVAL_DATE', payload: newDate });
-
-  const setDepartureTripDate = (newDate: Date | null) =>
-    dispatch({ type: 'SET_TRIP_DEPARTURE_DATE', payload: newDate });
-
   const resetState = () => dispatch({ type: 'RESET_STATE' });
 
   return {
@@ -69,8 +63,6 @@ function useInserterContext() {
       setTripSummary,
       setTripCover,
       setTripWork,
-      setArrivalTripDate,
-      setDepartureTripDate,
       resetState,
     },
   };

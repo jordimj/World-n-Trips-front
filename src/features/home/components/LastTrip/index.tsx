@@ -38,9 +38,11 @@ export default function LastTrip() {
         <Stack gap={1}>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
             <Typography sx={{ fontSize: 24, color: 'white' }}>{lastTrip.name}</Typography>
-            <Typography sx={{ fontSize: 14, color: 'var(--primary-color-200)' }}>
-              {formatTripDates(lastTrip.arrivalDate.date, lastTrip.departureDate.date)}
-            </Typography>
+            {lastTrip.arrivalDate && lastTrip.departureDate && (
+              <Typography sx={{ fontSize: 14, color: 'var(--primary-color-200)' }}>
+                {formatTripDates(lastTrip.arrivalDate, lastTrip.departureDate)}
+              </Typography>
+            )}
           </Stack>
           {lastTrip.summary && (
             <Typography sx={{ fontSize: 14, color: 'var(--primary-color-200)' }}>

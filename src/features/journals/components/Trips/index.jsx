@@ -11,7 +11,7 @@ function Trips() {
   const [filterTrips, setFilterTrips] = useLocalStorage('filter_trips', 'false');
 
   const filteredTrips = filterTrips ? trips.filter((trip) => trip.hasJournals) : trips;
-  const groupedTrips = groupBy(filteredTrips, (trip) => trip.departureDate.date.getFullYear());
+  const groupedTrips = groupBy(filteredTrips, (trip) => trip.departureDate?.getFullYear());
 
   return (
     <Box textAlign="center">

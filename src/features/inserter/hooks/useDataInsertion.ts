@@ -19,11 +19,9 @@ interface JournalBody {
 }
 
 interface TripBody {
-  title: string;
-  // summary: string;
+  name: string;
+  summary: string;
   coverImage: string;
-  arrivalDate: string;
-  departureDate: string;
   worktrip: boolean;
   telework: boolean;
 }
@@ -58,9 +56,11 @@ function useDataInsertion() {
       } as JournalBody)
     : isTrip
       ? ({
-          ...trip,
-          arrivalDate: formatDatabaseDate(trip?.arrivalDate!),
-          departureDate: formatDatabaseDate(trip?.departureDate!),
+          name: trip?.name,
+          summary: trip?.summary,
+          coverImage: trip?.coverImage,
+          worktrip: trip?.work === 'worktrip',
+          telework: trip?.work === 'telework',
         } as TripBody)
       : ({
           parsedData,

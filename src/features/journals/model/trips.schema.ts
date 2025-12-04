@@ -1,10 +1,5 @@
 import { z } from 'zod';
 
-const TripDateSchema = z.object({
-  dayId: z.number(),
-  date: z.preprocess((val) => (typeof val === 'string' ? new Date(val) : val), z.date()),
-});
-
 const TripSchema = z.object({
   id: z.number(),
   name: z.string(),
@@ -12,8 +7,12 @@ const TripSchema = z.object({
   worktrip: z.boolean(),
   telework: z.boolean(),
   picture: z.url(),
-  arrivalDate: TripDateSchema,
-  departureDate: TripDateSchema,
+  arrivalDate: z
+    .preprocess((val) => (typeof val === 'string' ? new Date(val) : val), z.date())
+    .nullable(),
+  departureDate: z
+    .preprocess((val) => (typeof val === 'string' ? new Date(val) : val), z.date())
+    .nullable(),
   hasJournals: z.boolean(),
 });
 

@@ -65,6 +65,4 @@ export interface Trip {
   summary: string;
   coverImage: string;
   work: 'telework' | 'worktrip' | null;
-  arrivalDate: Date;
-  departureDate: Date;
 }

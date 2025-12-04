@@ -61,16 +61,6 @@ type SetTripWithWork = {
   payload: 'worktrip' | 'telework' | null;
 };
 
-type SetTripArrivalDateAction = {
-  type: 'SET_TRIP_ARRIVAL_DATE';
-  payload: Date | null;
-};
-
-type SetTripDepartureDateAction = {
-  type: 'SET_TRIP_DEPARTURE_DATE';
-  payload: Date | null;
-};
-
 type ResetStateAction = {
   type: 'RESET_STATE';
 };
@@ -88,6 +78,4 @@ export type Action =
   | SetTripSummaryAction
   | SetTripCoverAction
   | SetTripWithWork
-  | SetTripArrivalDateAction
-  | SetTripDepartureDateAction
   | ResetStateAction;

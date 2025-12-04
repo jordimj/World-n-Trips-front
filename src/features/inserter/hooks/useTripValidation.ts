@@ -4,10 +4,8 @@ import { groupBy } from './useDataValidation';
 
 const TripSchema = z.object({
   name: z.string().min(5).max(50),
-  summary: z.string().min(10).max(50),
+  summary: z.string().min(10).max(255),
   coverImage: z.string().url(),
-  arrivalDate: z.coerce.date(),
-  departureDate: z.coerce.date(),
 });
 
 interface Props {

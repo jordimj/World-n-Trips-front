@@ -17,7 +17,7 @@ function Hero({ trip }) {
         <Typography variant="h1">{trip.name}</Typography>
         {trip.summary && <Typography variant="h2">{trip.summary}</Typography>}
         <Typography variant="h3">
-          {formatTripDates(trip.arrivalDate.date, trip.departureDate.date)}
+          {formatTripDates(trip.arrivalDate, trip.departureDate)}
         </Typography>
         {hasChip && <Chip variant={trip.telework ? 'telework' : 'worktrip'} />}
       </Stack>

@@ -13,8 +13,6 @@ export interface InserterState {
     summary: string;
     coverImage: string;
     work: 'telework' | 'worktrip' | null;
-    arrivalDate: Date;
-    departureDate: Date;
   };
   journal: {
     date: Date | null;
@@ -129,24 +127,6 @@ function reducer(state: InserterState, action: Action) {
         trip: {
           ...state.trip,
           work: action.payload,
-        },
-      };
-    }
-    case 'SET_TRIP_ARRIVAL_DATE': {
-      return {
-        ...state,
-        trip: {
-          ...state.trip,
-          arrivalDate: action.payload,
-        },
-      };
-    }
-    case 'SET_TRIP_DEPARTURE_DATE': {
-      return {
-        ...state,
-        trip: {
-          ...state.trip,
-          departureDate: action.payload,
         },
       };
     }

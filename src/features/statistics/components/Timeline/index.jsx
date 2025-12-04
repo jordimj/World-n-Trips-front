@@ -13,8 +13,8 @@ export default function Timeline({ year }) {
 
   const filteredTrips = trips.filter(
     (trip) =>
-      dayjs(trip.arrivalDate.date).year() === firstDay.year() ||
-      dayjs(trip.departureDate.date).year() === firstDay.year()
+      dayjs(trip.arrivalDate).year() === firstDay.year() ||
+      dayjs(trip.departureDate).year() === firstDay.year()
   );
 
   const daysInYear = firstDay.endOf('year').dayOfYear();
@@ -42,9 +42,9 @@ export default function Timeline({ year }) {
                 (trip) =>
                   firstDay
                     .add(idx, 'day')
-                    .isBetween(trip.arrivalDate.date, trip.departureDate.date) ||
-                  firstDay.add(idx, 'day').isSame(trip.arrivalDate.date, 'day') ||
-                  firstDay.add(idx, 'day').isSame(trip.departureDate.date, 'day')
+                    .isBetween(trip.arrivalDate, trip.departureDate) ||
+                  firstDay.add(idx, 'day').isSame(trip.arrivalDate, 'day') ||
+                  firstDay.add(idx, 'day').isSame(trip.departureDate, 'day')
               )}
               {...(idx === 0 && {
                 gridRowStart: firstDay.day() === 0 ? 7 : firstDay.day(),
