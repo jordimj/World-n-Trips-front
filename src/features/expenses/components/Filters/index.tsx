@@ -22,16 +22,16 @@ function Filters(props: Props) {
       countries: options,
     }));
 
-  const onChangeTrip = (options: Options) =>
+  const onChangeTrip = (trips: Options) =>
     setFilters((prevFilters) => ({
       ...prevFilters,
-      trips: options.map((option) => option.id),
+      trips,
     }));
 
-  const onChangeCurrency = (options: Options) =>
+  const onChangeCurrency = (currencies: Options) =>
     setFilters((prevFilters) => ({
       ...prevFilters,
-      currencies: options.map((option) => option.name),
+      currencies,
     }));
 
   const onChangeKeyword = (e: any) => {
@@ -42,16 +42,16 @@ function Filters(props: Props) {
     }));
   };
 
-  const onChangeFrom = (date: Date | null) =>
+  const onChangeFrom = (from: Date | null) =>
     setFilters((prevFilters) => ({
       ...prevFilters,
-      from: date,
+      from,
     }));
 
-  const onChangeTo = (date: Date | null) =>
+  const onChangeTo = (to: Date | null) =>
     setFilters((prevFilters) => ({
       ...prevFilters,
-      to: date,
+      to,
     }));
 
   const onChangePrice = (e: Event, newValue: number | number[], activeThumb: number) => {
@@ -73,7 +73,7 @@ function Filters(props: Props) {
     });
   };
 
-  const sliderMarks = Array.from({ length: 11 }, (_, idx) => ({
+  const sliderMarks = Array.from({ length: 14 }, (_, idx) => ({
     value: idx * 100,
     label: `${idx * 100} €`,
   }));
@@ -86,18 +86,14 @@ function Filters(props: Props) {
         gap={2}
         sx={{ px: 2 }}
       >
-        <DatePicker
-          label="From"
-          date={filters.from ?? null}
-          handleChange={onChangeFrom}
-        />
+        <DatePicker label="From" date={filters.from ?? null} handleChange={onChangeFrom} />
         <DatePicker label="To" date={filters.to ?? null} handleChange={onChangeTo} />
         <AutocompleteCountries.Multiple
-          initial={filters.countries}
+          value={filters.countries}
           onChangeOption={onChangeCountry}
         />
-        <AutocompleteTrips.Multiple onChangeOption={onChangeTrip} />
-        <AutocompleteCurrencies onChangeOption={onChangeCurrency} />
+        <AutocompleteTrips.Multiple value={filters.trips} onChangeOption={onChangeTrip} />
+        <AutocompleteCurrencies value={filters.currencies} onChangeOption={onChangeCurrency} />
       </Box>
       <Stack direction="row" gap={4} sx={{ px: 2 }}>
         <Box sx={{ px: 2, width: '100%' }}>
@@ -105,7 +101,7 @@ function Filters(props: Props) {
             getAriaLabel={() => 'Minimum and maximum price'}
             value={filters.price}
             min={0}
-            max={1000}
+            max={1300}
             onChange={debounce(onChangePrice, 300)}
             valueLabelDisplay="auto"
             getAriaValueText={(value) => `${value} €`}
@@ -113,10 +109,7 @@ function Filters(props: Props) {
             marks={sliderMarks}
           />
         </Box>
-        <SearchInput
-          placeholder="Filter by keyword"
-          onChange={debounce(onChangeKeyword, 300)}
-        />
+        <SearchInput placeholder="Filter by keyword" onChange={debounce(onChangeKeyword, 300)} />
       </Stack>
     </Stack>
   );

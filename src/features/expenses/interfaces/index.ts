@@ -29,9 +29,10 @@ export interface ExpensesFilters {
   from?: Date | null;
   to?: Date | null;
   countries?: Options;
+  trips?: Options;
   categories?: Array<number>;
   subcategories?: Array<number>;
-  currencies?: Array<string>;
+  currencies?: Options;
   price: Array<number>;
   orderBy?: OrderBy;
   order?: 'asc' | 'desc';

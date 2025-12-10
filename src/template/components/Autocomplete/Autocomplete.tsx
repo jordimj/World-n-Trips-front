@@ -54,18 +54,18 @@ interface AutocompleteMultipleProps
   loading: boolean;
   options?: Options;
   onChangeOption: (options: Options) => void;
-  initial?: Options;
+  value?: Options;
 }
 
 function AutocompleteMultiple(props: AutocompleteMultipleProps) {
-  const { label, loading, options, onChangeOption, initial, renderOption } = props;
+  const { label, loading, options, onChangeOption, value, renderOption } = props;
 
   return (
     <MuiAutocomplete
       disablePortal
       id={`autocomplete-${label}`}
       loadingText="Fetching items"
-      value={initial ?? []}
+      value={value ?? []}
       isOptionEqualToValue={(option, val) => option.id === val.id}
       options={options ?? []}
       loading={loading}

@@ -1,13 +1,14 @@
+import useCurrencies from '@/hooks/useCurrencies';
 import { Options } from './Autocomplete';
 import Autocomplete from './Autocomplete';
-import useCurrencies from '@/hooks/useCurrencies';
 
 interface Props {
+  value?: Options;
   onChangeOption: (options: Options) => void;
 }
 
 function AutocompleteCurrencies(props: Props) {
-  const { onChangeOption } = props;
+  const { value, onChangeOption } = props;
   const { data, isFetching } = useCurrencies();
 
   const options = data?.map((currency, idx) => ({
@@ -19,6 +20,7 @@ function AutocompleteCurrencies(props: Props) {
     <Autocomplete.Multiple
       label="Currencies"
       loading={isFetching}
+      value={value}
       options={options}
       onChangeOption={onChangeOption}
     />

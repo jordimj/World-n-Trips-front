@@ -36,11 +36,11 @@ function AutocompleteCountries(props: Props) {
 
 interface MultipleProps {
   onChangeOption: (options: Options) => void;
-  initial?: Options;
+  value?: Options;
 }
 
 function AutocompleteMultipleCountries(props: MultipleProps) {
-  const { onChangeOption, initial } = props;
+  const { onChangeOption, value } = props;
   const { data, isFetching } = useCountries(true);
 
   return (
@@ -49,7 +49,7 @@ function AutocompleteMultipleCountries(props: MultipleProps) {
       loading={isFetching}
       options={data}
       onChangeOption={onChangeOption}
-      initial={initial}
+      value={value}
       renderOption={(props, option, { selected }) => (
         <Stack component="li" direction="row" gap={1} {...props}>
           <Checkbox

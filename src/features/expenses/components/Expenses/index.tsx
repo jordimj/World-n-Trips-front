@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { Option } from '@/template/components/Autocomplete/Autocomplete';
 import { ExpensesFilters } from '../../interfaces';
-import Table from '../Table';
 import Filters from '../Filters';
+import Table from '../Table';
 
 interface LocationState {
   country?: Option;
@@ -12,7 +12,7 @@ interface LocationState {
 }
 
 function Expenses() {
-  const [filters, setFilters] = useState<ExpensesFilters>({ price: [0, 1000] });
+  const [filters, setFilters] = useState<ExpensesFilters>({ price: [0, 1300] });
 
   const location = useLocation();
   const state = location.state as LocationState | undefined;
