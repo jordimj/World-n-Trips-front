@@ -17,7 +17,7 @@ export default function NightsStatistics({ nights, kmWalked }) {
   }));
 
   return (
-    <Stack alignItems="center" gap={5}>
+    <Stack alignItems="center" gap={5} sx={{ mt: 6 }}>
       <Divider>Days & nights</Divider>
       <Stack direction="row" gap={3} flexWrap="wrap">
         <Metric
@@ -32,7 +32,7 @@ export default function NightsStatistics({ nights, kmWalked }) {
           <NightsChart data={{ 'Free stays': count.free, 'Paid stays': count.paid }} />
         </Metric>
       </Stack>
-      <Stack direction="row" alignItems="center" gap={5} sx={{ width: '70%', mb: 6 }}>
+      <Stack direction="row" alignItems="center" gap={5} sx={{ width: '70%' }}>
         <NightsTable spots={detailedSpots} />
         <AlsoSleptAt infoExtra={infoExtra} />
       </Stack>

@@ -7,9 +7,8 @@ import Day from './Day';
 import styles from './Timeline.module.css';
 
 export default function Timeline({ year }) {
-  const firstDay = dayjs(`1-1-${year}`);
-
   const { data: trips = [] } = useTrips();
+  const firstDay = dayjs(year).startOf('year');
 
   const filteredTrips = trips.filter(
     (trip) =>

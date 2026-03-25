@@ -14,7 +14,7 @@ export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
     hitchhikes;
 
   return (
-    <Stack component="section" gap={5} alignItems="center" sx={{ mb: 4 }}>
+    <Stack component="section" gap={5} alignItems="center" sx={{ mt: 6 }}>
       <Divider>Hitchhikes</Divider>
       <Stack direction="row" gap={3} flexWrap="wrap">
         <Metric.Hitchhikes metric={totalKilometers} />

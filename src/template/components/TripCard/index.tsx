@@ -40,7 +40,11 @@ function TripCard(props: Props) {
           <Chip className={styles.chip} variant={trip.telework ? 'telework' : 'worktrip'} />
         )}
         <CardContent>
-          <Typography gutterBottom variant="h5">
+          <Typography
+            gutterBottom
+            variant="h5"
+            sx={{ letterSpacing: 'var(--uppercase-letter-spacing)' }}
+          >
             {trip.name}
           </Typography>
           {trip.arrivalDate && trip.departureDate && (

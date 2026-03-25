@@ -18,11 +18,9 @@ function Country() {
 
   const hasData =
     country?.citiesVisited.length !== 0 ||
-    country?.nights !== undefined ||  
+    country?.nights !== undefined ||
     country?.hitchhikes !== undefined ||
     country?.expenses !== undefined;
-
-    console.log({hasData , citiesVisited: country?.citiesVisited, nights: country?.nights, hitchhikes: country?.hitchhikes, expenses: country?.expenses})
 
   return (
     <Fragment>
@@ -65,7 +63,7 @@ function Country() {
             <Button
               variant="contained"
               startIcon={<FileUploadIcon />}
-              sx={{ fontWeight: 400, textTransform: 'none' }}
+              sx={{ fontWeight: 400 }}
               onClick={() => setSearchParams({ dialog: 'inserter' })}
             >
               Add travel data
@@ -74,7 +72,7 @@ function Country() {
               variant="outlined"
               color="secondary"
               startIcon={<FlagIcon />}
-              sx={{ fontWeight: 400, textTransform: 'none' }}
+              sx={{ fontWeight: 400 }}
               disabled={isPendingVisited}
               onClick={() => setVisited(false)}
             >
@@ -90,7 +88,7 @@ function Country() {
           <Button
             variant="outlined"
             startIcon={<FlagIcon />}
-            sx={{ fontWeight: 400, textTransform: 'none' }}
+            sx={{ fontWeight: 400 }}
             disabled={isPendingVisited}
             onClick={() => setVisited(true)}
           >

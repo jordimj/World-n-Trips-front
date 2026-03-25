@@ -33,7 +33,7 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
   }));
 
   return (
-    <Stack component="section" alignItems="center" gap={4} sx={{ mb: 2 }}>
+    <Stack component="section" alignItems="center" gap={4} sx={{ mt: 6, mb: 2 }}>
       <Divider>Expenses</Divider>
       <Stack
         direction="row"

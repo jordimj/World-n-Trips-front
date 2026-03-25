@@ -144,7 +144,7 @@ function ExpensesTable(props: Props) {
                     <TableCell>
                       <Typography>{details}</Typography>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={styles.expense}>
                       <Typography sx={{ fontWeight: 500 }}>
                         {euroFormatter(Number(valueEur))}
                       </Typography>
@@ -159,7 +159,7 @@ function ExpensesTable(props: Props) {
                         </Typography>
                       )}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={styles.country}>
                       <CountryFlag name={country} />
                     </TableCell>
                     <TableCell>

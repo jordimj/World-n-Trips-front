@@ -18,6 +18,7 @@
 .text h1 {
   color: white;
   font-size: var(--spacing-9);
+  letter-spacing: var(--uppercase-letter-spacing);
 }
 
 .text h2 {
