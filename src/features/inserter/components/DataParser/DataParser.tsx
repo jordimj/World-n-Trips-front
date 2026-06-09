@@ -34,7 +34,18 @@ export default function DataParser() {
         }
 
         const data = result.data as TableData;
-        data.forEach((item, idx) => (item.id = idx + 1));
+        data.forEach((item: any, idx) => {
+          item.id = idx + 1;
+          ['valueEur', 'value'].forEach((key) => {
+            if (key in item) {
+              const cleanValue = item[key]
+                .replace(/[€\s]/g, '')
+                .replace(/\./g, '')
+                .replace(',', '.');
+              item[key] = cleanValue;
+            }
+          });
+        });
 
         setParsedData(data);
       },
