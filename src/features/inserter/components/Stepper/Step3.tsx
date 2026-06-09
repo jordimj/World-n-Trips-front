@@ -18,9 +18,11 @@ function Step3() {
   return (
     <Stack alignItems="center">
       <h2>Verify the data before importing it</h2>
-      {isJournal && <JournalConfirmation />}
-      {isTrip && <TripConfirmation />}
-      {!isTrip && !isJournal && (
+      {isJournal ? (
+        <JournalConfirmation />
+      ) : isTrip ? (
+        <TripConfirmation />
+      ) : (
         <Stack alignItems="center" sx={{ maxHeight: 'calc(100vh - 510px)' }}>
           {filename && <h5>Data read from: {filename}</h5>}
           <DataTable />

@@ -34,7 +34,7 @@ export async function getJournals(tripId: number) {
   return (await instance.get(`/journals/trip/${tripId}`)).data;
 }
 
-export async function saveNewData(dataKind: ImportKind, body: InserterBody) {
+export async function saveNewData(dataKind: ImportKind, body: InserterBody | FormData) {
   return (await instance.post(`/${dataKind}s/create`, body)).data;
 }
 

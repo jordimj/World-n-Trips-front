@@ -45,6 +45,8 @@ function useInserterContext() {
   const setTripWork = (work: 'worktrip' | 'telework' | null) =>
     dispatch({ type: 'SET_TRIP_WITH_WORK', payload: work });
 
+  const setTripFile = (file: File | null) => dispatch({ type: 'SET_TRIP_FILE', payload: file });
+
   const resetState = () => dispatch({ type: 'RESET_STATE' });
 
   return {
@@ -62,6 +64,7 @@ function useInserterContext() {
       setTripName,
       setTripSummary,
       setTripCover,
+      setTripFile,
       setTripWork,
       resetState,
     },

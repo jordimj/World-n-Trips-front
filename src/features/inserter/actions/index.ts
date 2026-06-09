@@ -61,6 +61,11 @@ type SetTripWithWork = {
   payload: 'worktrip' | 'telework' | null;
 };
 
+type SetTripFileAction = {
+  type: 'SET_TRIP_FILE';
+  payload: File | null;
+};
+
 type ResetStateAction = {
   type: 'RESET_STATE';
 };
@@ -78,4 +83,5 @@ export type Action =
   | SetTripSummaryAction
   | SetTripCoverAction
   | SetTripWithWork
+  | SetTripFileAction
   | ResetStateAction;

@@ -1,13 +1,12 @@
 import { Fragment, useEffect } from 'react';
-import { AxiosError } from 'axios';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
 import Spinner from '@/template/components/Spinner/Spinner';
+import { STEP_LABELS } from '../../constants';
 import useDataInsertion from '../../hooks/useDataInsertion';
 import useInserterContext from '../../hooks/useInserterContext';
-import useSnackbar from '../../hooks/useSnackbar';
 import useTripValidation from '../../hooks/useTripValidation';
-import { STEP_LABELS } from '../../constants';
 
 export default function StepperButtons() {
   const {
@@ -23,16 +22,7 @@ export default function StepperButtons() {
   } = useInserterContext();
 
   const { isValid: isTripValid } = useTripValidation({ trip });
-  const { isLoading, isSuccess, isError, error, mutate } = useDataInsertion();
-  const { openSnackbar, snackbar } = useSnackbar();
-
-  useEffect(() => {
-    if (isSuccess) openSnackbar([{ label: 'Database insertion done!' }]);
-    if (isError) {
-      const errors: any = (error as AxiosError).response?.data;
-      openSnackbar([{ label: errors.message, severity: 'error' }]);
-    }
-  }, [isSuccess, isError]);
+  const { isPending, mutate, snackbar } = useDataInsertion();
 
   const isJournal = dataKind === 'journal';
   const isTrip = dataKind === 'trip';
@@ -75,13 +65,14 @@ export default function StepperButtons() {
           <Button
             variant="contained"
             onClick={() => (isLastStep ? mutate : goNextStep)()}
-            disabled={isForwardDisabled(activeStep)}
+            disabled={isForwardDisabled(activeStep) || isPending}
+            {...(isPending && { startIcon: <CircularProgress size={20} color="inherit" /> })}
           >
             {isLastStep ? 'Import !' : 'Next'}
           </Button>
         </Stack>
       )}
-      {isLoading && <Spinner />}
+      {isPending && <Spinner />}
       {snackbar}
     </Fragment>
   );

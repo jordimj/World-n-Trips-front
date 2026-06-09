@@ -11,7 +11,7 @@ export default function TripConfirmation() {
 
   const parsedTrip = {
     ...trip,
-    picture: trip.coverImage,
+    picture: trip.coverImage ?? trip.imageFile,
   };
 
   return <TripCard trip={parsedTrip} />;

@@ -1,12 +1,15 @@
 .textField {
   background-color: var(--background-color-light);
-  border-radius: var(--border-radius);
   width: 100%;
   position: relative;
-}
 
-.textField input {
-  width: calc(100% - 150px);
+  & input {
+    width: calc(100% - 150px);
+  }
+
+  & fieldset {
+    border-radius: var(--border-radius);
+  }
 }
 
 .buttons {

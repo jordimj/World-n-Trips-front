@@ -13,6 +13,5 @@ export default function useTrips<T = Trips>(options?: UseTripsSelect<T>) {
       return TripsSchema.parse(data);
     },
     ...options,
-    refetchOnWindowFocus: false,
   });
 }

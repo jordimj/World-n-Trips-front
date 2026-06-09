@@ -8,7 +8,7 @@ import styles from './TripCard.module.css';
 interface Trip {
   id?: number;
   name: string;
-  picture?: string;
+  picture?: string | File;
   telework?: boolean;
   worktrip?: boolean;
   arrivalDate?: Date;
@@ -35,7 +35,16 @@ function TripCard(props: Props) {
           </CardActionArea>
         )}
       >
-        <CardMedia component="img" alt={trip.name} height="250" image={trip.picture} />
+        {trip.picture && (
+          <CardMedia
+            component="img"
+            alt={trip.name}
+            height="250"
+            image={
+              typeof trip.picture === 'string' ? trip.picture : URL.createObjectURL(trip.picture)
+            }
+          />
+        )}
         {hasChip && (
           <Chip className={styles.chip} variant={trip.telework ? 'telework' : 'worktrip'} />
         )}

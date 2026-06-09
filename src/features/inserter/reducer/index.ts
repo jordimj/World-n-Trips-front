@@ -12,6 +12,7 @@ export interface InserterState {
     name: string;
     summary: string;
     coverImage: string;
+    imageFile: File | null;
     work: 'telework' | 'worktrip' | null;
   };
   journal: {
@@ -127,6 +128,15 @@ function reducer(state: InserterState, action: Action) {
         trip: {
           ...state.trip,
           work: action.payload,
+        },
+      };
+    }
+    case 'SET_TRIP_FILE': {
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          imageFile: action.payload,
         },
       };
     }

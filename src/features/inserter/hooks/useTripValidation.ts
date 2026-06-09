@@ -5,7 +5,10 @@ import { groupBy } from './useDataValidation';
 const TripSchema = z.object({
   name: z.string().min(5).max(50),
   summary: z.string().min(10).max(255),
-  coverImage: z.string().url(),
+  imageFile: z.instanceof(File),
+  coverImage: z.string().url().optional(),
+  telework: z.boolean().optional(),
+  worktrip: z.boolean().optional(),
 });
 
 interface Props {
