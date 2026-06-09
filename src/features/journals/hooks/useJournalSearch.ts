@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-interface SearchState {
+export interface SearchState {
   isSearching: boolean;
   occurrences: Array<HTMLElement>;
   current: number | null;

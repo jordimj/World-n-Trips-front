@@ -3,11 +3,17 @@ import parse from 'html-react-parser';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import { formatFullDate } from '@/utils/date';
+import type { Journal } from '../../model/journals.schema';
 import styles from './JournalAccordion.module.css';
 
-function JournalAccordion(props) {
-  const { journal, day, keyword, isSearching } = props;
+interface JournalAccordionProps {
+  journal: Journal;
+  day: number;
+  keyword: string;
+  isSearching: boolean;
+}
 
+function JournalAccordion({ journal, day, keyword, isSearching }: JournalAccordionProps) {
   const [expanded, setExpanded] = useState(false);
   const toggleExpanded = () => setExpanded(!expanded);
   const regex = new RegExp(`(${keyword})`, 'gi');

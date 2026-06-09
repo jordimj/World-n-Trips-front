@@ -1,9 +1,14 @@
 import { Box, Stack, Typography } from '@mui/material';
 import Chip from '@/template/components/Chip/Chip';
 import { formatTripDates } from '@/utils/date';
+import type { Trip } from '../../model/trips.schema';
 import styles from './Hero.module.css';
 
-function Hero({ trip }) {
+interface HeroProps {
+  trip: Trip;
+}
+
+function Hero({ trip }: HeroProps) {
   const hasChip = trip.telework || trip.worktrip;
 
   return (
@@ -16,9 +21,11 @@ function Hero({ trip }) {
       <Stack className={styles.text}>
         <Typography variant="h1">{trip.name}</Typography>
         {trip.summary && <Typography variant="h2">{trip.summary}</Typography>}
-        <Typography variant="h3">
-          {formatTripDates(trip.arrivalDate, trip.departureDate)}
-        </Typography>
+        {trip.arrivalDate && trip.departureDate && (
+          <Typography variant="h3">
+            {formatTripDates(trip.arrivalDate, trip.departureDate)}
+          </Typography>
+        )}
         {hasChip && <Chip variant={trip.telework ? 'telework' : 'worktrip'} />}
       </Stack>
     </Box>

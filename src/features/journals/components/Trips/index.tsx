@@ -8,10 +8,13 @@ import useTrips from '../../hooks/useTrips';
 
 function Trips() {
   const { data: trips = [] } = useTrips();
-  const [filterTrips, setFilterTrips] = useLocalStorage('filter_trips', 'false');
+  const [filterTrips, setFilterTrips] = useLocalStorage<boolean>('filter_trips', false);
 
   const filteredTrips = filterTrips ? trips.filter((trip) => trip.hasJournals) : trips;
-  const groupedTrips = groupBy(filteredTrips, (trip) => trip.departureDate?.getFullYear());
+  const groupedTrips = groupBy(
+    filteredTrips,
+    (trip) => trip.departureDate?.getFullYear().toString() ?? ''
+  );
 
   return (
     <Box textAlign="center">

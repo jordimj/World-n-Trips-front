@@ -22,10 +22,7 @@ export default function Settings() {
   const handleClose = () => setAnchorEl(null);
 
   const { fullWidth, saveFullWidth } = useFullWidth();
-  const [enabledEphemerides, setEnabledEphemerides] = useLocalStorage(
-    'enabled_ephemerides',
-    'true'
-  );
+  const [enabledEphemerides, setEnabledEphemerides] = useLocalStorage<boolean>('enabled_ephemerides', true);
 
   return (
     <Stack direction="row" gap={1} alignItems="center" sx={{ ml: 'auto' }}>

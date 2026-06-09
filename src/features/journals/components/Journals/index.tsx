@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
 import Spinner from '@/template/components/Spinner/Spinner';
-import { useSearchParams } from 'react-router-dom';
 import useJournalSearch from '../../hooks/useJournalSearch';
 import useJournals from '../../hooks/useJournals';
 import useTrips from '../../hooks/useTrips';
@@ -14,7 +14,7 @@ import JournalAccordion from '../JournalAccordion';
 import Search from '../Search';
 
 function Journals() {
-  const { tripId } = useParams();
+  const { tripId } = useParams<{ tripId: string }>();
   const [, setSearchParams] = useSearchParams();
 
   const {
@@ -37,31 +37,30 @@ function Journals() {
 
   return (
     <Fragment>
-      <Hero trip={trip} />
-      {hasJournals ?
-        (
-          <Fragment>
-            <Search
-              search={search}
-              keywordRef={keywordRef}
-              handleSearch={handleSearch}
-              handleStopSearch={handleStopSearch}
-              handleNextOccurrence={handleNextOccurrence}
-              handleLastOccurrence={handleLastOccurrence}
-            />
-            <Stack direction="row" gap={3} justifyContent="center" flexWrap="wrap" sx={{ pt: 3 }}>
-              {journals.map((journal, idx) => (
-                <JournalAccordion
-                  key={idx}
-                  day={idx + 1}
-                  journal={journal}
-                  isSearching={search.isSearching}
-                  keyword={keywordRef.current?.value ?? ''}
-                />
-              ))}
-            </Stack>
-          </Fragment>)
-        :
+      <Hero trip={trip!} />
+      {hasJournals ? (
+        <Fragment>
+          <Search
+            search={search}
+            keywordRef={keywordRef}
+            handleSearch={handleSearch}
+            handleStopSearch={handleStopSearch}
+            handleNextOccurrence={handleNextOccurrence}
+            handleLastOccurrence={handleLastOccurrence}
+          />
+          <Stack direction="row" gap={3} justifyContent="center" flexWrap="wrap" sx={{ pt: 3 }}>
+            {journals.map((journal, idx) => (
+              <JournalAccordion
+                key={idx}
+                day={idx + 1}
+                journal={journal}
+                isSearching={search.isSearching}
+                keyword={keywordRef.current?.value ?? ''}
+              />
+            ))}
+          </Stack>
+        </Fragment>
+      ) : (
         <Stack gap={3} sx={{ alignItems: 'center', mt: 10 }}>
           <Typography sx={{ fontSize: 'var(--spacing-5)' }}>
             You have not added journal entries for this trip yet.
@@ -74,7 +73,8 @@ function Journals() {
           >
             Add journal entries
           </Button>
-        </Stack>}
+        </Stack>
+      )}
     </Fragment>
   );
 }

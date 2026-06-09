@@ -6,7 +6,17 @@ import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import type { SearchState } from '../../hooks/useJournalSearch';
 import styles from './Search.module.css';
+
+interface SearchProps {
+  search: SearchState;
+  keywordRef: React.RefObject<HTMLInputElement | null>;
+  handleNextOccurrence: () => void;
+  handleLastOccurrence: () => void;
+  handleSearch: () => void;
+  handleStopSearch: () => void;
+}
 
 function Search({
   search,
@@ -15,10 +25,10 @@ function Search({
   handleLastOccurrence,
   handleSearch,
   handleStopSearch,
-}) {
+}: SearchProps) {
   const { isSearching, totalMatches, current } = search;
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && !isSearching) {
       event.preventDefault();
       handleSearch();
@@ -56,7 +66,7 @@ function Search({
             <Typography>{totalMatches} occurrences found!</Typography>
             <Stack direction="row" alignItems="center" justifyContent="center">
               <Typography sx={{ pr: 1 }}>
-                {current + 1} / {totalMatches}
+                {current! + 1} / {totalMatches}
               </Typography>
               <IconButton
                 onClick={handleLastOccurrence}

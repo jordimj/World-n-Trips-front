@@ -11,8 +11,8 @@ interface Trip {
   picture?: string | File;
   telework?: boolean;
   worktrip?: boolean;
-  arrivalDate?: Date;
-  departureDate?: Date;
+  arrivalDate?: Date | null;
+  departureDate?: Date | null;
 }
 
 interface Props {
