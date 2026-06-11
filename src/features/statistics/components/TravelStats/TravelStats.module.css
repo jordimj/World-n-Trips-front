@@ -1,7 +1,10 @@
 .metricsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
   gap: var(--spacing-5);
+  flex: 1;
+  min-width: 0;
 }
 
 .root {

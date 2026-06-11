@@ -5,7 +5,6 @@
   border-radius: var(--border-radius);
   padding: var(--spacing-5);
   position: relative;
-  grid-row: 1 / 4;
 
   & svg {
     fill: var(--primary-color-100);
