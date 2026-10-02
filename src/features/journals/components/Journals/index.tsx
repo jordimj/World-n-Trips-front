@@ -31,14 +31,15 @@ function Journals() {
   const hasJournals = journals.length > 0;
 
   const trip = trips.find((trip) => trip.id === Number(tripId));
-  const isLoading = isLoadingTrips || isLoadingJournals;
 
-  if (isLoading) return <Spinner />;
+  if (isLoadingTrips || !trip) return <Spinner />;
 
   return (
     <Fragment>
-      <Hero trip={trip!} />
-      {hasJournals ? (
+      <Hero trip={trip} />
+      {isLoadingJournals ? (
+        <Spinner />
+      ) : hasJournals ? (
         <Fragment>
           <Search
             search={search}

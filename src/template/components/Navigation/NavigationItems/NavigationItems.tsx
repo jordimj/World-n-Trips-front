@@ -7,7 +7,7 @@ import NavigationItem from './NavigationItem/NavigationItem';
 import styles from './NavigationItems.module.css';
 
 const navigationItems = () => (
-  <nav>
+  <nav className={styles.navigationDock}>
     <ul className={styles.navigationItems}>
       <NavigationItem icon={<PublicIcon fontSize="large" />} label="World map" link="/" />
       <NavigationItem icon={<FlagIcon fontSize="large" />} label="Countries" link="/countries" />
