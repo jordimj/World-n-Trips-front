@@ -12,9 +12,9 @@ function useInserterContext() {
 
   const [state, dispatch] = context;
 
-  const goNextStep = () => dispatch({ type: 'SET_ACTIVE_STEP', payload: ++state.activeStep });
+  const goNextStep = () => dispatch({ type: 'SET_ACTIVE_STEP', payload: state.activeStep + 1 });
 
-  const goLastStep = () => dispatch({ type: 'SET_ACTIVE_STEP', payload: --state.activeStep });
+  const goLastStep = () => dispatch({ type: 'SET_ACTIVE_STEP', payload: state.activeStep - 1 });
 
   const setDatakind = (datakind: ImportKind) =>
     dispatch({ type: 'SET_DATA_KIND', payload: datakind });

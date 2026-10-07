@@ -3,7 +3,7 @@ import TableRow from '@mui/material/TableRow';
 import useCategories from '../../hooks/useCategories';
 import useDataValidation from '../../hooks/useDataValidation';
 import useInserterContext from '../../hooks/useInserterContext';
-import { Day, Expense, Night, Spot, TableKind } from '../../types';
+import { Day, Expense, Night, Spot, TableData, TableKind } from '../../types';
 import DataTableCell from './DataTableCell';
 
 function isDayRow(row: unknown, dataKind: string): row is Day {
@@ -40,21 +40,14 @@ export default function DataTableRow(props: Props) {
 
   const updateParsedData = (
     id: number,
-    key: 'category' | 'subcategory' | 'extraInfo',
+    key: 'category' | 'subcategory' | 'extraInfo' | 'provinceName',
     value: string
   ) => {
     if (!Array.isArray(parsedData)) return;
 
-    const newParsedData = (parsedData as Expense[])?.map((data) => {
-      if (data.id === id) {
-        return {
-          ...data,
-          [key]: value,
-        } as Expense;
-      }
-
-      return data as Expense;
-    }) as Expense[];
+    const newParsedData = parsedData.map((data) =>
+      data.id === id ? { ...data, [key]: value } : data
+    ) as TableData;
 
     setParsedData(newParsedData);
   };
@@ -84,6 +77,11 @@ export default function DataTableRow(props: Props) {
           <DataTableCell value={row.name} validationErrors={validationErrors['name']} />
           <DataTableCell value={row.spotKind} validationErrors={validationErrors['spotKind']} />
           <DataTableCell value={row.state} validationErrors={validationErrors['state']} />
+          <DataTableCell.Editable
+            value={row.provinceName ?? ''}
+            validationErrors={validationErrors['provinceName']}
+            onEdit={(value: string) => updateParsedData(row.id!, 'provinceName', value)}
+          />
           <DataTableCell value={row.shire} validationErrors={validationErrors['shire']} />
         </Fragment>
       )}

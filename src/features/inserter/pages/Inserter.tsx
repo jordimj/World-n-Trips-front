@@ -4,10 +4,38 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Dialog, DialogTitle, IconButton } from '@mui/material';
 import Stepper from '../components/Stepper';
 import { InserterProvider } from '../context/InserterProvider';
+import useInserterContext from '../hooks/useInserterContext';
 
 interface InserterDialogProps {
   open: boolean;
   onClose: () => void;
+}
+
+const TITLES = {
+  trip: 'Create a trip',
+  journal: 'Add a journal',
+  day: 'Add days',
+  night: 'Add nights',
+  expense: 'Add expenses',
+  spot: 'Add spots',
+};
+
+function InserterHeader({ onClose }: { onClose: () => void }) {
+  const {
+    state: { activeStep, dataKind },
+  } = useInserterContext();
+  const title = activeStep > 0 && dataKind ? TITLES[dataKind] : 'Add to your travels';
+
+  return (
+    <DialogTitle
+      sx={{ display: 'flex', alignItems: 'center', px: 3, py: 2, color: 'var(--text-color)' }}
+    >
+      {title}
+      <IconButton aria-label="close-inserter-dialog" onClick={onClose} sx={{ ml: 'auto' }}>
+        <CloseIcon />
+      </IconButton>
+    </DialogTitle>
+  );
 }
 
 function InserterDialog(props: InserterDialogProps) {
@@ -27,13 +55,8 @@ function InserterDialog(props: InserterDialogProps) {
         },
       }}
     >
-      <DialogTitle sx={{ display: 'flex' }}>
-        Add new travel data
-        <IconButton aria-label="close-inserter-dialog" onClick={onClose} sx={{ ml: 'auto' }}>
-          <CloseIcon />
-        </IconButton>
-      </DialogTitle>
       <InserterProvider>
+        <InserterHeader onClose={onClose} />
         <Stepper />
       </InserterProvider>
     </Dialog>

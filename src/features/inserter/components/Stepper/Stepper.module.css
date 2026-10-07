@@ -1,7 +1,10 @@
 .stepper {
   background-color: white;
-  padding: var(--spacing-6) 0;
-  width: 100%;
+  padding: var(--spacing-3) 0;
+  width: 90%;
+  max-width: 760px;
+  align-self: center;
+  flex-shrink: 0;
 }
 
 .stepContent {

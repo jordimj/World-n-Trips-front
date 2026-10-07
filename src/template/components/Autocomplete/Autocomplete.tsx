@@ -18,19 +18,25 @@ export interface Option {
 export interface Options extends Array<Option> {}
 
 interface Props
-  extends Pick<AutocompleteProps<Option, false, false, false>, 'renderOption' | 'sx'> {
+  extends Pick<AutocompleteProps<Option, false, false, false>, 'renderOption' | 'sx' | 'disabled'> {
   label: string;
+  valueId?: number | null;
   loading: boolean;
   options?: Options;
   onChangeOption: (optionId: number | null) => void;
 }
 
 function Autocomplete(props: Props) {
-  const { label, loading, options, onChangeOption, renderOption, sx } = props;
+  const { label, valueId, disabled, loading, options, onChangeOption, renderOption, sx } = props;
 
   return (
     <MuiAutocomplete
       disablePortal
+      disabled={disabled}
+      {...(valueId !== undefined && {
+        value: options?.find((option) => option.id === valueId) ?? null,
+      })}
+      isOptionEqualToValue={(option, value) => option.id === value.id}
       id={`autocomplete-${label}`}
       loadingText="Fetching items"
       options={options ?? []}

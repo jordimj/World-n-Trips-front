@@ -13,7 +13,7 @@ import styles from './DataTable.module.css';
 const TABLE_HEADERS = {
   day: ['Date', 'Kilometers'],
   night: ['Date', 'City', 'Slept At', 'Extra Info', 'Free'],
-  spot: ['Spot', 'Spot kind', 'State', 'Shire'],
+  spot: ['Spot', 'Spot kind', 'State code', 'Province name', 'Shire'],
   expense: ['Date', 'Category', 'Subcategory', 'Extra info', 'Value', 'Currency', 'Value (EUR)'],
 };
 

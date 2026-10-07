@@ -43,6 +43,7 @@ const SpotSchema = z.object({
   spotKind: z.string(),
   state: z.string(),
   shire: z.string(),
+  provinceName: z.string().max(255).optional(),
 });
 
 const ExpenseSchema = z.object({

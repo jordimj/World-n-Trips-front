@@ -1,22 +1,33 @@
-import {
-  NightShelter as NightShelterIcon,
-  LightMode as LightModeIcon,
-  Euro as EuroIcon,
-  Room as RoomIcon,
-  EditNote as EditNoteIcon,
-  LocalAirport as LocalAirportIcon,
-} from '@mui/icons-material';
-import { capitalize, Stack, Typography } from '@mui/material';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import EuroIcon from '@mui/icons-material/Euro';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import LocalAirportIcon from '@mui/icons-material/LocalAirport';
+import NightShelterIcon from '@mui/icons-material/NightShelter';
+import RoomIcon from '@mui/icons-material/Room';
+import { Button, ButtonBase, Stack, Typography } from '@mui/material';
 import useInserterContext from '../../hooks/useInserterContext';
 
-const DATA_KINDS = {
-  trip: <LocalAirportIcon fontSize="inherit" />,
-  day: <LightModeIcon fontSize="inherit" />,
-  night: <NightShelterIcon fontSize="inherit" />,
-  spot: <RoomIcon fontSize="inherit" />,
-  expense: <EuroIcon fontSize="inherit" />,
-  journal: <EditNoteIcon fontSize="inherit" />,
-};
+const MAIN_OPTIONS = [
+  {
+    kind: 'trip',
+    label: 'Trip',
+    description: 'Create a trip and import your itinerary',
+    Icon: LocalAirportIcon,
+  },
+  {
+    kind: 'journal',
+    label: 'Journal',
+    description: 'Write about a day of your trip',
+    Icon: EditNoteIcon,
+  },
+] as const;
+
+const INDIVIDUAL_OPTIONS = [
+  { kind: 'day', label: 'Day', Icon: LightModeIcon },
+  { kind: 'night', label: 'Night', Icon: NightShelterIcon },
+  { kind: 'expense', label: 'Expense', Icon: EuroIcon },
+  { kind: 'spot', label: 'Spot', Icon: RoomIcon },
+] as const;
 
 function Step1() {
   const {
@@ -24,41 +35,93 @@ function Step1() {
   } = useInserterContext();
 
   return (
-    <Stack alignItems="center" gap={2}>
-      <Typography variant="h2">Select the kind of data to be imported</Typography>
+    <Stack
+      alignItems="center"
+      gap={5}
+      sx={{ width: '100%', maxWidth: 860, mx: 'auto', py: 3, px: { xs: 2, sm: 3 } }}
+    >
+      <Typography variant="h2" sx={{ textAlign: 'center', fontSize: { xs: 28, sm: 36 } }}>
+        What would you like to add?
+      </Typography>
       <Stack
-        direction="row"
-        gap={3}
-        flexWrap="wrap"
-        sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}
+        sx={{
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: { xs: 'minmax(0, 300px)', sm: 'repeat(2, minmax(0, 300px))' },
+          justifyContent: 'center',
+          gap: 3,
+        }}
       >
-        {(Object.keys(DATA_KINDS) as (keyof typeof DATA_KINDS)[]).map((kind) => (
-          <Stack
+        {MAIN_OPTIONS.map(({ kind, label, description, Icon }) => (
+          <ButtonBase
             key={kind}
-            role="button"
-            justifyContent="center"
-            alignItems="center"
-            gap={3}
             onClick={() => setDatakind(kind)}
             sx={{
-              backgroundColor: 'white',
-              py: 3,
-              px: 5,
+              flexDirection: 'column',
+              gap: 2,
+              px: 3,
+              py: 4,
+              minHeight: 240,
               border: 'var(--border)',
               borderRadius: 'var(--border-radius)',
+              backgroundColor: 'white',
+              color: 'var(--text-color)',
+              transition: 'border-color 150ms ease, box-shadow 150ms ease',
               '&:hover': {
-                backgroundColor: 'var(--border)',
                 borderColor: 'var(--secondary-color)',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.06)',
               },
-              '& svg': {
-                fontSize: 'var(--spacing-11)',
+              '&.Mui-focusVisible': {
+                outline: '2px solid var(--secondary-color)',
+                outlineOffset: 3,
               },
             }}
           >
-            {DATA_KINDS[kind]}
-            <Typography fontSize="var(--spacing-6)">{capitalize(kind)}</Typography>
-          </Stack>
+            <Icon sx={{ fontSize: 64, color: 'var(--text-color)' }} />
+            <Typography component="span" sx={{ fontSize: 28, fontWeight: 600 }}>
+              {label}
+            </Typography>
+            <Typography
+              component="span"
+              variant="body2"
+              color="text.secondary"
+              sx={{
+                maxWidth: 240,
+                textAlign: 'center',
+                textWrap: kind === 'trip' ? 'balance' : undefined,
+              }}
+            >
+              {description}
+            </Typography>
+          </ButtonBase>
         ))}
+      </Stack>
+      <Stack gap={2} alignItems="center" sx={{ width: '100%' }}>
+        <Typography variant="body2" color="text.secondary" textAlign="center">
+          Or add individual data to an existing trip
+        </Typography>
+        <Stack
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: 'repeat(2, 1fr)', sm: 'repeat(4, 1fr)' },
+            gap: 1.5,
+            width: '100%',
+            maxWidth: 620,
+          }}
+        >
+          {INDIVIDUAL_OPTIONS.map(({ kind, label, Icon }) => (
+            <Button
+              key={kind}
+              variant="outlined"
+              color="secondary"
+              startIcon={<Icon />}
+              onClick={() => setDatakind(kind)}
+              sx={{ py: 1.25, textTransform: 'none', fontStyle: 'normal', fontWeight: 600 }}
+            >
+              {label}
+            </Button>
+          ))}
+        </Stack>
       </Stack>
     </Stack>
   );

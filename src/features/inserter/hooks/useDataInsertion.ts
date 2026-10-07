@@ -59,28 +59,13 @@ function useDataInsertion() {
         parsedData: draftToHtml(rawContentState),
       } as JournalBody)
     : isTrip
-      ? (() => {
-          const tripBody = {
-            name: trip?.name,
-            summary: trip?.summary,
-            coverImage: trip?.coverImage,
-            worktrip: trip?.work === 'worktrip',
-            telework: trip?.work === 'telework',
-          } as TripBody;
-
-          if (trip?.imageFile) {
-            const formData = new FormData();
-            formData.append('name', tripBody.name);
-            formData.append('summary', tripBody.summary);
-            formData.append('coverImage', tripBody.coverImage); // Might be empty string
-            formData.append('worktrip', tripBody.worktrip ? '1' : '0');
-            formData.append('telework', tripBody.telework ? '1' : '0');
-            formData.append('imageFile', trip?.imageFile);
-            return formData;
-          }
-
-          return tripBody;
-        })()
+      ? ({
+          name: trip?.name,
+          summary: trip?.summary,
+          coverImage: trip?.coverImage,
+          worktrip: trip?.work === 'worktrip',
+          telework: trip?.work === 'telework',
+        } as TripBody)
       : ({
           parsedData,
           optionId,

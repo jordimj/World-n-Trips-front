@@ -64,3 +64,24 @@ export async function getCategories() {
 export async function search(keyword: string) {
   return (await instance.get('/search', { params: { keyword } })).data;
 }
+
+export interface FullTripBody {
+  tripId: number;
+  tables: {
+    kind: 'day' | 'night' | 'expense' | 'spot';
+    countryId?: number | null;
+    rows: Record<string, string>[];
+  }[];
+}
+
+export async function saveFullTrip(body: FullTripBody) {
+  return (await instance.post('/trips/import', body)).data;
+}
+
+export async function getProvinces(): Promise<Record<string, string>> {
+  return (await instance.get('/provinces')).data;
+}
+
+export async function createTripWithData(body: FormData) {
+  return (await instance.post('/trips/create-with-data', body)).data;
+}

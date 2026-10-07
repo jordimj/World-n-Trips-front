@@ -17,10 +17,11 @@ interface Trip {
 
 interface Props {
   trip: Trip;
+  summary?: string;
 }
 
 function TripCard(props: Props) {
-  const { trip } = props;
+  const { trip, summary } = props;
 
   const navigate = useNavigate();
   const hasChip = trip.telework || trip.worktrip;
@@ -52,15 +53,23 @@ function TripCard(props: Props) {
           <Typography
             gutterBottom
             variant="h5"
-            sx={{ letterSpacing: 'var(--uppercase-letter-spacing)' }}
+            sx={{ letterSpacing: 'var(--uppercase-letter-spacing)', textAlign: 'center' }}
           >
             {trip.name}
           </Typography>
-          {trip.arrivalDate && trip.departureDate && (
+          {summary !== undefined ? (
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ overflowWrap: 'anywhere', textAlign: 'center' }}
+            >
+              {summary}
+            </Typography>
+          ) : trip.arrivalDate && trip.departureDate ? (
             <Typography variant="body2" color="text.secondary">
               {formatTripDates(trip.arrivalDate, trip.departureDate)}
             </Typography>
-          )}
+          ) : null}
         </CardContent>
       </ConditionalWrapper>
     </Card>

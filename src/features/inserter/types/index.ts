@@ -44,6 +44,7 @@ export interface Spot {
   id?: number;
   name: string;
   spotKind: string;
+  provinceName?: string;
   state: string;
   shire: string;
   countryId?: number;

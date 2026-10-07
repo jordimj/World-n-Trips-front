@@ -11,15 +11,20 @@ import Autocomplete, { Options } from './Autocomplete';
 interface Props {
   onChangeOption: (optionId: number | null) => void;
   sx?: SxProps;
+  label?: string;
+  valueId?: number | null;
+  disabled?: boolean;
 }
 
 function AutocompleteCountries(props: Props) {
-  const { onChangeOption, sx } = props;
+  const { onChangeOption, sx, label = 'Country', valueId, disabled } = props;
   const { data, isFetching } = useCountries();
 
   return (
     <Autocomplete
-      label="Country"
+      label={label}
+      valueId={valueId}
+      disabled={disabled}
       loading={isFetching}
       options={data}
       onChangeOption={onChangeOption}

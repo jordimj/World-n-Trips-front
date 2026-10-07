@@ -15,6 +15,7 @@
     "dayjs": "^1.11.18",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
+    "exceljs": "^4.4.0",
     "html-react-parser": "^5.2.6",
     "papaparse": "^5.5.3",
     "react": "^19.1.1",
@@ -51,7 +52,8 @@
     "start": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "pretty": "prettier --write \"src/**/*.+(js|json|css)\""
+    "pretty": "prettier --write \"src/**/*.+(js|json|css)\"",
+    "test:import": "node --test tests/full-trip.test.cjs"
   },
   "browserslist": {
     "production": [
