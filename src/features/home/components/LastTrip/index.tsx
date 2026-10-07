@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { ArrowForward } from '@mui/icons-material';
 import { Button, Skeleton, Stack, Typography } from '@mui/material';
-import useTrips from '@/features/journals/hooks/useTrips';
+import useTrips from '@/features/trips/hooks/useTrips';
 import { formatTripDates } from '@/utils/date';
 import styles from './LastTrip.module.css';
 
@@ -53,7 +53,7 @@ export default function LastTrip() {
         <Button
           variant="contained"
           endIcon={<ArrowForward />}
-          onClick={() => navigate(`/journals/${lastTrip.id}`)}
+          onClick={() => navigate(`/trips/${lastTrip.id}`)}
           sx={{ width: 'fit-content', px: 2, ml: 'auto', mt: 1 }}
         >
           View trip details

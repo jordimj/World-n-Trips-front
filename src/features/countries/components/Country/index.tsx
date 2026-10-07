@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import FlagIcon from '@mui/icons-material/Flag';
 import { Button, Stack, Typography } from '@mui/material';
@@ -12,6 +12,7 @@ import NightsStatistics from './Statistics/Nights/Nights';
 import VisitedSpots from './VisitedSpots';
 
 function Country() {
+  const navigate = useNavigate();
   const { data: country, isFetching } = useCountry();
   const { mutate: setVisited, isPending: isPendingVisited } = useSetCountryVisited();
   const [, setSearchParams] = useSearchParams();
@@ -51,6 +52,11 @@ function Country() {
             <ExpensesStatistics
               expenses={country.expenses}
               totalNights={country.nights?.count.total}
+              onViewExpenses={() =>
+                navigate('/expenses', {
+                  state: { country: { id: country.info.id, name: country.info.name } },
+                })
+              }
             />
           )}
         </Fragment>

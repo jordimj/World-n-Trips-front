@@ -85,3 +85,7 @@ export async function getProvinces(): Promise<Record<string, string>> {
 export async function createTripWithData(body: FormData) {
   return (await instance.post('/trips/create-with-data', body)).data;
 }
+
+export async function getRangeStatistics(from: string, to: string) {
+  return (await instance.get('/statistics/range', { params: { from, to } })).data;
+}

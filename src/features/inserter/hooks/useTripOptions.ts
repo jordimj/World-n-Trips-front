@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getTrips } from '@/api';
-import useTrips from '@/features/journals/hooks/useTrips';
-import { Trips } from '@/features/journals/model/trips.schema';
+import useTrips from '@/features/trips/hooks/useTrips';
+import { Trips } from '@/features/trips/model/trips.schema';
 import { Options } from '@/template/components/Autocomplete/Autocomplete';
 
 export default function useTripOptions() {

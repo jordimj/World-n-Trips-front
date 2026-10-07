@@ -79,7 +79,7 @@ Metric.Walked = (props: { metric: number }) => {
 };
 
 Metric.Expenses = (props: {
-  metric: number;
+  metric: number | null;
   label?: string;
   withMoneyIcon?: boolean;
   formattedAsNumber?: boolean;
@@ -95,7 +95,9 @@ Metric.Expenses = (props: {
     <Metric
       icon={withMoneyIcon ? <MoneyIcon fontSize="inherit" /> : <EuroIcon fontSize="inherit" />}
       label={label}
-      metric={formattedAsNumber ? numberFormatter(metric) : euroFormatter(metric)}
+      metric={
+        metric === null ? '—' : formattedAsNumber ? numberFormatter(metric) : euroFormatter(metric)
+      }
       sx={{ flexGrow: 1 }}
     />
   );

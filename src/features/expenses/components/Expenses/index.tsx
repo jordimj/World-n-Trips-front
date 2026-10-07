@@ -9,6 +9,8 @@ import Table from '../Table';
 interface LocationState {
   country?: Option;
   keyword?: string;
+  from?: string;
+  to?: string;
 }
 
 function Expenses() {
@@ -16,12 +18,21 @@ function Expenses() {
 
   const location = useLocation();
   const state = location.state as LocationState | undefined;
-  const { country, keyword } = state ?? {};
+  const { country, keyword, from, to } = state ?? {};
 
   useEffect(() => {
-    if (country !== undefined) setFilters({ ...filters, countries: [country] });
-    if (keyword !== undefined) setFilters({ ...filters, query: keyword });
-  }, [country, keyword]);
+    setFilters((previous) => ({
+      ...previous,
+      ...(country !== undefined && { countries: [country] }),
+      ...(keyword !== undefined && { query: keyword }),
+      ...(from !== undefined && {
+        from: new Date(from + 'T00:00:00'),
+        countries: undefined,
+        trips: undefined,
+      }),
+      ...(to !== undefined && { to: new Date(to + 'T00:00:00') }),
+    }));
+  }, [country, keyword, from, to]);
 
   return (
     <Fragment>

@@ -1,8 +1,10 @@
 .container {
   width: 100%;
+  overflow-x: auto;
 }
 
 .header {
+  min-width: 320px;
   display: flex;
   padding: 20px;
   background-color: var(--header-background-color);
@@ -29,6 +31,7 @@
 }
 
 .rows {
+  min-width: 320px;
   box-shadow: var(--box-shadow);
   border-radius: 8px;
   padding: 1%;

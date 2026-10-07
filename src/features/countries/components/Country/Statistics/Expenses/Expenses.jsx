@@ -1,6 +1,4 @@
-import { useNavigate } from 'react-router-dom';
 import { Box, Button, Stack } from '@mui/material';
-import useCountry from '@/features/countries/hooks/useCountry';
 import Divider from '@/template/components/Divider';
 import Metric from '@/template/components/Metric';
 import { deductNotDailyExpenses } from '@/utils';
@@ -8,28 +6,15 @@ import ExpensesChart from './ExpensesChart';
 import ExpensesTable from './ExpensesTable';
 import styles from './Expenses.module.css';
 
-export default function ExpensesStatistics({ expenses, totalNights }) {
+export default function ExpensesStatistics({ expenses, totalNights, onViewExpenses }) {
   const { sum, categories } = expenses;
   const sumWithoutDailyExp = deductNotDailyExpenses(sum, categories);
-
-  const navigate = useNavigate();
-  const { data: country } = useCountry();
-
-  const goToExpenses = () =>
-    navigate('/expenses', {
-      state: {
-        country: {
-          id: country.id,
-          name: country.name,
-        },
-      },
-    });
 
   const detailedExpenses = Object.entries(categories).map(([category, amount]) => ({
     category,
     amount,
-    percentage: amount / sum,
-    dailyAverage: amount / totalNights,
+    percentage: sum > 0 ? amount / sum : 0,
+    dailyAverage: totalNights > 0 ? amount / totalNights : null,
   }));
 
   return (
@@ -46,7 +31,10 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
         <Stack gap={3}>
           <Stack direction="row" gap={3} flexWrap="wrap">
             <Metric.Expenses metric={sum} />
-            <Metric.Expenses label="Expenses / day" metric={sum / totalNights} />
+            <Metric.Expenses
+              label="Expenses / day"
+              metric={totalNights > 0 ? sum / totalNights : null}
+            />
           </Stack>
           <Stack direction="row" gap={3} flexWrap="wrap">
             <Metric.Expenses
@@ -56,17 +44,19 @@ export default function ExpensesStatistics({ expenses, totalNights }) {
             />
             <Metric.Expenses
               label="Daily expenses / day"
-              metric={sumWithoutDailyExp / totalNights}
+              metric={totalNights > 0 ? sumWithoutDailyExp / totalNights : null}
               withMoneyIcon
             />
           </Stack>
         </Stack>
-        <Box className={styles.chart}>
-          <ExpensesChart expensesByCategory={categories} />
-        </Box>
+        {sum > 0 && (
+          <Box className={styles.chart}>
+            <ExpensesChart expensesByCategory={categories} />
+          </Box>
+        )}
       </Stack>
       <ExpensesTable expenses={detailedExpenses} />
-      <Button variant="text" onClick={goToExpenses} sx={{ ml: 'auto' }}>
+      <Button variant="text" onClick={onViewExpenses} sx={{ ml: 'auto' }}>
         Go to detailed expenses
       </Button>
     </Stack>

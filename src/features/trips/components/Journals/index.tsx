@@ -1,20 +1,17 @@
 import { Fragment } from 'react';
-import { useParams } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Divider from '@/template/components/Divider';
 import Spinner from '@/template/components/Spinner/Spinner';
 import useJournalSearch from '../../hooks/useJournalSearch';
 import useJournals from '../../hooks/useJournals';
-import useTrips from '../../hooks/useTrips';
-import Hero from '../Hero';
 import JournalAccordion from '../JournalAccordion';
 import Search from '../Search';
 
-function Journals() {
-  const { tripId } = useParams<{ tripId: string }>();
+function Journals({ query }: { query: ReturnType<typeof useJournals> }) {
   const [, setSearchParams] = useSearchParams();
 
   const {
@@ -26,18 +23,20 @@ function Journals() {
     handleStopSearch,
   } = useJournalSearch();
 
-  const { data: trips = [], isLoading: isLoadingTrips } = useTrips();
-  const { data: journals = [], isLoading: isLoadingJournals } = useJournals(tripId);
+  const { data: journals = [], isLoading: isLoadingJournals, isError, refetch } = query;
   const hasJournals = journals.length > 0;
-
-  const trip = trips.find((trip) => trip.id === Number(tripId));
-
-  if (isLoadingTrips || !trip) return <Spinner />;
 
   return (
     <Fragment>
-      <Hero trip={trip} />
-      {isLoadingJournals ? (
+      <Stack alignItems="center" sx={{ mt: 6, mb: 3 }}>
+        <Divider>Journals</Divider>
+      </Stack>
+      {isError ? (
+        <Stack alignItems="center" gap={2}>
+          <Typography>Unable to load journals.</Typography>
+          <Button onClick={() => refetch()}>Retry</Button>
+        </Stack>
+      ) : isLoadingJournals ? (
         <Spinner />
       ) : hasJournals ? (
         <Fragment>

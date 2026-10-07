@@ -74,6 +74,11 @@ function useDataInsertion() {
   const mutation = useMutation({
     mutationFn: () => saveNewData(dataKind!, body),
     onSuccess: () => {
+      if (dataKind && ['day', 'night', 'expense'].includes(dataKind)) {
+        queryClient.invalidateQueries({ queryKey: ['range-statistics'] });
+        queryClient.invalidateQueries({ queryKey: ['trips'] });
+      }
+      if (isJournal) queryClient.invalidateQueries({ queryKey: ['journals'] });
       if (isTrip) queryClient.invalidateQueries({ queryKey: ['trips'] });
       if (isCountryRelated) {
         const countryCode = countries?.find((country) => country.id === optionId)?.alpha3code;

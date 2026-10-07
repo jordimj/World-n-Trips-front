@@ -1,9 +1,11 @@
 .container {
-  width: 80%;
+  width: 100%;
+  overflow-x: auto;
 }
 
 .header {
   display: flex;
+  min-width: 640px;
   padding: 20px;
   background: var(--header-background-color);
   border-radius: 8px;
@@ -28,6 +30,7 @@
 }
 
 .rows {
+  min-width: 640px;
   box-shadow: var(--box-shadow);
   border-radius: 8px;
   padding: 1%;

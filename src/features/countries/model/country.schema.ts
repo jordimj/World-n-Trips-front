@@ -36,13 +36,13 @@ const StateVisitedSchema = z.object({
 
 const StatesVisitedSchema = z.array(StateVisitedSchema);
 
-const NightsSchema = z.object({
+export const NightsSchema = z.object({
   count: z.object({
     free: z.number(),
     paid: z.number(),
     total: z.number(),
   }),
-  spots: z.record(z.string(), z.number()),
+  spots: z.preprocess((val) => (Array.isArray(val) ? {} : val), z.record(z.string(), z.number())),
   infoExtra: z.preprocess(
     (val) => (Array.isArray(val) ? {} : val),
     z.record(z.string(), z.number())
@@ -79,7 +79,7 @@ const HitchhikesSchema = z.object({
   statsPerHour: z.array(StatPerHourSchema).nullable(),
 });
 
-const ExpensesSchema = z.object({
+export const ExpensesSchema = z.object({
   sum: z.number().nullable(),
   categories: z.preprocess(
     (val) => (Array.isArray(val) ? {} : val),

@@ -7,8 +7,9 @@ const Home = lazy(() => import('@/features/home/components/Home'));
 const Countries = lazy(() => import('@/features/countries/components/Countries'));
 const Country = lazy(() => import('@/features/countries/components/Country'));
 const TravelStats = lazy(() => import('@/features/statistics/components/TravelStats'));
-const Trips = lazy(() => import('@/features/journals/components/Trips'));
-const Journals = lazy(() => import('@/features/journals/components/Journals'));
+const Trips = lazy(() => import('@/features/trips/components/Trips'));
+const Trip = lazy(() => import('@/features/trips/components/Trip'));
+
 const Expenses = lazy(() => import('@/features/expenses/components/Expenses'));
 
 export const AppRouter = () => (
@@ -20,7 +21,7 @@ export const AppRouter = () => (
           <Route path="/countries" element={<Countries />} />
           <Route path="/statistics" element={<TravelStats />} />
           <Route path="/trips" element={<Trips />} />
-          <Route path="/journals/:tripId" element={<Journals />} />
+          <Route path="/trips/:tripId" element={<Trip />} />
           <Route path="/expenses" element={<Expenses />} />
           <Route path="/" element={<Home />} />
         </Routes>

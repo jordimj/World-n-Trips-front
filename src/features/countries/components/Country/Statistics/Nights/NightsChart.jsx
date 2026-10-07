@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto';
 import { Box } from '@mui/material';
+import Chart from 'chart.js/auto';
 
 const BORDER_COLOR = 'rgba(255, 99, 132, 0.8)';
 const HOVER_BORDER_COLOR = 'rgba(128, 128, 128, 1)';

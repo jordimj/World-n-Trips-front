@@ -31,9 +31,7 @@ function TripCard(props: Props) {
       <ConditionalWrapper
         condition={trip.id !== undefined}
         wrapper={(children) => (
-          <CardActionArea onClick={() => navigate(`/journals/${trip.id}`)}>
-            {children}
-          </CardActionArea>
+          <CardActionArea onClick={() => navigate(`/trips/${trip.id}`)}>{children}</CardActionArea>
         )}
       >
         {trip.picture && (

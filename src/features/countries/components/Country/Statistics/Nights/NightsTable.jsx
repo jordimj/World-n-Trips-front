@@ -14,9 +14,7 @@ const NightsTable = ({ spots }) => {
   const orderedSpots = tableOrderBy(spots, orderBy, direction);
 
   const switchDirection = () => {
-    setDirection(
-      direction === TABLE_DIRECTION_DESC ? TABLE_DIRECTION_ASC : TABLE_DIRECTION_DESC
-    );
+    setDirection(direction === TABLE_DIRECTION_DESC ? TABLE_DIRECTION_ASC : TABLE_DIRECTION_DESC);
   };
 
   const setOrderByAndDirection = (orderBy) => {

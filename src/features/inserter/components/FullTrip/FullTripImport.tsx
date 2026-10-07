@@ -153,12 +153,13 @@ export default function FullTripImport({ onBack }: { onBack: () => void }) {
           'search',
           'statistics',
           'journals',
+          'range-statistics',
           'expenses',
           'ephemerides',
         ].map((key) => queryClient.invalidateQueries({ queryKey: [key] }))
       );
       resetState();
-      navigate(`/journals/${created.tripId}`);
+      navigate(`/trips/${created.tripId}`);
     } catch (failure) {
       const response = (
         failure as {

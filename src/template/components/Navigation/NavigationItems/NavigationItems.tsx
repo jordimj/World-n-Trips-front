@@ -1,6 +1,6 @@
-import EditNoteIcon from '@mui/icons-material/EditNote';
 import EuroIcon from '@mui/icons-material/Euro';
 import FlagIcon from '@mui/icons-material/Flag';
+import LocalAirportIcon from '@mui/icons-material/LocalAirport';
 import PublicIcon from '@mui/icons-material/Public';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import NavigationItem from './NavigationItem/NavigationItem';
@@ -16,11 +16,7 @@ const navigationItems = () => (
         label="Travel stats"
         link="/statistics"
       />
-      <NavigationItem
-        icon={<EditNoteIcon fontSize="large" />}
-        label="Trip journals"
-        link="/trips"
-      />
+      <NavigationItem icon={<LocalAirportIcon fontSize="large" />} label="Trips" link="/trips" />
       <NavigationItem icon={<EuroIcon fontSize="large" />} label="Expenses" link="/expenses" />
     </ul>
   </nav>

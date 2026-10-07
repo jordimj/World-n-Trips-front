@@ -17,9 +17,7 @@ const ExpensesTable = ({ expenses }) => {
   const orderedExpenses = tableOrderBy(expenses, orderBy, direction);
 
   const switchDirection = () =>
-    setDirection(
-      direction === TABLE_DIRECTION_DESC ? TABLE_DIRECTION_ASC : TABLE_DIRECTION_DESC
-    );
+    setDirection(direction === TABLE_DIRECTION_DESC ? TABLE_DIRECTION_ASC : TABLE_DIRECTION_DESC);
 
   const setOrderByAndDirection = (orderBy) => {
     switchDirection();
@@ -64,7 +62,7 @@ const ExpensesTable = ({ expenses }) => {
             <div>{category}</div>
             <div>{euroFormatter(amount)}</div>
             <div>{percentageFormatter(percentage)}</div>
-            <div>{`${euroFormatter(dailyAverage)} / day`}</div>
+            <div>{dailyAverage === null ? '—' : `${euroFormatter(dailyAverage)} / day`}</div>
           </div>
         ))}
       </div>
