@@ -6,6 +6,9 @@ import Sidebar from '@/features/home/components/Sidebar';
 import { isCountryKey } from '@/template/components/CountryFlag';
 import styles from './Map.module.css';
 
+// Google GeoChart does not provide province maps for these countries.
+const COUNTRIES_WITHOUT_PROVINCE_MAPS = new Set(['SG', 'MC', 'SM', 'VA']);
+
 interface Props {
   data: Array<Array<string | number>>;
   region?: string;
@@ -17,6 +20,7 @@ function Map(props: Props) {
   const navigate = useNavigate();
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const hasNoProvinceMap = !isHome && COUNTRIES_WITHOUT_PROVINCE_MAPS.has(region ?? '');
 
   const options = isHome
     ? {
@@ -27,7 +31,7 @@ function Map(props: Props) {
       }
     : {
         region,
-        resolution: 'provinces',
+        resolution: hasNoProvinceMap ? 'countries' : 'provinces',
         enableRegionInteractivity: false,
         defaultColor: '#16888b',
       };
@@ -59,7 +63,12 @@ function Map(props: Props) {
 
   return (
     <div className={styles.container}>
-      <Chart chartType="GeoChart" chartEvents={chartEvents} data={data} options={options} />
+      <Chart
+        chartType="GeoChart"
+        chartEvents={chartEvents}
+        data={hasNoProvinceMap ? [['Country'], [region ?? '']] : data}
+        options={options}
+      />
       {isHome && <Sidebar />}
     </div>
   );
