@@ -1,95 +1,99 @@
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import { Stack } from '@mui/material';
-import { DATA_APPENDICES } from '@/constants';
-import Divider from '@/template/components/Divider';
-import Metric from '@/template/components/Metric';
+import RouteIcon from '@mui/icons-material/Route';
 import { numberFormatter } from '@/utils/number';
-import DetailRow from '../../CountryDetails/DetailRow/DetailRow';
 import HitchhikesCharts from './HitchhikesCharts';
+import styles from './Hitchhikes.module.css';
 
-export default function HitchhikesStatistics({ hitchhikes, totalNights }) {
+const format = (value, unit = '') =>
+  value != null && Number.isFinite(Number(value)) ? numberFormatter(Number(value), unit) : '—';
+
+function Comparison({ title, values, unit }) {
+  return (
+    <div className={styles.comparison}>
+      <h3>{title}</h3>
+      <dl>
+        {['longest', 'average', 'shortest'].map((key) => (
+          <div key={key}>
+            <dt>{key[0].toUpperCase() + key.slice(1)}</dt>
+            <dd>{format(values?.[key], unit)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
+export default function HitchhikesStatistics({ hitchhikes }) {
   const { totalKilometers, daysOnTheRoad, totalCars, distances, minutesWaiting, statsPerHour } =
     hitchhikes;
+  const average = (value, denominator) =>
+    denominator > 0 && value != null ? Number(value) / denominator : null;
 
   return (
-    <Stack component="section" gap={5} alignItems="center" sx={{ mt: 6 }}>
-      <Divider>Hitchhikes</Divider>
-      <Stack direction="row" gap={3} flexWrap="wrap">
-        <Metric.Hitchhikes metric={totalKilometers} />
-        <Metric
-          icon={<CalendarMonthIcon fontSize="inherit" />}
-          label="Days on the road"
-          metric={numberFormatter(daysOnTheRoad)}
-        />
-        {minutesWaiting && (
-          <Metric
-            icon={<AccessTimeIcon fontSize="inherit" />}
-            label="Minutes waiting"
-            metric={minutesWaiting.total}
-          />
-        )}
-        <Metric
-          icon={<DirectionsCarIcon fontSize="inherit" />}
-          label="Cars hitchhiked"
-          metric={numberFormatter(Math.trunc(totalCars))}
-        />
-      </Stack>
-      <Stack
-        direction="row"
-        justifyContent="space-evenly"
-        alignItems="center"
-        gap={2}
-        flexWrap="wrap"
-        sx={{ width: '100%' }}
-      >
-        <Stack sx={{ flex: 1, minWidth: 'var(--spacing-14)' }}>
-          <DetailRow
-            label="Average kilometers per traveled day"
-            value={numberFormatter(totalKilometers / totalNights, DATA_APPENDICES.KM)}
-          />
-          <DetailRow
-            label="Average kilometers per day on the road"
-            value={numberFormatter(totalKilometers / daysOnTheRoad, DATA_APPENDICES.KM)}
-          />
-          <DetailRow
-            label="Average rides per day on the road"
-            value={numberFormatter(totalCars / daysOnTheRoad, DATA_APPENDICES.RIDES)}
-          />
-        </Stack>
-        <Stack sx={{ flex: 1, minWidth: 'var(--spacing-14)' }}>
-          <DetailRow
-            label="Longest distance per ride"
-            value={numberFormatter(distances.longest, DATA_APPENDICES.KM)}
-          />
-          <DetailRow
-            label="Average distance per ride"
-            value={numberFormatter(distances.average, DATA_APPENDICES.KM)}
-          />
-          <DetailRow
-            label="Shortest distance per ride"
-            value={numberFormatter(distances.shortest, DATA_APPENDICES.KM)}
-          />
-        </Stack>
-        {minutesWaiting && (
-          <Stack sx={{ flex: 1, minWidth: 'var(--spacing-14)' }}>
-            <DetailRow
-              label="Longest wait per ride"
-              value={numberFormatter(minutesWaiting.waits.longest, DATA_APPENDICES.MINS)}
-            />
-            <DetailRow
-              label="Average wait per ride"
-              value={numberFormatter(minutesWaiting.waits.average, DATA_APPENDICES.MINS)}
-            />
-            <DetailRow
-              label="Shortest wait per ride"
-              value={numberFormatter(minutesWaiting.waits.shortest, DATA_APPENDICES.MINS)}
-            />
-          </Stack>
-        )}
-        {minutesWaiting && <HitchhikesCharts statsPerHour={statsPerHour} />}
-      </Stack>
-    </Stack>
+    <section className={styles.section} aria-labelledby="hitchhikes-heading">
+      <h2 id="hitchhikes-heading">Hitchhikes</h2>
+      <div className={styles.layout}>
+        <div>
+          <dl className={styles.metrics}>
+            <div>
+              <dt>Kilometers hitchhiked</dt>
+              <dd>{format(totalKilometers)}</dd>
+            </div>
+            <div>
+              <dt>Rides taken</dt>
+              <dd>{format(totalCars == null ? null : Math.trunc(totalCars))}</dd>
+            </div>
+          </dl>
+          <p className={styles.note}>
+            Across {format(daysOnTheRoad)} {Number(daysOnTheRoad) === 1 ? 'day' : 'days'} on the
+            road.
+          </p>
+          <div className={styles.supportingRow}>
+            <div>
+              <h3 className={styles.supportingHeading}>
+                <RouteIcon fontSize="small" /> On the road
+              </h3>
+              <p className={styles.supportingValue}>
+                {format(average(totalKilometers, daysOnTheRoad))}
+              </p>
+              <p className={styles.roadDayLabel}>Kilometers / road day</p>
+              {minutesWaiting && (
+                <div className={styles.roadRides}>
+                  <p className={styles.supportingValue}>
+                    {format(average(totalCars, daysOnTheRoad))}
+                  </p>
+                  <p className={styles.roadDayLabel}>Rides / road day</p>
+                </div>
+              )}
+            </div>
+            {minutesWaiting ? (
+              <div className={styles.waitingGroup}>
+                <h3 className={styles.supportingHeading}>
+                  <AccessTimeIcon fontSize="small" /> Time waiting
+                </h3>
+                <p className={styles.supportingValue}>{format(minutesWaiting.total)}</p>
+                <p className={styles.roadDayLabel}>Minutes waiting in total</p>
+              </div>
+            ) : (
+              <div className={styles.waitingGroup}>
+                <dl className={styles.ridesAverage}>
+                  <dt>Rides / road day</dt>
+                  <dd>{format(average(totalCars, daysOnTheRoad))}</dd>
+                </dl>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className={minutesWaiting ? styles.comparisons : styles.singleComparison}>
+          <Comparison title="Ride distances" values={distances} unit="km" />
+          {minutesWaiting && (
+            <Comparison title="Waiting time" values={minutesWaiting.waits} unit="min" />
+          )}
+        </div>
+      </div>
+      {statsPerHour?.length > 0 && (
+        <HitchhikesCharts statsPerHour={statsPerHour} hasWaiting={Boolean(minutesWaiting)} />
+      )}
+    </section>
   );
 }

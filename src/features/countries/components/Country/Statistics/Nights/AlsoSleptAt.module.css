@@ -1,14 +1,42 @@
-.extraInfoList {
-  width: 100%;
-  min-width: 250px;
-  text-align: left;
-  list-style: none;
+.note {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #faf5e9;
+  color: #354953;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
 }
-
-.extraInfoIcon {
-  font-size: var(--spacing-7);
-  color: inherit;
-  min-width: 0;
-  margin-left: var(--spacing-4);
-  margin-right: var(--spacing-4);
+:global([data-theme='dark']) .note {
+  background: #343028;
+  color: #f0e8d6;
+}
+.emoji {
+  flex: 0 0 24px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.3;
+}
+.note h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.note ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.note li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.count {
+  white-space: nowrap;
 }

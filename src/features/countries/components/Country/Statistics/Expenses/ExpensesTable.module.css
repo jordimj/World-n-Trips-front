@@ -1,49 +1,92 @@
-.container {
+.table {
   width: 100%;
-  overflow-x: auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
 }
-
-.header {
-  display: flex;
-  min-width: 640px;
-  padding: 20px;
-  background: var(--header-background-color);
-  border-radius: 8px;
-  box-shadow: var(--box-shadow);
+.table th {
+  text-align: left;
+  font-weight: 500;
 }
-
-.header button {
-  border: none;
-  outline: none;
-  background-color: transparent;
+.table thead th {
+  padding-bottom: 12px;
+  color: var(--summary-muted);
+  font-size: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+.table th:first-child {
+  width: 48%;
+}
+.table thead th:last-child,
+.table td {
+  text-align: right;
+}
+.table tbody th,
+.table td {
+  padding: 12px 0;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border-color);
+}
+.table tbody tr:last-child th,
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.table button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  min-height: 36px;
   cursor: pointer;
+  color: inherit;
+  border-radius: 4px;
 }
-
-.headerCell {
-  color: var(--header-text-color);
-  font-weight: 500;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
+.table button:hover {
+  color: var(--summary-accent);
 }
-
-.rows {
-  min-width: 640px;
-  box-shadow: var(--box-shadow);
-  border-radius: 8px;
-  padding: 1%;
-  background-color: var(--background-color-light);
-  text-align: center;
+.table button:focus-visible {
+  outline: 2px solid var(--summary-accent);
+  outline-offset: 4px;
 }
-
-.row {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(150px, 1fr));
-  gap: 10px;
-
-  padding: 10px;
-  background-color: transparent;
-  font-weight: 500;
+.category {
+  display: block;
+  text-transform: capitalize;
+  overflow-wrap: anywhere;
+}
+.track {
+  margin-top: 8px;
+  height: 6px;
+  background: var(--background-color-dark);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.track > span {
+  display: block;
+  height: 100%;
+  background: #16888b;
+  border-radius: inherit;
+}
+.amount {
+  font-weight: 700;
+}
+.percentage {
+  font-size: 12px;
+  margin-left: 8px;
+  color: var(--summary-muted);
+  white-space: nowrap;
+}
+.daily {
+  display: block;
+  font-size: 12px;
+  margin-top: 4px;
+  color: var(--summary-muted);
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }

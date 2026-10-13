@@ -1,50 +1,57 @@
-.container {
+.table {
   width: 100%;
-  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: fixed;
 }
-
-.header {
-  min-width: 320px;
-  display: flex;
-  padding: 20px;
-  background-color: var(--header-background-color);
-
-  border-radius: 8px;
-  box-shadow: var(--box-shadow);
+.table th {
+  text-align: left;
+  font-weight: 500;
 }
-
-.header button {
-  border: none;
-  outline: none;
-  background-color: transparent;
+.table thead th {
+  color: var(--summary-muted);
+  font-size: 12px;
+  padding-bottom: 10px;
+}
+.table thead th:last-child,
+.table td {
+  width: 64px;
+  text-align: right;
+}
+.table tbody th,
+.table td {
+  padding: 9px 0;
+  vertical-align: middle;
+}
+.table button {
+  min-height: 36px;
+  padding: 0;
+  border: 0;
   cursor: pointer;
+  background: transparent;
+  color: inherit;
+  border-radius: 4px;
 }
-
-.headerCell {
-  color: var(--header-text-color);
-  font-weight: 500;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
+.table button:hover {
+  color: var(--summary-accent);
 }
-
-.rows {
-  min-width: 320px;
-  box-shadow: var(--box-shadow);
-  border-radius: 8px;
-  padding: 1%;
-  background-color: var(--background-color-light);
-  text-align: center;
+.table button:focus-visible {
+  outline: 2px solid var(--summary-accent);
+  outline-offset: 4px;
 }
-
-.row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(150px, 1fr));
-  gap: 10px;
-
-  padding: 10px;
-  background-color: transparent;
-  font-weight: 500;
+.table tbody th > span {
+  overflow-wrap: anywhere;
+}
+.track {
+  height: 6px;
+  background: var(--background-color-dark);
+  border-radius: 3px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+.track > span {
+  height: 100%;
+  display: block;
+  background: #16888b;
+  border-radius: inherit;
 }

@@ -1,48 +1,45 @@
 import { useState } from 'react';
-import { Box, Stack, Typography } from '@mui/material';
-import ToggleButton from '@/template/components/ToggleButton';
 import HitchhikesChart from './HitchikesChart';
+import styles from './Hitchhikes.module.css';
 
-function HitchhikesCharts({ statsPerHour }) {
+const views = [
+  { id: 'rides', label: 'Rides' },
+  { id: 'distance', label: 'Distance' },
+  { id: 'minutes', label: 'Waiting' },
+];
+const titles = {
+  rides: 'Rides by hour',
+  distance: 'Kilometers by hour',
+  minutes: 'Minutes waiting by hour',
+};
+
+export default function HitchhikesCharts({ statsPerHour, hasWaiting }) {
   const [visibleChart, setVisibleChart] = useState('rides');
-
   return (
-    <Box
-      sx={{
-        backgroundColor: 'var(--background-color-light)',
-        boxShadow: 'var(--box-shadow)',
-        borderRadius: 'var(--border-radius)',
-        p: 3,
-        mt: 2,
-        width: '100%',
-      }}
-    >
-      <Stack
-        direction="row"
-        gap={2}
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{ mb: 2 }}
-      >
-        <Typography variant="h5">
-          {visibleChart === 'rides'
-            ? 'Number of cars hitchhiked per hour'
-            : visibleChart === 'distance'
-              ? 'Kilometers hitchhiked per hour'
-              : 'Minutes waiting on the road per hour'}
-        </Typography>
-        <ToggleButton
-          active={visibleChart}
-          options={[
-            { id: 'rides', label: 'Rides', onClick: () => setVisibleChart('rides') },
-            { id: 'distance', label: 'Distance', onClick: () => setVisibleChart('distance') },
-            { id: 'minutes', label: 'Waiting', onClick: () => setVisibleChart('minutes') },
-          ]}
-        />
-      </Stack>
-      <HitchhikesChart stats={statsPerHour} chartKind={visibleChart} />
-    </Box>
+    <div className={styles.charts}>
+      <div className={styles.chartHeader}>
+        <h3>By time of day</h3>
+        <div className={styles.controls} role="group" aria-label="Hourly chart view">
+          {views
+            .filter((view) => view.id !== 'minutes' || hasWaiting)
+            .map((view) => (
+              <button
+                key={view.id}
+                type="button"
+                aria-pressed={visibleChart === view.id}
+                onClick={() => setVisibleChart(view.id)}
+              >
+                {view.label}
+              </button>
+            ))}
+        </div>
+      </div>
+      <p id="hitchhikes-chart-title" className={styles.chartTitle}>
+        {titles[visibleChart]}
+      </p>
+      <div className={styles.chartCanvas}>
+        <HitchhikesChart stats={statsPerHour} chartKind={visibleChart} />
+      </div>
+    </div>
   );
 }
-
-export default HitchhikesCharts;

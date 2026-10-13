@@ -1,73 +1,81 @@
 import { useState } from 'react';
-import { TABLE_DIRECTION_ASC, TABLE_DIRECTION_DESC } from '@/constants';
-import { SortingArrow } from '@/template/components/SortingArrow/SortingArrow';
-import { tableOrderBy } from '@/utils';
-import { euroFormatter, percentageFormatter } from '@/utils/number';
+import { euroFormatter } from '@/utils/number';
 import styles from './ExpensesTable.module.css';
 
-const ORDER_BY_CATEGORY = 'category';
-const ORDER_BY_AMOUNT = 'amount';
-const ORDER_BY_PERCENTAGE = 'percentage';
-const ORDER_BY_DAILY_AVERAGE = 'dailyAverage';
-
-const ExpensesTable = ({ expenses }) => {
-  const [direction, setDirection] = useState(TABLE_DIRECTION_DESC);
-  const [orderBy, setOrderBy] = useState(ORDER_BY_CATEGORY);
-
-  const orderedExpenses = tableOrderBy(expenses, orderBy, direction);
-
-  const switchDirection = () =>
-    setDirection(direction === TABLE_DIRECTION_DESC ? TABLE_DIRECTION_ASC : TABLE_DIRECTION_DESC);
-
-  const setOrderByAndDirection = (orderBy) => {
-    switchDirection();
-    setOrderBy(orderBy);
-  };
-
+const percentFormatter = new Intl.NumberFormat('en', {
+  style: 'percent',
+  maximumFractionDigits: 1,
+});
+export default function ExpensesTable({ expenses, dayBasis = 'calendar' }) {
+  const [sort, setSort] = useState({ key: 'amount', direction: 'desc' });
+  const ordered = [...expenses].sort((a, b) => {
+    const result =
+      sort.key === 'category' ? a.category.localeCompare(b.category) : a.amount - b.amount;
+    return sort.direction === 'asc' ? result : -result;
+  });
+  const maximum = Math.max(1, ...expenses.map((item) => item.amount));
+  const changeSort = (key) =>
+    setSort((previous) => ({
+      key,
+      direction:
+        previous.key === key
+          ? previous.direction === 'asc'
+            ? 'desc'
+            : 'asc'
+          : key === 'category'
+            ? 'asc'
+            : 'desc',
+    }));
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <button
-          className={styles.headerCell}
-          onClick={() => setOrderByAndDirection(ORDER_BY_CATEGORY)}
-        >
-          <div>Category</div>
-          {orderBy === ORDER_BY_CATEGORY && <SortingArrow direction={direction} />}
-        </button>
-        <button
-          className={styles.headerCell}
-          onClick={() => setOrderByAndDirection(ORDER_BY_AMOUNT)}
-        >
-          <div>Amount</div>
-          {orderBy === ORDER_BY_AMOUNT && <SortingArrow direction={direction} />}
-        </button>
-        <button
-          className={styles.headerCell}
-          onClick={() => setOrderByAndDirection(ORDER_BY_PERCENTAGE)}
-        >
-          <div>Percentage</div>
-          {orderBy === ORDER_BY_PERCENTAGE && <SortingArrow direction={direction} />}
-        </button>
-        <button
-          className={styles.headerCell}
-          onClick={() => setOrderByAndDirection(ORDER_BY_DAILY_AVERAGE)}
-        >
-          <div>Daily average</div>
-          {orderBy === ORDER_BY_DAILY_AVERAGE && <SortingArrow direction={direction} />}
-        </button>
-      </div>
-      <div className={styles.rows}>
-        {orderedExpenses.map(({ category, amount, percentage, dailyAverage }) => (
-          <div className={styles.row} key={category}>
-            <div>{category}</div>
-            <div>{euroFormatter(amount)}</div>
-            <div>{percentageFormatter(percentage)}</div>
-            <div>{dailyAverage === null ? '—' : `${euroFormatter(dailyAverage)} / day`}</div>
-          </div>
+    <table
+      className={styles.table}
+      aria-label={`Expenses by category, with share and ${dayBasis} daily average`}
+    >
+      <thead>
+        <tr>
+          {[
+            ['category', 'Category'],
+            ['amount', 'Amount'],
+          ].map(([key, label]) => (
+            <th
+              key={key}
+              scope="col"
+              aria-sort={
+                sort.key === key ? (sort.direction === 'asc' ? 'ascending' : 'descending') : 'none'
+              }
+            >
+              <button onClick={() => changeSort(key)}>
+                {label}
+                <span aria-hidden="true">
+                  {sort.key === key ? (sort.direction === 'asc' ? ' ↑' : ' ↓') : ' ↕'}
+                </span>
+              </button>
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {ordered.map(({ category, amount, percentage, dailyAverage }) => (
+          <tr key={category}>
+            <th scope="row">
+              <span className={styles.category}>{category.toLowerCase()}</span>
+              <div className={styles.track} aria-hidden="true">
+                <span style={{ width: `${(Math.max(0, amount) / maximum) * 100}%` }} />
+              </div>
+            </th>
+            <td>
+              <span className={styles.amount}>{euroFormatter(amount)}</span>
+              <span className={styles.percentage}>
+                {percentage === null ? '—' : percentFormatter.format(percentage)}
+                <span className={styles.srOnly}> of total</span>
+              </span>
+              <span className={styles.daily}>
+                {dailyAverage === null ? '— / day' : `${euroFormatter(dailyAverage)} / day`}
+              </span>
+            </td>
+          </tr>
         ))}
-      </div>
-    </div>
+      </tbody>
+    </table>
   );
-};
-
-export default ExpensesTable;
+}
