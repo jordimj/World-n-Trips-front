@@ -30,8 +30,12 @@ const CountryInfoSchema = z.object({
 });
 
 const StateVisitedSchema = z.object({
-  name: z.string(),
-  code: z.string().regex(/^[A-Z]{2}-[A-Z0-9]{1,3}$/),
+  // Older records may use a province name as the code and omit its name.
+  name: z
+    .string()
+    .nullable()
+    .transform((name) => name ?? ''),
+  code: z.string().min(1),
 });
 
 const StatesVisitedSchema = z.array(StateVisitedSchema);

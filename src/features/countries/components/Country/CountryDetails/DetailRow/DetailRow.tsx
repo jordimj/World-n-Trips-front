@@ -6,14 +6,11 @@ interface Props {
   value?: string | number;
   isLoading?: boolean;
 }
-
-export default (props: Props) => {
-  const { label, value, isLoading = false } = props;
-
+export default function DetailRow({ label, value, isLoading = false }: Props) {
   return (
     <div className={styles.row}>
-      <div className={styles.label}>{label}</div>
-      {isLoading ? <Skeleton width={220} height={20} /> : value}
+      <dt>{label}</dt>
+      <dd>{isLoading ? <Skeleton width="100%" height={20} /> : (value ?? 'Unavailable')}</dd>
     </div>
   );
-};
+}

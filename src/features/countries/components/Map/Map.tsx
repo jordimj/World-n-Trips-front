@@ -12,10 +12,11 @@ const COUNTRIES_WITHOUT_PROVINCE_MAPS = new Set(['SG', 'MC', 'SM', 'VA']);
 interface Props {
   data: Array<Array<string | number>>;
   region?: string;
+  height?: number;
 }
 
 function Map(props: Props) {
-  const { data, region } = props;
+  const { data, region, height } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -65,6 +66,8 @@ function Map(props: Props) {
     <div className={styles.container}>
       <Chart
         chartType="GeoChart"
+        height={height}
+        width="100%"
         chartEvents={chartEvents}
         data={hasNoProvinceMap ? [['Country'], [region ?? '']] : data}
         options={options}

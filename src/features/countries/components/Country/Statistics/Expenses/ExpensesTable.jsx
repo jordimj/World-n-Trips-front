@@ -13,7 +13,6 @@ export default function ExpensesTable({ expenses, dayBasis = 'calendar' }) {
       sort.key === 'category' ? a.category.localeCompare(b.category) : a.amount - b.amount;
     return sort.direction === 'asc' ? result : -result;
   });
-  const maximum = Math.max(1, ...expenses.map((item) => item.amount));
   const changeSort = (key) =>
     setSort((previous) => ({
       key,
@@ -60,7 +59,7 @@ export default function ExpensesTable({ expenses, dayBasis = 'calendar' }) {
             <th scope="row">
               <span className={styles.category}>{category.toLowerCase()}</span>
               <div className={styles.track} aria-hidden="true">
-                <span style={{ width: `${(Math.max(0, amount) / maximum) * 100}%` }} />
+                <span style={{ width: `${Math.min(1, Math.max(0, percentage ?? 0)) * 100}%` }} />
               </div>
             </th>
             <td>

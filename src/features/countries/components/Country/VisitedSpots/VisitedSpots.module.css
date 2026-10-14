@@ -1,10 +1,77 @@
 .root {
-  background-color: var(--background-color-light);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--border-radius);
-  padding: var(--spacing-4);
-
-  & > div:first-child {
-    margin-left: auto;
+  --places-accent: #166c6f;
+  --places-muted: #566873;
+  margin-top: 28px;
+  background: var(--background-color-light);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 24px;
+}
+:global([data-theme='dark']) .root {
+  --places-accent: #68e0db;
+  --places-muted: #b3c5cd;
+}
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.heading h2 {
+  font-family: 'Poppins Section', var(--font-family);
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 8px;
+  background: var(--background-color);
+}
+.tabs button {
+  font: inherit;
+  font-size: 13px;
+  padding: 7px 12px;
+  min-height: 36px;
+  border: 0;
+  border-radius: 5px;
+  color: var(--places-muted);
+  background: transparent;
+  cursor: pointer;
+}
+.tabs button[aria-selected='true'] {
+  color: var(--places-accent);
+  background: var(--background-color-light);
+  font-weight: 700;
+}
+.tabs button:hover {
+  color: var(--places-accent);
+}
+.tabs button:focus-visible,
+.panel:focus-visible {
+  outline: 2px solid var(--places-accent);
+  outline-offset: 3px;
+}
+.panel {
+  margin-top: 22px;
+  border-radius: 4px;
+}
+.empty {
+  color: var(--places-muted);
+  font-size: 13px;
+}
+@media (max-width: 600px) {
+  .heading h2 {
+    font-size: 24px;
+  }
+  .root {
+    padding: 20px 16px;
+  }
+  .tabs button {
+    min-height: 44px;
   }
 }

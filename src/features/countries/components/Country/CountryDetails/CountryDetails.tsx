@@ -1,57 +1,34 @@
-import { Skeleton, Box, Stack } from '@mui/material';
 import { DATA_APPENDICES } from '@/constants';
-import Chip from '@/template/components/Chip/Chip';
-import { buildTripName } from '@/utils';
 import { numberFormatter } from '@/utils/number';
 import { CountryInfo } from '../../../model/country.schema';
+import NeighboringCountries from '../NeighboringCountries';
 import DetailRow from './DetailRow/DetailRow';
 import styles from './CountryDetails.module.css';
 
 interface Props {
   info?: CountryInfo;
-  trips?: Array<string>;
   isLoading?: boolean;
 }
-
-const CountryDetails = (props: Props) => {
-  const { info, trips, isLoading = false } = props;
-
-  return (
-    <Stack className={styles.root}>
-      <Box className={styles.details}>
-        {isLoading ? (
-          <Skeleton variant="rounded" height={340} />
-        ) : (
-          <img src={info?.flagUrl} alt={`${info?.name}'s flag`} />
-        )}
-        <DetailRow label="Capital" value={info?.capital} isLoading={isLoading} />
-        <DetailRow label="Region" value={info?.region} isLoading={isLoading} />
-        <DetailRow label="Local name" value={info?.localName} isLoading={isLoading} />
-        <DetailRow
-          label="Surface area"
-          value={numberFormatter(info?.surfaceArea, DATA_APPENDICES.SQUARE_METERS)}
-          isLoading={isLoading}
-        />
-        <DetailRow
-          label="Population"
-          value={numberFormatter(info?.population)}
-          isLoading={isLoading}
-        />
-        <DetailRow label="Government form" value={info?.governmentForm} isLoading={isLoading} />
-        <DetailRow label="Independent from" value={info?.independenceYear} isLoading={isLoading} />
-      </Box>
-      <Stack
-        direction="row"
-        justifyContent="center"
-        flexWrap="wrap"
-        sx={{ columnGap: 2, rowGap: 2 }}
-      >
-        {trips?.sort().map((trip) => (
-          <Chip key={trip} label={buildTripName(trip)} />
-        ))}
-      </Stack>
-    </Stack>
-  );
-};
-
+const CountryDetails = ({ info, isLoading = false }: Props) => (
+  <section className={styles.details} aria-label="Country facts">
+    <h2>Country facts</h2>
+    <dl>
+      <DetailRow label="Capital" value={info?.capital} isLoading={isLoading} />
+      <DetailRow label="Local name" value={info?.localName} isLoading={isLoading} />
+      <DetailRow
+        label="Surface area"
+        value={numberFormatter(info?.surfaceArea, DATA_APPENDICES.SQUARE_METERS)}
+        isLoading={isLoading}
+      />
+      <DetailRow
+        label="Population"
+        value={numberFormatter(info?.population)}
+        isLoading={isLoading}
+      />
+      <DetailRow label="Government form" value={info?.governmentForm} isLoading={isLoading} />
+      <DetailRow label="Independent from" value={info?.independenceYear} isLoading={isLoading} />
+    </dl>
+    <NeighboringCountries info={info} isLoading={isLoading} />
+  </section>
+);
 export default CountryDetails;

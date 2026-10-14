@@ -1,17 +1,19 @@
-.root {
-  width: 100%;
-  flex: 1;
-  gap: var(--spacing-5);
-}
-
 .details {
-  background-color: var(--background-color-light);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--border-radius);
+  min-width: 0;
+  background: var(--background-color-light);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 24px;
+}
+.details dl {
+  margin: 18px 0 0;
+}
+@media (max-width: 750px) {
+  .details {
+    padding: 20px 16px;
+  }
 }
 
-.details img {
-  width: 100%;
-  border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius);
+.details > section {
+  margin-top: 13px;
 }

@@ -14,9 +14,10 @@
   --summary-muted: #b3c5cd;
 }
 .section h2 {
+  font-family: 'Poppins Section', var(--font-family);
   margin: 0 0 28px;
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: -0.02em;
 }
 .section h3 {

@@ -18,9 +18,10 @@
   --chart-active: #20484a;
 }
 .section h2 {
+  font-family: 'Poppins Section', var(--font-family);
   margin: 0 0 28px;
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: -0.02em;
 }
 .section h3 {
@@ -141,6 +142,7 @@
 .comparison dl > div {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
   gap: 8px;
   padding: 16px 0;

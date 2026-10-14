@@ -1,36 +1,67 @@
 .container {
-  align-items: center;
-  padding: var(--spacing-4);
-  gap: var(--spacing-4);
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+  padding-top: 13px;
 }
-
-.container img {
-  width: 100%;
+.container h3 {
+  margin: 0;
+  color: var(--overview-muted);
+  font-size: 13px;
+  font-weight: inherit;
+  line-height: 1.65;
 }
-
+.container p {
+  color: var(--overview-muted);
+  font-size: 13px;
+}
 .neighboringCountries {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 18px;
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+}
+.neighboringCountry {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--spacing-4);
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1.5;
+  border-radius: 4px;
 }
-
 .neighboringCountry img {
-  width: 90px;
-  height: 90px;
-  opacity: 0.5;
-  filter: grayscale(100%);
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
-
-.visited img {
-  opacity: 1;
-  filter: grayscale(0%);
+.neighboringCountry span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
-
-.neighboringCountry:is(:hover, :focus) {
-  opacity: 1;
-  filter: grayscale(0%) drop-shadow(0 8px 8px rgba(0, 0, 0, 0.5));
-  transition:
-    0.5s opacity,
-    filter;
+.neighboringCountry small {
+  display: block;
+  color: var(--overview-muted);
+  font-size: 11px;
+}
+.neighboringCountry:hover {
+  color: var(--overview-accent);
+}
+.neighboringCountry:focus-visible {
+  outline: 2px solid var(--overview-accent);
+  outline-offset: 4px;
+}
+@media (max-width: 1000px) {
+  .neighboringCountries {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 751px) and (max-width: 850px) {
+  .neighboringCountries {
+    column-gap: 10px;
+  }
 }

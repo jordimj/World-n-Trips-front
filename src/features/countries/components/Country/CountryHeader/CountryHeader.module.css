@@ -1,18 +1,172 @@
 .header {
-  flex-direction: row;
-  align-items: center;
-  gap: var(--spacing-5);
-  margin: var(--spacing-4);
+  --overview-accent: #166c6f;
+  --overview-muted: #566873;
+  margin: 24px 0 0;
 }
-
-@media (max-width: 750px) {
-  .header {
-    flex-direction: column;
+:global([data-theme='dark']) .header {
+  --overview-accent: #68e0db;
+  --overview-muted: #b3c5cd;
+}
+.identityRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 28px;
+  margin-bottom: 28px;
+}
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+.identity img {
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.identity h1 {
+  margin: 0;
+  font-size: 38px;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+.identity p {
+  margin: 8px 0 0;
+  color: var(--overview-muted);
+  font-size: 14px;
+}
+.trips {
+  display: flex;
+  align-self: flex-end;
+  align-items: baseline;
+  gap: 10px;
+  max-width: 46%;
+  min-width: 0;
+  text-align: right;
+}
+.tripLabel {
+  display: block;
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--overview-muted);
+}
+.trips ul {
+  min-width: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.trips li {
+  padding: 7px 11px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background: var(--background-color-light);
+  color: var(--overview-accent);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+  gap: 28px;
+  align-items: stretch;
+}
+@media (min-width: 751px) {
+  .layout > section {
+    min-height: 560px;
   }
 }
-
-.map {
+.geography {
+  min-width: 0;
+  background: var(--background-color-light);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.header h2 {
+  font-family: 'Poppins Section', var(--font-family);
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+@media (max-width: 600px) {
+  .header h2 {
+    font-size: 24px;
+  }
+}
+.mapHeading {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
-  flex: 2;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--overview-muted);
+}
+.legend > span {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--overview-accent);
+}
+.map {
+  margin: 14px 0 0;
+  min-width: 0;
+  position: relative;
+  flex: 1;
+  min-height: 340px;
+}
+.map > div {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+@media (max-width: 750px) {
+  .identityRow {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .identity {
+    gap: 14px;
+  }
+  .identity h1 {
+    font-size: 30px;
+  }
+  .trips {
+    align-self: flex-start;
+    max-width: 100%;
+    text-align: left;
+  }
+  .trips ul {
+    justify-content: flex-start;
+  }
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .map {
+    min-height: 300px;
+    height: 300px;
+    flex: none;
+  }
+  .geography {
+    grid-row: 1;
+    padding: 20px 16px;
+  }
 }

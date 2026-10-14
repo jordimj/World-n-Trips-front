@@ -18,7 +18,8 @@ function Country() {
   const [, setSearchParams] = useSearchParams();
 
   const hasData =
-    country?.citiesVisited.length !== 0 ||
+    (country?.citiesVisited?.length ?? 0) > 0 ||
+    (country?.statesVisited?.length ?? 0) > 0 ||
     country?.nights !== undefined ||
     country?.hitchhikes !== undefined ||
     country?.expenses !== undefined;
@@ -33,7 +34,8 @@ function Country() {
       />
       {hasData ? (
         <Fragment>
-          {country?.citiesVisited?.length !== 0 && (
+          {((country?.citiesVisited?.length ?? 0) > 0 ||
+            (country?.statesVisited?.length ?? 0) > 0) && (
             <VisitedSpots
               cities={country?.citiesVisited ?? []}
               states={country?.statesVisited ?? []}
@@ -42,12 +44,7 @@ function Country() {
           {country?.nights && (
             <NightsStatistics kmWalked={country?.kilometersWalked} nights={country?.nights} />
           )}
-          {country?.hitchhikes && (
-            <HitchhikesStatistics
-              hitchhikes={country.hitchhikes}
-              totalNights={country.nights?.count.total}
-            />
-          )}
+          {country?.hitchhikes && <HitchhikesStatistics hitchhikes={country.hitchhikes} />}
           {country?.expenses && (
             <ExpensesStatistics
               expenses={country.expenses}

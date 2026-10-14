@@ -1,59 +1,37 @@
 import { NavLink } from 'react-router-dom';
-import { Box, Skeleton, Stack, Tooltip, Typography, Zoom } from '@mui/material';
+import { Skeleton } from '@mui/material';
 import { CountryInfo } from '@/features/countries/model/country.schema';
 import CountryFlag from '@/template/components/CountryFlag';
 import styles from './NeighboringCountries.module.css';
 
 interface Props {
   info?: CountryInfo;
-  isLoading?: Boolean;
+  isLoading?: boolean;
 }
-
-function NeighboringCountries(props: Props) {
-  const { info, isLoading = false } = props;
-
-  if (isLoading) {
-    return (
-      <Stack className={styles.container}>
-        <Typography variant="subtitle2">Neighboring countries</Typography>
-        <Box className={styles.neighboringCountries}>
-          {Array.from({ length: 5 }).map((_, idx) => (
-            <Skeleton
-              key={idx}
-              variant="circular"
-              height={90}
-              className={styles.neighboringCountry}
-            />
-          ))}
-        </Box>
-      </Stack>
-    );
-  }
-
+function NeighboringCountries({ info, isLoading = false }: Props) {
   return (
-    <Stack className={styles.container}>
-      <Typography variant="subtitle2">Neighboring countries</Typography>
-      <Box className={styles.neighboringCountries}>
-        {info?.borders.length === 0 ? (
-          <Typography>{`${info.name} has none`}</Typography>
-        ) : (
-          info?.borders.map(([countryCode, countryName, visited]) => (
-            <Tooltip key={countryName} title={countryName} arrow TransitionComponent={Zoom}>
-              <NavLink
-                key={countryCode}
-                to={`/countries/${countryCode}/`}
-                className={[styles.neighboringCountry, visited && styles.visited]
-                  .filter(Boolean)
-                  .join(' ')}
-              >
-                <CountryFlag name={countryName} isXL />
+    <section className={styles.container} aria-label="Neighboring countries">
+      <h3>Neighboring countries</h3>
+      {isLoading ? (
+        <Skeleton height={80} />
+      ) : !info?.borders.length ? (
+        <p>No land borders.</p>
+      ) : (
+        <ul className={styles.neighboringCountries}>
+          {info.borders.map(([code, name, visited]) => (
+            <li key={code}>
+              <NavLink to={`/countries/${code}/`} className={styles.neighboringCountry}>
+                <CountryFlag name={name} />
+                <span>
+                  {name}
+                  <small>{visited ? 'Visited' : 'Not visited'}</small>
+                </span>
               </NavLink>
-            </Tooltip>
-          ))
-        )}
-      </Box>
-    </Stack>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }
-
 export default NeighboringCountries;
