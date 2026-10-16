@@ -11,3 +11,43 @@
   box-sizing: border-box;
   z-index: 2;
 }
+
+.overHero {
+  pointer-events: none;
+}
+
+.overHero > * {
+  pointer-events: auto;
+}
+
+.overHero :global(.MuiIconButton-root) {
+  color: white;
+  background-color: transparent;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.overHero :global(.MuiIconButton-root:hover) {
+  background-color: transparent;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.overHero :global(.MuiIconButton-root:focus-visible) {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+.overHero :global(.MuiIconButton-root:focus),
+.overHero :global(.MuiIconButton-root:active),
+.overHero :global(.MuiIconButton-root.Mui-focusVisible) {
+  background-color: transparent;
+}
+
+.overHero :global(.MuiIconButton-root .MuiTouchRipple-root) {
+  display: none;
+}
+
+.overHero :global(.MuiIconButton-root) > svg {
+  filter: drop-shadow(0 1px 2px rgba(4, 22, 29, 0.8));
+}

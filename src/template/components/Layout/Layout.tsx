@@ -15,6 +15,7 @@ const Layout = ({ children }: Props) => {
 
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const isTrip = /^\/trips\/[^/]+\/?$/.test(location.pathname);
 
   return (
     <>
@@ -22,14 +23,16 @@ const Layout = ({ children }: Props) => {
       <Box
         className={`${styles.container} ${isHome ? styles.home : ''}`}
         sx={{
-          width: fullWidth
-            ? 'calc(100% - var(--spacing-4) * 2)'
-            : `min(${isHome ? 2000 : 1600}px, calc(100% - var(--spacing-4) * 2))`,
+          width: isTrip
+            ? '100%'
+            : fullWidth
+              ? 'calc(100% - var(--spacing-4) * 2)'
+              : `min(${isHome ? 2000 : 1600}px, calc(100% - var(--spacing-4) * 2))`,
           transition: 'ease-in-out 1s',
         }}
       >
-        <Toolbar />
-        <main className={styles.main}>{children}</main>
+        <Toolbar overHero={isTrip} />
+        <main className={`${styles.main} ${isTrip ? styles.tripMain : ''}`}>{children}</main>
       </Box>
     </>
   );

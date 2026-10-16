@@ -1,50 +1,110 @@
-.image {
+.hero {
   position: relative;
   isolation: isolate;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  min-height: clamp(700px, 80svh, 900px);
+  padding: 120px 4% 52px;
   overflow: hidden;
-
-  height: 50%;
-  min-height: 750px;
+  background: #123541;
+  color: white;
 }
 
-.picture,
-.overlay {
+.picture {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-}
-
-.picture {
-  z-index: -2;
   object-fit: cover;
+  object-position: center;
+  z-index: -2;
 }
 
-.overlay {
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   z-index: -1;
-  background: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(
+    0deg,
+    rgba(4, 22, 29, 0.95),
+    rgba(4, 22, 29, 0.32) 55%,
+    rgba(4, 22, 29, 0.08)
+  );
 }
 
 .text {
-  position: relative;
-  display: flex;
-  align-items: center;
+  min-width: 0;
 }
 
 .text h1 {
+  margin: 0;
   color: white;
-  font-size: var(--spacing-9);
-  letter-spacing: var(--uppercase-letter-spacing);
+  font-size: 72px;
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
-.text h2 {
+.summary {
+  max-width: 46ch;
+  margin: 18px 0 26px;
+  font-size: 20px;
+  line-height: 1.6;
   color: white;
-  font-size: var(--spacing-6);
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
 }
 
-.text h3 {
-  color: var(--text-color-secondary);
-  font-size: var(--spacing-7);
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: #e1eeee;
+  font-size: 14px;
+}
+
+.date svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.hero::selection,
+.hero ::selection {
+  background: #166c6f;
+  color: white;
+}
+
+@media (max-width: 650px) {
+  .hero {
+    min-height: 600px;
+    padding: 100px 24px 30px;
+  }
+
+  .text h1 {
+    font-size: 44px;
+  }
+
+  .summary {
+    margin: 16px 0 24px;
+    font-size: 17px;
+  }
+
+  .details {
+    margin-top: 24px;
+  }
 }
