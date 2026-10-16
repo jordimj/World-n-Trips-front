@@ -399,3 +399,87 @@
   background: #b6e5da;
   color: #123f4b;
 }
+
+.emptyJournal {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 0 14px;
+}
+.notebook {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 72px;
+  border-radius: 12px;
+  background: #edf5f2;
+  color: #166c6f;
+  transform: rotate(-5deg);
+}
+.notebook svg {
+  width: 34px;
+  height: 40px;
+}
+.emptyCopy h3 {
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin: 0 0 7px;
+}
+.emptyCopy p {
+  font-family: 'Poppins Section', var(--font-family);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--journal-muted);
+  margin: 0;
+  max-width: 60ch;
+}
+.emptyJournal .addEntry {
+  height: auto;
+  align-self: center;
+  padding: 11px 15px;
+  border-radius: 7px;
+  background: #166c6f;
+  color: white;
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 500;
+  text-transform: none;
+  white-space: nowrap;
+}
+.emptyJournal .addEntry:hover {
+  background: #12595c;
+}
+.emptyJournal .addEntry:focus-visible {
+  outline: 3px solid var(--journal-ink);
+  outline-offset: 4px;
+}
+:global([data-theme='dark']) .notebook {
+  background: #1c3033;
+  color: #68e0db;
+}
+@media (max-width: 650px) {
+  .emptyJournal {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 18px;
+    padding: 14px 0 4px;
+    align-items: start;
+  }
+  .notebook {
+    width: 48px;
+    height: 58px;
+  }
+  .notebook svg {
+    width: 28px;
+    height: 34px;
+  }
+  .emptyCopy h3 {
+    font-size: 17px;
+  }
+  .emptyJournal .addEntry {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

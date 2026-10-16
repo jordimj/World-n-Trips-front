@@ -9,6 +9,7 @@ import useInserterContext from '../hooks/useInserterContext';
 interface InserterDialogProps {
   open: boolean;
   onClose: () => void;
+  initialKind?: 'journal';
 }
 
 const TITLES = {
@@ -39,7 +40,7 @@ function InserterHeader({ onClose }: { onClose: () => void }) {
 }
 
 function InserterDialog(props: InserterDialogProps) {
-  const { onClose, open } = props;
+  const { onClose, open, initialKind } = props;
   const handleClose = () => onClose();
 
   return (
@@ -55,7 +56,7 @@ function InserterDialog(props: InserterDialogProps) {
         },
       }}
     >
-      <InserterProvider>
+      <InserterProvider initialKind={initialKind}>
         <InserterHeader onClose={onClose} />
         <Stepper />
       </InserterProvider>
@@ -72,6 +73,7 @@ export default function Inserter() {
   const handleClose = () => {
     const newParams = new URLSearchParams(searchParams);
     newParams.delete('dialog');
+    newParams.delete('inserterKind');
     setSearchParams(newParams);
   };
 
@@ -80,7 +82,11 @@ export default function Inserter() {
       <IconButton color="secondary" aria-label="open inserter dialog" onClick={handleClickOpen}>
         <FileUploadIcon />
       </IconButton>
-      <InserterDialog open={open} onClose={handleClose} />
+      <InserterDialog
+        open={open}
+        onClose={handleClose}
+        initialKind={searchParams.get('inserterKind') === 'journal' ? 'journal' : undefined}
+      />
     </>
   );
 }

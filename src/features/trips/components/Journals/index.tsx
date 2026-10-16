@@ -9,9 +9,9 @@ import {
 } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import parse from 'html-react-parser';
+import AddIcon from '@mui/icons-material/Add';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -335,19 +335,34 @@ function Journals({ query }: { query: ReturnType<typeof useJournals> }) {
             )}
           </>
         ) : (
-          <Stack gap={3} sx={{ alignItems: 'center', mt: 10 }}>
-            <Typography sx={{ fontSize: 'var(--spacing-5)' }}>
-              You have not added journal entries for this trip yet.
-            </Typography>
+          <div className={styles.emptyJournal}>
+            <div className={styles.notebook} aria-hidden="true">
+              <svg
+                viewBox="0 0 32 40"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="5" y="3" width="24" height="34" rx="3" />
+                <path d="M10 3v34M3 10h5M3 18h5M3 26h5M15 13h8M15 18h6" />
+              </svg>
+            </div>
+            <div className={styles.emptyCopy}>
+              <h3>Your trip, in your words</h3>
+              <p>No entries yet. Add a moment, a day, or the whole story.</p>
+            </div>
             <Button
+              className={styles.addEntry}
               variant="contained"
-              startIcon={<FileUploadIcon />}
-              sx={{ fontWeight: 400, textTransform: 'none' }}
-              onClick={() => setSearchParams({ dialog: 'inserter' })}
+              disableElevation
+              startIcon={<AddIcon />}
+              onClick={() => setSearchParams({ dialog: 'inserter', inserterKind: 'journal' })}
             >
-              Add journal entries
+              Add first entry
             </Button>
-          </Stack>
+          </div>
         )}
       </section>
       <div ref={spacerRef} aria-hidden="true" />

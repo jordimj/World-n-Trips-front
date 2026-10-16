@@ -35,7 +35,15 @@ export const initialState: InserterState = {
   },
 };
 
-function reducer(state: InserterState, action: Action) {
+const emptyTrip: NonNullable<InserterState['trip']> = {
+  name: '',
+  summary: '',
+  coverImage: '',
+  imageFile: null,
+  work: null,
+};
+
+function reducer(state: InserterState, action: Action): InserterState {
   switch (action.type) {
     case 'SET_ACTIVE_STEP': {
       return {
@@ -99,7 +107,7 @@ function reducer(state: InserterState, action: Action) {
       return {
         ...state,
         trip: {
-          ...state.trip,
+          ...(state.trip ?? emptyTrip),
           name: action.payload,
         },
       };
@@ -108,7 +116,7 @@ function reducer(state: InserterState, action: Action) {
       return {
         ...state,
         trip: {
-          ...state.trip,
+          ...(state.trip ?? emptyTrip),
           summary: action.payload,
         },
       };
@@ -117,7 +125,7 @@ function reducer(state: InserterState, action: Action) {
       return {
         ...state,
         trip: {
-          ...state.trip,
+          ...(state.trip ?? emptyTrip),
           coverImage: action.payload,
         },
       };
@@ -126,7 +134,7 @@ function reducer(state: InserterState, action: Action) {
       return {
         ...state,
         trip: {
-          ...state.trip,
+          ...(state.trip ?? emptyTrip),
           work: action.payload,
         },
       };
@@ -135,7 +143,7 @@ function reducer(state: InserterState, action: Action) {
       return {
         ...state,
         trip: {
-          ...state.trip,
+          ...(state.trip ?? emptyTrip),
           imageFile: action.payload,
         },
       };
