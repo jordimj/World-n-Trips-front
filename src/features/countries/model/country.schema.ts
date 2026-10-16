@@ -60,15 +60,15 @@ const StatPerHourSchema = z.object({
   minutes: z.string(),
 });
 
-const HitchhikesSchema = z.object({
+export const HitchhikesSchema = z.object({
   totalKilometers: z.number(),
   totalKilometersOpenAir: z.number().nullable(),
   daysOnTheRoad: z.number(),
   totalCars: z.number(),
   distances: z.object({
-    longest: z.string(),
-    shortest: z.string(),
-    average: z.string(),
+    longest: z.string().nullable(),
+    shortest: z.string().nullable(),
+    average: z.string().nullable(),
   }),
   minutesWaiting: z
     .object({

@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import ExpensesStatistics from '@/features/countries/components/Country/Statistics/Expenses/Expenses';
+import HitchhikesStatistics from '@/features/countries/components/Country/Statistics/Hitchhikes/Hitchhikes';
 import NightsStatistics from '@/features/countries/components/Country/Statistics/Nights/Nights';
 import Hero from '@/features/trips/components/Hero';
 import Journals from '@/features/trips/components/Journals';
@@ -62,6 +63,7 @@ export default function Trip() {
             {!data.hasDayData && (
               <Typography textAlign="center">No day records for this trip.</Typography>
             )}
+            {data.hitchhikes && <HitchhikesStatistics hitchhikes={data.hitchhikes} />}
             {data.expenses ? (
               <ExpensesStatistics
                 expenses={data.expenses}

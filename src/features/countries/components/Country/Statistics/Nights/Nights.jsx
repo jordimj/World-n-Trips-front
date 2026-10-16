@@ -36,24 +36,26 @@ export default function NightsStatistics({ nights, kmWalked, dailyCount = 0, has
                 ? 'Calendar duration unavailable; using days linked to recorded nights.'
                 : 'No calendar duration or recorded days available.'}
           </p>
-          <div className={styles.walkingSection}>
-            <div className={styles.walking}>
-              <h3>
-                <DirectionsWalkIcon fontSize="small" />
-                On foot
-              </h3>
-              <dl className={styles.walkingTotal}>
-                <dt>Kilometers walked</dt>
-                <dd>{hasDayData && kmWalked != null ? numberFormatter(kmWalked) : '—'}</dd>
-              </dl>
+          {kmWalked > 0 ? (
+            <div className={styles.walkingSection}>
+              <div className={styles.walking}>
+                <h3>
+                  <DirectionsWalkIcon fontSize="small" />
+                  On foot
+                </h3>
+                <dl className={styles.walkingTotal}>
+                  <dt>Kilometers walked</dt>
+                  <dd>{hasDayData && kmWalked != null ? numberFormatter(kmWalked) : '—'}</dd>
+                </dl>
+              </div>
+              {days && hasDayData && kmWalked != null ? (
+                <dl className={styles.walkingAverage}>
+                  <dt>Kilometers / day</dt>
+                  <dd>{numberFormatter(kmWalked / days)}</dd>
+                </dl>
+              ) : null}
             </div>
-            {days && hasDayData && kmWalked != null ? (
-              <dl className={styles.walkingAverage}>
-                <dt>Kilometers / day</dt>
-                <dd>{numberFormatter(kmWalked / days)}</dd>
-              </dl>
-            ) : null}
-          </div>
+          ) : null}
         </div>
         <div className={styles.breakdown}>
           {count.total > 0 ? (
