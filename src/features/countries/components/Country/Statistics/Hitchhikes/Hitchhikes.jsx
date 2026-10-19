@@ -1,6 +1,7 @@
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import RouteIcon from '@mui/icons-material/Route';
 import { numberFormatter } from '@/utils/number';
+import BehindTheRides from './BehindTheRides';
 import HitchhikesCharts from './HitchhikesCharts';
 import styles from './Hitchhikes.module.css';
 
@@ -41,13 +42,20 @@ export default function HitchhikesStatistics({ hitchhikes }) {
             </div>
             <div>
               <dt>Rides taken</dt>
-              <dd>{format(totalCars == null ? null : Math.trunc(totalCars))}</dd>
+              <dd>{format(totalCars)}</dd>
             </div>
           </dl>
           <p className={styles.note}>
             Across {format(daysOnTheRoad)} {Number(daysOnTheRoad) === 1 ? 'day' : 'days'} on the
             road.
           </p>
+          {hitchhikes.unsuccessfulAttempts > 0 && (
+            <p className={styles.note}>
+              {format(totalCars)} {totalCars === 1 ? 'ride taken' : 'rides taken'} ·{' '}
+              {format(hitchhikes.unsuccessfulAttempts)} unsuccessful{' '}
+              {hitchhikes.unsuccessfulAttempts === 1 ? 'attempt' : 'attempts'}
+            </p>
+          )}
           <div className={styles.supportingRow}>
             <div>
               <h3 className={styles.supportingHeading}>
@@ -73,6 +81,9 @@ export default function HitchhikesStatistics({ hitchhikes }) {
                 </h3>
                 <p className={styles.supportingValue}>{format(minutesWaiting.total)}</p>
                 <p className={styles.roadDayLabel}>Minutes waiting in total</p>
+                {hitchhikes.unsuccessfulAttempts > 0 && (
+                  <p className={styles.note}>Includes unsuccessful attempts.</p>
+                )}
               </div>
             ) : (
               <div className={styles.waitingGroup}>
@@ -94,6 +105,7 @@ export default function HitchhikesStatistics({ hitchhikes }) {
       {statsPerHour?.length > 0 && (
         <HitchhikesCharts statsPerHour={statsPerHour} hasWaiting={Boolean(minutesWaiting)} />
       )}
+      <BehindTheRides hitchhikes={hitchhikes} />
     </section>
   );
 }

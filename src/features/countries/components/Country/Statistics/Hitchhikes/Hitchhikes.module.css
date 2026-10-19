@@ -67,7 +67,8 @@
   line-height: 1.65;
   margin: 16px 0 0;
 }
-.layout > div > .note {
+.layout > div > .note,
+.waitingGroup > .note {
   margin-top: 4px;
 }
 
@@ -217,6 +218,278 @@
   height: 240px;
   min-width: 0;
 }
+.behind,
+.rideLog {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+.behindHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+}
+.behindHeader h3 {
+  margin-bottom: 4px;
+}
+.behindHeader .note {
+  margin-top: 0;
+}
+.breakdowns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 24px;
+}
+.breakdowns h4 {
+  font-size: 15px;
+  margin: 0 0 16px;
+}
+.breakdownRows {
+  margin: 0;
+}
+.breakdownRows > div {
+  margin-bottom: 16px;
+}
+.breakdownLabel {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.breakdownLabel dd {
+  margin: 0;
+  white-space: nowrap;
+}
+.breakdownPercentage {
+  text-align: right;
+  color: var(--summary-muted);
+  font-family: 'Poppins Section', var(--font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+}
+.breakdownBarRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6ch;
+  align-items: center;
+  gap: 12px;
+}
+.barTrack {
+  height: 5px;
+  border-radius: 2px;
+  background: var(--chart-grid);
+}
+.barTrack > span {
+  display: block;
+  height: 100%;
+  background: var(--summary-accent);
+  border-radius: inherit;
+}
+.openAir {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: fit-content;
+  margin: 0;
+  padding: 16px 18px;
+  background: color-mix(in srgb, var(--summary-accent) 7%, var(--background-color-light));
+  border-radius: 8px;
+  color: var(--summary-accent);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  max-width: 100%;
+}
+.openAir > svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+.openAirShare {
+  display: block;
+  margin-top: 4px;
+  color: var(--summary-muted);
+  font-family: 'Poppins Section', var(--font-family);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+.moreBreakdown > summary,
+.rideLog > summary {
+  cursor: pointer;
+  color: var(--summary-accent);
+  padding: 8px 0;
+  font-size: 14px;
+}
+.rideLog > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  list-style: none;
+  padding: 4px 0;
+}
+.rideLog > summary::-webkit-details-marker {
+  display: none;
+}
+.logSummaryText {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 16px;
+}
+.logSummaryTitle {
+  font-size: 17px;
+  font-weight: 700;
+}
+.logSummaryCount {
+  color: var(--summary-muted);
+  font-family: 'Poppins Section', var(--font-family);
+  font-size: 13px;
+  font-weight: 400;
+}
+.logChevron {
+  flex-shrink: 0;
+}
+.rideLog[open] .logChevron {
+  transform: rotate(180deg);
+}
+.moreBreakdown > summary:focus-visible,
+.rideLog > summary:focus-visible,
+.showMore:focus-visible {
+  outline: 2px solid var(--summary-accent);
+  outline-offset: 4px;
+}
+.logEntries {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+}
+.logEntries::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 30px;
+  bottom: 30px;
+  width: 1px;
+  background: var(--border-color);
+}
+.logStop {
+  position: relative;
+  z-index: 1;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: var(--summary-accent);
+  background: var(--chart-active);
+}
+.logStop svg {
+  width: 19px;
+  height: 19px;
+}
+.logEntry {
+  display: grid;
+  grid-template-columns: 35px minmax(0, 1fr) 155px;
+  gap: 6px 18px;
+  align-items: start;
+  padding: 16px 0;
+  font-size: 14px;
+}
+.logDate {
+  grid-column: 2 / -1;
+  display: flex;
+  gap: 10px;
+  font-family: 'Poppins Section', var(--font-family);
+  font-size: 12px;
+  color: var(--summary-muted);
+}
+.logDate span {
+  margin: 0;
+}
+.logRoute {
+  grid-column: 2;
+  overflow-wrap: anywhere;
+}
+.logEntry p {
+  margin: 0;
+}
+.logEntry .note {
+  margin-top: 6px;
+  font-family: 'Poppins Section', var(--font-family);
+  font-weight: 400;
+}
+.logEntry .routeTitle {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.routeCountry {
+  color: var(--summary-muted);
+  font-family: 'Poppins Section', var(--font-family);
+  font-size: 13px;
+  font-weight: 400;
+}
+.logEntry .attemptLabel {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--chart-active);
+  color: var(--summary-accent);
+  font-weight: 500;
+  font-size: 12px;
+}
+.logDetails {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 24px;
+  margin-top: 5px;
+  color: var(--summary-muted);
+  font-family: 'Poppins Section', var(--font-family);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+.logNumbers {
+  grid-column: 3;
+  text-align: right;
+  max-width: 160px;
+}
+.logDistance {
+  color: var(--summary-accent);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.logDistance span {
+  font-size: 13px;
+  font-family: 'Poppins Section', var(--font-family);
+  font-weight: 400;
+}
+.showMore {
+  margin-top: 16px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--summary-accent);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.showMore:hover {
+  background: var(--chart-active);
+}
 .section ::selection {
   background: #cff8f4;
   color: #17474a;
@@ -227,6 +500,26 @@
   }
 }
 @media (max-width: 600px) {
+  .breakdowns {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .logEntry {
+    grid-template-columns: 35px minmax(0, 1fr) 82px;
+    gap: 6px 10px;
+  }
+  .logDate {
+    grid-column: 2 / -1;
+    display: flex;
+    gap: 10px;
+    padding-top: 0;
+  }
+  .logDate span {
+    margin: 0;
+  }
+  .logNumbers {
+    max-width: 120px;
+  }
   .section {
     padding: 20px 16px;
     margin-top: 32px;

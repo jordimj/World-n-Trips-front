@@ -10,10 +10,15 @@ export default function HitchhikesChart({ stats, chartKind }) {
 
   useEffect(() => {
     const canvas = chartRef.current;
-    const data = Array(24).fill(0);
+    const data = Array(24).fill(null);
     stats.forEach((stat) => {
-      if (Number.isInteger(Number(stat.hour)) && stat.hour >= 0 && stat.hour < 24) {
-        data[Number(stat.hour)] = Number(stat[chartKind]) || 0;
+      if (
+        stat.hour != null &&
+        Number.isInteger(Number(stat.hour)) &&
+        stat.hour >= 0 &&
+        stat.hour < 24
+      ) {
+        data[Number(stat.hour)] = stat[chartKind] == null ? null : Number(stat[chartKind]);
       }
     });
     let chart;
@@ -57,7 +62,10 @@ export default function HitchhikesChart({ stats, chartKind }) {
               border: { display: true, color: divider, dash: [4, 4] },
               ticks: {
                 color: muted,
-                ...(chartKind === 'rides' ? { stepSize: 1, precision: 0 } : {}),
+                ...(chartKind === 'rides' &&
+                data.every((value) => value == null || Number.isInteger(value))
+                  ? { stepSize: 1, precision: 0 }
+                  : {}),
               },
             },
           },
@@ -81,7 +89,7 @@ export default function HitchhikesChart({ stats, chartKind }) {
       {stats
         .map(
           (stat) =>
-            `${stat.hour}:00: ${numberFormatter(Number(stat[chartKind]) || 0, units[chartKind])}`
+            `${stat.hour}:00: ${stat[chartKind] == null ? 'Not recorded' : numberFormatter(Number(stat[chartKind]), units[chartKind])}`
         )
         .join('; ')}
     </canvas>

@@ -56,8 +56,8 @@ export const NightsSchema = z.object({
 const StatPerHourSchema = z.object({
   hour: z.number().nullable(),
   rides: z.number(),
-  distance: z.string(),
-  minutes: z.string(),
+  distance: z.string().nullable(),
+  minutes: z.string().nullable(),
 });
 
 export const HitchhikesSchema = z.object({
@@ -81,6 +81,33 @@ export const HitchhikesSchema = z.object({
     })
     .nullable(),
   statsPerHour: z.array(StatPerHourSchema).nullable(),
+  unsuccessfulAttempts: z.number().int().nonnegative(),
+  recordedRideSegments: z.number().int().nonnegative(),
+  vehicleTypes: z.array(z.object({ label: z.string(), count: z.number().int().positive() })),
+  nationalities: z.array(z.object({ label: z.string(), count: z.number().int().positive() })),
+  vehicleTypeRecorded: z.number().int().nonnegative(),
+  nationalityRecorded: z.number().int().nonnegative(),
+  openAirSegments: z.number().int().nonnegative(),
+  rideLog: z.array(
+    z.object({
+      id: z.number().int(),
+      date: z.string().nullable(),
+      country: z.string().nullable(),
+      countryCode: z.string().nullable(),
+      origin: z.string().nullable(),
+      destination: z.string().nullable(),
+      hour: z.string().nullable(),
+      minutesWaiting: z.number().nullable(),
+      distance: z.number().nullable(),
+      vehicleType: z.string().nullable(),
+      nationality: z.string().nullable(),
+      openAir: z.boolean().nullable(),
+      walking: z.boolean().nullable(),
+      failed: z.boolean(),
+      rideCount: z.number().nullable(),
+      remarks: z.string().nullable(),
+    })
+  ),
 });
 
 export const ExpensesSchema = z.object({

@@ -40,6 +40,10 @@ export default function HitchhikesCharts({ statsPerHour, hasWaiting }) {
       <div className={styles.chartCanvas}>
         <HitchhikesChart stats={statsPerHour} chartKind={visibleChart} />
       </div>
+      <p className={styles.note}>
+        Only entries with a recorded hour are shown. Rides and distance exclude unsuccessful
+        attempts; waiting time includes them.
+      </p>
     </div>
   );
 }
