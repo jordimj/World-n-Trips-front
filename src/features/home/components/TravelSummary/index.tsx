@@ -1,73 +1,35 @@
-import { useNavigate } from 'react-router-dom';
-import ArrowForward from '@mui/icons-material/ArrowForward';
-import LocalAirportIcon from '@mui/icons-material/LocalAirport';
-import TodayIcon from '@mui/icons-material/Today';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import { Button, Skeleton, Stack, Typography } from '@mui/material';
 import useStatistics from '@/features/statistics/hooks/useStatistics';
 import styles from './TravelSummary.module.css';
 
 export default function TravelSummary() {
-  const navigate = useNavigate();
-  const { data: statistics, isLoading } = useStatistics();
-
-  const visited = statistics?.countries?.all.visited;
-  const trips = statistics?.metrics?.trips;
-  const days = statistics?.metrics?.days;
-
+  const { data, isPending, isError, refetch } = useStatistics();
+  const metrics = [
+    { label: 'Countries visited', value: data?.countries?.all.visited },
+    { label: 'Total trips', value: data?.metrics?.trips },
+    { label: 'Days traveling', value: data?.metrics?.days },
+  ];
   return (
-    <Stack className={styles.root}>
-      <Typography className={styles.title}>Travel statistics</Typography>
-      <MetricItem
-        icon={<TravelExploreIcon className={styles.icon} />}
-        label="Countries visited"
-        value={visited}
-        isLoading={isLoading}
-      />
-      <MetricItem
-        icon={<LocalAirportIcon className={styles.icon} />}
-        label="Total trips"
-        value={trips}
-        isLoading={isLoading}
-      />
-      <MetricItem
-        icon={<TodayIcon className={styles.icon} />}
-        label="Days traveling"
-        value={days}
-        isLoading={isLoading}
-      />
-      <Button
-        variant="contained"
-        endIcon={<ArrowForward />}
-        onClick={() => navigate('/statistics')}
-        sx={{ width: 'fit-content', px: 2, ml: 'auto', mt: 1 }}
-      >
-        Check all stats
-      </Button>
-    </Stack>
-  );
-}
-
-function MetricItem(props: {
-  icon: React.ReactNode;
-  label: string;
-  value?: number;
-  isLoading: boolean;
-}) {
-  const { icon, label, value, isLoading = false } = props;
-  return (
-    <Stack className={styles.metricItem}>
-      <Stack direction="row" alignItems="center" gap={3}>
-        {icon}
-        <Stack>
-          <Typography className={styles.label}>{label}</Typography>
-          {isLoading ? (
-            <Skeleton width={64} height={32} />
-          ) : (
-            <Typography className={styles.value}>{value}</Typography>
-          )}
-        </Stack>
-      </Stack>
-    </Stack>
+    <div className={styles.root} aria-label="Travel statistics" aria-busy={isPending}>
+      <dl className={styles.metrics}>
+        {metrics.map(({ label, value }) => (
+          <div key={label}>
+            <dt>{label}</dt>
+            <dd>
+              {isPending ? (
+                <span className={styles.loading} aria-label="Loading" />
+              ) : (
+                (value?.toLocaleString('en-US') ?? '—')
+              )}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      {isError && (
+        <p role="alert">
+          Travel totals couldn’t be loaded.{' '}
+          <button onClick={() => void refetch()}>Try again</button>
+        </p>
+      )}
+    </div>
   );
 }

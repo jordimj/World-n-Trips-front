@@ -1,64 +1,79 @@
-import { useNavigate } from 'react-router-dom';
-import { ArrowForward } from '@mui/icons-material';
-import { Button, Skeleton, Stack, Typography } from '@mui/material';
+import { useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import ArrowForward from '@mui/icons-material/ArrowForward';
+import LandscapeOutlined from '@mui/icons-material/LandscapeOutlined';
 import useTrips from '@/features/trips/hooks/useTrips';
 import { formatTripDates } from '@/utils/date';
 import styles from './LastTrip.module.css';
 
 export default function LastTrip() {
-  const navigate = useNavigate();
-  const { data: trips, isLoading } = useTrips();
-
+  const { data: trips, isPending, isError, refetch } = useTrips();
+  const [, setSearchParams] = useSearchParams();
+  const [failedPicture, setFailedPicture] = useState<string | null>(null);
+  const [loadedPicture, setLoadedPicture] = useState<string | null>(null);
   const lastTrip = trips?.at(0);
-
-  if (lastTrip === undefined || isLoading) {
-    return (
-      <Stack className={styles.root}>
-        <Typography className={styles.label}>Last trip</Typography>
-        {isLoading ? (
-          <Stack gap={2} sx={{ minWidth: 250 }}>
-            <Skeleton height={160} />
-            <Skeleton height={32} />
-          </Stack>
-        ) : (
-          <Stack gap={2} sx={{ minWidth: 250 }}>
-            <Typography sx={{ fontSize: 14 }}>There are no trips saved.</Typography>
-            <Typography sx={{ fontSize: 14 }}>Go add some!</Typography>
-          </Stack>
-        )}
-      </Stack>
-    );
-  }
-
+  const hasCover = Boolean(
+    lastTrip &&
+      !isPending &&
+      !isError &&
+      loadedPicture === lastTrip.picture &&
+      failedPicture !== lastTrip.picture
+  );
   return (
-    <Stack className={styles.root}>
-      <Typography className={styles.label}>Last trip</Typography>
-      <Stack gap={3}>
-        <img src={lastTrip.picture} />
-        <Stack gap={1}>
-          <Stack direction="row" justifyContent="space-between" alignItems="center">
-            <Typography sx={{ fontSize: 24, color: 'white' }}>{lastTrip.name}</Typography>
-            {lastTrip.arrivalDate && lastTrip.departureDate && (
-              <Typography sx={{ fontSize: 14, color: 'var(--primary-color-200)' }}>
-                {formatTripDates(lastTrip.arrivalDate, lastTrip.departureDate)}
-              </Typography>
-            )}
-          </Stack>
-          {lastTrip.summary && (
-            <Typography sx={{ fontSize: 14, color: 'var(--primary-color-200)' }}>
-              {lastTrip.summary}
-            </Typography>
+    <section
+      className={`${styles.root} ${hasCover ? styles.cover : ''}`}
+      aria-labelledby="last-trip-heading"
+      aria-busy={isPending}
+    >
+      <h2 id="last-trip-heading">Last trip</h2>
+      {isPending ? (
+        <div className={styles.loading} role="status">
+          Loading your latest trip…
+        </div>
+      ) : isError ? (
+        <div className={styles.empty} role="alert">
+          <p>Your latest trip couldn’t be loaded.</p>
+          <button onClick={() => void refetch()}>Try again</button>
+        </div>
+      ) : !lastTrip ? (
+        <div className={styles.empty}>
+          <LandscapeOutlined aria-hidden="true" />
+          <p>No trips saved yet. Your next story starts here.</p>
+          <button onClick={() => setSearchParams({ dialog: 'inserter' })}>
+            Add your first trip
+          </button>
+        </div>
+      ) : (
+        <>
+          {failedPicture === lastTrip.picture ? (
+            <div className={styles.pictureFallback}>
+              <LandscapeOutlined aria-hidden="true" />
+              <span>{lastTrip.name}</span>
+            </div>
+          ) : (
+            <img
+              className={styles.picture}
+              src={lastTrip.picture}
+              alt=""
+              onLoad={() => setLoadedPicture(lastTrip.picture)}
+              onError={() => setFailedPicture(lastTrip.picture)}
+            />
           )}
-        </Stack>
-        <Button
-          variant="contained"
-          endIcon={<ArrowForward />}
-          onClick={() => navigate(`/trips/${lastTrip.id}`)}
-          sx={{ width: 'fit-content', px: 2, ml: 'auto', mt: 1 }}
-        >
-          View trip details
-        </Button>
-      </Stack>
-    </Stack>
+          {hasCover && <div className={styles.coverSpace} aria-hidden="true" />}
+          <div className={styles.details}>
+            <h3>{lastTrip.name}</h3>
+            {lastTrip.arrivalDate && lastTrip.departureDate && (
+              <p className={styles.dates}>
+                {formatTripDates(lastTrip.arrivalDate, lastTrip.departureDate)}
+              </p>
+            )}
+            {lastTrip.summary && <p className={styles.summary}>{lastTrip.summary}</p>}
+          </div>
+          <Link className={styles.action} to={`/trips/${lastTrip.id}`}>
+            View trip details <ArrowForward fontSize="small" />
+          </Link>
+        </>
+      )}
+    </section>
   );
 }

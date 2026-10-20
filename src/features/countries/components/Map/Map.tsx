@@ -2,7 +2,6 @@ import { Chart, ReactGoogleChartEvent } from 'react-google-charts';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { WORLD_MAP } from '@/constants';
 import COUNTRIES from '@/constants/countryCodes';
-import Sidebar from '@/features/home/components/Sidebar';
 import { isCountryKey } from '@/template/components/CountryFlag';
 import styles from './Map.module.css';
 
@@ -13,10 +12,11 @@ interface Props {
   data: Array<Array<string | number>>;
   region?: string;
   height?: number;
+  countryLinks?: Record<string, string>;
 }
 
 function Map(props: Props) {
-  const { data, region, height } = props;
+  const { data, region, height, countryLinks } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -26,9 +26,12 @@ function Map(props: Props) {
   const options = isHome
     ? {
         region: region !== WORLD_MAP ? region : null,
-        colorAxis: { colors: ['#16888b'] },
+        colorAxis: { colors: ['#70b7b1', '#16888b'] },
         defaultColor: '#16888b',
+        datalessRegionColor: '#cdd8d5',
+        backgroundColor: 'transparent',
         tooltip: { trigger: 'none' },
+        legend: 'none',
       }
     : {
         region,
@@ -48,6 +51,12 @@ function Map(props: Props) {
         const selectedCountryPosition = selection[0].row + 1;
         const countryName = data[selectedCountryPosition][0];
 
+        const countryCode = countryLinks?.[countryName];
+        if (countryCode) {
+          navigate(`/countries/${countryCode}`);
+          return;
+        }
+
         if (!isCountryKey(countryName)) return;
 
         navigate(`/countries/${COUNTRIES[countryName]}`);
@@ -63,16 +72,15 @@ function Map(props: Props) {
   ];
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isHome ? styles.homeMap : ''}`}>
       <Chart
         chartType="GeoChart"
-        height={height}
+        height={height ?? (isHome ? '100%' : undefined)}
         width="100%"
         chartEvents={chartEvents}
         data={hasNoProvinceMap ? [['Country'], [region ?? '']] : data}
         options={options}
       />
-      {isHome && <Sidebar />}
     </div>
   );
 }

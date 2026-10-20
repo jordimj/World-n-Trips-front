@@ -11,3 +11,13 @@
 .tripMain {
   padding-top: 0;
 }
+
+.home {
+  min-height: 100vh;
+  background: #eaf0ed;
+  color: #123742;
+}
+
+.homeMain {
+  padding-top: 70px;
+}

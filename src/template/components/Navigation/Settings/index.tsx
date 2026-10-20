@@ -17,19 +17,21 @@ export default function Settings() {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 
-  const handleOpen = (event: MouseEvent<HTMLButtonElement>) =>
-    setAnchorEl(event.currentTarget);
+  const handleOpen = (event: MouseEvent<HTMLButtonElement>) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
   const { fullWidth, saveFullWidth } = useFullWidth();
-  const [enabledEphemerides, setEnabledEphemerides] = useLocalStorage<boolean>('enabled_ephemerides', true);
+  const [enabledEphemerides, setEnabledEphemerides] = useLocalStorage<boolean>(
+    'enabled_ephemerides',
+    true
+  );
 
   return (
     <Stack direction="row" gap={1} alignItems="center" sx={{ ml: 'auto' }}>
       {enabledEphemerides && <Ephemerides />}
       <Inserter />
       <Search />
-      <IconButton color="secondary" onClick={handleOpen}>
+      <IconButton color="secondary" aria-label="Open settings" onClick={handleOpen}>
         <SettingsIcon />
       </IconButton>
       <Menu id="settings-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>

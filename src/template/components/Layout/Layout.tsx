@@ -17,17 +17,27 @@ const Layout = ({ children }: Props) => {
   const isHome = location.pathname === '/';
   const isTrip = /^\/trips\/[^/]+\/?$/.test(location.pathname);
 
+  if (isHome) {
+    return (
+      <div className={styles.home}>
+        <NavigationItems />
+        <Toolbar />
+        <main className={styles.homeMain}>{children}</main>
+      </div>
+    );
+  }
+
   return (
     <>
       <NavigationItems />
       <Box
-        className={`${styles.container} ${isHome ? styles.home : ''}`}
+        className={styles.container}
         sx={{
           width: isTrip
             ? '100%'
             : fullWidth
               ? 'calc(100% - var(--spacing-4) * 2)'
-              : `min(${isHome ? 2000 : 1600}px, calc(100% - var(--spacing-4) * 2))`,
+              : 'min(1600px, calc(100% - var(--spacing-4) * 2))',
           transition: 'ease-in-out 1s',
         }}
       >

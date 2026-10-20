@@ -42,6 +42,8 @@ Search highlights matching words in titles, excerpts, and expanded journal text 
 
 ## Brand Commitments
 
+Home (`/`) has its own approved personal-atlas visual world: the original left-side navigation dock and top-right icon toolbar, mineral mist page ground, white outlined panels, teal actions, existing Poppins typography, and softly rounded cards. This Home identity is scoped to that route; preserve the country, trip, journal, and statistics commitments below. Its map, metrics, and latest-trip photography use recorded API data. Home’s right column contains a compact borderless Last trip card with a full-card photograph and overlaid text and up to three earlier Recent trips beneath it. Exclude the featured trip from Recent trips, preserve the existing trip ordering, and hide the section when no earlier trips exist.
+
 The trip detail hero spans the full viewport width with a single cover photograph. Its white title, optional summary, date range with a calendar icon, and existing telework or work-trip badge sit at the lower left over a dark gradient. The hero starts at the top of the viewport behind the toolbar, with a responsive desktop height between 700px and 900px (80% of the small viewport height) and a 600px minimum on mobile. The fixed toolbar buttons use transparent backgrounds with a light backdrop blur and subtly shadowed white icons to remain understated and readable over the photograph. This treatment applies only while the controls overlap the hero; scrolling past it restores the standard toolbar button appearance. Over the image, clicked and focused buttons remain transparent without a colored ripple; preserve a visible keyboard focus outline. Trip statistics and journals beneath it retain the existing content-width setting.
 
 The user wants these sections to blend travel-journal warmth with practical dashboard clarity. The statistics sections share navy headings, teal figures, restrained borders and dividers, clear labels, and responsive layouts. Supporting walking and hitchhiking metrics use meaningful icons and consistent number and label styling.
@@ -72,3 +74,5 @@ Greek Honeymoon (trip 31) supplied 17 real entries for the journal timeline, sea
 - Keep hitchhiking road-day averages separate from calendar or recorded-day averages.
 - Keep country identity, geographic reference facts, and personal travel records clearly understandable without duplicating information.
 - Preserve map readability and access to long trip and place lists across desktop and mobile.
+
+Home’s Continent and Region filters use MUI Select with external inline labels and white backgrounds. Continue using MUI for these controls; reusable native HTML abstractions are deferred to a future task.
