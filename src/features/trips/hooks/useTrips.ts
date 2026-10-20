@@ -3,9 +3,9 @@ import { getTrips } from '@/api';
 import { TripsSchema } from '../model/trips.schema';
 import { Trips } from '../model/trips.schema';
 
-type UseTripsSelect<T> = Pick<UseQueryOptions<Trips, unknown, T>, 'select'>;
+type UseTripsOptions<T> = Pick<UseQueryOptions<Trips, unknown, T>, 'select' | 'enabled'>;
 
-export default function useTrips<T = Trips>(options?: UseTripsSelect<T>) {
+export default function useTrips<T = Trips>(options?: UseTripsOptions<T>) {
   return useQuery({
     queryKey: ['trips'],
     queryFn: async () => {

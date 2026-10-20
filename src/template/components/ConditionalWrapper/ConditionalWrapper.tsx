@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 
-interface Props {
+interface Props<T extends ReactNode> {
   condition: boolean;
-  wrapper: (child: ReactNode) => ReactNode;
-  children: ReactNode;
+  wrapper: (child: T) => ReactNode;
+  children: T;
 }
 
-function ConditionalWrapper(props: Props) {
+function ConditionalWrapper<T extends ReactNode>(props: Props<T>) {
   const { condition, wrapper, children } = props;
   return condition ? wrapper(children) : children;
 }

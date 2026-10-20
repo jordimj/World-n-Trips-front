@@ -2,7 +2,7 @@ import { RefObject, useEffect, useRef, useState } from 'react';
 
 const useElementOnScreen = <T extends Element>(
   options?: IntersectionObserverInit
-): [RefObject<T>, boolean] => {
+): [RefObject<T | null>, boolean] => {
   const ref = useRef<T>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
 
